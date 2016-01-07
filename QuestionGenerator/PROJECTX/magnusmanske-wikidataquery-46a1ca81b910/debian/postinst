@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Create wdq-mm user
+adduser --no-create-home --system wdq-mm

@@ -1,0 +1,14 @@
+Source: wdq-mm
+Section: web
+Priority: extra
+Maintainer: Magnus Manske <magnusmanske@googlemail.com>
+Build-Depends: debhelper (>= 9.0.0), libcurl4-gnutls-dev, libmysqlclient-dev
+Standards-Version: 3.9.3
+Homepage: https://wdq.wmflabs.org
+Vcs-Git: https://bitbucket.org/magnusmanske/wikidataquery.git
+Vcs-Browser: https://bitbucket.org/magnusmanske/wikidataquery
+
+Package: wdq-mm
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Tools to query Wikidata

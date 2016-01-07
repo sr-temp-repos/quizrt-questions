@@ -1,0 +1,21 @@
+<html>
+<body>
+<form method="post">
+Search: <input type="text" name="q" value="Google"/>
+<input type="submit" value="Submit">
+</form>
+
+<?php
+
+if (isset($_POST['q'])) {
+$search = $_POST['q'];
+$errors = libxml_use_internal_errors(true);
+$doc = new DOMDocument();
+$doc->loadHTMLFile("https://www.wikidata.org/w/api.php?
+action=wbsearchentities&search=Google&format=json&language=en");
+libxml_clear_errors();
+libxml_use_internal_errors($errors);
+}
+?>
+</body>
+</html>

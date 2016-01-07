@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PROJECT X</title>
+  </head>
+  <body>
+  <div class="maleActors"></div>
+    <script src="script/jquery-1.11.3.js"></script>
+  <script>
+  (function($){
+      var tempURL="https://www.wikidata.org/wiki/Special:EntityData/Q";
+      var maleCricketerList = 'http://wdq.wmflabs.org/api?q=claim[106:12299841]%20AND%20claim[27:668]%20AND%20claim[21:6581097]';
+      getList(tempURL,maleCricketerList);
+
+      var maleActorList='http://wdq.wmflabs.org/api?q=claim[106:33999]%20AND%20claim[27:668]%20AND%20claim[21:6581097]';
+      getList(tempURL,maleActorList);
+
+      function getList(tempURL,playListURL){
+      $.getJSON(playListURL+"&callback=?" ,function(data){
+        $.each(data["items"],function(k,v){
+          var maleActorLink=tempURL+v+".json";
+          getNames(maleActorLink,v);
+      });
+    });
+    function getNames(link,v){
+      $.getJSON(link ,function(data) {
+      var actorName=data["entities"]["Q"+v]["labels"]["en"]["value"];
+          $(".maleActors").append(actorName);
+      });
+    }
+  }
+
+    })(jQuery);
+
+  </script>
+  </body>
+</html>

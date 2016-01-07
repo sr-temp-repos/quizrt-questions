@@ -1,0 +1,60 @@
+<script src="../js/wikidata.js"></script>
+<!--<script src="../js/jquery/js/jquery-ui.min.js"></script>-->
+
+<style>
+#query_preview {
+	margin-top:10px;
+	padding-top:5px;
+	border-top:3px solid #DDDDDD;
+}
+
+li.step_wrapper  { border-top:1px solid black; padding-top:2px; margin-top:2px; }
+/*li.step_wrapper:first-child { border-top:none; }*/
+
+table.claims_table {
+}
+
+.helper {
+	color:#AAAAAA;
+	margin-left:5px;
+	margin-right:5px;
+	display:none;
+}
+
+span.desc {
+	color:#AAAAAA;
+}
+
+div.tree_element {
+	display:inline;
+	margin-right:10px;
+	padding:1px;
+}
+
+div.claimsection {
+	border-top:1px solid #DDDDDD;
+}
+
+.sortable { list-style-type: none; margin: 0; padding: 0; margin-top:5px; }
+/*.sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }*/
+</style>
+
+<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />-->
+
+<div id='top'>
+<p class='lead'>Build your Wikidata query (see <a href='../api_documentation.html'>the API</a> for more details about queries).</p>
+
+<div id='querybuilder'></div>
+
+</div>
+
+<div id='main'>
+</div>
+
+<div style='border-top:1px solid #DDDDDD;margin-top:10px'>
+Examples:
+<a href='?q=claim[31:(tree[12280][][279])] AND tree[183][150][17,131]'>Bridges in Germany</a> |
+<a href='?q=tree[4504][171,273,75,76,77,70,71,74,89]'>Taxonomy of the Komodo dragon</a> |
+<a href='?q=tree[30][150][17,131]_AND_claim[138:676555]'>Places in the U.S. that are named after Francis of Assisi</a>
+
+</div>

@@ -1,0 +1,46 @@
+Wikidata query source code
+(c) 2013 by Magnus Manske
+released under GPL 2+
+
+HOWTO:
+
+To start the server: ./wd_server CONFIG_FILE
+
+CONFIG_FILE looks like this (no spaces around "="!!):
+user='MYSQL_USER_NAME_IN_QUOTES'
+password='MYSQL_PASSWORD_IN_QUOTES'
+mysql_server=MYSQL_HOST
+http_port=HTTP_PORT
+html_path=DIRECTORY_WITH_HTML_FOR_WDQ
+secret_sauce=PASSWORD_FOR_EXTERNAL_UPDATE_COMMAND
+fofn=FOFN_FILE
+update_wdq_file=1
+
+
+NOTE: update_wdq_file=1 lets the instance overwrite the WDQ binary file with an updated version (default: no writing)
+
+
+
+== PREVIOUS
+
+
+Use parse_xml_bz2.php to convert an XML dump to a tabbed format:
+bunzip2 -c BZ2_FILE | parse_xml_bz2.php | gzip -c > claims.tab.gz
+
+Generate file secretsauce.txt containing a single line "password" for live updates
+
+Start wd_inmem (on some systems with sudo for low port numbers) with port number as parameter, pipe in tabbed file, like so:
+zcat claims.tab.gz | sudo ./wd_inmem 80
+
+See run.sh for automated make/run
+
+Use ./download_and_process_incremental_dumps.php for incremental updates (Labs environment only ATM).
+
+
+Required Ubuntu packages:
+sudo apt-get install build-essentials
+sudo apt-get install php5
+
+
+If Mac OSX Firewall keeps bugging you about wd_inmem "allow incoming connectoins":
+http://silvanolte.com/blog/2011/01/18/do-you-want-the-application-to-accept-incoming-network-connections/

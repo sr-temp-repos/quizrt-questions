@@ -1,0 +1,7 @@
+user='YOURMYSQLUSERNAME'
+password='YOURMYSQLPASSWORD'
+mysql_server=labsdb1002.eqiad.wmnet
+http_port=8834
+html_path=/usr/share/wdq-mm/html/
+secret_sauce=thishastobereallysecretok
+fofn=/etc/wd_server.fofn
