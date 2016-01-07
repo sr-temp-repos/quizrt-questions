@@ -10,7 +10,7 @@
     },
     registerHelpers: function() {
       var self = this;
-      Handlebars.registerHelper('generateOptions',function(results,index) {
+      Handlebars.registerHelper('generateOptions',function(results) {
         var optionsHTML = '';
         for( var i=1;i<=12;i++ ) {
           if( results['option' + i] ) {
