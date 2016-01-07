@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My product page</title>
+</head>
+<body>
+  <ul class="ques">
+    <script id="template" type="text/x-handlebars-template">
+      {{#each this}}
+      <li>
+        <div>
+          <h4>{{{question}}}</h4>
+          <ul class="options">
+            <!-- <li>{{{option1}}}</li>
+            <li>{{{option2}}}</li>
+            <li>{{{option2}}}</li>
+            <li>{{{option2}}}</li> -->
+            {{{ generateOptions this @index }}}
+          </ul>
+          <p>correctIndex: {{correctIndex}}</p>
+        </div>
+      </li>
+      {{/each}}
+    </script>
+  </ul>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="lib/handlebars-v4.0.5.js"></script>
+  <script src="js/QuestionManager.js"></script>
+  <!-- <script>
+  (function(){
+    var content=[
+      {
+        "questionId": "web301_q11",
+        "image": "null",
+        "question": "Which of the following is a valid property in a hibernate configuration?",
+        "correctIndex": 4,
+        "option1": "hibernate.dialect",
+        "option2": "hibernate.connection.url",
+        "option3": "show_sql",
+        "option4": "All of the above",
+        "topicId": "T1"
+      },
+      {
+        "questionId": "web301_q14",
+        "image": "null",
+        "question": "<p>How are Associations between Hibernate entities realized in Database?</p>",
+        "correctIndex": 4,
+        "option1": "<p>join queries</p>",
+        "option2": "<p>foreign keys</p>",
+        "option3": "<p>constraints</p>",
+        "option4": "<p>All of the Above</p>",
+        "topicId": "T1"
+      }
+    ];
+
+    var template=Handlebars.compile($('#template').html());
+    $('ul.ques').append(template(content));
+  })();
+
+  </script> -->
+</body>
+</html>
