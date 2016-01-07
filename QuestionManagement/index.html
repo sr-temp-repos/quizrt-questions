@@ -3,27 +3,46 @@
 <head>
   <meta charset="utf-8">
   <title>My product page</title>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Boot Strap Style Sheet -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">4:04 PM
+
 </head>
 <body>
-  <ul class="ques container">
-    <script id="template" type="text/x-handlebars-template">
-      {{#each this}}
-      <li>
-        <div>
-          <h4>{{{question}}}</h4>
-          <ul class="options">
-            {{{ generateOptions this @index }}}
-          </ul>
-          <p>correctIndex: {{correctIndex}}</p>
-        </div>
-      </li>
-      {{/each}}
-    </script>
-  </ul>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="lib/handlebars-v4.0.5.js"></script>
-  <script src="js/QuestionManager.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <div class="container">
+    <h2>List of Questions</h2>
+    <div class="panel-group" id="accordion">
+      <script id="template" type="text/x-handlebars-template">
+        {{#each this}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}">{{{question}}}</a>
+              </h4>
+            </div>
+            {{#if @index}}
+              <div id="collapse{{@index}}"  class="panel-collapse collapse" >
+            {{else}}
+              <div id="collapse{{@index}}"  class="panel-collapse collapse in" >
+            {{/if}}
+              <div class="panel-body">
+                <ul class="options">
+                  {{{ generateOptions this @index }}}
+                </ul>
+              </div>
+              <div class="panel-footer">correctIndex: {{correctIndex}}</div>
+            </div>
+          </div>
+        {{/each}}
+      </script>
+    </div>
+  </div>
+  <!-- JQuery script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Handle Bars Java script -->
+  <script src="lib/handlebars-v4.0.5.js"></script>
+  <!-- Bootstrap java script -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- Custom Script -->
+  <script src="js/QuestionManager.js"></script>
 </body>
 </html>
