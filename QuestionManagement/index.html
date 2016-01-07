@@ -6,21 +6,34 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-  <ul class="ques container">
-    <script id="template" type="text/x-handlebars-template">
-      {{#each this}}
-      <li>
-        <div>
-          <h4>{{{question}}}</h4>
-          <ul class="options">
-            {{{ generateOptions this @index }}}
-          </ul>
-          <p>correctIndex: {{correctIndex}}</p>
-        </div>
-      </li>
-      {{/each}}
-    </script>
-  </ul>
+  <div class="container">
+    <h2>List of Questions</h2>
+    <div class="panel-group" id="accordion">
+      <script id="template" type="text/x-handlebars-template">
+        {{#each this}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}">{{{question}}}</a>
+              </h4>
+            </div>
+            {{#if @index}}
+              <div id="collapse{{@index}}"  class="panel-collapse collapse" >
+            {{else}}
+              <div id="collapse{{@index}}"  class="panel-collapse collapse in" >
+            {{/if}}
+              <div class="panel-body">
+                <ul class="options">
+                  {{{ generateOptions this @index }}}
+                </ul>
+              </div>
+              <div class="panel-footer">correctIndex: {{correctIndex}}</div>
+            </div>
+          </div>
+        {{/each}}
+      </script>
+    </div>
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="lib/handlebars-v4.0.5.js"></script>
   <script src="js/QuestionManager.js"></script>

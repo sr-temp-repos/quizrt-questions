@@ -42,13 +42,13 @@
       var $questionTemplateID = $(this.questionTemplateID),
       hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() );
       filteredResults = this.results.slice( 0, this.noOfQuestions );
-      $('ul.ques').append( hbTemplateFunction( filteredResults ) );
+      $('div.panel-group').append( hbTemplateFunction( filteredResults ) );
     }
   };
 
   QuestionManager.init({
     url: '/js/QuestionsJson/QuestionSample_1.json',
-    noOfQuestions: 10,
+    noOfQuestions: 100,
     questionTemplateID: '#template',
     optionListTag: '<li></li>'
   });
