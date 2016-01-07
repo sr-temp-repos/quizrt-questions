@@ -6,7 +6,9 @@
       this.noOfQuestions = config.noOfQuestions;
       this.questionTemplateID = config.questionTemplateID;
       this.optionListTag=config.optionListTag;
+      this.$formSection = config.$formSection;
       this.getQuestionJson();
+      this.eventHandlers();
     },
     registerHelpers: function() {
       var self = this;
@@ -15,7 +17,7 @@
         for( var i=1;i<=12;i++ ) {
           if( results['option' + i] ) {
             optionsHTML += $('<div></div>').append($(self.optionListTag).text(results['option' + i])).html();
-            console.log(optionsHTML);
+            //console.log(optionsHTML);
           } else {
             break;
           }
@@ -24,6 +26,24 @@
         return optionsHTML;
       });
     },
+
+    eventHandlers: function() {
+      var self=this;
+      // handle form submit event
+      self.$formSection.submit(function(e) {
+        e.preventDefault();
+        var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(' ','|') + ')','ig');
+        //console.log(searchKeywords);
+        var results = $.grep( self.results, function(result, i) {
+//          console.log(i + ' ' + result.question.search(searchKeywords) );
+          return result.question.search(searchKeywords) > -1;
+        });
+        self.listQuestions(results);
+//        console.log(results);
+
+      });
+    },
+
     getQuestionJson: function() {
       var self=this;
       $.ajax({
@@ -33,23 +53,26 @@
       }).done(function(results) {
         self.results = results;
         self.registerHelpers();
-        self.listQuestions();
+        self.listQuestions(self.results);
       });
     },
 
 
-    listQuestions: function() {
+    listQuestions: function(results) {
+      console.log(this.questionTemplateID);
       var $questionTemplateID = $(this.questionTemplateID),
-      hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() );
-      filteredResults = this.results.slice( 0, this.noOfQuestions );
-      $('div.panel-group').append( hbTemplateFunction( filteredResults ) );
+          hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() ),
+          filteredResults = results.slice( 0, this.noOfQuestions );
+      console.log(filteredResults);
+      $('div.panel-group').empty().append( hbTemplateFunction( filteredResults ) );
     }
   };
 
   QuestionManager.init({
-    url: '/js/QuestionsJson/QuestionSample_1.json',
-    noOfQuestions: 100,
+    url: '/js/QuestionsJson/QuestionSample_2.json',
+    noOfQuestions: 10,
     questionTemplateID: '#template',
-    optionListTag: '<li></li>'
+    optionListTag: '<li></li>',
+    $formSection: $('#search')
   });
 })();

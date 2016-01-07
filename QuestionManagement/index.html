@@ -8,34 +8,40 @@
 
 </head>
 <body>
-  <div class="container">
-    <h2>List of Questions</h2>
-    <div class="panel-group" id="accordion">
-      <script id="template" type="text/x-handlebars-template">
-        {{#each this}}
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}">{{{question}}}</a>
-              </h4>
-            </div>
-            {{#if @index}}
-              <div id="collapse{{@index}}"  class="panel-collapse collapse" >
-            {{else}}
-              <div id="collapse{{@index}}"  class="panel-collapse collapse in" >
-            {{/if}}
-              <div class="panel-body">
-                <ul class="options">
-                  {{{ generateOptions this }}}
-                </ul>
-              </div>
-              <div class="panel-footer">correctIndex: {{correctIndex}}</div>
-            </div>
-          </div>
-        {{/each}}
-      </script>
+  <main class="container">
+    <div class="well">
+      <h2>Search Question</h2>
+      <form id="search" action="">
+        <input name="searchText" id="searchText" placeholder="Search using Keywords" type="text" size="100" />
+        <button type="submit" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </form>
     </div>
-  </div>
+    <h2 class="text-center">List of Questions</h2>
+    <div class="panel-group" id="accordion">
+
+    </div>
+
+    <!-- Question Template -->
+    <script id="template" type="text/x-handlebars-template">
+      {{#each this}}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}">{{{question}}}</a>
+            </h4>
+          </div>
+          <div id="collapse{{@index}}"  class="panel-collapse collapse" >
+            <div class="panel-body">
+              <ul class="options">
+                {{{ generateOptions this }}}
+              </ul>
+            </div>
+            <div class="panel-footer">correctIndex: {{correctIndex}}</div>
+          </div>
+        </div>
+      {{/each}}
+    </script>
+  </main>
   <!-- JQuery script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Handle Bars Java script -->
