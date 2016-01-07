@@ -14,11 +14,13 @@
         var optionsHTML = '';
         for( var i=1;i<=12;i++ ) {
           if( results['option' + i] ) {
-            optionsHTML += $( self.optionListTag ).text(results['option' + i]).html();
+            optionsHTML += $('<div></div>').append($(self.optionListTag).text(results['option' + i])).html();
+            console.log(optionsHTML);
           } else {
             break;
           }
         }
+        //console.log(optionsHTML);
         return optionsHTML;
       });
     },
@@ -38,8 +40,8 @@
 
     listQuestions: function() {
       var $questionTemplateID = $(this.questionTemplateID),
-          hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() );
-          filteredResults = this.results.slice( 0, this.noOfQuestions );
+      hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() );
+      filteredResults = this.results.slice( 0, this.noOfQuestions );
       $('ul.ques').append( hbTemplateFunction( filteredResults ) );
     }
   };
