@@ -2,7 +2,7 @@
   var QuestionManager = {
     /* Intializes the config data into the object */
     init: function(config) {
-      this.url = config.url;
+      this.questionURL = config.questionURL;
       this.noOfQuestions = config.noOfQuestions;
       this.questionTemplateID = config.questionTemplateID;
       this.optionListTag=config.optionListTag;
@@ -25,6 +25,21 @@
         //console.log(optionsHTML);
         return optionsHTML;
       });
+
+      /* For generating Topics and Categories */
+      Handlebars.registerHelper('generateTopicsCategory',function(results) {
+        var optionsHTML = '',
+            categories = [],
+            topics = [];
+        for( var i=0,len=results.topicId.length; i<=len; i++ ) {
+          categories[i]=self.topics[result.topicId[i]].category;
+          topics[i]=self.topics[result.topicId[i]].name;
+        }
+        return $('<div></div>')
+                  .append($('<td></td>').text(topics))
+                  .append($('<td></td>').text(categories))
+                  .html();
+      });
     },
 
     eventHandlers: function() {
@@ -39,11 +54,21 @@
         self.listQuestions(results);
       });
     },
-
+    getTopicsJson: function() {
+      var self=this;
+      $.ajax({
+        url: self.questionURL,
+        dataType: 'json',
+        method: 'post'
+      }).done(function(results) {
+        self.topics = results;
+        getQuestionJson();
+      };
+    },
     getQuestionJson: function() {
       var self=this;
       $.ajax({
-        url: self.url,
+        url: self.questionURL,
         dataType: 'json',
         method: 'post'
       }).done(function(results) {
@@ -58,7 +83,7 @@
       var $questionTemplateID = $(this.questionTemplateID),
           hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() ),
           filteredResults = results.slice( 0, this.noOfQuestions );
-      $('div.panel-group').slideToggle( 500 )
+      this.questionList.slideToggle( 500 )
                           .empty()
                           .append( hbTemplateFunction( filteredResults ) )
                           .slideToggle( 500 );
@@ -66,9 +91,11 @@
   };
 
   QuestionManager.init({
-    url: '/js/QuestionsJson/QuestionSample_2.json',
+    questionURL: '/js/QuestionsJson/QuestionSample_2.json',
+    topicsURL: '/js/QuestionsJson/Topics_v1.json'
     noOfQuestions: 10,
     questionTemplateID: '#template',
+    $questionContainer: $('#questionList'),
     optionListTag: '<li></li>',
     $formSection: $('#searchForm')
   });

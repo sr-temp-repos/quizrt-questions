@@ -14,16 +14,45 @@
     <div id="search" class="well">
       <h2>Search Question</h2>
       <form id="searchForm" action="">
-        <input name="searchText" id="searchText" placeholder="Search using Keywords" type="text" size="100" />
+        <input name="searchText" id="searchText" class="col-xs-8" placeholder="Search using Keywords" type="text" />
         <button type="submit" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
       </form>
     </div>
     <h2 class="text-center">List of Questions</h2>
-    <div class="panel-group" id="accordion">
+    <table id="questionList" class="table table-stripped">
+      <th>
+        <td>Question</td>
+        <td>Topics</td>
+        <td>Categories</td>
+        <td>Difficulty Level</td>
+        <td>Times Used</td>
+        <td>Correct Ratio</td>
+        <td>Frequecy</td>
+        <td>Last Edited</td>
+        <td>Created On</td>
+      </th>
+    </table>
+
+    <script id="template" type="text/x-handlebars-template">
+      {{#each this}}
+        <tr>
+          <td>{{question}}</td>
+          {{generateTopicsCategory}}
+          <td>{{difficultyLevel}}</td>
+          <td>{{timesUsed}}</td>
+          <td>{{correctRatio}}</td>
+          <td>{{frequency}}</td>
+          <td>{{lastEdited}}</td>
+          <td>{{createdOn}}</td>
+        </tr>
+      {{/each}}
+    </script>
+
+    <!-- <div class="panel-group" id="accordion">
 
     </div>
 
-    <!-- Question Template -->
+
     <script id="template" type="text/x-handlebars-template">
       {{#each this}}
         <div class="panel panel-default">
@@ -43,13 +72,17 @@
                 <h4>Correct Answer</h4>
               </div>
               <div class="col-xs-10">
-                <input type="text"  value="{{correctIndex}}" disabled />
+                <input class="editContent col-xs-9" type="text"  value="{{correctIndex}}" disabled />
+                <div class="col-xs-3 saveButtons hidden">
+                  <button class="btn btn-default pull-right">Cancel</button>
+                  <button class="btn btn-success pull-right">Save</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       {{/each}}
-    </script>
+    </script> -->
   </main>
   <!-- JQuery script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

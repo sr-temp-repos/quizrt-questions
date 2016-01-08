@@ -6,6 +6,10 @@ main {
   margin-top: 0px;
 }
 
+#searchForm > * {
+  padding-right: 10px;
+}
+
 /* List of classes */
 .question:hover {
   background-color: #e5e5e5;
@@ -20,13 +24,18 @@ main {
 .panel-footer > * {
   margin: 0px;
 }
-.panel-footer input {
+.editContent {
   font-size: 16px;
   padding: 10px 0px;
   font-weight: bolder;
-  width: 100%;
   background-color: rgba(0,0,0,0);
   border: none;
+}
+.saveButtons {
+  padding: 5px;
+}
+.saveButtons button {
+  margin-left: 10px;
 }
 .correctanswer {
   padding: 10px;
@@ -36,7 +45,7 @@ main {
   border: none;
   border-right: 1px solid #e3e3e3;
 }
-.correctanswer h4 {
+.correctanswer h4  {
   padding: 0px;
   margin: 0px;
 }
