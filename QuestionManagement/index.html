@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <title>My product page</title>
   <!-- Boot Strap Style Sheet -->
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <!-- Custom Style sheet -->
+  <link rel="stylesheet" href="css/QuestionManager.css" />
 
 </head>
 <body>
@@ -25,9 +27,9 @@
     <script id="template" type="text/x-handlebars-template">
       {{#each this}}
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading question"  data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{@index}}">
             <h4 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}">{{{question}}}</a>
+              {{{question}}}
             </h4>
           </div>
           <div id="collapse{{@index}}"  class="panel-collapse collapse" >

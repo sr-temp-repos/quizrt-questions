@@ -1,0 +1,9 @@
+main {
+  margin-top: 30px;
+}
+
+/* List of classes */
+.question:hover {
+  background-color: #e5e5e5;
+  cursor: pointer;
+}

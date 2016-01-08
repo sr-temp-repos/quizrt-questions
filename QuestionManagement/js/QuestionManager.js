@@ -33,14 +33,10 @@
       self.$formSection.submit(function(e) {
         e.preventDefault();
         var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(' ','|') + ')','ig');
-        //console.log(searchKeywords);
         var results = $.grep( self.results, function(result, i) {
-//          console.log(i + ' ' + result.question.search(searchKeywords) );
           return result.question.search(searchKeywords) > -1;
         });
         self.listQuestions(results);
-//        console.log(results);
-
       });
     },
 
@@ -59,12 +55,13 @@
 
 
     listQuestions: function(results) {
-      console.log(this.questionTemplateID);
       var $questionTemplateID = $(this.questionTemplateID),
           hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() ),
           filteredResults = results.slice( 0, this.noOfQuestions );
-      console.log(filteredResults);
-      $('div.panel-group').empty().append( hbTemplateFunction( filteredResults ) );
+      $('div.panel-group').slideToggle( 500 )
+                          .empty()
+                          .append( hbTemplateFunction( filteredResults ) )
+                          .slideToggle( 500 );
     }
   };
 
