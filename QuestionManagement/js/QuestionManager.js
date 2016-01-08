@@ -70,6 +70,6 @@
     noOfQuestions: 10,
     questionTemplateID: '#template',
     optionListTag: '<li></li>',
-    $formSection: $('#search')
+    $formSection: $('#searchForm')
   });
 })();
