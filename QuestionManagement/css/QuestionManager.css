@@ -17,18 +17,20 @@ main {
   overflow: hidden;
   padding: 0px;
 }
-.panel-footer * {
-  padding: 10px;
+.panel-footer > * {
   margin: 0px;
 }
-.panel-footer > strong {
+.panel-footer input {
   font-size: 16px;
+  padding: 10px 0px;
   font-weight: bolder;
+  width: 100%;
+  background-color: rgba(0,0,0,0);
+  border: none;
 }
 .correctanswer {
+  padding: 10px;
   background-color: rgba(116, 210, 116, 0.94);
-  display: inline-block;
-  width: 150px;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border: none;
