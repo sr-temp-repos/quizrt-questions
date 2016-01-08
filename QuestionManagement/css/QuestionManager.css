@@ -11,3 +11,30 @@ main {
   background-color: #e5e5e5;
   cursor: pointer;
 }
+
+/* correct answer well */
+.panel-footer {
+  overflow: hidden;
+  padding: 0px;
+}
+.panel-footer * {
+  padding: 10px;
+  margin: 0px;
+}
+.panel-footer > strong {
+  font-size: 16px;
+  font-weight: bolder;
+}
+.correctanswer {
+  background-color: rgba(116, 210, 116, 0.94);
+  display: inline-block;
+  width: 150px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: none;
+  border-right: 1px solid #e3e3e3;
+}
+.correctanswer h4 {
+  padding: 0px;
+  margin: 0px;
+}
