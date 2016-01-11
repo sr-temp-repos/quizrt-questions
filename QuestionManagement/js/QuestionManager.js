@@ -3,13 +3,17 @@
     /* Intializes the config data into the object */
     init: function(config) {
       this.questionURL = config.questionURL;
-      this.noOfQuestions = config.noOfQuestions;
+      this.topicsURL = config.topicsURL;
       this.questionTemplateID = config.questionTemplateID;
       this.optionListTag=config.optionListTag;
       this.$formSection = config.$formSection;
-      this.getQuestionJson();
+      this.$questionContainer = config.$questionContainer;
+      this.dateSeparator = config.dateSeparator;
+      this.$question = config.$question;
+      this.getTopicsJson();
       this.eventHandlers();
     },
+
     registerHelpers: function() {
       var self = this;
       Handlebars.registerHelper('generateOptions',function(results) {
@@ -25,46 +29,23 @@
         //console.log(optionsHTML);
         return optionsHTML;
       });
-
-      /* For generating Topics and Categories */
-      Handlebars.registerHelper('generateTopicsCategory',function(results) {
-        var optionsHTML = '',
-            categories = [],
-            topics = [];
-        for( var i=0,len=results.topicId.length; i<=len; i++ ) {
-          categories[i]=self.topics[result.topicId[i]].category;
-          topics[i]=self.topics[result.topicId[i]].name;
-        }
-        return $('<div></div>')
-                  .append($('<td></td>').text(topics))
-                  .append($('<td></td>').text(categories))
-                  .html();
-      });
     },
 
     eventHandlers: function() {
       var self=this;
-      // handle form submit event
+      // handle search form submit event
       self.$formSection.submit(function(e) {
         e.preventDefault();
-        var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(' ','|') + ')','ig');
-        var results = $.grep( self.results, function(result, i) {
-          return result.question.search(searchKeywords) > -1;
-        });
+        var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(' ','|') + ')','ig'),
+            results = $.grep( self.results, function(result, i) {
+              return result.question.search(searchKeywords) > -1 || result.topicId.search(searchKeywords) > -1 || result.topicId.search(searchKeywords) > -1;
+            });
         self.listQuestions(results);
+
       });
+
     },
-    getTopicsJson: function() {
-      var self=this;
-      $.ajax({
-        url: self.questionURL,
-        dataType: 'json',
-        method: 'post'
-      }).done(function(results) {
-        self.topics = results;
-        getQuestionJson();
-      };
-    },
+
     getQuestionJson: function() {
       var self=this;
       $.ajax({
@@ -78,25 +59,48 @@
       });
     },
 
+    getTopicsJson: function() {
+      var self=this;
+      $.ajax({
+        url: self.topicsURL,
+        dataType: 'json',
+        method: 'post'
+      }).done(function(results) {
+        self.topics = results;
+        self.getQuestionJson();
+      })
+    },
 
     listQuestions: function(results) {
       var $questionTemplateID = $(this.questionTemplateID),
-          hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() ),
-          filteredResults = results.slice( 0, this.noOfQuestions );
-      this.questionList.slideToggle( 500 )
-                          .empty()
-                          .append( hbTemplateFunction( filteredResults ) )
-                          .slideToggle( 500 );
+          hbTemplateFunction = Handlebars.compile( $questionTemplateID.html() );
+
+      console.log(this.$questionContainer);
+      this.$questionContainer.slideToggle( 500 )
+            .bootgrid('clear')
+            .bootgrid('append', results )
+            .slideToggle( 500 );
+
     }
   };
 
   QuestionManager.init({
-    questionURL: '/js/QuestionsJson/QuestionSample_2.json',
-    topicsURL: '/js/QuestionsJson/Topics_v1.json'
-    noOfQuestions: 10,
+    /* Json URL */
+    questionURL: '/js/QuestionsJson/QuestionSample_3.json',
+    topicsURL: '/js/QuestionsJson/Topics_v1.json',
+
+    /* Template to use for placing question and question container */
     questionTemplateID: '#template',
     $questionContainer: $('#questionList'),
-    optionListTag: '<li></li>',
-    $formSection: $('#searchForm')
+    // optionListTag: '<li></li>',
+
+    /* Search from object for submit event */
+    $formSection: $('#searchForm'),
+
+    /* Question Selection Toggle */
+    $question: $('.question-row'),
+
+    /* date Separator for configuring date separation */
+    dateSeparator: '/'
   });
 })();
