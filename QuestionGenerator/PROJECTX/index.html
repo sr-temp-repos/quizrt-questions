@@ -1,31 +1,186 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>PROJECT X</title>
-  </head>
-  <body>
-<!-- <select id="cricketers" name="Cricketers List">
-</select> -->
-
-<button type="button" id="searchButton" name="search">Search Item</button><input type="text" id="searchText"></input>
-
-<select id="properties" name="properties">
-</select>
-
-<button type="button" id="searchProperty" name="searchProperty">Search Property</button><input type="text" id="searchPropertyText"></input>
-<select id="propertyNames" name="propertyNames">
-</select>
-
-<button type="button" id="getResult" name="getResult">Get Result</button>
-
-<select id="propertyFilter" name="propertyFilter">
-</select>
-
-<div id="result">
-
-</div>
-    <script src="script/jquery-1.11.3.min.js"></script>
-    <script src="script/script.js"></script>
-  </body>
+   <head>
+      <meta charset="utf-8">
+      <!-- Website Title & Description for Search Engine purposes -->
+      <title>Question Generator</title>
+      <!-- Mobile viewport optimized -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <!-- Bootstrap CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/bootstrap-glyphicons.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/style.css" rel="stylesheet">
+      <!-- Include Modernizr in the head, before any other Javascript -->
+      <script src="script/modernizr-2.6.2.min.js"></script>
+      <!--google fonts-->
+      <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
+   </head>
+   <body>
+      <header>
+         <div class="container-12">
+            <h1 class="well text-center"> <strong>Question Generator</strong></h1>
+         </div>
+         <!--end container-12-->
+      </header>
+      <main>
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-6">
+                  <div class="input-group">
+                     <span class="input-group-btn">
+                        <button class="btn btn-default" id="searchProperty" type="button"><strong>Search by Property</strong></button>
+                        <h5><small>Ex:profession,instance of etc.</small></h5>
+                     </span>
+                     <input type="text" id="searchPropertyText" class="form-control" placeholder="Search for...">
+                  </div>
+                  <!-- /input-group -->
+               </div>
+               <!-- /.col-lg-6 -->
+               <div class="col-lg-6">
+                  <div class="input-group">
+                     <input type="text" class="form-control" id="searchEntityText" placeholder="Search for...">
+                     <span class="input-group-btn">
+                        <button class="btn btn-default" id="searchEntity" type="button"><strong>Search an Entity</strong></button>
+                        <h5><small>Ex:dog,Amitabh Bachchan etc.</small></h5>
+                     </span>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+               <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+            <hr>
+            <div class="row">
+               <div class="col-lg-6" id="propertySuggestion">
+                  <div class="panel panel-default" id="propertySuggestionRow">
+                     <div class="panel-heading">
+                        <h3 class="panel-title text-center"><strong>Properties Availaible</strong></h3>
+                     </div>
+                     <div class="panel-body">
+                        <ul class="list-group" id="propertyNames">
+                        </ul>
+                     </div>
+                     <!--end panel body-->
+                  </div>
+               </div>
+               <!--end col-lg-6-->
+               <div class="col-lg-6 col-lg-offset-6" id="entity">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h3 class="panel-title text-center"><strong>Possible Entities</strong></h3>
+                     </div>
+                     <div class="panel-body">
+                        <ul class="list-group" id="entityOptions">
+                        </ul>
+                     </div>
+                     <!--end panel body-->
+                  </div>
+               </div>
+               <!--end col-lg-6-->
+            </div>
+            <!--end row-->
+            <div class="row" id="propertyEntityDiv">
+               <div class="col-lg-6" id="propertyValueSuggestion">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h3 class="panel-title text-center"><strong>Possible Values</strong></h3>
+                     </div>
+                     <div class="panel-body">
+                        <div class="row">
+                           <div class="col-3 text-center">
+                              <h5><strong>EntityID:Entity Name</strong></h5>
+                           </div>
+                        </div>
+                        <!--end row-->
+                        <hr>
+                        <ul class="list-group" id="valueNames">
+                        </ul>
+                     </div>
+                     <!--end panel body-->
+                  </div>
+               </div>
+               <!--end col-lg-6-->
+               <div class="col-lg-6 col-lg-offset-6" id="entityProperties">
+                  <div class="panel panel-default">
+                     <div class="panel-heading">
+                        <h3 class="panel-title text-center"><strong>EntityProperties</strong></h3>
+                     </div>
+                     <div class="panel-body">
+                        <div class="row">
+                           <div class="col-3 text-center">
+                              <h5><strong>Property:Value</strong></h5>
+                           </div>
+                        </div>
+                        <!--end row-->
+                        <hr>
+                        <ul class="list-group" id="entityPropertyList">
+                        </ul>
+                     </div>
+                     <!--end panel body-->
+                  </div>
+               </div>
+               <!--end col-lg-6-->
+            </div>
+            <!--end row-->
+            <hr>
+            <div class="row well text-center">
+               <div class="col-12">
+                  <h1><strong>Result</strong></h1>
+               </div>
+               <div class="col-12">
+                  <p>
+                     <button type="button" id="filterButton"class="btn btn-primary btn-xs">Filter?</button>
+                  </p>
+               </div>
+               <!---filter properties---------->
+               <div class="col-12">
+                  <div class="row">
+                     <div class="col-lg-6">
+                        <div class="input-group well" id="propertyList">
+                           <div class="input-group-addon" id="cbList">
+                              <h5>Filter By:</h5>
+                           </div>
+                        </div>
+                        <!-- /input-group -->
+                     </div>
+                     <!-- /.col-lg-6 -->
+                  </div>
+                  <!-- /.row -->
+                  <div class="row text-center">
+                     <button class="btn-sm" id="valuesList">Get Values</button>
+                  </div>
+                  <div class="dropdown">
+                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                     Filtered Values
+                     <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu" id="filteredValues" aria-labelledby="dropdownMenu1">
+                     </ul>
+                  </div>
+               </div>
+               <!--end col-12-->
+               <!---end filter properties---------->
+               <div class="col-12 text-center">
+                  <ul class="list-group" id="resultList">
+                  </ul>
+               </div>
+            </div>
+            <!---end row,well-->
+         </div>
+         <!--end container-->
+      </main>
+      <!-- All Javascript at the bottom of the page for faster page loading -->
+      <!-- First try for the online version of jQuery-->
+      <script src="http://code.jquery.com/jquery.js"></script>
+      <!-- If no online access, fallback to our hardcoded version of jQuery -->
+      <script>
+         window.jQuery || document.write('<script src="script/jquery-1.8.2.min.js"><\/script>')
+      </script>
+      <!-- Bootstrap JS -->
+      <script src="script/bootstrap.min.js"></script>
+      <!-- Custom JS -->
+      <script src="script/script.js"></script>
+   </body>
 </html>
