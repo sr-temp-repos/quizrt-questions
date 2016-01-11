@@ -1,0 +1,21 @@
+#propertySuggestion,
+#propertyValueSuggestion,
+#entity,
+#entityProperties {
+    display: none;
+}
+#propertyEntityDiv,
+#propertySuggestionRow,
+#entity {
+    height: 200px;
+}
+#propertyValueSuggestion,
+#entityProperties,
+#propertyNames,
+#entityOptions {
+    height: 100%;
+    overflow-y: scroll;
+}
+#propertyList {
+    overflow-x: scroll;
+}
