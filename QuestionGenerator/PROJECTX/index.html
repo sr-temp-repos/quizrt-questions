@@ -83,11 +83,11 @@
             <!--end row-->
             <div class="row" id="propertyEntityDiv">
                <div class="col-lg-6" id="propertyValueSuggestion">
-                  <div class="panel panel-default">
+                  <div class="panel panel-default" >
                      <div class="panel-heading">
                         <h3 class="panel-title text-center"><strong>Possible Values</strong></h3>
                      </div>
-                     <div class="panel-body">
+                     <div class="panel-body" id="panelForPropertyValueSuggestion">
                         <div class="row">
                            <div class="col-3 text-center">
                               <h5><strong>EntityID:Entity Name</strong></h5>
@@ -103,11 +103,11 @@
                </div>
                <!--end col-lg-6-->
                <div class="col-lg-6 col-lg-offset-6" id="entityProperties">
-                  <div class="panel panel-default">
+                  <div class="panel panel-default" >
                      <div class="panel-heading">
                         <h3 class="panel-title text-center"><strong>EntityProperties</strong></h3>
                      </div>
-                     <div class="panel-body">
+                     <div class="panel-body" id="scrollForEntityProperties">
                         <div class="row">
                            <div class="col-3 text-center">
                               <h5><strong>Property:Value</strong></h5>
@@ -135,12 +135,13 @@
                   </p>
                </div>
                <!---filter properties---------->
-               <div class="col-12">
+               <div id="checkBoxDiv">
+                 <h5 class="text-center">Filter By</h5><span class="caret"></span>
                   <div class="row">
-                     <div class="col-lg-6">
+                     <div class="col-lg-12">
                         <div class="input-group well" id="propertyList">
                            <div class="input-group-addon" id="cbList">
-                              <h5>Filter By:</h5>
+
                            </div>
                         </div>
                         <!-- /input-group -->
@@ -170,6 +171,10 @@
             <!---end row,well-->
          </div>
          <!--end container-->
+
+         <div id="spinner">
+
+         </div>
       </main>
       <!-- All Javascript at the bottom of the page for faster page loading -->
       <!-- First try for the online version of jQuery-->

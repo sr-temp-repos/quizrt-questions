@@ -1,4 +1,5 @@
 (function() {
+
     var qIdList = [];
     var qId = null;
     var pIdList = [];
@@ -18,8 +19,11 @@
     };
 
     function getProperties(propertyNames) {
+      pIdList=[];
         var link = "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + propertyNames + "&language=en&type=property&format=json";
+        $("#spinner").show();
         $.getJSON(link + "&callback=?", function(data) {
+            $('#propertyNames').find("li").remove();
             $.each(data["search"], function(k, v) {
                 if (k == 0) {
                     pId = v["title"].substr(10);
@@ -31,14 +35,17 @@
                 pIdList.push(v["title"].substr(10));
 
             });
+            $("#spinner").hide();
         });
-
     }
 
     <!-- ----------------------------------------------------- -->
     function getEntityHints(item) {
+        qIdList=[];
         var link = "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=" + item + "&language=en&format=json";
+        $("#spinner").show();
         $.getJSON(link + "&callback=?", function(data) {
+            $('#entityOptions').find("li").remove();
             $.each(data["search"], function(k, v) {
                 if (k == 0) {
                     qId = v["title"].substr(1);
@@ -49,11 +56,13 @@
                 }).addClass("list-group-item").attr("id", k));
                 qIdList.push(v["title"].substr(1));
             });
+            $("#spinner").hide();
         });
     }
 
     function getEntityProperties(qId) {
         var entityUrl = "https://www.wikidata.org/w/api.php?action=wbgetentities&props=claims&ids=Q" + qId + "&languages=en&format=json";
+        $("#spinner").show();
         $.getJSON(entityUrl + "&callback=?", function(data) {
             $.each(data["entities"]["Q" + qId]["claims"], function(key, val) {
                 var tempLink1 = "https://www.wikidata.org/wiki/Special:EntityData/" + key + ".json"
@@ -61,6 +70,7 @@
                     $.each(val, function(key1, val1) {
                         var numericID = val1["mainsnak"]["datavalue"]["value"]["numeric-id"];
                         var tempLink2 = "https://www.wikidata.org/wiki/Special:EntityData/Q" + numericID + ".json";
+                        $('#entityPropertyList').find("li").remove();
                         $.getJSON(tempLink2, function(data2) {
                             if (getPropertyValueList(data1["entities"][key]["labels"]["en"]["value"]) == null) {
                                 propertyValueList[data1["entities"][key]["labels"]["en"]["value"]] = data2["entities"]["Q" + numericID]["labels"]["en"]["value"];
@@ -70,7 +80,6 @@
                                 } else
                                     propertyValueList[data1["entities"][key]["labels"]["en"]["value"]] = propertyValueList[data1["entities"][key]["labels"]["en"]["value"]] + "," + data2["entities"]["Q" + numericID]["labels"]["en"]["value"];
                             }
-
                             $("#entityPropertyList").append($('<li>', {
                                 value: numericID,
                                 text: data1["entities"][key]["labels"]["en"]["value"] + ":" + data2["entities"]["Q" + numericID]["labels"]["en"]["value"]
@@ -80,6 +89,7 @@
                     });
                 });
             });
+            $("#spinner").hide();
         });
     }
     <!-- ----------------------------------------------------- -->
@@ -88,6 +98,7 @@
             $("#propertySuggestion").slideDown(1000);
             $("#entity").slideUp("fast");
             $("#entityProperties").slideUp("fast");
+            $("#propertyValueSuggestion").slideUp("fast");
             var searchText1 = $("#searchPropertyText").val();
             $("#propertyNames").find('li').remove();
             getProperties(searchText1);
@@ -97,7 +108,9 @@
             $("#entity").slideDown(1000);
             $("#propertySuggestion").slideUp("fast");
             $("#propertyValueSuggestion").slideUp("fast");
+            $("#entityProperties").slideUp("fast");
             var searchText2 = $("#searchEntityText").val();
+            $("#entityPropertyList").find('li').remove();
             $("#entityOptions").find('li').remove();
             getEntityHints(searchText2);
         });
@@ -107,6 +120,8 @@
     function getPropertyValues() {
         var resultUrl = 'http://wdq.wmflabs.org/api?q=claim[' + pId + ']';
         var tempURL = 'https://www.wikidata.org/wiki/Special:EntityData/Q';
+        $('#valueNames').find("li").remove();
+        $("#spinner").show();
         $.getJSON(resultUrl + "&callback=?", function(data) {
             $.each(data["items"], function(k, v) {
                 if (k < 4) {
@@ -129,12 +144,15 @@
                     })
                 }
             });
+            $("#spinner").hide();
         });
     }
 
     <!----------------------------------->
     function getFilterProperties(qId) {
+        filterList={};
         var entityUrl = "https://www.wikidata.org/w/api.php?action=wbgetentities&props=claims&ids=Q" + qId + "&languages=en&format=json";
+        $("#spinner").show();
         $.getJSON(entityUrl + "&callback=?", function(data) {
             $.each(data["entities"]["Q" + qId]["claims"], function(key, val) {
                 var tempLink1 = "https://www.wikidata.org/wiki/Special:EntityData/" + key + ".json"
@@ -155,13 +173,17 @@
                     });
                 });
             });
+            $("#spinner").hide();
         });
     }
 
     function getPropertyValueResult() {
         var claim = 'claim[' + pId + ':' + qId + "]";
+        $('#resultList').find("li").remove();
         resultUrl = resultUrl + claim + "%20AND%20";
+        console.log(resultUrl);
         var tempURL = 'https://www.wikidata.org/wiki/Special:EntityData/Q';
+        $("#spinner").show();
         $.getJSON(resultUrl + "&callback=?", function(data) {
             $.each(data["items"], function(k, v) {
                 if (k < 10) {
@@ -175,6 +197,7 @@
                     });
                 }
             });
+            $("#spinner").hide();
         });
     }
     <!------------------------------------->
@@ -194,13 +217,21 @@
         });
     }
     getSelectedItem();
-
+    var k=0;
     function getResult() {
+
         $("#valueNames").on("click", ".list-group-item", function() {
+            $('#cbList').find("input").remove();
+            $('#cbList').find("label").remove();
+            resultUrl = 'http://wdq.wmflabs.org/api?q=';
             qId = $(this).val();
             getPropertyValueResult();
         });
+
         $("#entityOptions").on("click", ".list-group-item", function() {
+            $('#cbList').find("input").remove();
+            $('#cbList').find("label").remove();
+            resultUrl = 'http://wdq.wmflabs.org/api?q=';
             qId = qIdList[$(this).val()];
             getPropertyValueResult();
         });
@@ -211,22 +242,19 @@
     function addCheckbox(name) {
         var container = $('#cbList');
         var inputs = container.find('input');
-        var id = inputs.length + 1;
-
-        $('<input />', {
+        var id = inputs.length;
+        container.append($("<div class='checkbox'>")).append($('<input />', {
             type: 'checkbox',
             id: 'cb' + id,
             value: name
-        }).appendTo(container);
-        $('<label />', {
+        }).addClass("col-lg-1")).append($('<label />', {
             'for': 'cb' + id,
             text: name
-        }).appendTo(container);
+        }).addClass("col-lg-3 text-left"));
     }
 
     function addDropDown(name) {
         tempValue = name.split(",");
-
         $('#filteredValues').append($('<li>', {
             text: tempValue[0]
         }).addClass("text-center lead"));
@@ -235,11 +263,13 @@
                 text: tempValue[i]
             }).addClass("list-group-item"));
         }
-        $('#filteredValues').append($('<li>', {}).addClass("divider"));
     }
 
     function filter() {
         $("#filterButton").on("click", function() {
+          $("#checkBoxDiv").slideToggle();
+          $('#cbList').find("input").remove();
+          $('#cbList').find("label").remove();
             for (var key in filterList) {
                 if (filterList.hasOwnProperty(key)) {
                     property[key.split(":")[0]] = key.split(":")[1];
@@ -248,14 +278,14 @@
             }
         });
 
-
         $("#valuesList").on("click", function() {
             var checkedProperties = [];
+            $('#filteredValues').find("li").remove();
             $.each($("input[type='checkbox']:checked"), function() {
                 checkedProperties.push($(this).val());
                 for (var key in filterList) {
                     if (filterList.hasOwnProperty(key)) {
-                        if (key.includes($(this).val())) {
+                        if (key.includes($(this).val()+":")) {
                             var values = filterList[key];
                             addDropDown(key + "," + values);
                         }
