@@ -3,15 +3,23 @@ main {
 }
 
 #search {
-  overflow: hidden;
+  width: inherit;
 }
+
 #searchForm > * {
   margin-left: 10px;
   padding: 3px;
 }
 
+#pageNo > .pagination {
+  margin: 0px;
+}
 
-/* hiding default bootgrid search tool */
-.input-group {
-  display: none;
+#pageNo > .pageTracker {
+  text-align: right;
+}
+
+/* overiding default */
+#questionList {
+  width: inherit;
 }
