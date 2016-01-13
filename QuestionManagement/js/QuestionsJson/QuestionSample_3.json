@@ -8,17 +8,14 @@
 		"option2": "hibernate.connection.url",
 		"option3": "show_sql",
 		"option4": "All of the above",
-		"topicId": [
-			"T6",
-			"T3",
-			"T4"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 3992,
-		"correctRatio": "9:689",
-		"frequency": 399.2,
-		"createdOn": "2006-02-25T00:00:00.000Z",
-		"lastEdited": "2006-02-25T00:00:00.000Z"
+		"topicId": "football, cricket, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 5,
+		"timesUsed": 8223,
+		"correctRatio": "4196:6185",
+		"frequency": 822,
+		"createdOn": "6/9/1963",
+		"lastEdited": "6/9/1963"
 	},
 	{
 		"questionId": "web301_q14",
@@ -29,17 +26,14 @@
 		"option2": "<p>foreign keys</p>",
 		"option3": "<p>constraints</p>",
 		"option4": "<p>All of the Above</p>",
-		"topicId": [
-			"T2",
-			"T1",
-			"T1"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 6773,
-		"correctRatio": "431:4314",
-		"frequency": 677.3,
-		"createdOn": "1987-06-16T00:00:00.000Z",
-		"lastEdited": "1987-06-16T00:00:00.000Z"
+		"topicId": "baseball, baseball, baseball",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 3,
+		"timesUsed": 2574,
+		"correctRatio": "4944:7858",
+		"frequency": 257,
+		"createdOn": "28/10/1914",
+		"lastEdited": "28/10/1914"
 	},
 	{
 		"questionId": "web301_q16",
@@ -50,17 +44,14 @@
 		"option2": "Series - Book",
 		"option3": "Book - BookInfo",
 		"option4": "Author - Publisher",
-		"topicId": [
-			"T6",
-			"T1",
-			"T2"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 8808,
-		"correctRatio": "3081:3337",
-		"frequency": 880.8,
-		"createdOn": "1941-08-03T00:00:00.000Z",
-		"lastEdited": "1941-08-03T00:00:00.000Z"
+		"topicId": "cricket, football, elepant",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 8,
+		"timesUsed": 5829,
+		"correctRatio": "544:3060",
+		"frequency": 583,
+		"createdOn": "13/9/1970",
+		"lastEdited": "13/9/1970"
 	},
 	{
 		"questionId": "web301_q17",
@@ -71,17 +62,14 @@
 		"option2": " when Book is deleted",
 		"option3": " saved respectively.",
 		"option4": "Publication is retrieved when Book is retrieved.",
-		"topicId": [
-			"T1",
-			"T6",
-			"T1"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 3244,
-		"correctRatio": "5756:7422",
-		"frequency": 324.4,
-		"createdOn": "1910-11-10T00:00:00.000Z",
-		"lastEdited": "1910-11-10T00:00:00.000Z"
+		"topicId": "dog, football, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 5,
+		"timesUsed": 3176,
+		"correctRatio": "3047:6531",
+		"frequency": 318,
+		"createdOn": "2/6/2002",
+		"lastEdited": "2/6/2002"
 	},
 	{
 		"questionId": "web301_q18",
@@ -92,17 +80,14 @@
 		"option2": "lazy-load",
 		"option3": "cascade",
 		"option4": "None of the Above",
-		"topicId": [
-			"T2",
-			"T1",
-			"T4"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 1276,
-		"correctRatio": "2653:3445",
-		"frequency": 127.6,
-		"createdOn": "1931-10-15T00:00:00.000Z",
-		"lastEdited": "1931-10-15T00:00:00.000Z"
+		"topicId": "elepant, football, dog",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 5,
+		"timesUsed": 8710,
+		"correctRatio": "739:1759",
+		"frequency": 871,
+		"createdOn": "11/7/2006",
+		"lastEdited": "11/7/2006"
 	},
 	{
 		"questionId": "web301_q19",
@@ -113,17 +98,14 @@
 		"option2": "<entity>.hbm.xml",
 		"option3": "hbm.<entity>.xls",
 		"option4": "<entity>.hbm.xls",
-		"topicId": [
-			"T5",
-			"T6",
-			"T3"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 2798,
-		"correctRatio": "797:975",
-		"frequency": 279.8,
-		"createdOn": "1924-11-26T00:00:00.000Z",
-		"lastEdited": "1924-11-26T00:00:00.000Z"
+		"topicId": "dog, cat, elepant",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 8,
+		"timesUsed": 6451,
+		"correctRatio": "3898:5715",
+		"frequency": 645,
+		"createdOn": "16/11/1909",
+		"lastEdited": "16/11/1909"
 	},
 	{
 		"questionId": "web301_q20",
@@ -134,17 +116,14 @@
 		"option2": "primary",
 		"option3": "id",
 		"option4": "none of these",
-		"topicId": [
-			"T1",
-			"T4",
-			"T1"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 50,
-		"correctRatio": "1656:9032",
-		"frequency": 5,
-		"createdOn": "1934-09-30T00:00:00.000Z",
-		"lastEdited": "1934-09-30T00:00:00.000Z"
+		"topicId": "football, dog, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 3490,
+		"correctRatio": "6104:7023",
+		"frequency": 349,
+		"createdOn": "3/1/2011",
+		"lastEdited": "3/1/2011"
 	},
 	{
 		"questionId": "web301_q21",
@@ -155,17 +134,14 @@
 		"option2": "no-null",
 		"option3": "not-null",
 		"option4": "nullable",
-		"topicId": [
-			"T3",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 4369,
-		"correctRatio": "3731:5164",
-		"frequency": 436.9,
-		"createdOn": "2008-09-27T00:00:00.000Z",
-		"lastEdited": "2008-09-27T00:00:00.000Z"
+		"topicId": "football, cat, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 6750,
+		"correctRatio": "380:5579",
+		"frequency": 675,
+		"createdOn": "4/4/1995",
+		"lastEdited": "4/4/1995"
 	},
 	{
 		"questionId": "web301_q23",
@@ -176,17 +152,14 @@
 		"option2": "class",
 		"option3": "type",
 		"option4": "category",
-		"topicId": [
-			"T5",
-			"T5",
-			"T6"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 8716,
-		"correctRatio": "4041:9089",
-		"frequency": 871.6,
-		"createdOn": "2010-10-11T00:00:00.000Z",
-		"lastEdited": "2010-10-11T00:00:00.000Z"
+		"topicId": "elepant, baseball, cricket",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 5476,
+		"correctRatio": "4818:9059",
+		"frequency": 548,
+		"createdOn": "15/3/1916",
+		"lastEdited": "15/3/1916"
 	},
 	{
 		"questionId": "web301_q26",
@@ -197,17 +170,14 @@
 		"option2": "Singleton",
 		"option3": "Prototype",
 		"option4": "",
-		"topicId": [
-			"T1",
-			"T3",
-			"T6"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 694,
-		"correctRatio": "2898:8752",
-		"frequency": 69.4,
-		"createdOn": "1932-06-10T00:00:00.000Z",
-		"lastEdited": "1932-06-10T00:00:00.000Z"
+		"topicId": "elepant, cricket, football",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 1,
+		"timesUsed": 5547,
+		"correctRatio": "269:484",
+		"frequency": 555,
+		"createdOn": "18/4/1955",
+		"lastEdited": "18/4/1955"
 	},
 	{
 		"questionId": "web301_q27",
@@ -218,17 +188,14 @@
 		"option2": "hibernate.connection.datasource",
 		"option3": "hibernate.connection.driver",
 		"option4": "None of the above",
-		"topicId": [
-			"T3",
-			"T2",
-			"T1"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 7223,
-		"correctRatio": "7519:8898",
-		"frequency": 722.3,
-		"createdOn": "1980-08-09T00:00:00.000Z",
-		"lastEdited": "1980-08-09T00:00:00.000Z"
+		"topicId": "cricket, cricket, cat",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 5973,
+		"correctRatio": "3855:8274",
+		"frequency": 597,
+		"createdOn": "30/5/1937",
+		"lastEdited": "30/5/1937"
 	},
 	{
 		"questionId": "web301_q29",
@@ -239,17 +206,14 @@
 		"option2": "Throws error because no table name is assigned",
 		"option3": "No error and class name is mapped with table name",
 		"option4": "Hibernate ignores the class",
-		"topicId": [
-			"T5",
-			"T1",
-			"T1"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 7761,
-		"correctRatio": "7368:9663",
-		"frequency": 776.1,
-		"createdOn": "1995-07-05T00:00:00.000Z",
-		"lastEdited": "1995-07-05T00:00:00.000Z"
+		"topicId": "dog, baseball, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 5,
+		"timesUsed": 9693,
+		"correctRatio": "2140:9856",
+		"frequency": 969,
+		"createdOn": "21/5/2013",
+		"lastEdited": "21/5/2013"
 	},
 	{
 		"questionId": "web301_q30",
@@ -260,17 +224,14 @@
 		"option2": "Hibernate provides a mapping for object-oriented domain model to a traditional relational database",
 		"option3": "Both 1 & 2",
 		"option4": "None of the above",
-		"topicId": [
-			"T6",
-			"T3",
-			"T2"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 4893,
-		"correctRatio": "59:2241",
-		"frequency": 489.3,
-		"createdOn": "1955-07-17T00:00:00.000Z",
-		"lastEdited": "1955-07-17T00:00:00.000Z"
+		"topicId": "elepant, dog, cricket",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 8,
+		"timesUsed": 7526,
+		"correctRatio": "2559:2605",
+		"frequency": 753,
+		"createdOn": "28/12/1988",
+		"lastEdited": "28/12/1988"
 	},
 	{
 		"questionId": "web301_q31",
@@ -281,17 +242,14 @@
 		"option2": "session.createCriteria()",
 		"option3": "session.createHQL()",
 		"option4": "session.createSQLQuery()",
-		"topicId": [
-			"T3",
-			"T6",
-			"T2"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 351,
-		"correctRatio": "4:132",
-		"frequency": 35.1,
-		"createdOn": "1932-05-08T00:00:00.000Z",
-		"lastEdited": "1932-05-08T00:00:00.000Z"
+		"topicId": "cat, football, cat",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 2,
+		"timesUsed": 2045,
+		"correctRatio": "4056:8516",
+		"frequency": 205,
+		"createdOn": "26/1/1958",
+		"lastEdited": "26/1/1958"
 	},
 	{
 		"questionId": "web301_q32",
@@ -302,17 +260,14 @@
 		"option2": "show sql statements on console",
 		"option3": "do not show sql statements",
 		"option4": "none of the above",
-		"topicId": [
-			"T4",
-			"T4",
-			"T2"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 5953,
-		"correctRatio": "1557:9187",
-		"frequency": 595.3,
-		"createdOn": "1946-02-11T00:00:00.000Z",
-		"lastEdited": "1946-02-11T00:00:00.000Z"
+		"topicId": "football, cat, dog",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 4552,
+		"correctRatio": "276:340",
+		"frequency": 455,
+		"createdOn": "17/7/1966",
+		"lastEdited": "17/7/1966"
 	},
 	{
 		"questionId": "web301_q33",
@@ -323,17 +278,14 @@
 		"option2": "Empty object",
 		"option3": "Throws an exception",
 		"option4": "None of the above",
-		"topicId": [
-			"T1",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 5374,
-		"correctRatio": "144:376",
-		"frequency": 537.4,
-		"createdOn": "1949-01-11T00:00:00.000Z",
-		"lastEdited": "1949-01-11T00:00:00.000Z"
+		"topicId": "cricket, dog, dog",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 9,
+		"timesUsed": 7990,
+		"correctRatio": "301:8391",
+		"frequency": 799,
+		"createdOn": "28/1/1943",
+		"lastEdited": "28/1/1943"
 	},
 	{
 		"questionId": "web301_q34",
@@ -344,17 +296,14 @@
 		"option2": "The settings of XML configuration file will override the settings used in the properties",
 		"option3": "Duplicate configuration exception",
 		"option4": "None of the above",
-		"topicId": [
-			"T5",
-			"T6",
-			"T6"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 2194,
-		"correctRatio": "3025:7271",
-		"frequency": 219.4,
-		"createdOn": "2013-10-29T00:00:00.000Z",
-		"lastEdited": "2013-10-29T00:00:00.000Z"
+		"topicId": "cat, cricket, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 9856,
+		"correctRatio": "682:2281",
+		"frequency": 986,
+		"createdOn": "17/3/1943",
+		"lastEdited": "17/3/1943"
 	},
 	{
 		"questionId": "web301_q35",
@@ -365,17 +314,14 @@
 		"option2": "3",
 		"option3": "Wraps a JDBC connection",
 		"option4": "Factory for Transaction",
-		"topicId": [
-			"T2",
-			"T2",
-			"T6"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 8917,
-		"correctRatio": "2993:3437",
-		"frequency": 891.7,
-		"createdOn": "1970-10-19T00:00:00.000Z",
-		"lastEdited": "1970-10-19T00:00:00.000Z"
+		"topicId": "baseball, cricket, elepant",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 5,
+		"timesUsed": 3853,
+		"correctRatio": "3383:9727",
+		"frequency": 385,
+		"createdOn": "23/11/1905",
+		"lastEdited": "23/11/1905"
 	},
 	{
 		"questionId": "web301_q36",
@@ -386,17 +332,14 @@
 		"option2": "JPA",
 		"option3": "JMX",
 		"option4": "JSP",
-		"topicId": [
-			"T1",
-			"T3",
-			"T4"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 5338,
-		"correctRatio": "2472:3941",
-		"frequency": 533.8,
-		"createdOn": "2006-05-10T00:00:00.000Z",
-		"lastEdited": "2006-05-10T00:00:00.000Z"
+		"topicId": "baseball, cricket, cricket",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 8224,
+		"correctRatio": "5515:9452",
+		"frequency": 822,
+		"createdOn": "8/1/1940",
+		"lastEdited": "8/1/1940"
 	},
 	{
 		"questionId": "web301_q37",
@@ -407,17 +350,14 @@
 		"option2": "maven",
 		"option3": "hbm2java",
 		"option4": "ANT",
-		"topicId": [
-			"T6",
-			"T6",
-			"T1"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 8932,
-		"correctRatio": "2834:6459",
-		"frequency": 893.2,
-		"createdOn": "1976-04-03T00:00:00.000Z",
-		"lastEdited": "1976-04-03T00:00:00.000Z"
+		"topicId": "cricket, baseball, cat",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 3140,
+		"correctRatio": "4054:6650",
+		"frequency": 314,
+		"createdOn": "1/9/1942",
+		"lastEdited": "1/9/1942"
 	},
 	{
 		"questionId": "web301_q38",
@@ -428,17 +368,14 @@
 		"option2": "Oracle",
 		"option3": "SQL server",
 		"option4": "All of the above",
-		"topicId": [
-			"T2",
-			"T2",
-			"T2"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 5574,
-		"correctRatio": "741:7841",
-		"frequency": 557.4,
-		"createdOn": "1948-05-13T00:00:00.000Z",
-		"lastEdited": "1948-05-13T00:00:00.000Z"
+		"topicId": "cricket, cat, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 5,
+		"timesUsed": 686,
+		"correctRatio": "2424:2638",
+		"frequency": 69,
+		"createdOn": "18/10/1930",
+		"lastEdited": "18/10/1930"
 	},
 	{
 		"questionId": "web301_q39",
@@ -449,17 +386,14 @@
 		"option2": "Annotation",
 		"option3": "Annotations or XML",
 		"option4": "None of these",
-		"topicId": [
-			"T4",
-			"T2",
-			"T3"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 358,
-		"correctRatio": "709:3792",
-		"frequency": 35.8,
-		"createdOn": "1950-10-20T00:00:00.000Z",
-		"lastEdited": "1950-10-20T00:00:00.000Z"
+		"topicId": "cricket, dog, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 9,
+		"timesUsed": 4646,
+		"correctRatio": "482:513",
+		"frequency": 465,
+		"createdOn": "25/10/2000",
+		"lastEdited": "25/10/2000"
 	},
 	{
 		"questionId": "web301_q40",
@@ -470,17 +404,14 @@
 		"option2": "columns",
 		"option3": "Class fields",
 		"option4": "Objects",
-		"topicId": [
-			"T3",
-			"T3",
-			"T2"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 6138,
-		"correctRatio": "4225:4992",
-		"frequency": 613.8,
-		"createdOn": "1922-03-17T00:00:00.000Z",
-		"lastEdited": "1922-03-17T00:00:00.000Z"
+		"topicId": "cricket, elepant, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 3,
+		"timesUsed": 1737,
+		"correctRatio": "353:3057",
+		"frequency": 174,
+		"createdOn": "11/11/1983",
+		"lastEdited": "11/11/1983"
 	},
 	{
 		"questionId": "web301_q42",
@@ -491,17 +422,14 @@
 		"option2": "Primary Key mapping",
 		"option3": "Each field to column mapping",
 		"option4": "All of the above",
-		"topicId": [
-			"T3",
-			"T6",
-			"T4"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 7023,
-		"correctRatio": "4167:6347",
-		"frequency": 702.3,
-		"createdOn": "1981-01-10T00:00:00.000Z",
-		"lastEdited": "1981-01-10T00:00:00.000Z"
+		"topicId": "cricket, elepant, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 1199,
+		"correctRatio": "4306:4471",
+		"frequency": 120,
+		"createdOn": "5/4/1986",
+		"lastEdited": "5/4/1986"
 	},
 	{
 		"questionId": "web301_q43",
@@ -512,17 +440,14 @@
 		"option2": "@Column",
 		"option3": "@HibernateColumn",
 		"option4": "@Id",
-		"topicId": [
-			"T5",
-			"T5",
-			"T3"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 594,
-		"correctRatio": "3472:9937",
-		"frequency": 59.4,
-		"createdOn": "1903-10-14T00:00:00.000Z",
-		"lastEdited": "1903-10-14T00:00:00.000Z"
+		"topicId": "dog, cricket, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 1635,
+		"correctRatio": "4122:5395",
+		"frequency": 164,
+		"createdOn": "18/8/1917",
+		"lastEdited": "18/8/1917"
 	},
 	{
 		"questionId": "web301_q47",
@@ -533,17 +458,14 @@
 		"option2": "Type 3",
 		"option3": "Type 2",
 		"option4": "Type 1",
-		"topicId": [
-			"T2",
-			"T2",
-			"T1"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 5983,
-		"correctRatio": "7147:8507",
-		"frequency": 598.3,
-		"createdOn": "1917-06-15T00:00:00.000Z",
-		"lastEdited": "1917-06-15T00:00:00.000Z"
+		"topicId": "football, cat, cat",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 2,
+		"timesUsed": 7147,
+		"correctRatio": "7682:8039",
+		"frequency": 715,
+		"createdOn": "9/9/1996",
+		"lastEdited": "9/9/1996"
 	},
 	{
 		"questionId": "web301_q48",
@@ -554,17 +476,14 @@
 		"option2": "Type 2",
 		"option3": "Type 3",
 		"option4": "Type 4",
-		"topicId": [
-			"T3",
-			"T3",
-			"T1"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 9655,
-		"correctRatio": "113:614",
-		"frequency": 965.5,
-		"createdOn": "1928-07-12T00:00:00.000Z",
-		"lastEdited": "1928-07-12T00:00:00.000Z"
+		"topicId": "football, elepant, cat",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 440,
+		"correctRatio": "45:1487",
+		"frequency": 44,
+		"createdOn": "25/9/1954",
+		"lastEdited": "25/9/1954"
 	},
 	{
 		"questionId": "web301_q49",
@@ -575,17 +494,14 @@
 		"option2": "Type 2",
 		"option3": "Type 3",
 		"option4": "Type 4",
-		"topicId": [
-			"T6",
-			"T3",
-			"T1"
-		],
+		"topicId": "football, cat, dog",
+		"categories": "sport, animal, animal",
 		"difficultyLevel": 8,
-		"timesUsed": 5192,
-		"correctRatio": "4092:5011",
-		"frequency": 519.2,
-		"createdOn": "1940-03-26T00:00:00.000Z",
-		"lastEdited": "1940-03-26T00:00:00.000Z"
+		"timesUsed": 538,
+		"correctRatio": "4512:4691",
+		"frequency": 54,
+		"createdOn": "17/4/1991",
+		"lastEdited": "17/4/1991"
 	},
 	{
 		"questionId": "web301_q50",
@@ -596,17 +512,14 @@
 		"option2": "Type 2",
 		"option3": "Type 3",
 		"option4": "Type 4",
-		"topicId": [
-			"T6",
-			"T6",
-			"T1"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 8014,
-		"correctRatio": "2876:5999",
-		"frequency": 801.4,
-		"createdOn": "1981-06-21T00:00:00.000Z",
-		"lastEdited": "1981-06-21T00:00:00.000Z"
+		"topicId": "cricket, baseball, cricket",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 3,
+		"timesUsed": 7864,
+		"correctRatio": "1304:7728",
+		"frequency": 786,
+		"createdOn": "16/4/1974",
+		"lastEdited": "16/4/1974"
 	},
 	{
 		"questionId": "web301_q51",
@@ -617,17 +530,14 @@
 		"option2": " or IBM",
 		"option3": " what is the preferred driver type?",
 		"option4": "Type 4",
-		"topicId": [
-			"T2",
-			"T4",
-			"T5"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 6434,
-		"correctRatio": "3959:6821",
-		"frequency": 643.4,
-		"createdOn": "1916-08-12T00:00:00.000Z",
-		"lastEdited": "1916-08-12T00:00:00.000Z"
+		"topicId": "cat, baseball, cricket",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 9,
+		"timesUsed": 4642,
+		"correctRatio": "764:9438",
+		"frequency": 464,
+		"createdOn": "11/2/1923",
+		"lastEdited": "11/2/1923"
 	},
 	{
 		"questionId": "web301_q52",
@@ -638,17 +548,14 @@
 		"option2": "Type 4 drivers are 100% Java compatible",
 		"option3": "Type 4 drivers can not be used with Linux platform",
 		"option4": "None of the above",
-		"topicId": [
-			"T6",
-			"T2",
-			"T3"
-		],
+		"topicId": "football, dog, elepant",
+		"categories": "sport, animal, animal",
 		"difficultyLevel": 3,
-		"timesUsed": 3295,
-		"correctRatio": "852:936",
-		"frequency": 329.5,
-		"createdOn": "2006-11-22T00:00:00.000Z",
-		"lastEdited": "2006-11-22T00:00:00.000Z"
+		"timesUsed": 488,
+		"correctRatio": "229:592",
+		"frequency": 49,
+		"createdOn": "28/8/1974",
+		"lastEdited": "28/8/1974"
 	},
 	{
 		"questionId": "web301_q53",
@@ -659,17 +566,14 @@
 		"option2": "At client side",
 		"option3": " a separate driver is needed for each database",
 		"option4": "Type-4 driver is entirely written in Java",
-		"topicId": [
-			"T1",
-			"T3",
-			"T1"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 3221,
-		"correctRatio": "573:8099",
-		"frequency": 322.1,
-		"createdOn": "1976-04-09T00:00:00.000Z",
-		"lastEdited": "1976-04-09T00:00:00.000Z"
+		"topicId": "elepant, cat, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 1,
+		"timesUsed": 6010,
+		"correctRatio": "379:1521",
+		"frequency": 601,
+		"createdOn": "6/11/1937",
+		"lastEdited": "6/11/1937"
 	},
 	{
 		"questionId": "web301_q54",
@@ -680,17 +584,14 @@
 		"option2": "Open Connection",
 		"option3": "Close Connection",
 		"option4": "Both 2 & 3",
-		"topicId": [
-			"T6",
-			"T5",
-			"T4"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 8294,
-		"correctRatio": "791:3168",
-		"frequency": 829.4,
-		"createdOn": "1933-05-21T00:00:00.000Z",
-		"lastEdited": "1933-05-21T00:00:00.000Z"
+		"topicId": "dog, cat, cricket",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 6826,
+		"correctRatio": "5346:5350",
+		"frequency": 683,
+		"createdOn": "6/5/2012",
+		"lastEdited": "6/5/2012"
 	},
 	{
 		"questionId": "web301_q55",
@@ -701,17 +602,14 @@
 		"option2": "Connection Pools",
 		"option3": "ORM Tools",
 		"option4": "None of the above",
-		"topicId": [
-			"T1",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 1507,
-		"correctRatio": "142:1405",
-		"frequency": 150.7,
-		"createdOn": "1969-11-20T00:00:00.000Z",
-		"lastEdited": "1969-11-20T00:00:00.000Z"
+		"topicId": "cricket, elepant, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 4159,
+		"correctRatio": "3258:6242",
+		"frequency": 416,
+		"createdOn": "21/12/1954",
+		"lastEdited": "21/12/1954"
 	},
 	{
 		"questionId": "web301_q56",
@@ -722,17 +620,14 @@
 		"option2": "Create ODBC bridge",
 		"option3": "Load the Driver",
 		"option4": "All of the above",
-		"topicId": [
-			"T4",
-			"T1",
-			"T1"
-		],
+		"topicId": "dog, football, cricket",
+		"categories": "animal, sport, sport",
 		"difficultyLevel": 1,
-		"timesUsed": 7573,
-		"correctRatio": "6507:8254",
-		"frequency": 757.3,
-		"createdOn": "1917-03-22T00:00:00.000Z",
-		"lastEdited": "1917-03-22T00:00:00.000Z"
+		"timesUsed": 4393,
+		"correctRatio": "6684:9398",
+		"frequency": 439,
+		"createdOn": "6/2/1948",
+		"lastEdited": "6/2/1948"
 	},
 	{
 		"questionId": "web301_q57",
@@ -743,17 +638,14 @@
 		"option2": "ResultSet",
 		"option3": "ConnectionPool",
 		"option4": "DriverConnection",
-		"topicId": [
-			"T6",
-			"T2",
-			"T6"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 517,
-		"correctRatio": "572:6123",
-		"frequency": 51.7,
-		"createdOn": "1993-09-15T00:00:00.000Z",
-		"lastEdited": "1993-09-15T00:00:00.000Z"
+		"topicId": "elepant, cat, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 3,
+		"timesUsed": 8396,
+		"correctRatio": "1881:4291",
+		"frequency": 840,
+		"createdOn": "13/7/1907",
+		"lastEdited": "13/7/1907"
 	},
 	{
 		"questionId": "web301_q58",
@@ -764,17 +656,14 @@
 		"option2": "ResultSet",
 		"option3": "Connection",
 		"option4": "None of the above",
-		"topicId": [
-			"T4",
-			"T4",
-			"T4"
-		],
+		"topicId": "football, baseball, baseball",
+		"categories": "sport, sport, sport",
 		"difficultyLevel": 5,
-		"timesUsed": 8405,
-		"correctRatio": "3202:6614",
-		"frequency": 840.5,
-		"createdOn": "2000-10-25T00:00:00.000Z",
-		"lastEdited": "2000-10-25T00:00:00.000Z"
+		"timesUsed": 962,
+		"correctRatio": "6004:8243",
+		"frequency": 96,
+		"createdOn": "20/7/1942",
+		"lastEdited": "20/7/1942"
 	},
 	{
 		"questionId": "web301_q59",
@@ -785,17 +674,14 @@
 		"option2": "Writing code to populate columns data into POJOs",
 		"option3": "Writing try/catch blocks",
 		"option4": "All of the above",
-		"topicId": [
-			"T3",
-			"T3",
-			"T4"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 5086,
-		"correctRatio": "3512:9596",
-		"frequency": 508.6,
-		"createdOn": "1927-02-24T00:00:00.000Z",
-		"lastEdited": "1927-02-24T00:00:00.000Z"
+		"topicId": "cat, dog, elepant",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 7690,
+		"correctRatio": "6271:8950",
+		"frequency": 769,
+		"createdOn": "27/12/1913",
+		"lastEdited": "27/12/1913"
 	},
 	{
 		"questionId": "web301_q60",
@@ -806,17 +692,14 @@
 		"option2": "Class fields",
 		"option3": "Class itself",
 		"option4": "None of the above",
-		"topicId": [
-			"T1",
-			"T6",
-			"T2"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 2935,
-		"correctRatio": "2613:4668",
-		"frequency": 293.5,
-		"createdOn": "1914-06-16T00:00:00.000Z",
-		"lastEdited": "1914-06-16T00:00:00.000Z"
+		"topicId": "cricket, baseball, elepant",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 5376,
+		"correctRatio": "3693:4596",
+		"frequency": 538,
+		"createdOn": "22/1/1932",
+		"lastEdited": "22/1/1932"
 	},
 	{
 		"questionId": "web301_q61",
@@ -827,17 +710,14 @@
 		"option2": "Object",
 		"option3": "Class fields",
 		"option4": "Class methods",
-		"topicId": [
-			"T4",
-			"T1",
-			"T6"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 9507,
-		"correctRatio": "4151:5367",
-		"frequency": 950.7,
-		"createdOn": "1946-05-11T00:00:00.000Z",
-		"lastEdited": "1946-05-11T00:00:00.000Z"
+		"topicId": "cat, elepant, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 9383,
+		"correctRatio": "51:6679",
+		"frequency": 938,
+		"createdOn": "9/12/1947",
+		"lastEdited": "9/12/1947"
 	},
 	{
 		"questionId": "web301_q62",
@@ -848,17 +728,14 @@
 		"option2": "Load from external properties file",
 		"option3": "Object",
 		"option4": "None of these",
-		"topicId": [
-			"T4",
-			"T3",
-			"T5"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 4865,
-		"correctRatio": "2916:9273",
-		"frequency": 486.5,
-		"createdOn": "1974-03-12T00:00:00.000Z",
-		"lastEdited": "1974-03-12T00:00:00.000Z"
+		"topicId": "baseball, cat, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 5,
+		"timesUsed": 5146,
+		"correctRatio": "2206:6063",
+		"frequency": 515,
+		"createdOn": "7/9/1998",
+		"lastEdited": "7/9/1998"
 	},
 	{
 		"questionId": "web301_q63",
@@ -869,17 +746,14 @@
 		"option2": "XML File",
 		"option3": "Properties File",
 		"option4": "Hashmap",
-		"topicId": [
-			"T1",
-			"T2",
-			"T6"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 5398,
-		"correctRatio": "3133:6472",
-		"frequency": 539.8,
-		"createdOn": "1907-08-19T00:00:00.000Z",
-		"lastEdited": "1907-08-19T00:00:00.000Z"
+		"topicId": "dog, baseball, baseball",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 3,
+		"timesUsed": 4366,
+		"correctRatio": "93:733",
+		"frequency": 437,
+		"createdOn": "30/8/1922",
+		"lastEdited": "30/8/1922"
 	},
 	{
 		"questionId": "web301_q64",
@@ -890,17 +764,14 @@
 		"option2": "Storage and retrieval of objects",
 		"option3": "API to query data using objects",
 		"option4": "All of the above",
-		"topicId": [
-			"T6",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 4907,
-		"correctRatio": "4887:7247",
-		"frequency": 490.7,
-		"createdOn": "1994-03-29T00:00:00.000Z",
-		"lastEdited": "1994-03-29T00:00:00.000Z"
+		"topicId": "baseball, baseball, baseball",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 1135,
+		"correctRatio": "1458:4289",
+		"frequency": 114,
+		"createdOn": "4/6/2015",
+		"lastEdited": "4/6/2015"
 	},
 	{
 		"questionId": "web301_q66",
@@ -911,17 +782,14 @@
 		"option2": "Properties file",
 		"option3": "Hashmap",
 		"option4": "Database table",
-		"topicId": [
-			"T1",
-			"T3",
-			"T3"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 8914,
-		"correctRatio": "1486:6484",
-		"frequency": 891.4,
-		"createdOn": "1998-06-27T00:00:00.000Z",
-		"lastEdited": "1998-06-27T00:00:00.000Z"
+		"topicId": "elepant, elepant, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 2216,
+		"correctRatio": "4322:5351",
+		"frequency": 222,
+		"createdOn": "22/3/2010",
+		"lastEdited": "22/3/2010"
 	},
 	{
 		"questionId": "web301_q67",
@@ -932,17 +800,14 @@
 		"option2": "HQL",
 		"option3": "DBMS",
 		"option4": "NoSQL",
-		"topicId": [
-			"T4",
-			"T4",
-			"T3"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 7688,
-		"correctRatio": "2489:7431",
-		"frequency": 768.8,
-		"createdOn": "1985-01-26T00:00:00.000Z",
-		"lastEdited": "1985-01-26T00:00:00.000Z"
+		"topicId": "cricket, elepant, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 2,
+		"timesUsed": 6721,
+		"correctRatio": "225:257",
+		"frequency": 672,
+		"createdOn": "8/1/1945",
+		"lastEdited": "8/1/1945"
 	},
 	{
 		"questionId": "web301_q68",
@@ -953,17 +818,14 @@
 		"option2": "Java Pragmatic API",
 		"option3": "Java Persistence API",
 		"option4": "Java Programmer API",
-		"topicId": [
-			"T2",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 1220,
-		"correctRatio": "3327:9572",
-		"frequency": 122,
-		"createdOn": "2000-11-10T00:00:00.000Z",
-		"lastEdited": "2000-11-10T00:00:00.000Z"
+		"topicId": "cat, cat, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 6841,
+		"correctRatio": "8141:8339",
+		"frequency": 684,
+		"createdOn": "16/3/1968",
+		"lastEdited": "16/3/1968"
 	},
 	{
 		"questionId": "web301_q69",
@@ -974,17 +836,14 @@
 		"option2": "EntityManager.merge()",
 		"option3": "EntityManager.detach()",
 		"option4": "None of these",
-		"topicId": [
-			"T4",
-			"T2",
-			"T6"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 8803,
-		"correctRatio": "1689:3592",
-		"frequency": 880.3,
-		"createdOn": "1922-03-21T00:00:00.000Z",
-		"lastEdited": "1922-03-21T00:00:00.000Z"
+		"topicId": "cricket, cricket, dog",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 1,
+		"timesUsed": 4547,
+		"correctRatio": "1826:5524",
+		"frequency": 455,
+		"createdOn": "14/9/1904",
+		"lastEdited": "14/9/1904"
 	},
 	{
 		"questionId": "web301_q70",
@@ -995,17 +854,14 @@
 		"option2": "JMS",
 		"option3": "JPA",
 		"option4": "None of the above",
-		"topicId": [
-			"T6",
-			"T5",
-			"T6"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 479,
-		"correctRatio": "4930:4978",
-		"frequency": 47.9,
-		"createdOn": "1934-08-10T00:00:00.000Z",
-		"lastEdited": "1934-08-10T00:00:00.000Z"
+		"topicId": "elepant, cricket, dog",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 8,
+		"timesUsed": 8954,
+		"correctRatio": "1706:2206",
+		"frequency": 895,
+		"createdOn": "15/7/1977",
+		"lastEdited": "15/7/1977"
 	},
 	{
 		"questionId": "web301_q72",
@@ -1016,17 +872,14 @@
 		"option2": "JTA",
 		"option3": "JDO",
 		"option4": "Castor",
-		"topicId": [
-			"T2",
-			"T2",
-			"T1"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 793,
-		"correctRatio": "644:9342",
-		"frequency": 79.3,
-		"createdOn": "1929-06-17T00:00:00.000Z",
-		"lastEdited": "1929-06-17T00:00:00.000Z"
+		"topicId": "elepant, elepant, cricket",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 5,
+		"timesUsed": 2728,
+		"correctRatio": "443:529",
+		"frequency": 273,
+		"createdOn": "17/1/1947",
+		"lastEdited": "17/1/1947"
 	},
 	{
 		"questionId": "web301_q75",
@@ -1037,17 +890,14 @@
 		"option2": "Provides an API that reduces the code significantly",
 		"option3": "Abstracts the underlying database",
 		"option4": "Easy to manage complex models",
-		"topicId": [
-			"T3",
-			"T1",
-			"T4"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 5890,
-		"correctRatio": "1523:2978",
-		"frequency": 589,
-		"createdOn": "1904-10-09T00:00:00.000Z",
-		"lastEdited": "1904-10-09T00:00:00.000Z"
+		"topicId": "cat, baseball, dog",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 2728,
+		"correctRatio": "976:2877",
+		"frequency": 273,
+		"createdOn": "5/3/1979",
+		"lastEdited": "5/3/1979"
 	},
 	{
 		"questionId": "web301_q77",
@@ -1058,17 +908,14 @@
 		"option2": "Storage and retrieval of objects",
 		"option3": "API to query data using objects",
 		"option4": "All of the above",
-		"topicId": [
-			"T6",
-			"T6",
-			"T6"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 3146,
-		"correctRatio": "8118:8591",
-		"frequency": 314.6,
-		"createdOn": "1987-06-08T00:00:00.000Z",
-		"lastEdited": "1987-06-08T00:00:00.000Z"
+		"topicId": "cricket, baseball, dog",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 7535,
+		"correctRatio": "1872:1960",
+		"frequency": 754,
+		"createdOn": "6/8/1942",
+		"lastEdited": "6/8/1942"
 	},
 	{
 		"questionId": "web301_q79",
@@ -1079,17 +926,14 @@
 		"option2": "Properties file",
 		"option3": "Hashmap",
 		"option4": "Database table",
-		"topicId": [
-			"T5",
-			"T5",
-			"T2"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 5319,
-		"correctRatio": "202:1391",
-		"frequency": 531.9,
-		"createdOn": "1953-07-29T00:00:00.000Z",
-		"lastEdited": "1953-07-29T00:00:00.000Z"
+		"topicId": "football, elepant, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 1936,
+		"correctRatio": "7743:8054",
+		"frequency": 194,
+		"createdOn": "11/3/1925",
+		"lastEdited": "11/3/1925"
 	},
 	{
 		"questionId": "web301_q80",
@@ -1100,17 +944,14 @@
 		"option2": "HQL",
 		"option3": "DBMS",
 		"option4": "NoSQL",
-		"topicId": [
-			"T1",
-			"T4",
-			"T6"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 9439,
-		"correctRatio": "8035:9343",
-		"frequency": 943.9,
-		"createdOn": "1997-09-27T00:00:00.000Z",
-		"lastEdited": "1997-09-27T00:00:00.000Z"
+		"topicId": "dog, cat, cat",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 1,
+		"timesUsed": 5734,
+		"correctRatio": "8067:9565",
+		"frequency": 573,
+		"createdOn": "12/12/1997",
+		"lastEdited": "12/12/1997"
 	},
 	{
 		"questionId": "web301_q81",
@@ -1121,17 +962,14 @@
 		"option2": "Java Pragmatic API",
 		"option3": "Java Persistence API",
 		"option4": "Java Programmer API",
-		"topicId": [
-			"T3",
-			"T2",
-			"T5"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 1386,
-		"correctRatio": "3018:8122",
-		"frequency": 138.6,
-		"createdOn": "1921-01-31T00:00:00.000Z",
-		"lastEdited": "1921-01-31T00:00:00.000Z"
+		"topicId": "dog, cat, cat",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 2,
+		"timesUsed": 9271,
+		"correctRatio": "5152:9175",
+		"frequency": 927,
+		"createdOn": "18/10/1929",
+		"lastEdited": "18/10/1929"
 	},
 	{
 		"questionId": "web301_q82",
@@ -1142,17 +980,14 @@
 		"option2": "EntityManager.merge()",
 		"option3": "EntityManager.detach()",
 		"option4": "None of these",
-		"topicId": [
-			"T2",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 8698,
-		"correctRatio": "1040:1047",
-		"frequency": 869.8,
-		"createdOn": "1962-09-25T00:00:00.000Z",
-		"lastEdited": "1962-09-25T00:00:00.000Z"
+		"topicId": "cat, elepant, cat",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 5046,
+		"correctRatio": "1325:1878",
+		"frequency": 505,
+		"createdOn": "7/12/1962",
+		"lastEdited": "7/12/1962"
 	},
 	{
 		"questionId": "web301_q83",
@@ -1163,17 +998,14 @@
 		"option2": "Matches connection requests from the java application with the proper database driver using communication subprotocol",
 		"option3": "Both 1 and 2",
 		"option4": "None of the above",
-		"topicId": [
-			"T1",
-			"T1",
-			"T4"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 17,
-		"correctRatio": "3958:6875",
-		"frequency": 1.7,
-		"createdOn": "2012-04-04T00:00:00.000Z",
-		"lastEdited": "2012-04-04T00:00:00.000Z"
+		"topicId": "elepant, dog, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 3149,
+		"correctRatio": "1456:5907",
+		"frequency": 315,
+		"createdOn": "28/11/1942",
+		"lastEdited": "28/11/1942"
 	},
 	{
 		"questionId": "web301_q84",
@@ -1184,17 +1016,14 @@
 		"option2": "Interface enabling a Java application to interact with a database",
 		"option3": "Class to call stored procedures in the database",
 		"option4": "None of the above",
-		"topicId": [
-			"T4",
-			"T1",
-			"T6"
-		],
+		"topicId": "cricket, football, football",
+		"categories": "sport, sport, sport",
 		"difficultyLevel": 4,
-		"timesUsed": 1667,
-		"correctRatio": "5487:9119",
-		"frequency": 166.7,
-		"createdOn": "1947-10-17T00:00:00.000Z",
-		"lastEdited": "1947-10-17T00:00:00.000Z"
+		"timesUsed": 2502,
+		"correctRatio": "480:3046",
+		"frequency": 250,
+		"createdOn": "19/8/1952",
+		"lastEdited": "19/8/1952"
 	},
 	{
 		"questionId": "web301_q85",
@@ -1205,17 +1034,14 @@
 		"option2": "Class.forName()",
 		"option3": "Both A and B",
 		"option4": "getConnection()",
-		"topicId": [
-			"T2",
-			"T1",
-			"T5"
-		],
+		"topicId": "cat, cricket, dog",
+		"categories": "animal, sport, animal",
 		"difficultyLevel": 8,
-		"timesUsed": 4514,
-		"correctRatio": "36:85",
-		"frequency": 451.4,
-		"createdOn": "1999-12-02T00:00:00.000Z",
-		"lastEdited": "1999-12-02T00:00:00.000Z"
+		"timesUsed": 8742,
+		"correctRatio": "7075:7435",
+		"frequency": 874,
+		"createdOn": "2/1/1993",
+		"lastEdited": "2/1/1993"
 	},
 	{
 		"questionId": "web301_q86",
@@ -1226,17 +1052,14 @@
 		"option2": "executeUpdate()",
 		"option3": "getConnection()",
 		"option4": "prepareCall()",
-		"topicId": [
-			"T3",
-			"T3",
-			"T2"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 5562,
-		"correctRatio": "7095:9869",
-		"frequency": 556.2,
-		"createdOn": "1951-09-07T00:00:00.000Z",
-		"lastEdited": "1951-09-07T00:00:00.000Z"
+		"topicId": "cat, elepant, football",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 5,
+		"timesUsed": 3592,
+		"correctRatio": "260:260",
+		"frequency": 359,
+		"createdOn": "20/12/2015",
+		"lastEdited": "20/12/2015"
 	},
 	{
 		"questionId": "web301_q87",
@@ -1247,17 +1070,14 @@
 		"option2": "PreparedStatement",
 		"option3": "CallableStatement",
 		"option4": "InterimStatement",
-		"topicId": [
-			"T6",
-			"T3",
-			"T5"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 1079,
-		"correctRatio": "2555:5029",
-		"frequency": 107.9,
-		"createdOn": "1948-12-19T00:00:00.000Z",
-		"lastEdited": "1948-12-19T00:00:00.000Z"
+		"topicId": "cricket, elepant, dog",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 2977,
+		"correctRatio": "6740:7210",
+		"frequency": 298,
+		"createdOn": "28/7/1969",
+		"lastEdited": "28/7/1969"
 	},
 	{
 		"questionId": "web301_q88",
@@ -1268,17 +1088,14 @@
 		"option2": "int",
 		"option3": "boolean",
 		"option4": "char",
-		"topicId": [
-			"T1",
-			"T4",
-			"T1"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 21,
-		"correctRatio": "1485:2865",
-		"frequency": 2.1,
-		"createdOn": "2006-02-18T00:00:00.000Z",
-		"lastEdited": "2006-02-18T00:00:00.000Z"
+		"topicId": "cat, baseball, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 8,
+		"timesUsed": 7980,
+		"correctRatio": "2137:9955",
+		"frequency": 798,
+		"createdOn": "11/12/1972",
+		"lastEdited": "11/12/1972"
 	},
 	{
 		"questionId": "web301_q89",
@@ -1289,17 +1106,14 @@
 		"option2": "3",
 		"option3": "1",
 		"option4": "2",
-		"topicId": [
-			"T4",
-			"T1",
-			"T5"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 9175,
-		"correctRatio": "368:390",
-		"frequency": 917.5,
-		"createdOn": "2009-08-02T00:00:00.000Z",
-		"lastEdited": "2009-08-02T00:00:00.000Z"
+		"topicId": "baseball, elepant, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 8,
+		"timesUsed": 567,
+		"correctRatio": "350:3221",
+		"frequency": 57,
+		"createdOn": "1/8/1943",
+		"lastEdited": "1/8/1943"
 	},
 	{
 		"questionId": "web301_q90",
@@ -1310,17 +1124,14 @@
 		"option2": "executeQuery()",
 		"option3": "executeUpdate()",
 		"option4": "executeResult()",
-		"topicId": [
-			"T4",
-			"T2",
-			"T6"
-		],
+		"topicId": "cricket, football, football",
+		"categories": "sport, sport, sport",
 		"difficultyLevel": 5,
-		"timesUsed": 9584,
-		"correctRatio": "1066:1259",
-		"frequency": 958.4,
-		"createdOn": "1918-10-25T00:00:00.000Z",
-		"lastEdited": "1918-10-25T00:00:00.000Z"
+		"timesUsed": 7031,
+		"correctRatio": "195:1555",
+		"frequency": 703,
+		"createdOn": "16/5/1916",
+		"lastEdited": "16/5/1916"
 	},
 	{
 		"questionId": "web301_q91",
@@ -1331,17 +1142,14 @@
 		"option2": "When the user name",
 		"option3": " password and the database does not match",
 		"option4": "When the JDBC database URL passed is not constructed properly",
-		"topicId": [
-			"T3",
-			"T1",
-			"T2"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 3894,
-		"correctRatio": "536:1748",
-		"frequency": 389.4,
-		"createdOn": "1954-11-02T00:00:00.000Z",
-		"lastEdited": "1954-11-02T00:00:00.000Z"
+		"topicId": "football, elepant, cricket",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 5267,
+		"correctRatio": "7132:7926",
+		"frequency": 527,
+		"createdOn": "18/10/1905",
+		"lastEdited": "18/10/1905"
 	},
 	{
 		"questionId": "web301_q92",
@@ -1352,17 +1160,14 @@
 		"option2": "Yes",
 		"option3": " they are compiled",
 		"option4": "No",
-		"topicId": [
-			"T6",
-			"T6",
-			"T5"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 5682,
-		"correctRatio": "956:1673",
-		"frequency": 568.2,
-		"createdOn": "1940-05-24T00:00:00.000Z",
-		"lastEdited": "1940-05-24T00:00:00.000Z"
+		"topicId": "football, cat, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 10,
+		"timesUsed": 7060,
+		"correctRatio": "9457:9951",
+		"frequency": 706,
+		"createdOn": "8/3/1993",
+		"lastEdited": "8/3/1993"
 	},
 	{
 		"questionId": "web301_q94",
@@ -1373,17 +1178,14 @@
 		"option2": " when loading Series objects.",
 		"option3": "Book child objects are loaded only Series.getBooks() api is called.",
 		"option4": "Series.getBooks() if called should be under hibernate session.",
-		"topicId": [
-			"T3",
-			"T1",
-			"T4"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 9032,
-		"correctRatio": "2022:3677",
-		"frequency": 903.2,
-		"createdOn": "1938-05-27T00:00:00.000Z",
-		"lastEdited": "1938-05-27T00:00:00.000Z"
+		"topicId": "football, elepant, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 292,
+		"correctRatio": "2180:7885",
+		"frequency": 29,
+		"createdOn": "1/6/1995",
+		"lastEdited": "1/6/1995"
 	},
 	{
 		"questionId": "web301_q95",
@@ -1394,17 +1196,14 @@
 		"option2": "All of the above",
 		"option3": "'list' enforces ordering in database query",
 		"option4": " Ordering in database query is slower than otherwise.",
-		"topicId": [
-			"T3",
-			"T2",
-			"T6"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 1656,
-		"correctRatio": "1398:8522",
-		"frequency": 165.6,
-		"createdOn": "1934-03-14T00:00:00.000Z",
-		"lastEdited": "1934-03-14T00:00:00.000Z"
+		"topicId": "cat, football, cat",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 4193,
+		"correctRatio": "1353:6232",
+		"frequency": 419,
+		"createdOn": "3/6/1999",
+		"lastEdited": "3/6/1999"
 	},
 	{
 		"questionId": "web301_q96",
@@ -1415,17 +1214,14 @@
 		"option2": "When business logic needs children every time parent object is accessed.",
 		"option3": "When the Parent has many such relations. Like User to Roles",
 		"option4": " User to Settings etc.",
-		"topicId": [
-			"T6",
-			"T6",
-			"T4"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 313,
-		"correctRatio": "4780:7751",
-		"frequency": 31.3,
-		"createdOn": "1934-03-04T00:00:00.000Z",
-		"lastEdited": "1934-03-04T00:00:00.000Z"
+		"topicId": "elepant, cat, dog",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 3828,
+		"correctRatio": "2646:9919",
+		"frequency": 383,
+		"createdOn": "1/9/1991",
+		"lastEdited": "1/9/1991"
 	},
 	{
 		"questionId": "web301_q97",
@@ -1436,17 +1232,14 @@
 		"option2": "one-to-many",
 		"option3": "many-to-one",
 		"option4": "many-to-many",
-		"topicId": [
-			"T1",
-			"T4",
-			"T2"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 1757,
-		"correctRatio": "991:2463",
-		"frequency": 175.7,
-		"createdOn": "1972-01-28T00:00:00.000Z",
-		"lastEdited": "1972-01-28T00:00:00.000Z"
+		"topicId": "dog, football, cat",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 5179,
+		"correctRatio": "2133:3898",
+		"frequency": 518,
+		"createdOn": "20/7/1928",
+		"lastEdited": "20/7/1928"
 	},
 	{
 		"questionId": "web301_q99",
@@ -1457,17 +1250,14 @@
 		"option2": " and a Product can be referred to by many Purchase Orders (because many Customers buy the same Product).</p><p>What is the association between Purchase Order and Product?</p>",
 		"option3": "one-to-many",
 		"option4": "one-to-one",
-		"topicId": [
-			"T3",
-			"T5",
-			"T6"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 5821,
-		"correctRatio": "1655:1900",
-		"frequency": 582.1,
-		"createdOn": "1941-04-03T00:00:00.000Z",
-		"lastEdited": "1941-04-03T00:00:00.000Z"
+		"topicId": "dog, elepant, football",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 825,
+		"correctRatio": "1373:6334",
+		"frequency": 83,
+		"createdOn": "23/9/1986",
+		"lastEdited": "23/9/1986"
 	},
 	{
 		"questionId": "web301_q100",
@@ -1478,17 +1268,14 @@
 		"option2": "one-to-many",
 		"option3": "many-to-one",
 		"option4": "many-to-many",
-		"topicId": [
-			"T1",
-			"T4",
-			"T4"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 5475,
-		"correctRatio": "8322:8546",
-		"frequency": 547.5,
-		"createdOn": "1909-07-11T00:00:00.000Z",
-		"lastEdited": "1909-07-11T00:00:00.000Z"
+		"topicId": "elepant, elepant, cricket",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 636,
+		"correctRatio": "5635:8121",
+		"frequency": 64,
+		"createdOn": "29/11/1947",
+		"lastEdited": "29/11/1947"
 	},
 	{
 		"questionId": "web301_q101",
@@ -1499,17 +1286,14 @@
 		"option2": "Java Reflection",
 		"option3": "Java IO",
 		"option4": "All of the above",
-		"topicId": [
-			"T6",
-			"T3",
-			"T5"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 378,
-		"correctRatio": "207:6023",
-		"frequency": 37.8,
-		"createdOn": "2000-03-20T00:00:00.000Z",
-		"lastEdited": "2000-03-20T00:00:00.000Z"
+		"topicId": "cricket, cricket, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 3408,
+		"correctRatio": "2706:3016",
+		"frequency": 341,
+		"createdOn": "14/4/1905",
+		"lastEdited": "14/4/1905"
 	},
 	{
 		"questionId": "web301_q102",
@@ -1520,17 +1304,14 @@
 		"option2": "Load database driver",
 		"option3": "Fire Query",
 		"option4": "Create statement",
-		"topicId": [
-			"T5",
-			"T3",
-			"T1"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 7983,
-		"correctRatio": "2466:4379",
-		"frequency": 798.3,
-		"createdOn": "1951-07-10T00:00:00.000Z",
-		"lastEdited": "1951-07-10T00:00:00.000Z"
+		"topicId": "dog, baseball, cricket",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 872,
+		"correctRatio": "2737:5726",
+		"frequency": 87,
+		"createdOn": "1/8/1901",
+		"lastEdited": "1/8/1901"
 	},
 	{
 		"questionId": "web301_q103",
@@ -1541,17 +1322,14 @@
 		"option2": "Inside finally block",
 		"option3": "Inside Resultset iteration",
 		"option4": "Anywhere",
-		"topicId": [
-			"T6",
-			"T3",
-			"T5"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 2399,
-		"correctRatio": "1477:2504",
-		"frequency": 239.9,
-		"createdOn": "2013-06-11T00:00:00.000Z",
-		"lastEdited": "2013-06-11T00:00:00.000Z"
+		"topicId": "football, baseball, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 6,
+		"timesUsed": 7327,
+		"correctRatio": "386:6719",
+		"frequency": 733,
+		"createdOn": "24/11/1942",
+		"lastEdited": "24/11/1942"
 	},
 	{
 		"questionId": "web301_q104",
@@ -1562,17 +1340,14 @@
 		"option2": "Load from external properties file",
 		"option3": "Inside Try/Catch block",
 		"option4": "None of the above",
-		"topicId": [
-			"T5",
-			"T1",
-			"T6"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 1443,
-		"correctRatio": "2340:9496",
-		"frequency": 144.3,
-		"createdOn": "2014-06-04T00:00:00.000Z",
-		"lastEdited": "2014-06-04T00:00:00.000Z"
+		"topicId": "football, baseball, cat",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 10,
+		"timesUsed": 2237,
+		"correctRatio": "171:7453",
+		"frequency": 224,
+		"createdOn": "20/3/2010",
+		"lastEdited": "20/3/2010"
 	},
 	{
 		"questionId": "web301_q105",
@@ -1583,17 +1358,14 @@
 		"option2": "DriverManager",
 		"option3": "Resultset",
 		"option4": "Statement",
-		"topicId": [
-			"T5",
-			"T3",
-			"T2"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 3542,
-		"correctRatio": "3320:3934",
-		"frequency": 354.2,
-		"createdOn": "2003-05-17T00:00:00.000Z",
-		"lastEdited": "2003-05-17T00:00:00.000Z"
+		"topicId": "football, cat, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 5,
+		"timesUsed": 3826,
+		"correctRatio": "6004:7403",
+		"frequency": 383,
+		"createdOn": "2/9/1988",
+		"lastEdited": "2/9/1988"
 	},
 	{
 		"questionId": "web301_q106",
@@ -1604,17 +1376,14 @@
 		"option2": "Error Prone",
 		"option3": "Brittle to Change",
 		"option4": "All of the above",
-		"topicId": [
-			"T3",
-			"T6",
-			"T6"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 1360,
-		"correctRatio": "3958:6898",
-		"frequency": 136,
-		"createdOn": "1982-04-01T00:00:00.000Z",
-		"lastEdited": "1982-04-01T00:00:00.000Z"
+		"topicId": "cricket, cat, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 4858,
+		"correctRatio": "327:3637",
+		"frequency": 486,
+		"createdOn": "15/12/1925",
+		"lastEdited": "15/12/1925"
 	},
 	{
 		"questionId": "web301_q107",
@@ -1625,17 +1394,14 @@
 		"option2": "Compilation errors",
 		"option3": "Database connection exceptions at runtime",
 		"option4": "None of the above",
-		"topicId": [
-			"T6",
-			"T2",
-			"T1"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 8763,
-		"correctRatio": "4487:4545",
-		"frequency": 876.3,
-		"createdOn": "1967-05-03T00:00:00.000Z",
-		"lastEdited": "1967-05-03T00:00:00.000Z"
+		"topicId": "football, cat, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 6,
+		"timesUsed": 26,
+		"correctRatio": "3542:7830",
+		"frequency": 3,
+		"createdOn": "12/3/1924",
+		"lastEdited": "12/3/1924"
 	},
 	{
 		"questionId": "web301_q108",
@@ -1646,17 +1412,14 @@
 		"option2": "Difficulties that are encountered when a RDBMS system is used by an Object Oriented program",
 		"option3": "Difficulties that are encountered because of invalid database connection parameters",
 		"option4": "All of the above",
-		"topicId": [
-			"T6",
-			"T3",
-			"T6"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 3591,
-		"correctRatio": "1108:9804",
-		"frequency": 359.1,
-		"createdOn": "2012-11-19T00:00:00.000Z",
-		"lastEdited": "2012-11-19T00:00:00.000Z"
+		"topicId": "baseball, baseball, baseball",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 5634,
+		"correctRatio": "4917:6666",
+		"frequency": 563,
+		"createdOn": "3/2/1939",
+		"lastEdited": "3/2/1939"
 	},
 	{
 		"questionId": "web301_q109",
@@ -1667,17 +1430,14 @@
 		"option2": "Inheritance",
 		"option3": "Associations",
 		"option4": "Identity",
-		"topicId": [
-			"T3",
-			"T2",
-			"T4"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 6590,
-		"correctRatio": "3268:4324",
-		"frequency": 659,
-		"createdOn": "1905-11-16T00:00:00.000Z",
-		"lastEdited": "1905-11-16T00:00:00.000Z"
+		"topicId": "cat, elepant, football",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 6,
+		"timesUsed": 864,
+		"correctRatio": "875:2713",
+		"frequency": 86,
+		"createdOn": "1/2/1904",
+		"lastEdited": "1/2/1904"
 	},
 	{
 		"questionId": "web301_q112",
@@ -1688,17 +1448,14 @@
 		"option2": " i.e. there is a large programming overhead",
 		"option3": "Queries are DBMS specific",
 		"option4": "Both 1 & 2",
-		"topicId": [
-			"T3",
-			"T1",
-			"T6"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 4833,
-		"correctRatio": "5992:9869",
-		"frequency": 483.3,
-		"createdOn": "1988-08-20T00:00:00.000Z",
-		"lastEdited": "1988-08-20T00:00:00.000Z"
+		"topicId": "cricket, football, cat",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 10,
+		"timesUsed": 9576,
+		"correctRatio": "846:1107",
+		"frequency": 958,
+		"createdOn": "13/9/1934",
+		"lastEdited": "13/9/1934"
 	},
 	{
 		"questionId": "web301_q113",
@@ -1709,17 +1466,14 @@
 		"option2": "JDBC Type 1 Driver",
 		"option3": "ORM Tools",
 		"option4": "All of the above",
-		"topicId": [
-			"T2",
-			"T5",
-			"T2"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 7113,
-		"correctRatio": "4391:6954",
-		"frequency": 711.3,
-		"createdOn": "1931-09-07T00:00:00.000Z",
-		"lastEdited": "1931-09-07T00:00:00.000Z"
+		"topicId": "cricket, elepant, dog",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 3256,
+		"correctRatio": "154:171",
+		"frequency": 326,
+		"createdOn": "5/3/2016",
+		"lastEdited": "5/3/2016"
 	},
 	{
 		"questionId": "web301_q114",
@@ -1730,17 +1484,14 @@
 		"option2": "Pay as you go",
 		"option3": "Elastic Resource Cpacity",
 		"option4": "All of above",
-		"topicId": [
-			"T1",
-			"T4",
-			"T1"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 9732,
-		"correctRatio": "295:2096",
-		"frequency": 973.2,
-		"createdOn": "1991-05-12T00:00:00.000Z",
-		"lastEdited": "1991-05-12T00:00:00.000Z"
+		"topicId": "football, dog, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 1714,
+		"correctRatio": "982:8601",
+		"frequency": 171,
+		"createdOn": "15/7/1906",
+		"lastEdited": "15/7/1906"
 	},
 	{
 		"questionId": "web301_q115",
@@ -1751,17 +1502,14 @@
 		"option2": "PaaS",
 		"option3": "MaaS",
 		"option4": "SaaS",
-		"topicId": [
-			"T5",
-			"T4",
-			"T3"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 9277,
-		"correctRatio": "560:1053",
-		"frequency": 927.7,
-		"createdOn": "1952-02-15T00:00:00.000Z",
-		"lastEdited": "1952-02-15T00:00:00.000Z"
+		"topicId": "cat, cricket, football",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 2277,
+		"correctRatio": "3814:6982",
+		"frequency": 228,
+		"createdOn": "6/10/1908",
+		"lastEdited": "6/10/1908"
 	},
 	{
 		"questionId": "web301_q116",
@@ -1772,17 +1520,14 @@
 		"option2": "Amazon S3 Service",
 		"option3": "Rackspace",
 		"option4": "All of above",
-		"topicId": [
-			"T2",
-			"T5",
-			"T2"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 4798,
-		"correctRatio": "1692:2016",
-		"frequency": 479.8,
-		"createdOn": "1994-11-18T00:00:00.000Z",
-		"lastEdited": "1994-11-18T00:00:00.000Z"
+		"topicId": "baseball, baseball, elepant",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 2964,
+		"correctRatio": "4157:4478",
+		"frequency": 296,
+		"createdOn": "26/9/1999",
+		"lastEdited": "26/9/1999"
 	},
 	{
 		"questionId": "web301_q117",
@@ -1793,17 +1538,14 @@
 		"option2": "Salesforce.com",
 		"option3": "Google App Engine",
 		"option4": "Both 2 and 3",
-		"topicId": [
-			"T6",
-			"T2",
-			"T1"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 4468,
-		"correctRatio": "7777:8164",
-		"frequency": 446.8,
-		"createdOn": "1905-04-26T00:00:00.000Z",
-		"lastEdited": "1905-04-26T00:00:00.000Z"
+		"topicId": "elepant, football, football",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 5,
+		"timesUsed": 7998,
+		"correctRatio": "5216:8703",
+		"frequency": 800,
+		"createdOn": "9/7/1969",
+		"lastEdited": "9/7/1969"
 	},
 	{
 		"questionId": "web301_q118",
@@ -1814,17 +1556,14 @@
 		"option2": "YouTube",
 		"option3": "Dropbox",
 		"option4": "All of above",
-		"topicId": [
-			"T1",
-			"T4",
-			"T4"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 8213,
-		"correctRatio": "2568:2947",
-		"frequency": 821.3,
-		"createdOn": "1945-06-21T00:00:00.000Z",
-		"lastEdited": "1945-06-21T00:00:00.000Z"
+		"topicId": "cat, football, dog",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 2290,
+		"correctRatio": "3165:4720",
+		"frequency": 229,
+		"createdOn": "28/5/1929",
+		"lastEdited": "28/5/1929"
 	},
 	{
 		"questionId": "web301_q119",
@@ -1835,17 +1574,14 @@
 		"option2": "Memcache",
 		"option3": "Both 1 and 2",
 		"option4": "Only 2",
-		"topicId": [
-			"T5",
-			"T5",
-			"T4"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 9500,
-		"correctRatio": "124:2433",
-		"frequency": 950,
-		"createdOn": "1980-11-08T00:00:00.000Z",
-		"lastEdited": "1980-11-08T00:00:00.000Z"
+		"topicId": "cricket, cricket, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 5649,
+		"correctRatio": "276:1225",
+		"frequency": 565,
+		"createdOn": "19/10/1955",
+		"lastEdited": "19/10/1955"
 	},
 	{
 		"questionId": "web301_q120",
@@ -1856,17 +1592,14 @@
 		"option2": "Overuse of shared resources",
 		"option3": "Fair usage of shared resources",
 		"option4": "None of above",
-		"topicId": [
-			"T4",
-			"T3",
-			"T3"
-		],
+		"topicId": "football, elepant, football",
+		"categories": "sport, animal, sport",
 		"difficultyLevel": 8,
-		"timesUsed": 689,
-		"correctRatio": "684:2283",
-		"frequency": 68.9,
-		"createdOn": "1967-09-23T00:00:00.000Z",
-		"lastEdited": "1967-09-23T00:00:00.000Z"
+		"timesUsed": 3032,
+		"correctRatio": "409:6750",
+		"frequency": 303,
+		"createdOn": "21/10/1952",
+		"lastEdited": "21/10/1952"
 	},
 	{
 		"questionId": "web301_q121",
@@ -1877,17 +1610,14 @@
 		"option2": "Limits and Quotas",
 		"option3": "Free app",
 		"option4": "None of Above",
-		"topicId": [
-			"T4",
-			"T5",
-			"T3"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 1786,
-		"correctRatio": "4256:7937",
-		"frequency": 178.6,
-		"createdOn": "1916-09-15T00:00:00.000Z",
-		"lastEdited": "1916-09-15T00:00:00.000Z"
+		"topicId": "cat, football, football",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 8,
+		"timesUsed": 5735,
+		"correctRatio": "1062:3903",
+		"frequency": 574,
+		"createdOn": "31/8/1945",
+		"lastEdited": "31/8/1945"
 	},
 	{
 		"questionId": "web301_q122",
@@ -1898,17 +1628,14 @@
 		"option2": "Management & Maintenance",
 		"option3": "Scalability and elasticity",
 		"option4": "All of above",
-		"topicId": [
-			"T3",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 4427,
-		"correctRatio": "1931:2042",
-		"frequency": 442.7,
-		"createdOn": "1967-09-02T00:00:00.000Z",
-		"lastEdited": "1967-09-02T00:00:00.000Z"
+		"topicId": "cat, cat, football",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 6326,
+		"correctRatio": "889:4549",
+		"frequency": 633,
+		"createdOn": "5/7/1917",
+		"lastEdited": "5/7/1917"
 	},
 	{
 		"questionId": "web301_q123",
@@ -1919,17 +1646,14 @@
 		"option2": "Billable Quota",
 		"option3": "Safety Limits",
 		"option4": "All of Above",
-		"topicId": [
-			"T6",
-			"T1",
-			"T4"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 1896,
-		"correctRatio": "532:7913",
-		"frequency": 189.6,
-		"createdOn": "2003-08-20T00:00:00.000Z",
-		"lastEdited": "2003-08-20T00:00:00.000Z"
+		"topicId": "baseball, baseball, baseball",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 269,
+		"correctRatio": "1165:2180",
+		"frequency": 27,
+		"createdOn": "8/6/1996",
+		"lastEdited": "8/6/1996"
 	},
 	{
 		"questionId": "web301_q129",
@@ -1940,17 +1664,14 @@
 		"option2": "Network bandwidth",
 		"option3": "CPUs or the Processing units",
 		"option4": "All of the above",
-		"topicId": [
-			"T5",
-			"T5",
-			"T3"
-		],
-		"difficultyLevel": 7,
-		"timesUsed": 6940,
-		"correctRatio": "5934:8158",
-		"frequency": 694,
-		"createdOn": "1913-04-28T00:00:00.000Z",
-		"lastEdited": "1913-04-28T00:00:00.000Z"
+		"topicId": "football, elepant, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 2,
+		"timesUsed": 7837,
+		"correctRatio": "2076:3327",
+		"frequency": 784,
+		"createdOn": "14/8/1979",
+		"lastEdited": "14/8/1979"
 	},
 	{
 		"questionId": "web301_q130",
@@ -1961,17 +1682,14 @@
 		"option2": "By removing servers to reduce race condition",
 		"option3": "By replacing with a bigger server",
 		"option4": "Both 1 and 3",
-		"topicId": [
-			"T1",
-			"T1",
-			"T6"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 4818,
-		"correctRatio": "188:1868",
-		"frequency": 481.8,
-		"createdOn": "1934-04-19T00:00:00.000Z",
-		"lastEdited": "1934-04-19T00:00:00.000Z"
+		"topicId": "cricket, elepant, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 6,
+		"timesUsed": 9763,
+		"correctRatio": "2789:8162",
+		"frequency": 976,
+		"createdOn": "19/1/1910",
+		"lastEdited": "19/1/1910"
 	},
 	{
 		"questionId": "web301_q131",
@@ -1982,17 +1700,14 @@
 		"option2": "IT Cost",
 		"option3": "Scalability",
 		"option4": "All of above",
-		"topicId": [
-			"T6",
-			"T5",
-			"T2"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 3563,
-		"correctRatio": "1881:7571",
-		"frequency": 356.3,
-		"createdOn": "1934-11-26T00:00:00.000Z",
-		"lastEdited": "1934-11-26T00:00:00.000Z"
+		"topicId": "elepant, football, football",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 5646,
+		"correctRatio": "2309:4651",
+		"frequency": 565,
+		"createdOn": "11/7/1963",
+		"lastEdited": "11/7/1963"
 	},
 	{
 		"questionId": "web301_q132",
@@ -2003,17 +1718,14 @@
 		"option2": "Replacing with a smaller server",
 		"option3": "Adding more servers",
 		"option4": "None of the above",
-		"topicId": [
-			"T1",
-			"T2",
-			"T4"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 4040,
-		"correctRatio": "449:835",
-		"frequency": 404,
-		"createdOn": "1989-12-12T00:00:00.000Z",
-		"lastEdited": "1989-12-12T00:00:00.000Z"
+		"topicId": "football, elepant, elepant",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 7368,
+		"correctRatio": "1631:6242",
+		"frequency": 737,
+		"createdOn": "20/5/1937",
+		"lastEdited": "20/5/1937"
 	},
 	{
 		"questionId": "web301_q133",
@@ -2024,17 +1736,14 @@
 		"option2": "Scale Down",
 		"option3": "Scale In",
 		"option4": "Scale Up",
-		"topicId": [
-			"T6",
-			"T3",
-			"T2"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 452,
-		"correctRatio": "495:1007",
-		"frequency": 45.2,
-		"createdOn": "1933-10-15T00:00:00.000Z",
-		"lastEdited": "1933-10-15T00:00:00.000Z"
+		"topicId": "cat, cat, cat",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 2,
+		"timesUsed": 1029,
+		"correctRatio": "1726:2755",
+		"frequency": 103,
+		"createdOn": "6/3/1986",
+		"lastEdited": "6/3/1986"
 	},
 	{
 		"questionId": "web301_q134",
@@ -2045,17 +1754,14 @@
 		"option2": "Database connection",
 		"option3": "Statement",
 		"option4": "Resultset",
-		"topicId": [
-			"T6",
-			"T2",
-			"T5"
-		],
+		"topicId": "football, baseball, baseball",
+		"categories": "sport, sport, sport",
 		"difficultyLevel": 7,
-		"timesUsed": 1505,
-		"correctRatio": "311:2428",
-		"frequency": 150.5,
-		"createdOn": "1956-11-21T00:00:00.000Z",
-		"lastEdited": "1956-11-21T00:00:00.000Z"
+		"timesUsed": 9373,
+		"correctRatio": "4349:5170",
+		"frequency": 937,
+		"createdOn": "24/11/1921",
+		"lastEdited": "24/11/1921"
 	},
 	{
 		"questionId": "web301_q136",
@@ -2066,17 +1772,14 @@
 		"option2": "Throws SQLException",
 		"option3": "Inserts null value",
 		"option4": "Sets the auto increment  value based on the mapping ",
-		"topicId": [
-			"T4",
-			"T5",
-			"T1"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 2793,
-		"correctRatio": "1369:1406",
-		"frequency": 279.3,
-		"createdOn": "1917-11-20T00:00:00.000Z",
-		"lastEdited": "1917-11-20T00:00:00.000Z"
+		"topicId": "baseball, dog, cat",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 799,
+		"correctRatio": "3636:8013",
+		"frequency": 80,
+		"createdOn": "26/11/1920",
+		"lastEdited": "26/11/1920"
 	},
 	{
 		"questionId": "web301_q138",
@@ -2087,17 +1790,14 @@
 		"option2": "Updates the record in database",
 		"option3": "Inserts or updates based on id",
 		"option4": "All of the above",
-		"topicId": [
-			"T2",
-			"T6",
-			"T3"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 1210,
-		"correctRatio": "7412:7673",
-		"frequency": 121,
-		"createdOn": "2007-08-28T00:00:00.000Z",
-		"lastEdited": "2007-08-28T00:00:00.000Z"
+		"topicId": "baseball, cricket, elepant",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 1,
+		"timesUsed": 8453,
+		"correctRatio": "1006:4552",
+		"frequency": 845,
+		"createdOn": "23/4/1939",
+		"lastEdited": "23/4/1939"
 	},
 	{
 		"questionId": "web301_q139",
@@ -2108,17 +1808,14 @@
 		"option2": "Load the hibernate configuration",
 		"option3": "Create Database connection",
 		"option4": "All of the above",
-		"topicId": [
-			"T5",
-			"T1",
-			"T1"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 4077,
-		"correctRatio": "3330:5594",
-		"frequency": 407.7,
-		"createdOn": "1943-06-10T00:00:00.000Z",
-		"lastEdited": "1943-06-10T00:00:00.000Z"
+		"topicId": "cat, baseball, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 8816,
+		"correctRatio": "2059:2108",
+		"frequency": 882,
+		"createdOn": "24/4/1927",
+		"lastEdited": "24/4/1927"
 	},
 	{
 		"questionId": "web301_q144",
@@ -2129,17 +1826,14 @@
 		"option2": "JDBC",
 		"option3": "TopLink",
 		"option4": "Spring",
-		"topicId": [
-			"T1",
-			"T1",
-			"T2"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 5818,
-		"correctRatio": "4164:8910",
-		"frequency": 581.8,
-		"createdOn": "1936-04-11T00:00:00.000Z",
-		"lastEdited": "1936-04-11T00:00:00.000Z"
+		"topicId": "elepant, football, dog",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 9,
+		"timesUsed": 7448,
+		"correctRatio": "137:498",
+		"frequency": 745,
+		"createdOn": "5/10/1948",
+		"lastEdited": "5/10/1948"
 	},
 	{
 		"questionId": "web301_q145",
@@ -2150,17 +1844,14 @@
 		"option2": "Session",
 		"option3": "Query",
 		"option4": "SessionFactory",
-		"topicId": [
-			"T1",
-			"T6",
-			"T5"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 7759,
-		"correctRatio": "3641:3720",
-		"frequency": 775.9,
-		"createdOn": "1999-12-19T00:00:00.000Z",
-		"lastEdited": "1999-12-19T00:00:00.000Z"
+		"topicId": "dog, cricket, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 8,
+		"timesUsed": 3173,
+		"correctRatio": "206:1438",
+		"frequency": 317,
+		"createdOn": "19/11/1970",
+		"lastEdited": "19/11/1970"
 	},
 	{
 		"questionId": "web301_q147",
@@ -2171,17 +1862,14 @@
 		"option2": "query.set()",
 		"option3": "query.load()",
 		"option4": "query.setParameter()",
-		"topicId": [
-			"T1",
-			"T6",
-			"T5"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 9867,
-		"correctRatio": "434:1862",
-		"frequency": 986.7,
-		"createdOn": "1921-03-13T00:00:00.000Z",
-		"lastEdited": "1921-03-13T00:00:00.000Z"
+		"topicId": "cat, cricket, cat",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 9,
+		"timesUsed": 6009,
+		"correctRatio": "3353:3513",
+		"frequency": 601,
+		"createdOn": "29/11/2004",
+		"lastEdited": "29/11/2004"
 	},
 	{
 		"questionId": "web301_q148",
@@ -2192,17 +1880,14 @@
 		"option2": "Database connection",
 		"option3": "Statement",
 		"option4": "Resultset",
-		"topicId": [
-			"T1",
-			"T5",
-			"T5"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 5775,
-		"correctRatio": "639:1232",
-		"frequency": 577.5,
-		"createdOn": "1920-09-17T00:00:00.000Z",
-		"lastEdited": "1920-09-17T00:00:00.000Z"
+		"topicId": "cat, football, cat",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 3941,
+		"correctRatio": "2413:9075",
+		"frequency": 394,
+		"createdOn": "6/1/1976",
+		"lastEdited": "6/1/1976"
 	},
 	{
 		"questionId": "web301_q150",
@@ -2213,17 +1898,14 @@
 		"option2": "Throws SQLException",
 		"option3": "Inserts null value",
 		"option4": "Sets the auto increment  value based on the mapping ",
-		"topicId": [
-			"T6",
-			"T1",
-			"T1"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 9958,
-		"correctRatio": "5052:9437",
-		"frequency": 995.8,
-		"createdOn": "1936-11-10T00:00:00.000Z",
-		"lastEdited": "1936-11-10T00:00:00.000Z"
+		"topicId": "football, cricket, dog",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 4000,
+		"correctRatio": "4107:6635",
+		"frequency": 400,
+		"createdOn": "28/6/1908",
+		"lastEdited": "28/6/1908"
 	},
 	{
 		"questionId": "web301_q152",
@@ -2234,17 +1916,14 @@
 		"option2": "Updates the record in database",
 		"option3": "Inserts or updates based on id",
 		"option4": "None of the above",
-		"topicId": [
-			"T5",
-			"T5",
-			"T5"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 4076,
-		"correctRatio": "4405:5239",
-		"frequency": 407.6,
-		"createdOn": "1942-09-20T00:00:00.000Z",
-		"lastEdited": "1942-09-20T00:00:00.000Z"
+		"topicId": "dog, dog, cat",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 10,
+		"timesUsed": 7769,
+		"correctRatio": "705:915",
+		"frequency": 777,
+		"createdOn": "17/3/1907",
+		"lastEdited": "17/3/1907"
 	},
 	{
 		"questionId": "web301_q153",
@@ -2255,17 +1934,14 @@
 		"option2": "JPA",
 		"option3": "JMX",
 		"option4": "JSP",
-		"topicId": [
-			"T2",
-			"T3",
-			"T5"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 8824,
-		"correctRatio": "1495:5302",
-		"frequency": 882.4,
-		"createdOn": "1934-10-19T00:00:00.000Z",
-		"lastEdited": "1934-10-19T00:00:00.000Z"
+		"topicId": "baseball, cricket, cricket",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 3,
+		"timesUsed": 6923,
+		"correctRatio": "3665:5527",
+		"frequency": 692,
+		"createdOn": "27/12/1913",
+		"lastEdited": "27/12/1913"
 	},
 	{
 		"questionId": "web301_q154",
@@ -2276,17 +1952,14 @@
 		"option2": "maven",
 		"option3": "hbm2java",
 		"option4": "ANT",
-		"topicId": [
-			"T5",
-			"T1",
-			"T2"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 1836,
-		"correctRatio": "3070:5477",
-		"frequency": 183.6,
-		"createdOn": "1987-01-11T00:00:00.000Z",
-		"lastEdited": "1987-01-11T00:00:00.000Z"
+		"topicId": "cat, baseball, elepant",
+		"categories": "animal, sport, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 7235,
+		"correctRatio": "138:892",
+		"frequency": 724,
+		"createdOn": "10/12/1929",
+		"lastEdited": "10/12/1929"
 	},
 	{
 		"questionId": "web301_q155",
@@ -2297,17 +1970,14 @@
 		"option2": "Oracle",
 		"option3": "SQL server",
 		"option4": "All of the above",
-		"topicId": [
-			"T2",
-			"T6",
-			"T4"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 9197,
-		"correctRatio": "1235:2489",
-		"frequency": 919.7,
-		"createdOn": "1918-09-25T00:00:00.000Z",
-		"lastEdited": "1918-09-25T00:00:00.000Z"
+		"topicId": "dog, dog, cat",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 3,
+		"timesUsed": 8480,
+		"correctRatio": "148:436",
+		"frequency": 848,
+		"createdOn": "4/12/2013",
+		"lastEdited": "4/12/2013"
 	},
 	{
 		"questionId": "web301_q156",
@@ -2318,17 +1988,14 @@
 		"option2": "Annotation",
 		"option3": "Annotations or XML",
 		"option4": "None of these",
-		"topicId": [
-			"T1",
-			"T3",
-			"T1"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 1913,
-		"correctRatio": "1013:1554",
-		"frequency": 191.3,
-		"createdOn": "1938-03-27T00:00:00.000Z",
-		"lastEdited": "1938-03-27T00:00:00.000Z"
+		"topicId": "cricket, cricket, cricket",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 2,
+		"timesUsed": 4039,
+		"correctRatio": "2108:3587",
+		"frequency": 404,
+		"createdOn": "21/9/1921",
+		"lastEdited": "21/9/1921"
 	},
 	{
 		"questionId": "web301_q157",
@@ -2339,17 +2006,14 @@
 		"option2": "columns",
 		"option3": "Class fields",
 		"option4": "Objects",
-		"topicId": [
-			"T4",
-			"T5",
-			"T1"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 8547,
-		"correctRatio": "5310:7405",
-		"frequency": 854.7,
-		"createdOn": "1972-10-23T00:00:00.000Z",
-		"lastEdited": "1972-10-23T00:00:00.000Z"
+		"topicId": "baseball, cat, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 7,
+		"timesUsed": 6897,
+		"correctRatio": "425:2060",
+		"frequency": 690,
+		"createdOn": "11/12/1972",
+		"lastEdited": "11/12/1972"
 	},
 	{
 		"questionId": "web301_q158",
@@ -2360,17 +2024,14 @@
 		"option2": "Load database driver",
 		"option3": "Fire Query",
 		"option4": "Create statement",
-		"topicId": [
-			"T6",
-			"T4",
-			"T4"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 1015,
-		"correctRatio": "2502:6931",
-		"frequency": 101.5,
-		"createdOn": "1996-01-21T00:00:00.000Z",
-		"lastEdited": "1996-01-21T00:00:00.000Z"
+		"topicId": "dog, elepant, cricket",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 8,
+		"timesUsed": 5073,
+		"correctRatio": "1474:9012",
+		"frequency": 507,
+		"createdOn": "15/6/1920",
+		"lastEdited": "15/6/1920"
 	},
 	{
 		"questionId": "web301_q160",
@@ -2381,17 +2042,14 @@
 		"option2": "Compilation errors",
 		"option3": "Database connection exceptions at runtime",
 		"option4": "None of the above",
-		"topicId": [
-			"T6",
-			"T2",
-			"T2"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 9614,
-		"correctRatio": "1291:3555",
-		"frequency": 961.4,
-		"createdOn": "1976-11-29T00:00:00.000Z",
-		"lastEdited": "1976-11-29T00:00:00.000Z"
+		"topicId": "football, cat, cricket",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 8,
+		"timesUsed": 6670,
+		"correctRatio": "376:4600",
+		"frequency": 667,
+		"createdOn": "11/9/1993",
+		"lastEdited": "11/9/1993"
 	},
 	{
 		"questionId": "web301_q161",
@@ -2402,17 +2060,14 @@
 		"option2": "Load from external properties file",
 		"option3": "Inside Try/Catch block",
 		"option4": "None of the above",
-		"topicId": [
-			"T2",
-			"T2",
-			"T2"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 5245,
-		"correctRatio": "2025:7029",
-		"frequency": 524.5,
-		"createdOn": "1947-01-03T00:00:00.000Z",
-		"lastEdited": "1947-01-03T00:00:00.000Z"
+		"topicId": "baseball, baseball, dog",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 7,
+		"timesUsed": 1503,
+		"correctRatio": "1121:2204",
+		"frequency": 150,
+		"createdOn": "17/7/1929",
+		"lastEdited": "17/7/1929"
 	},
 	{
 		"questionId": "web301_q162",
@@ -2423,17 +2078,14 @@
 		"option2": "DriverManager",
 		"option3": "Resultset",
 		"option4": "Statement",
-		"topicId": [
-			"T4",
-			"T5",
-			"T3"
-		],
-		"difficultyLevel": 4,
-		"timesUsed": 9993,
-		"correctRatio": "2294:3697",
-		"frequency": 999.3,
-		"createdOn": "1980-11-29T00:00:00.000Z",
-		"lastEdited": "1980-11-29T00:00:00.000Z"
+		"topicId": "cat, elepant, dog",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 9,
+		"timesUsed": 8483,
+		"correctRatio": "809:878",
+		"frequency": 848,
+		"createdOn": "11/11/1983",
+		"lastEdited": "11/11/1983"
 	},
 	{
 		"questionId": "web301_q163",
@@ -2444,17 +2096,14 @@
 		"option2": "Load database driver",
 		"option3": "Fire Query",
 		"option4": "Create statement",
-		"topicId": [
-			"T1",
-			"T3",
-			"T4"
-		],
-		"difficultyLevel": 8,
-		"timesUsed": 9028,
-		"correctRatio": "2010:4315",
-		"frequency": 902.8,
-		"createdOn": "1991-08-12T00:00:00.000Z",
-		"lastEdited": "1991-08-12T00:00:00.000Z"
+		"topicId": "cricket, cat, football",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 3041,
+		"correctRatio": "69:170",
+		"frequency": 304,
+		"createdOn": "28/4/1975",
+		"lastEdited": "28/4/1975"
 	},
 	{
 		"questionId": "web301_q164",
@@ -2465,17 +2114,14 @@
 		"option2": "Inside finally block",
 		"option3": "Inside Resultset iteration",
 		"option4": "Anywhere",
-		"topicId": [
-			"T2",
-			"T5",
-			"T3"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 3987,
-		"correctRatio": "2875:9922",
-		"frequency": 398.7,
-		"createdOn": "1904-07-16T00:00:00.000Z",
-		"lastEdited": "1904-07-16T00:00:00.000Z"
+		"topicId": "baseball, dog, cat",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 2871,
+		"correctRatio": "4796:9048",
+		"frequency": 287,
+		"createdOn": "1/11/1968",
+		"lastEdited": "1/11/1968"
 	},
 	{
 		"questionId": "web301_q165",
@@ -2486,17 +2132,14 @@
 		"option2": "Compilation errors",
 		"option3": "Database connection exceptions at runtime",
 		"option4": "None of the above",
-		"topicId": [
-			"T1",
-			"T3",
-			"T4"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 964,
-		"correctRatio": "380:1227",
-		"frequency": 96.4,
-		"createdOn": "1929-01-30T00:00:00.000Z",
-		"lastEdited": "1929-01-30T00:00:00.000Z"
+		"topicId": "dog, dog, baseball",
+		"categories": "animal, animal, sport",
+		"difficultyLevel": 5,
+		"timesUsed": 1804,
+		"correctRatio": "224:746",
+		"frequency": 180,
+		"createdOn": "30/5/1911",
+		"lastEdited": "30/5/1911"
 	},
 	{
 		"questionId": "web301_q166",
@@ -2507,17 +2150,14 @@
 		"option2": "Load from external properties file",
 		"option3": "Inside Try/Catch block",
 		"option4": "None of the above",
-		"topicId": [
-			"T4",
-			"T1",
-			"T5"
-		],
-		"difficultyLevel": 9,
-		"timesUsed": 2207,
-		"correctRatio": "7557:8141",
-		"frequency": 220.7,
-		"createdOn": "1962-06-23T00:00:00.000Z",
-		"lastEdited": "1962-06-23T00:00:00.000Z"
+		"topicId": "cricket, dog, cat",
+		"categories": "sport, animal, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 7692,
+		"correctRatio": "573:835",
+		"frequency": 769,
+		"createdOn": "14/5/2000",
+		"lastEdited": "14/5/2000"
 	},
 	{
 		"questionId": "web301_q167",
@@ -2528,17 +2168,14 @@
 		"option2": "DriverManager",
 		"option3": "Resultset",
 		"option4": "Statement",
-		"topicId": [
-			"T3",
-			"T3",
-			"T2"
-		],
-		"difficultyLevel": 10,
-		"timesUsed": 9009,
-		"correctRatio": "278:4999",
-		"frequency": 900.9,
-		"createdOn": "1978-11-15T00:00:00.000Z",
-		"lastEdited": "1978-11-15T00:00:00.000Z"
+		"topicId": "elepant, football, cricket",
+		"categories": "animal, sport, sport",
+		"difficultyLevel": 2,
+		"timesUsed": 7871,
+		"correctRatio": "9344:9734",
+		"frequency": 787,
+		"createdOn": "11/1/1912",
+		"lastEdited": "11/1/1912"
 	},
 	{
 		"questionId": "web301_q168",
@@ -2549,17 +2186,14 @@
 		"option2": "2: Java (programming language)",
 		"option3": "3: Python (programming language)",
 		"option4": "4: Perl",
-		"topicId": [
-			"T1",
-			"T1",
-			"T1"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 6828,
-		"correctRatio": "6563:7729",
-		"frequency": 682.8,
-		"createdOn": "1914-07-11T00:00:00.000Z",
-		"lastEdited": "1914-07-11T00:00:00.000Z"
+		"topicId": "baseball, cricket, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 9,
+		"timesUsed": 8482,
+		"correctRatio": "7694:7972",
+		"frequency": 848,
+		"createdOn": "1/5/1988",
+		"lastEdited": "1/5/1988"
 	},
 	{
 		"questionId": "web301_q169",
@@ -2570,17 +2204,14 @@
 		"option2": "2: Actively developed",
 		"option3": "3: Active in new format",
 		"option4": "4: Active",
-		"topicId": [
-			"T1",
-			"T1",
-			"T3"
-		],
-		"difficultyLevel": 2,
-		"timesUsed": 7912,
-		"correctRatio": "3566:5150",
-		"frequency": 791.2,
-		"createdOn": "2011-03-17T00:00:00.000Z",
-		"lastEdited": "2011-03-17T00:00:00.000Z"
+		"topicId": "baseball, football, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 4,
+		"timesUsed": 3131,
+		"correctRatio": "422:567",
+		"frequency": 313,
+		"createdOn": "20/8/2015",
+		"lastEdited": "20/8/2015"
 	},
 	{
 		"questionId": "web301_q170",
@@ -2591,17 +2222,14 @@
 		"option2": "2: Based on Apache License 2.0",
 		"option3": "3: Triple-license MPL",
 		"option4": "GPL and LGPL",
-		"topicId": [
-			"T6",
-			"T1",
-			"T5"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 7404,
-		"correctRatio": "684:5015",
-		"frequency": 740.4,
-		"createdOn": "1997-09-04T00:00:00.000Z",
-		"lastEdited": "1997-09-04T00:00:00.000Z"
+		"topicId": "football, cricket, cricket",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 9,
+		"timesUsed": 7755,
+		"correctRatio": "496:1358",
+		"frequency": 776,
+		"createdOn": "24/8/1928",
+		"lastEdited": "24/8/1928"
 	},
 	{
 		"questionId": "web301_q171",
@@ -2612,17 +2240,14 @@
 		"option2": "2: Cross-platform",
 		"option3": "3: Windows",
 		"option4": "4: Linux",
-		"topicId": [
-			"T3",
-			"T3",
-			"T6"
-		],
+		"topicId": "football, cricket, dog",
+		"categories": "sport, sport, animal",
 		"difficultyLevel": 8,
-		"timesUsed": 8239,
-		"correctRatio": "1384:3789",
-		"frequency": 823.9,
-		"createdOn": "1955-09-07T00:00:00.000Z",
-		"lastEdited": "1955-09-07T00:00:00.000Z"
+		"timesUsed": 1284,
+		"correctRatio": "3432:5967",
+		"frequency": 128,
+		"createdOn": "28/8/1966",
+		"lastEdited": "28/8/1966"
 	},
 	{
 		"questionId": "web301_q172",
@@ -2633,17 +2258,14 @@
 		"option2": "2: Test-driven development",
 		"option3": "3: Software testing",
 		"option4": "4: Unit testing",
-		"topicId": [
-			"T4",
-			"T5",
-			"T2"
-		],
-		"difficultyLevel": 5,
-		"timesUsed": 1352,
-		"correctRatio": "2677:2745",
-		"frequency": 135.2,
-		"createdOn": "1963-09-17T00:00:00.000Z",
-		"lastEdited": "1963-09-17T00:00:00.000Z"
+		"topicId": "baseball, baseball, elepant",
+		"categories": "sport, sport, animal",
+		"difficultyLevel": 6,
+		"timesUsed": 6887,
+		"correctRatio": "1544:6760",
+		"frequency": 689,
+		"createdOn": "29/8/1978",
+		"lastEdited": "29/8/1978"
 	},
 	{
 		"questionId": "web301_q173",
@@ -2654,17 +2276,14 @@
 		"option2": "2: Apache Tomcat",
 		"option3": "3: Apache Maven",
 		"option4": "4: Apache Ant",
-		"topicId": [
-			"T5",
-			"T5",
-			"T6"
-		],
-		"difficultyLevel": 6,
-		"timesUsed": 8649,
-		"correctRatio": "3573:5737",
-		"frequency": 864.9,
-		"createdOn": "1925-09-25T00:00:00.000Z",
-		"lastEdited": "1925-09-25T00:00:00.000Z"
+		"topicId": "football, dog, baseball",
+		"categories": "sport, animal, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 9665,
+		"correctRatio": "2447:2814",
+		"frequency": 967,
+		"createdOn": "10/3/1941",
+		"lastEdited": "10/3/1941"
 	},
 	{
 		"questionId": "web301_q174",
@@ -2675,17 +2294,14 @@
 		"option2": "2: HTML",
 		"option3": "3: XML",
 		"option4": "4: XHTML",
-		"topicId": [
-			"T4",
-			"T4",
-			"T5"
-		],
-		"difficultyLevel": 1,
-		"timesUsed": 7845,
-		"correctRatio": "7214:8826",
-		"frequency": 784.5,
-		"createdOn": "1904-01-26T00:00:00.000Z",
-		"lastEdited": "1904-01-26T00:00:00.000Z"
+		"topicId": "cat, elepant, dog",
+		"categories": "animal, animal, animal",
+		"difficultyLevel": 4,
+		"timesUsed": 8972,
+		"correctRatio": "346:759",
+		"frequency": 897,
+		"createdOn": "27/6/1952",
+		"lastEdited": "27/6/1952"
 	},
 	{
 		"questionId": "web301_q175",
@@ -2696,16 +2312,13 @@
 		"option2": "2: PaaS",
 		"option3": "3: IaaS",
 		"option4": "4: MaaS",
-		"topicId": [
-			"T1",
-			"T4",
-			"T5"
-		],
-		"difficultyLevel": 3,
-		"timesUsed": 7432,
-		"correctRatio": "12:28",
-		"frequency": 743.2,
-		"createdOn": "1911-06-11T00:00:00.000Z",
-		"lastEdited": "1911-06-11T00:00:00.000Z"
+		"topicId": "baseball, football, football",
+		"categories": "sport, sport, sport",
+		"difficultyLevel": 10,
+		"timesUsed": 8276,
+		"correctRatio": "4160:7102",
+		"frequency": 828,
+		"createdOn": "17/11/2007",
+		"lastEdited": "17/11/2007"
 	}
 ]

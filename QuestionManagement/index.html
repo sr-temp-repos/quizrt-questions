@@ -5,49 +5,74 @@
   <title>My product page</title>
   <!-- Boot Strap Style Sheet -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
   <!-- Custom Style sheet -->
   <link rel="stylesheet" href="css/QuestionManager.css" />
 
 </head>
 <body>
   <main class="container">
-    <div id="search" class="well">
-      <h2>Search Question</h2>
-      <form id="searchForm" action="">
-        <input name="searchText" id="searchText" class="col-xs-8" placeholder="Search using Keywords" type="text" />
-        <button type="submit" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+    <div id="search" class="well row">
+      <form id="searchForm" class="col-sm-9 col-xs-9" action="">
+        <input name="searchText" id="searchText" class="col-sm-9 col-xs-9" placeholder="Search using Keywords, Topics, Category" type="text" />
+        <button type="submit" class="col-sm-2 col-xs-2" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
       </form>
+      <div id='noOfQuestions' class='col-sm-3 col-xs-3 actionBar dropdown'>
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+        </ul>
+      </div>
     </div>
-    <h2 class="text-center">List of Questions</h2>
-    <table id="questionList" class="table table-stripped">
-      <th>
-        <td>Question</td>
-        <td>Topics</td>
-        <td>Categories</td>
-        <td>Difficulty Level</td>
-        <td>Times Used</td>
-        <td>Correct Ratio</td>
-        <td>Frequecy</td>
-        <td>Last Edited</td>
-        <td>Created On</td>
-      </th>
-    </table>
-
-    <script id="template" type="text/x-handlebars-template">
-      {{#each this}}
+    <!-- <form id="editData" class="jumbotron row" action="">
+        <label for="question">Question</label>
+        <input type="text">{{Question}}</input>
+        {{generateOptions this}}
+        <label for="Topics Related">Topics</label>
+        <input type="text">{{topics}}</input>
+        <label for="Topics Related">Categories</label>
+        <input type="text">{{categories}}</input>
+        <label for="Topics Related">Difficulty Level</label>
+        <input type="text">{{difficultyLevel}}</input>
+        <button class="btn btn-success" type="submit">Save</button>
+    </form> -->
+    <!-- <script id="template" type="text/x-handlebars-template">
+      <label for="question">Question</label>
+      <input type="text">{{Question}}</input>
+      <label for="Topics Related">Topics</label>
+      <input type="text">{{topics}}</input>
+      <label for="Topics Related">Categories</label>
+      <input type="text">{{categories}}</input>
+      <label for="Topics Related">Difficulty Level</label>
+      <input type="text">{{difficultyLevel}}</input>
+      <input class="btn btn-success" type="submit">Save</input>
+    </script> -->
+    <table id="questionList" class="table table-bordered table-responsive table-hover row">
+      <thead>
         <tr>
-          <td>{{question}}</td>
-          {{generateTopicsCategory}}
-          <td>{{difficultyLevel}}</td>
-          <td>{{timesUsed}}</td>
-          <td>{{correctRatio}}</td>
-          <td>{{frequency}}</td>
-          <td>{{lastEdited}}</td>
-          <td>{{createdOn}}</td>
+          <th data-column-id='question' data-sortable='false'>Question</th>
+          <th data-column-id='topicId' data-sortable='false'>Topics</th>
+          <th data-column-id='categories' data-sortable='false'>Categories</th>
+          <th data-column-id='difficultyLevel'>Difficulty Level</th>
+          <th data-column-id='timesUsed'>Times Used</th>
+          <th data-column-id='correctRatio'>Correct Ratio</th>
+          <th data-column-id='frequency'>Frequecy per Day</th>
+          <th data-column-id='lastEdited'>Last Edited</th>
+          <th data-column-id='createdOn'>Created On</th>
+          <th data-column-id='commands' data-formatter='commands' data-sortable='false'>Edit/Delete</th>
         </tr>
-      {{/each}}
-    </script>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div id="pageNo" class="row">
+      <ul class="pagination col-sm-8 col-xs-6">
 
+      </ul>
+      <p class="pageTracker col-sm-4 col-xs-6"> </p>
+    </div>
+    <div id="loadTemplates">
+    </div>
     <!-- <div class="panel-group" id="accordion">
 
     </div>
@@ -90,6 +115,8 @@
   <script src="lib/handlebars-v4.0.5.js"></script>
   <!-- Bootstrap java script -->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- Pagination bootgrid -->
+  <script src="lib/twbsPagination/jquery.twbsPagination.js" charset="utf-8"></script>
   <!-- Custom Script -->
   <script src="js/QuestionManager.js"></script>
 </body>

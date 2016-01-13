@@ -5,6 +5,10 @@ var generateRandomNumber = function(range) {
   return Math.round(Math.random()*range)%range + 1;
 }
 
+var dateFormater = function(tDate,dateSeparator) {
+  return tDate.getDate() + dateSeparator + (tDate.getMonth()+1) + dateSeparator + (1900 + tDate.getYear());
+}
+
 fs.readFile( 'QuestionsJson/QuestionSample_2.json', function( err, data ) {
   var jsonData = JSON.parse(data),
       topics = {
@@ -17,16 +21,25 @@ fs.readFile( 'QuestionsJson/QuestionSample_2.json', function( err, data ) {
               }
       topicsIdCollection = [];
   for( var i=0, len=jsonData.length ; i<len ; i++ ) {
-    var noOfAttemps = generateRandomNumber(10000);
+    var noOfAttemps = generateRandomNumber(10000),
+        dateCreated = new Date((1900 + generateRandomNumber(116))%2016 + '-' + generateRandomNumber(12) + '-' + + generateRandomNumber(28)),
+        dateEdited = dateCreated;
+
+    dateEdited.setDate(dateCreated.getDate() + generateRandomNumber(100));
     jsonData[i].image = 'http://placehold.it/150x150';
-    jsonData[i].topicId = ['T'+generateRandomNumber(6),'T'+generateRandomNumber(6),'T'+generateRandomNumber(6)];
+    topicRanPick = [
+                    topics['T'+generateRandomNumber(6)],
+                    topics['T'+generateRandomNumber(6)],
+                    topics['T'+generateRandomNumber(6)]
+                  ];
+    jsonData[i].topicId = topicRanPick[0].name + ', ' + topicRanPick[1].name + ', ' + topicRanPick[2].name;
+    jsonData[i].categories = topicRanPick[0].category + ', ' + topicRanPick[1].category + ', ' + topicRanPick[2].category;
     jsonData[i].difficultyLevel = generateRandomNumber(10);
     jsonData[i].timesUsed = 10 + generateRandomNumber(10000);
     jsonData[i].correctRatio = generateRandomNumber(noOfAttemps) + ':' + noOfAttemps;
-    jsonData[i].frequency = jsonData[i].timesUsed/10;
-    jsonData[i].createdOn = new Date((1900 + generateRandomNumber(116))%2016 + '-' + generateRandomNumber(12) + '-' + + generateRandomNumber(28));
-    jsonData[i].lastEdited = jsonData[i].createdOn;
-    jsonData[i].lastEdited.setDate(jsonData[i].createdOn.getDate() + generateRandomNumber(8));
+    jsonData[i].frequency = Math.round(jsonData[i].timesUsed/10);
+    jsonData[i].createdOn = dateFormater(dateCreated, '/');
+    jsonData[i].lastEdited =  dateFormater(dateEdited, '/');
   }
   fs.writeFile('QuestionsJson/QuestionSample_3.json',JSON.stringify(jsonData,null,'\t'));
   fs.writeFile('QuestionsJson/Topics_v1.json',JSON.stringify(topics,null,'\t'));
