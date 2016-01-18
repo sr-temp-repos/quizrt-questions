@@ -12,10 +12,10 @@
       <td>{{lastEdited}}</td>
       <td>{{createdOn}}</td>
       <td>
-        <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{this.questionId}}">
+        <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}">
           <span class="glyphicon glyphicon-pencil"></span>
         </button>
-        <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{this.questionId}}">
+        <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{@index}}">
           <span class="glyphicon glyphicon-remove"></span>
         </button>
       </td>

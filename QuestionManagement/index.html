@@ -14,8 +14,9 @@
   <main class="container">
     <div id="search" class="well row">
       <form id="searchForm" class="col-sm-9 col-xs-9" action="">
-        <input name="searchText" id="searchText" class="col-sm-9 col-xs-9" placeholder="Search using Keywords, Topics, Category" type="text" />
-        <button type="submit" class="col-sm-2 col-xs-2" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+        <input name="searchText" id="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />
+        <button type="submit" class="btn btn-success col-sm-2 col-xs-2" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+        <button type="reset" class="btn btn-default col-sm-2 col-xs-2" onclick="console.log(document.getElementById('searchForm'))"><span class="glyphicon glyphicon-remove"></span> Clear </button>
       </form>
       <div id='noOfQuestions' class='col-sm-3 col-xs-3 actionBar dropdown'>
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">

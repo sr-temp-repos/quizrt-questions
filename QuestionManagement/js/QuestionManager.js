@@ -28,17 +28,21 @@
 
     eventHandlers: function() {
       var self=this;
-      // handle search form submit event
+      // handle search form submit and reset event
       self.$formSection.submit(function(e) {
         e.preventDefault();
-        var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(' ','|') + ')','ig'),
+        var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(/\s/g,'|') + ')','ig'),
             results = $.grep( self.results, function(result, i) {
               return result.question.search(searchKeywords) > -1 || result.topicId.search(searchKeywords) > -1 || result.categories.search(searchKeywords) > -1;
             });
         self.redraw(results);
       });
-
+      self.$formSection.on('reset', function(e) {
+        self.$formSection.children('input')[0].value = "";
+        self.$formSection.submit();
+      });
     },
+
     sliceResults: function(results, start) {
       start = start || 0;
       var selectedRowCount = this.$dropDownId.data('selectedRowCount');
@@ -66,28 +70,13 @@
           questionHandler = Handlebars.compile($(this.questionTemplateID).html());
 
       $questionContainer.children('tbody').empty().append(questionHandler(results));
-      // $questionContainer.bootgrid({
-      //   ajax: 'true',
-      //   url: this.questionURL,
-      //   method: 'post',
-      //   formatters: {
-      //       "commands": function(column, row)
-      //       {
-      //           return "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\"  style=\"font-size:22px; vertical-align:middle; line-height: 20px;\" data-row-id=\"" + row.questionId + "\"><span class=\"glyphicon glyphicon-pencil\"></span></button> " +
-      //               "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\"   style=\"font-size:22px; vertical-align:middle;  line-height: 20px;\" data-row-id=\"" + row.questionId + "\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
-      //       }
-      //   }
-      // }).on('loaded.rs.jquery.bootgrid', function(e){
-      //   self.changeFilterPosition();
-      //   self.$questionContainer.find(".command-edit").on("click", function(e)
-      //   {
-      //       alert("You pressed edit on row " + $(this).data("row-id"));
-      //   }).end().find(".command-delete").on("click", function(e)
-      //   {
-      //       alert("You pressed delete on row: " + $(this).data("row-id"));
-      //   });
-      // });
-
+      // handle question edit, delete and view events
+      $(self.editBtn).on('click', function(e) {
+        console.log('Edit row id : ' + $(this).data('rowId'));
+      });
+      $(self.deleteBtn).on('click', function(e) {
+        console.log('Delete row id : ' + $(this).data('rowId'));
+      });
     },
     draw: function(results) {
       //console.log(this.dropdownTemplateID);
@@ -173,6 +162,10 @@
 
     /* Search from object for submit event */
     $formSection: $('#searchForm'),
+
+    /* Edit and Delete Button */
+    editBtn: 'button.command-edit',
+    deleteBtn: 'button.command-delete',
 
     /* Dropdown options */
     noOfQuestions: [10, //first one default

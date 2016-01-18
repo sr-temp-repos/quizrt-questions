@@ -24,7 +24,7 @@ fs.readFile( 'QuestionsJson/QuestionSample_2.json', function( err, data ) {
     var noOfAttemps = generateRandomNumber(10000),
         dateCreated = new Date((1900 + generateRandomNumber(116))%2016 + '-' + generateRandomNumber(12) + '-' + + generateRandomNumber(28)),
         dateEdited = dateCreated;
-
+        
     dateEdited.setDate(dateCreated.getDate() + generateRandomNumber(100));
     jsonData[i].image = 'http://placehold.it/150x150';
     topicRanPick = [
@@ -36,7 +36,7 @@ fs.readFile( 'QuestionsJson/QuestionSample_2.json', function( err, data ) {
     jsonData[i].categories = topicRanPick[0].category + ', ' + topicRanPick[1].category + ', ' + topicRanPick[2].category;
     jsonData[i].difficultyLevel = generateRandomNumber(10);
     jsonData[i].timesUsed = 10 + generateRandomNumber(10000);
-    jsonData[i].correctRatio = generateRandomNumber(noOfAttemps) + ':' + noOfAttemps;
+    jsonData[i].correctRatio = generateRandomNumber(noOfAttemps) + '/' + noOfAttemps;
     jsonData[i].frequency = Math.round(jsonData[i].timesUsed/10);
     jsonData[i].createdOn = dateFormater(dateCreated, '/');
     jsonData[i].lastEdited =  dateFormater(dateEdited, '/');
