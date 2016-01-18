@@ -1,0 +1,35 @@
+#propertySuggestion,
+#propertyValueSuggestion,
+#entity,
+#entityProperties,
+#checkBoxDiv {
+    display: none;
+}
+#propertyEntityDiv,
+#propertySuggestionRow,
+#entity,
+{
+    height: 100px;
+}
+#scrollForEntityProperties, #propertyNames, #entityOptions, #panelForPropertyValueSuggestion {
+    height: 200px;
+    overflow-y: scroll;
+}
+#propertyList {
+    overflow-x: scroll;
+}
+
+#spinner{
+  display:none;
+  opacity:0.6;
+  position:fixed;
+  top: 0%;
+  left: 0%;
+  bottom: 0%;
+  right: 0%;
+  background: url("../images/loading.gif") no-repeat center #fff;
+  z-index: 2;
+}
+#filteredValues{
+  z-index: 1;
+}
