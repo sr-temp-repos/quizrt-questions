@@ -55,8 +55,8 @@
     getQuestionJson: function() {
       var self=this;
       $.ajax({
-        url: self.questionURL,
-        data: {type: 'list'},
+        url: '/list',
+        data: {questionURL: self.questionURL},
         dataType: 'json',
         method: 'post'
       }).done(function(results) {

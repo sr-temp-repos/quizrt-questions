@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var json = require('./routes/json');
+var list = require('./routes/list');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/json', json);
+app.use('/list', list);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
