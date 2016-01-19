@@ -4,7 +4,7 @@
     /* Intializes the config data into the object */
     init: function(config) {
       $.extend(this,config);
-      $(this.templateDiv).load(this.templateFile);
+      //$(this.templateDiv).load(this.templateFile);
       this.getQuestionJson();
       this.eventHandlers();
     },

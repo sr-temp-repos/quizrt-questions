@@ -25,7 +25,6 @@
           </ul>
         </div>
       </div>
-      {{= title }}
       <table id="questionList" class="table table-bordered table-responsive table-hover row">
         <thead>
           <tr>
@@ -51,10 +50,46 @@
         <p class="pageTracker col-sm-4 col-xs-6"> </p>
       </div>
     </main>
+
+    <div id="loadTemplates">
+      <!-- Template for displaying question -->
+      <script id="questionTbl" type="text/x-handlebars-template">
+        {{#each this}}
+          <tr class="question-row">
+            <td class="question">{{question}}</td>
+            <td>{{topicId}}</td>
+            <td>{{categories}}</td>
+            <td>{{difficultyLevel}}</td>
+            <td>{{timesUsed}}</td>
+            <td>{{correctRatio}}</td>
+            <td>{{frequency}}</td>
+            <td>{{lastEdited}}</td>
+            <td>{{createdOn}}</td>
+            <td>
+              <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}">
+                <span class="glyphicon glyphicon-pencil"></span>
+              </button>
+              <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{@index}}">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+      </script>
+
+      <!-- Template for Drop Down button -->
+      <script id="dropdownTmp" type="text/x-handlebars-template">
+      {{#each this}}
+        <li class="noofRows" data-rowcount="{{this}}">
+          <a>{{this}}</a>
+        </li>
+      {{/each}}
+      </script>
+    </div>
     <!-- JQuery script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Handle Bars Java script -->
-    <!-- <script src="libraries/handlebars-v4.0.5.js"></script> -->
+    <script src="libraries/handlebars-v4.0.5.js"></script>
     <!-- Bootstrap java script -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Pagination bootgrid -->

@@ -1,13 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 
-/* Post question Json listing. */
+function readJSONFile(filename, callback) {
+  fs.readFile(filename, function (err, data) {
+    if(err) {
+      callback(err);
+      return;
+    }
+    try {
+      callback(null, JSON.parse(data));
+    } catch(exception) {
+      callback(exception);
+    }
+  });
+}
+
 router.post('/', function(req, res, next) {
-  console.log(req.body.questionURL);
+  readJSONFile("public/" + req.body.questionURL, function(err, json) {
+    res.json(json);
+  });
 
-  var json = JSON.parse(req.body.questionURL);
-  console.log(json.slice(0,3));
-  res.json(json);
 });
-
 module.exports = router;
