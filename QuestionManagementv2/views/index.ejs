@@ -25,6 +25,8 @@
           </ul>
         </div>
       </div>
+      <div id="alertArea" class="alert">
+      </div>
       <table id="questionList" class="table table-bordered table-responsive table-hover row">
         <thead>
           <tr>
@@ -66,10 +68,10 @@
             <td>{{lastEdited}}</td>
             <td>{{createdOn}}</td>
             <td>
-              <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}">
+              <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}" data-question-id="{{questionId}}">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
-              <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{@index}}">
+              <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{@index}}" data-question-id="{{questionId}}">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </td>
@@ -85,6 +87,42 @@
         </li>
       {{/each}}
       </script>
+
+      <script type="text/x-handlebars-template" id="modalTmp"> 
+        <!-- Modal --> 
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{question}}</p>
+                <p>{{option1}}</p>
+                <p>{{option2}}</p>
+                <p>{{option3}}</p>
+                <p>{{option4}}</p>
+                <p>{{correctIndex}}</p>
+                <p>{{topicId}}</p>
+                <p>{{categories}}</p>
+                <p>{{difficultyLevel}}</p>
+                <p>{{timesUsed}}</p>
+                <p>{{correctRatio}}</p>
+                <p>{{frequency}}</p>
+                <p>{{lastEdited}}</p>
+                <p>{{createdOn}}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </script>
+
     </div>
     <!-- JQuery script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

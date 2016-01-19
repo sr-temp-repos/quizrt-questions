@@ -23,3 +23,7 @@ main {
 #questionList {
   width: inherit;
 }
+
+#alertArea {
+  display: none;
+}

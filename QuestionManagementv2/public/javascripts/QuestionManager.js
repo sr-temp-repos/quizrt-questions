@@ -31,11 +31,14 @@
       // handle search form submit and reset event
       self.$formSection.submit(function(e) {
         e.preventDefault();
-        var searchKeywords = new RegExp('\\b(' + self.$formSection.children('input')[0].value.replace(/\s/g,'|') + ')','ig'),
-            results = $.grep( self.results, function(result, i) {
-              return result.question.search(searchKeywords) > -1 || result.topicId.search(searchKeywords) > -1 || result.categories.search(searchKeywords) > -1;
-            });
-        self.redraw(results);
+        $.ajax({
+          url: '/QuestionRequestHandler',
+          data: {requestType: 'search', query: self.$formSection.children('input')[0].value},
+          dataType: 'json',
+          method: 'post'
+        }).done(function(results) {
+          self.redraw(results);
+        });
       });
       self.$formSection.on('reset', function(e) {
         self.$formSection.children('input')[0].value = "";
@@ -55,8 +58,8 @@
     getQuestionJson: function() {
       var self=this;
       $.ajax({
-        url: '/list',
-        data: {questionURL: self.questionURL},
+        url: '/QuestionRequestHandler',
+        data: {requestType: 'list'},
         dataType: 'json',
         method: 'post'
       }).done(function(results) {
@@ -70,13 +73,56 @@
           self = this,
           questionHandler = Handlebars.compile($(this.questionTemplateID).html());
 
+
       $questionContainer.children('tbody').empty().append(questionHandler(results));
       // handle question edit, delete and view events
       $(self.editBtn).on('click', function(e) {
-        console.log('Edit row id : ' + $(this).data('rowId'));
+        var rowId = $(this).data('rowId'),
+            pageNo = self.$pageNo.data('pageNo')-1,
+            selectedRowCount = self.$dropDownId.data('selectedRowCount'),
+            questionNumber = (rowId + pageNo * selectedRowCount),
+            modalHandler = Handlebars.compile($(self.modalTemplateID).html());
+        console.log(self.results[questionNumber]);
+        $modal = $(modalHandler(self.results[questionNumber])).insertAfter(self.$pageNo);
+        $modal.modal('show');
+        $('[data-dismiss=modal]').on('click',function(e){
+            $modal.modal('hide');
+            $modal.remove();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        });
       });
       $(self.deleteBtn).on('click', function(e) {
-        console.log('Delete row id : ' + $(this).data('rowId'));
+        // var questionNumber = $(this).data('questionId');
+        var questionNumber = $(this).data('rowId'),
+            pageNo = self.$pageNo.data('pageNo')-1,
+            selectedRowCount = self.$dropDownId.data('selectedRowCount');
+        //(questionNumber + pageNo * selectedRowCount)},
+        $.ajax({
+          url: '/QuestionRequestHandler',
+          data: {requestType: 'delete', questionId: (questionNumber + pageNo * selectedRowCount)},
+          dataType: 'json',
+          method: 'post'
+        }).done(function(result) {
+          var $alertArea = "";
+          result= JSON.parse(result);
+          if(result.status == 'success') {
+            $alertArea = $('<div></div>', {
+              class: 'alert alert-success'
+            }).insertAfter(self.$searchWell).html( '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
+                          result.message);
+            self.results = $.grep(self.results, function(result, i) {
+              return i!=questionNumber;
+            });
+            self.redraw(self.results);
+          } else { // Handling error status
+            $alertArea = $('<div></div>', {
+              class: 'alert alert-failure'
+            }).insertAfter(self.$searchWell).html( '<a href="#" class="close" data-dismiss="alert">&times;</a>' +
+                          result.message);
+          }
+          $alertArea.slideDown();
+        });
       });
     },
     draw: function(results) {
@@ -141,7 +187,7 @@
 
             lastQuestion = (lastQuestion > results.length)? results.length : lastQuestion;
             self.listQuestions( self.sliceResults( results,startQuestionNo ) );
-
+            self.$pageNo.data('pageNo',page);
             $pageTrk.html('Showing ' + firstQuestion + ' to ' + lastQuestion + ' of ' + results.length + ' Questions');
           }
       });
@@ -158,11 +204,15 @@
     templateDiv: '#loadTemplates',
     questionTemplateID: '#questionTbl',
     dropdownTemplateID: '#dropdownTmp',
+    modalTemplateID: '#modalTmp',
     $questionContainer: $('#questionList'),
     // optionListTag: '<li></li>',
 
     /* Search from object for submit event */
     $formSection: $('#searchForm'),
+
+    /* Alert Area */
+    $alertArea: $('#alertArea'),
 
     /* Edit and Delete Button */
     editBtn: 'button.command-edit',
