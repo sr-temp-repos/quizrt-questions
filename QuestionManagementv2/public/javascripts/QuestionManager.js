@@ -56,6 +56,7 @@
       var self=this;
       $.ajax({
         url: self.questionURL,
+        data: {type: 'list'},
         dataType: 'json',
         method: 'post'
       }).done(function(results) {
@@ -149,7 +150,7 @@
 
   QuestionManager.init({
     /* Json URL */
-    questionURL: '/js/QuestionsJson/QuestionSample_3.json',
+    questionURL: 'javascripts/QuestionsJson/QuestionSample_3.json',
     // topicsURL: '/js/QuestionsJson/Topics_v1.json',
 
     /* Template to use for placing question and question container */
