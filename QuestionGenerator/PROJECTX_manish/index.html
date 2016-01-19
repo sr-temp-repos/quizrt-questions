@@ -14,8 +14,8 @@
       <!-- Include Modernizr in the head, before any other Javascript -->
       <script src="script/modernizr-2.6.2.min.js"></script>
       <!--google fonts-->
-      <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'>
+      <!-- <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Nunito:400,700' rel='stylesheet' type='text/css'> -->
    </head>
    <body>
       <header>
@@ -25,6 +25,9 @@
          <!--end container-12-->
       </header>
       <main>
+          <div class="container text-center panel">
+            <h3>Search the possible data availaible below or <a href="questionStub.html">proceed with creating questions?</a> </h3>
+          </div>
          <div class="container">
             <div class="row">
                <div class="col-lg-6">
@@ -150,7 +153,10 @@
                   </div>
                   <!-- /.row -->
                   <div class="row text-center">
-                     <button class="btn-sm" id="valuesList">Get Values</button>
+                     <button class="btn-sm btn-success" id="showValues">Show Selected Values</button>
+                  </div>
+                  <div class="row text-center">
+                     <button class="btn-sm btn-info" id="valuesList">Get Values</button>
                   </div>
                   <div class="dropdown">
                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -178,7 +184,7 @@
       </main>
       <!-- All Javascript at the bottom of the page for faster page loading -->
       <!-- First try for the online version of jQuery-->
-      <script src="http://code.jquery.com/jquery.js"></script>
+      <script src="script/jquery.js"></script>
       <!-- If no online access, fallback to our hardcoded version of jQuery -->
       <script>
          window.jQuery || document.write('<script src="script/jquery-1.8.2.min.js"><\/script>')
