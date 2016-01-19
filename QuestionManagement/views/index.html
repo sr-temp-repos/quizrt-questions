@@ -25,29 +25,6 @@
         </ul>
       </div>
     </div>
-    <!-- <form id="editData" class="jumbotron row" action="">
-        <label for="question">Question</label>
-        <input type="text">{{Question}}</input>
-        {{generateOptions this}}
-        <label for="Topics Related">Topics</label>
-        <input type="text">{{topics}}</input>
-        <label for="Topics Related">Categories</label>
-        <input type="text">{{categories}}</input>
-        <label for="Topics Related">Difficulty Level</label>
-        <input type="text">{{difficultyLevel}}</input>
-        <button class="btn btn-success" type="submit">Save</button>
-    </form> -->
-    <!-- <script id="template" type="text/x-handlebars-template">
-      <label for="question">Question</label>
-      <input type="text">{{Question}}</input>
-      <label for="Topics Related">Topics</label>
-      <input type="text">{{topics}}</input>
-      <label for="Topics Related">Categories</label>
-      <input type="text">{{categories}}</input>
-      <label for="Topics Related">Difficulty Level</label>
-      <input type="text">{{difficultyLevel}}</input>
-      <input class="btn btn-success" type="submit">Save</input>
-    </script> -->
     <table id="questionList" class="table table-bordered table-responsive table-hover row">
       <thead>
         <tr>
@@ -74,41 +51,6 @@
     </div>
     <div id="loadTemplates">
     </div>
-    <!-- <div class="panel-group" id="accordion">
-
-    </div>
-
-
-    <script id="template" type="text/x-handlebars-template">
-      {{#each this}}
-        <div class="panel panel-default">
-          <div class="panel-heading question"  data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{@index}}">
-            <h4 class="panel-title">
-              {{{question}}}
-            </h4>
-          </div>
-          <div id="collapse{{@index}}"  class="panel-collapse collapse" >
-            <div class="panel-body">
-              <ul class="options">
-                {{{ generateOptions this }}}
-              </ul>
-            </div>
-            <div class="panel-footer">
-              <div class="correctanswer well bg-success col-xs-2">
-                <h4>Correct Answer</h4>
-              </div>
-              <div class="col-xs-10">
-                <input class="editContent col-xs-9" type="text"  value="{{correctIndex}}" disabled />
-                <div class="col-xs-3 saveButtons hidden">
-                  <button class="btn btn-default pull-right">Cancel</button>
-                  <button class="btn btn-success pull-right">Save</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      {{/each}}
-    </script> -->
   </main>
   <!-- JQuery script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
