@@ -15,7 +15,16 @@
         var optionsHTML = '';
         for( var i=1;i<=12;i++ ) {
           if( results['option' + i] ) {
-            optionsHTML += $('<div></div>').append($(self.optionListTag).text(results['option' + i])).html();
+            var $optionInput = $('<div></div>').append($('<label></label>', {
+              for: 'option' + i
+            }).text('Option ' + i)).append($('<input></input>', {
+              type: 'text',
+              class: 'form-control',
+              name: 'option' + i,
+              id: 'option' + i,
+              value: results['option' + i]
+            }));
+            optionsHTML += $('<div></div>').append($(self.optionListTag,{class: 'form-group'}).html($optionInput.html())).html();
             //console.log(optionsHTML);
           } else {
             break;
@@ -23,6 +32,9 @@
         }
         //console.log(optionsHTML);
         return optionsHTML;
+      });
+      Handlebars.registerHelper("currentDate", function() {
+        return new Date().toString('dd/MM/yyyy');
       });
     },
 
@@ -82,7 +94,6 @@
             selectedRowCount = self.$dropDownId.data('selectedRowCount'),
             questionNumber = (rowId + pageNo * selectedRowCount),
             modalHandler = Handlebars.compile($(self.modalTemplateID).html());
-        console.log(self.results[questionNumber]);
         $modal = $(modalHandler(self.results[questionNumber])).insertAfter(self.$pageNo);
         $modal.modal('show');
         $('[data-dismiss=modal]').on('click',function(e){
@@ -206,7 +217,7 @@
     dropdownTemplateID: '#dropdownTmp',
     modalTemplateID: '#modalTmp',
     $questionContainer: $('#questionList'),
-    // optionListTag: '<li></li>',
+    optionListTag: '<div></div>',
 
     /* Search from object for submit event */
     $formSection: $('#searchForm'),

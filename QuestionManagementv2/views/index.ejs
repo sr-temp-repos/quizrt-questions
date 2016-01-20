@@ -1,25 +1,25 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>My product page</title>
-    <!-- Boot Strap Style Sheet -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<head>
+  <meta charset="utf-8">
+  <title>My product page</title>
+  <!-- Boot Strap Style Sheet -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 
-    <!-- Custom Style sheet -->
-    <link rel="stylesheet" href="stylesheets/QuestionManager.css" />
+  <!-- Custom Style sheet -->
+  <link rel="stylesheet" href="stylesheets/QuestionManager.css" />
 
-  </head>
-  <body>
-    <main class="container">
-      <div id="search" class="well row">
-        <form id="searchForm" class="col-sm-9 col-xs-9" action="">
-          <input name="searchText" id="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />
-          <button type="submit" class="btn btn-success col-sm-2 col-xs-2" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
-          <button type="reset" class="btn btn-default col-sm-2 col-xs-2" onclick="console.log(document.getElementById('searchForm'))"><span class="glyphicon glyphicon-remove"></span> Clear </button>
-        </form>
-        <div id='noOfQuestions' class='col-sm-3 col-xs-3 actionBar dropdown'>
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+</head>
+<body>
+  <main class="container">
+    <div id="search" class="well row">
+      <form id="searchForm" class="col-sm-9 col-xs-9" action="">
+        <input name="searchText" id="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />
+        <button type="submit" class="btn btn-success col-sm-2 col-xs-2" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+        <button type="reset" class="btn btn-default col-sm-2 col-xs-2" onclick="console.log(document.getElementById('searchForm'))"><span class="glyphicon glyphicon-remove"></span> Clear </button>
+      </form>
+      <div id='noOfQuestions' class='col-sm-3 col-xs-3 actionBar dropdown'>
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
           </ul>
@@ -57,67 +57,109 @@
       <!-- Template for displaying question -->
       <script id="questionTbl" type="text/x-handlebars-template">
         {{#each this}}
-          <tr class="question-row">
-            <td class="question">{{question}}</td>
-            <td>{{topicId}}</td>
-            <td>{{categories}}</td>
-            <td>{{difficultyLevel}}</td>
-            <td>{{timesUsed}}</td>
-            <td>{{correctRatio}}</td>
-            <td>{{frequency}}</td>
-            <td>{{lastEdited}}</td>
-            <td>{{createdOn}}</td>
-            <td>
-              <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}" data-question-id="{{questionId}}">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
-              <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{@index}}" data-question-id="{{questionId}}">
-                <span class="glyphicon glyphicon-remove"></span>
-              </button>
-            </td>
-          </tr>
+        <tr class="question-row">
+          <td class="question">{{question}}</td>
+          <td>{{topicId}}</td>
+          <td>{{categories}}</td>
+          <td>{{difficultyLevel}}</td>
+          <td>{{timesUsed}}</td>
+          <td>{{correctRatio}}</td>
+          <td>{{frequency}}</td>
+          <td>{{lastEdited}}</td>
+          <td>{{createdOn}}</td>
+          <td>
+            <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}" data-question-id="{{questionId}}">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            <button type="button" class="btn btn-xs btn-default command-delete" data-row-id="{{@index}}" data-question-id="{{questionId}}">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+        </tr>
         {{/each}}
       </script>
 
       <!-- Template for Drop Down button -->
       <script id="dropdownTmp" type="text/x-handlebars-template">
-      {{#each this}}
+        {{#each this}}
         <li class="noofRows" data-rowcount="{{this}}">
           <a>{{this}}</a>
         </li>
-      {{/each}}
+        {{/each}}
       </script>
 
       <script type="text/x-handlebars-template" id="modalTmp"> 
-        <!-- Modal --> 
-        <div class="modal fade" id="myModal" role="dialog">
+        <!-- Modal --> 
+        <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
             <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
+            <div class="modal-content">
+              <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-              </div>
-              <div class="modal-body">
-                <p>{{question}}</p>
-                <p>{{option1}}</p>
-                <p>{{option2}}</p>
-                <p>{{option3}}</p>
-                <p>{{option4}}</p>
-                <p>{{correctIndex}}</p>
-                <p>{{topicId}}</p>
-                <p>{{categories}}</p>
-                <p>{{difficultyLevel}}</p>
-                <p>{{timesUsed}}</p>
-                <p>{{correctRatio}}</p>
-                <p>{{frequency}}</p>
-                <p>{{lastEdited}}</p>
-                <p>{{createdOn}}</p>
+                <h4 class="modal-title">Modal Header</h4>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
+              <form action="/QuestionRequestHandler" method="post">
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="question">Question: </label>
+                    <input type="text" class="form-control" name="question" value="{{question}}" />
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="option1">Option 1:</label>
+                    <input type="text" class="form-control" name="option1" value="{{option1}}" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="option2" value="{{option2}}" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="option3" value="{{option3}}" />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="option4" value="{{option4}}" />
+                  </div> -->
+                  {{{generateOptions this}}}
+                  <div class="form-group">
+                    <label for="option1">Correct index:</label>
+                    <input type="number" class="form-control" name="correctIndex" min='1' max='4' value="{{correctIndex}}" />
+                  </div>
+                  <div class="form-group">
+                    <label for="option1">Topics:</label>
+                    <input type="text" class="form-control" name="topicId" value="{{topicId}}" />
+                  </div>
+                  <div class="form-group">
+                    <label for="option1">Categories:</label>
+                    <input type="text" class="form-control" id="categories" name="categories" value="{{categories}}" />
+                  </div>
+                  <div class="form-group">
+                    <label for="option1">Difficulty Level:</label>
+                    <label type="number" name="difficultyLevel">{{difficultyLevel}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="option1">Times Used: </label>
+                    <label type="number" name="timesUsed">{{timesUsed}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="correctRatio">Correct Ratio:</label>
+                    <label type="text" name="correctRatio">{{correctRatio}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="frequency">Frequency:</label>
+                    <label type="text" name="frequency">{{frequency}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastEdited">Last Edited Date:</label>
+                    <label type="text" id="lastEdited" name="lastEdited">{{currentDate}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label for="createdOn">Created Dated:</label>
+                    <label type="text" name="createdOn">{{createdOn}}</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -125,14 +167,14 @@
 
     </div>
     <!-- JQuery script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Handle Bars Java script -->
-    <script src="libraries/handlebars-v4.0.5.js"></script>
-    <!-- Bootstrap java script -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Handle Bars Java script -->
+    <script src="libraries/handlebars-v4.0.5.js"></script>
+    <!-- Bootstrap java script -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- Pagination bootgrid -->
     <script src="libraries/twbsPagination/jquery.twbsPagination.js" charset="utf-8"></script>
-    <!-- Custom Script -->
-    <script src="javascripts/QuestionManager.js"></script>
+    <!-- Custom Script -->
+    <script src="javascripts/QuestionManager.js"></script>
   </body>
-</html>
+  </html>
