@@ -39,9 +39,9 @@ router.post('/', function(req, res, next) {
       readJSONFile(questionJSONFileURL, function(err, json) {
         var questionIdToDelete = parseInt(req.body.questionId);
         if( json.length > questionIdToDelete && questionIdToDelete > -1 ) {
-          res.json(JSON.stringify({status: 'success', message: 'Success : Deleted ' + questionIdToDelete + ' from the question data store.'}));
+          res.json({status: 'success', message: 'Success : Deleted ' + questionIdToDelete + ' from the question data store.'});
         } else {
-          res.json(JSON.stringify({status: 'error', message: 'Failure : Cannot able to find ' + questionIdToDelete + ' in the question data store.'}));
+          res.json({status: 'failure', message: 'Failure : Cannot able to find ' + questionIdToDelete + ' in the question data store.'});
         }
       });
   }

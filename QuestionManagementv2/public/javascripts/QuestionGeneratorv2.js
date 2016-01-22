@@ -33,7 +33,6 @@ fs.readFile( 'QuestionsJson/QuestionSample_2.json', function( err, data ) {
                     topics['T'+generateRandomNumber(6)]
                   ];
     jsonData[i].topicId = topicRanPick[0].topicId + ', ' + topicRanPick[1].topicId + ', ' + topicRanPick[2].topicId;
-    console.log(topicId)
     jsonData[i].topics = topicRanPick[0].name + ', ' + topicRanPick[1].name + ', ' + topicRanPick[2].name;
     jsonData[i].categories = topicRanPick[0].category + ', ' + topicRanPick[1].category + ', ' + topicRanPick[2].category;
     jsonData[i].difficultyLevel = generateRandomNumber(10);
