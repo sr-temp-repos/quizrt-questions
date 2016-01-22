@@ -122,7 +122,6 @@
       $(self.topicsClass).each(function(index){
         $(this).data('topicId',index);
       });
-      console.log(topicId);
       topicIdArray.splice(topicId,1);
       categoryArray.splice(topicId,1);
       $topicIdsHidden.value = topicIdArray.join(', ');
@@ -133,155 +132,46 @@
           pageNo = self.$pageNo.data('pageNo')-1,
           selectedRowCount = self.$dropDownId.data('selectedRowCount'),
           questionNumber = (rowId + pageNo * selectedRowCount),
-          $topicIdsHidden = $(self.topicIds)[0],
-          $categories = $(self.categories),
           modalHandler = Handlebars.compile($(self.modalTemplateID).html()),
-          dataListHandler = Handlebars.compile($(self.topicDataListTemplate).html());
+          dataListHandler = Handlebars.compile($(self.topicDataListTemplate).html()),
+          categoryListHandler = Handlebars.compile($(self.categoryDataListTemplate).html());
 
       $modal = $(modalHandler(self.results[questionNumber])).insertAfter(self.$pageNo);
       $modal.modal('show');
       $modal.append($(dataListHandler(self.topics))); //Adding Data List to help select topics
-       $('[data-toggle="tooltip"]').tooltip();  
-      // On save click
-      $(self.editQuestionForm).on('submit',function(e) {
+      $modal.append($(categoryListHandler(self.topics)));
+       $('[data-toggle="tooltip"]').tooltip();
 
-      });
-
-      $(self.addCategoryId).on('click', function(e) {
-        var $addCategoryTxt = $(this).closest('div').find('input')[0],
-            textEntered = $addCategoryTxt.value,
-            $newTopicForm = $(self.newTopicForm),
-            $newCategoryForm = $(self.newCategoryForm),
-            $topicIdsHidden = $(self.topicIds)[0],
-            $categories = $(self.categories),
-            topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html());
-        $.ajax({
-          url: '/TopicsRequestHandler',
-          data: {requestType: 'checkCategory', checkExist: textEntered, newTopicName: $(self.topicName)[0].value },
-          dataType: 'json',
-          method: 'post'
-        }).done(function(results) {
-          if(results.status==='success') {
-            var $topicsWell = $(self.topicsWell),
-                len = $topicsWell.find('.topics').length;
-
-            $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-            $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-            var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-              self.onTopicWellClose.call(this,self);
-            }).end();
-            $topicsWell.append(newWell);
-            $(self.messageArea).slideUp().removeClass('text-danger');
-            $($topicsWell.find('.topics')[len]).data('topicId',len);
-            $newTopicForm.slideUp();
-            $(self.addTopicId).fadeIn();
-            $(self.topicName).attr('disabled',false);
-          } else {
-          //  console.log($(self.messageArea).removeClass('text-danger'));
-            $(self.messageArea).html(self.messages['newCategory']).removeClass('text-danger');
-            $($addCategoryTxt).attr('disabled',true);
-            $newTopicForm.find(':button').fadeOut();
-            $newCategoryForm.slideDown();
-            $newCategoryForm.data('topicObj', results.topicObj);
-          }
-        });
-      });
-
-      $(self.yesBtn).on('click', function(e) {
-        var $newCategoryForm = $(self.newCategoryForm),
-            $newTopicForm = $(self.newTopicForm),
-            $topicIdsHidden = $(self.topicIds)[0],
-            $categories = $(self.categories),
-            $addCategoryTxt = $newTopicForm.find('input')[0],
-            topicObj = $newCategoryForm.data('topicObj');
-
-        $.ajax({
-          url: '/TopicsRequestHandler',
-          data: {requestType: 'addTopicCategory', newTopicObj: topicObj },
-          dataType: 'json',
-          method: 'post'
-        }).done(function(results) {
-
-          if(results.status === 'success') {
-            var $topicsWell = $(self.topicsWell),
-                len = $topicsWell.find('.topics').length;
-
-            $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-            $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-            var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-              self.onTopicWellClose.call(this,self);
-            }).end();
-            $topicsWell.append(newWell);
-            $($topicsWell.find('.topics')[len]).data('topicId',len);
-            $newCategoryForm.slideUp();
-            $newTopicForm.slideUp();
-            $(self.messageArea).slideUp();
-            $($addCategoryTxt).attr('disabled',false);
-            $(self.addTopicId).fadeIn();
-            $(self.topicName).attr('disabled',false);
-            $newTopicForm.find(':button').fadeIn();
-          }
-          else {
-            $(self.messageArea).html(self.messages['error']).addClass('text-danger');
-            $newCategoryForm.slideUp();
-            $($addCategoryTxt).attr('disabled',false);
-            $newTopicForm.find(':button').fadeIn();
-          }
-        });
-      });
-
-      $(self.noBtn).on('click',function(e) {
-        var $newCategoryForm = $(self.newCategoryForm),
-            $newTopicForm = $(self.newTopicForm),
-            $topicIdsHidden = $(self.topicIds)[0],
-            $categories = $(self.categories),
-            $addCategoryTxt = $newTopicForm.find('input')[0];
-
-        $newCategoryForm.slideUp();
-        $($addCategoryTxt).attr('disabled',false);
-        $newTopicForm.find(':button').fadeIn();
-        $(self.messageArea).html(self.messages['newTopic']).removeClass('text-danger');
-      });
-
-      $(self.cancelCategoryId).on('click', function(e) {
-        $(self.addTopicId).fadeIn();
-        $(self.newTopicForm).slideUp();
-        $(self.topicName).attr('disabled',false);
-        $(self.messageArea).slideUp();
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var $target = $($(e.target).attr("href")).find('textArea'); // activated tab
+        $target.focus();
       });
 
       //Click add button
       $(self.addTopicId).on('click', function(e) {
-        var textEntered = $(this).closest('div').find('input')[0].value,
-            $addBtn = $(this),
-            topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html()),
-            $topicIdsHidden = $(self.topicIds)[0],
-            $categories = $(self.categories);
-        $.ajax({
-          url: '/TopicsRequestHandler',
-          data: {requestType: 'checkTopic', checkExist: textEntered  },
-          dataType: 'json',
-          method: 'post'
-        }).done(function(results) {
-          if(results.status==='success'){
-            var $topicsWell = $(self.topicsWell),
-                len = $topicsWell.find('.topics').length;
-            $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-            $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-            var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-              self.onTopicWellClose.call(this,self);
-            }).end();
-            $topicsWell.append(newWell);
-            $($topicsWell.find('.topics')[len]).data('topicId',len);
-          }
-          else {
-            $(self.messageArea).html(self.messages['newTopic']).slideDown();
-            $(self.newTopicForm).slideDown();
-            $addBtn.fadeOut();
-            $(self.topicName).attr('disabled',true);
-          }
-        });
+        EditModalManager.addTopic.call(this,self,e);
       });
+      // Modal Form submission
+      $(self.editQuestionForm).on('submit',function(e) {
+        EditModalManager.editQuestionFormSubmit.call(this,self,e);
+      });
+
+      $(self.addCategoryId).on('click', function(e) {
+        EditModalManager.addCategoryId.call(this,self,e);
+      });
+
+      $(self.yesBtn).on('click', function(e) {
+        EditModalManager.yesBtnClicked.call(this,self,e);
+      });
+
+      $(self.noBtn).on('click',function(e) {
+        EditModalManager.noBtnClicked.call(this,self,e);
+      });
+
+      $(self.cancelCategoryId).on('click', function(e) {
+        EditModalManager.cancelCategoryIdClicked.call(this,self,e);
+      });
+
       //Modal window force close
       $('[data-dismiss=modal]').on('click',function(e){
           $modal.modal('hide');
@@ -423,13 +313,14 @@
     generateOptionsTemplate: '#generateOptionsTmp',
     topicDataListTemplate: '#topicDataListTmp',
     topicWellTemplate: '#topicWellTmp',
+    categoryDataListTemplate: '#categoryDataListTmp',
 
     $questionContainer: $('#questionList'),
     optionListTag: '<div></div>',
 
     /* Search from object for submit event */
     $formSection: $('#searchForm'),
-    $editQuestionForm: '#editQuestion',
+    editQuestionForm: '#editQuestion',
 
     /* Edit and Delete Button */
     editBtn: 'button.command-edit',
@@ -463,13 +354,14 @@
     newTopicForm: '#newTopicForm',
     newCategoryForm: '#newCategoryForm',
     messageArea: '#messageArea',
-
+    lastEdited: '#lastEdited',
 
     /* Message Array for Topic management */
     messages: {
       newTopic : 'Topic that was entered is new, please tag it with some category',
       newCategory: 'Category that was entered is new, please comfirm as requested below',
       error: 'Failed to insert new Topic and Category, please try again'
-    }
+    },
+
   });
 })();

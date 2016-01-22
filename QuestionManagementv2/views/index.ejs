@@ -16,7 +16,7 @@
       <form id="searchForm" class="col-sm-9 col-xs-9" action="">
         <input name="searchText" id="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />
         <button type="submit" class="btn btn-success col-sm-2 col-xs-2" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
-        <button type="reset" class="btn btn-default col-sm-2 col-xs-2" onclick="console.log(document.getElementById('searchForm'))"><span class="glyphicon glyphicon-remove"></span> Clear </button>
+        <button type="reset" class="btn btn-default col-sm-2 col-xs-2"><span class="glyphicon glyphicon-remove"></span> Clear </button>
       </form>
       <div id='noOfQuestions' class='col-sm-3 col-xs-3 actionBar dropdown'>
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
@@ -92,15 +92,16 @@
           <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-              <form id="editQuestion" action="/QuestionRequestHandler" method="post">
+              <form id="editQuestion" method="post">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Edit Question</h4>
                   <div class="form-inline pull-right wrapper">
                     <label for="createdOn">Created Dated:</label>
-                    <label class='divider' type="text" name="createdOn"><em>{{createdOn}}</em></label>
+                    <label class='divider' name="createdOn"><em>{{createdOn}}</em></label>
                     <label for="lastEdited">Last Edited:</label>
-                    <label type="text" id="lastEdited" name="lastEdited"><em>{{lastEdited}}</em></label>
+                    <label><em>{{lastEdited}}</em></label>
+                    <input type="hidden" id="lastEdited" name="lastEdited" />
                   </div>
                 </div>
                 <div class="modal-body">
@@ -114,29 +115,31 @@
                   </div>
                   <div class="form-group">
                     <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
-                    <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax this}}" value="{{correctIndex}}" />
+                    <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax this}}" value="{{correctIndex}}"  data-toggle="tooltip" title="Correct Index cannot be empty." />
                   </div>
-                  <div class="form-inline">
-                    <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
-                    <div id="topicsWell">
-                      {{{generateTpcs this.topics}}}
+                  <div class="wrap">
+                    <div class="form-inline">
+                      <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
+                      <div id="topicsWell">
+                        {{{generateTpcs this.topics}}}
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-inline">
-                    <strong id="messageArea" class="text-warning form-hidden"></strong>
-                    <input type="text" class="form-control" id="topicName" name="topicId" list="topicList" placeholder="Enter Topics to add" />
-                    <input type="button" class="form-control btn btn-warning" id="addTopicId" value="Add" />
-                    <input type="hidden" id="topicIds" name="topicsIds" value="{{topicId}}" />
-                    <div class="form-hidden" id="newTopicForm">
-                      <input type="text" class="form-control" name="topicId" list="categoryList" placeholder="Enter category to add" />
-                      <input type="button" class="form-control btn btn-warning" id="addCategories" value="Add" />
-                      <input type="button" class="form-control btn btn-default" id="cancelCategories" value="Cancel" />
-                      <p></p>
-                    </div>
-                    <div class="form-hidden" id="newCategoryForm">
-                      <strong class="text-warning" >Are you sure you want to add new Category?</strong>
-                        <input type="button" class="form-control btn btn-warning" id="yesBtn" value="Yes" />
-                        <input type="button" class="form-control btn btn-default" id="noBtn" value="No" />
+                    <div class="form-inline" data-toggle="tooltip">
+                      <strong id="messageArea" class="text-warning form-hidden"></strong>
+                      <input type="text" class="form-control" id="topicName" list="topicList" placeholder="Enter Topics to add"  data-toggle="tooltip" title="Topics cannot be empty. Please add one." />
+                      <input type="button" class="form-control btn btn-warning" id="addTopicId" value="Add" />
+                      <input type="hidden" id="topicIds" name="topicsIds" value="{{topicId}}" />
+                      <div class="form-hidden" id="newTopicForm">
+                        <input type="text" class="form-control" list="categoryList" placeholder="Enter category to add" />
+                        <input type="button" class="form-control btn btn-warning" id="addCategories" value="Add" />
+                        <input type="button" class="form-control btn btn-default" id="cancelCategories" value="Cancel" />
+                        <p></p>
+                      </div>
+                      <div class="form-hidden" id="newCategoryForm">
+                        <strong class="text-warning" >Are you sure you want to add new Category?</strong>
+                          <input type="button" class="form-control btn btn-warning" id="yesBtn" value="Yes" />
+                          <input type="button" class="form-control btn btn-default" id="noBtn" value="No" />
+                      </div>
                     </div>
                   </div>
                   <div class="form-inline">
@@ -152,6 +155,7 @@
                     <label  class='divider' name="correctRatio">{{correctRatio}}</label>
                     <label for="frequency">Frequency:</label>
                     <label name="frequency">{{frequency}}</label>
+                    <input type="hidden" id="lastEdited" name="requestType" value="edit" />
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -176,9 +180,9 @@
         <ul class="nav nav-tabs">
           {{#each this}}
             {{#if (equal @index 1)}}
-              <li class="active"><a data-toggle="tab" href="#option{{@index}}">{{@index}}</a></li>
+              <li class="active"><a data-toggle="tab" class='tab' href="#option{{@index}}">{{@index}}</a></li>
             {{else}}
-              <li><a data-toggle="tab" href="#option{{@index}}">{{@index}}</a></li>
+              <li><a data-toggle="tab" class='tab' href="#option{{@index}}">{{@index}}</a></li>
             {{/if}}
           {{/each}}
         </ul>
@@ -204,6 +208,13 @@
           {{/each}}
         </datalist>
       </script>
+      <script type="text/x-handlebars-template" id="categoryDataListTmp">
+        <datalist id="categoryList">
+          {{#each this}}
+            <option data-topic-id="{{topicId}}">{{category}}</option>
+          {{/each}}
+        </datalist>
+      </script>
       <script type="text/x-handlebars-template" id="topicWellTmp">
         {{#each this}}
           <div class="well well-sm topics" data-topic-id="{{@index}}">
@@ -222,5 +233,6 @@
     <script src="libraries/twbsPagination/jquery.twbsPagination.js" charset="utf-8"></script>
     <!-- Custom Script -->
     <script src="javascripts/QuestionManager.js"></script>
+    <script src="javascripts/EditModalManager.js"></script>
   </body>
   </html>
