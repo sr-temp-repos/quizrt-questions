@@ -1,0 +1,121 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose node symlink /usr/bin/node
+5 verbose readDependencies loading dependencies from /vagrant/quizrt-questions/QuestionManagementv2/package.json
+6 verbose install where, deps [ '/vagrant/quizrt-questions/QuestionManagementv2',
+6 verbose install   [ 'body-parser',
+6 verbose install     'cookie-parser',
+6 verbose install     'debug',
+6 verbose install     'ejs',
+6 verbose install     'express',
+6 verbose install     'morgan',
+6 verbose install     'serve-favicon',
+6 verbose install     'stylus',
+6 verbose install     'mongoose',
+6 verbose install     'mongodb' ] ]
+7 verbose install where, peers [ '/vagrant/quizrt-questions/QuestionManagementv2', [] ]
+8 verbose installManyTop reading for lifecycle /vagrant/quizrt-questions/QuestionManagementv2/package.json
+9 info preinstall QuestionManagementv2@0.0.0
+10 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/body-parser/package.json
+11 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/cookie-parser/package.json
+12 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/debug/package.json
+13 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/ejs/package.json
+14 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/express/package.json
+15 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/morgan/package.json
+16 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/serve-favicon/package.json
+17 verbose installManyTop reading scoped package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/stylus/package.json
+18 info package.json stylus@0.42.3 No license field.
+19 verbose readDependencies loading dependencies from /vagrant/quizrt-questions/QuestionManagementv2/package.json
+20 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/body-parser/package.json
+21 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/cookie-parser/package.json
+22 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/debug/package.json
+23 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/ejs/package.json
+24 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/express/package.json
+25 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/morgan/package.json
+26 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/serve-favicon/package.json
+27 verbose targetResolver reading package data from /vagrant/quizrt-questions/QuestionManagementv2/node_modules/stylus/package.json
+28 silly cache add args [ 'mongodb@~2.0', null ]
+29 verbose cache add spec mongodb@~2.0
+30 silly cache add parsed spec { raw: 'mongodb@~2.0',
+30 silly cache add   scope: null,
+30 silly cache add   name: 'mongodb',
+30 silly cache add   rawSpec: '~2.0',
+30 silly cache add   spec: '>=2.0.0 <2.1.0',
+30 silly cache add   type: 'range' }
+31 silly addNamed mongodb@>=2.0.0 <2.1.0
+32 verbose addNamed ">=2.0.0 <2.1.0" is a valid semver range for mongodb
+33 silly addNameRange { name: 'mongodb', range: '>=2.0.0 <2.1.0', hasData: false }
+34 silly mapToRegistry name mongodb
+35 silly mapToRegistry using default registry
+36 silly mapToRegistry registry http://172.23.238.253:4873/
+37 silly mapToRegistry uri http://172.23.238.253:4873/mongodb
+38 verbose addNameRange registry:http://172.23.238.253:4873/mongodb not in flight; fetching
+39 verbose already installed skipping body-parser@~1.13.2 /vagrant/quizrt-questions/QuestionManagementv2
+40 verbose already installed skipping cookie-parser@~1.3.5 /vagrant/quizrt-questions/QuestionManagementv2
+41 verbose already installed skipping debug@~2.2.0 /vagrant/quizrt-questions/QuestionManagementv2
+42 verbose already installed skipping ejs@~2.3.3 /vagrant/quizrt-questions/QuestionManagementv2
+43 verbose already installed skipping express@~4.13.1 /vagrant/quizrt-questions/QuestionManagementv2
+44 verbose already installed skipping morgan@~1.6.1 /vagrant/quizrt-questions/QuestionManagementv2
+45 verbose already installed skipping serve-favicon@~2.3.0 /vagrant/quizrt-questions/QuestionManagementv2
+46 verbose already installed skipping stylus@0.42.3 /vagrant/quizrt-questions/QuestionManagementv2
+47 silly cache add args [ 'mongoose@~4.2.7', null ]
+48 verbose cache add spec mongoose@~4.2.7
+49 silly cache add parsed spec { raw: 'mongoose@~4.2.7',
+49 silly cache add   scope: null,
+49 silly cache add   name: 'mongoose',
+49 silly cache add   rawSpec: '~4.2.7',
+49 silly cache add   spec: '>=4.2.7 <4.3.0',
+49 silly cache add   type: 'range' }
+50 silly addNamed mongoose@>=4.2.7 <4.3.0
+51 verbose addNamed ">=4.2.7 <4.3.0" is a valid semver range for mongoose
+52 silly addNameRange { name: 'mongoose', range: '>=4.2.7 <4.3.0', hasData: false }
+53 silly mapToRegistry name mongoose
+54 silly mapToRegistry using default registry
+55 silly mapToRegistry registry http://172.23.238.253:4873/
+56 silly mapToRegistry uri http://172.23.238.253:4873/mongoose
+57 verbose addNameRange registry:http://172.23.238.253:4873/mongoose not in flight; fetching
+58 verbose request uri http://172.23.238.253:4873/mongodb
+59 verbose request no auth needed
+60 info attempt registry request try #1 at 06:21:59
+61 verbose request id 21e2cf988c09021c
+62 http request GET http://172.23.238.253:4873/mongodb
+63 verbose request uri http://172.23.238.253:4873/mongoose
+64 verbose request no auth needed
+65 info attempt registry request try #1 at 06:21:59
+66 http request GET http://172.23.238.253:4873/mongoose
+67 info retry will retry, error on last attempt: Error: connect ECONNREFUSED
+68 info retry will retry, error on last attempt: Error: connect ECONNREFUSED
+69 info attempt registry request try #2 at 06:22:10
+70 http request GET http://172.23.238.253:4873/mongoose
+71 info retry will retry, error on last attempt: Error: connect ECONNREFUSED
+72 info attempt registry request try #2 at 06:22:12
+73 http request GET http://172.23.238.253:4873/mongodb
+74 info retry will retry, error on last attempt: Error: connect ECONNREFUSED
+75 info attempt registry request try #3 at 06:23:11
+76 http request GET http://172.23.238.253:4873/mongoose
+77 info attempt registry request try #3 at 06:23:13
+78 http request GET http://172.23.238.253:4873/mongodb
+79 verbose stack Error: connect ECONNREFUSED
+79 verbose stack     at exports._errnoException (util.js:746:11)
+79 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1010:19)
+80 verbose cwd /vagrant/quizrt-questions/QuestionManagementv2
+81 error Linux 3.13.0-65-generic
+82 error argv "/usr/bin/node" "/usr/bin/npm" "install"
+83 error node v0.12.7
+84 error npm  v2.11.3
+85 error code ECONNREFUSED
+86 error errno ECONNREFUSED
+87 error syscall connect
+88 error Error: connect ECONNREFUSED
+88 error     at exports._errnoException (util.js:746:11)
+88 error     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1010:19)
+88 error  { [Error: connect ECONNREFUSED]
+88 error   code: 'ECONNREFUSED',
+88 error   errno: 'ECONNREFUSED',
+88 error   syscall: 'connect',
+88 error   parent: 'QuestionManagementv2' }
+89 error If you are behind a proxy, please make sure that the
+89 error 'proxy' config is set properly.  See: 'npm help config'
+90 verbose exit [ 1, true ]
