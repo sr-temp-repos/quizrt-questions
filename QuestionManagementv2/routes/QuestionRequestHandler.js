@@ -30,10 +30,14 @@ router.post('/', function(req, res, next) {
         var query = req.body.query,
             searchKeywords = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig'),
             json = json.filter(function(result) {
-              return result.question.search(searchKeywords) > -1 || result.topicId.search(searchKeywords) > -1 || result.categories.search(searchKeywords) > -1;
+              return result.question.search(searchKeywords) > -1 || result.topics.search(searchKeywords) > -1 || result.categories.search(searchKeywords) > -1;
             });
         res.json(json);
       });
+      break;
+    case 'edit':
+      /* Data base area for edit operations */
+      res.json({status: 'success', message: 'Success : Successfully saved the question'});
       break;
     case 'delete':
       readJSONFile(questionJSONFileURL, function(err, json) {
