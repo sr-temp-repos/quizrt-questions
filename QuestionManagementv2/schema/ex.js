@@ -1,40 +1,90 @@
 var mongoose = require('mongoose');
 var promise = require('promise');
+
+mongoose.connect('mongodb://localhost/test');
+
+//var categorySchema = require('./category');
+//var topic = require('./topic');
 var questionSchema = require('./question.js');
 
-var Question = mongoose.model('Question', questionSchema);
 
-var q = new Question({
-      questionId: "web301_q11",
-  		picture: "http://placehold.it/150x150",
-  		question: "Which of the following is a valid property in a hibernate configuration?",
-  		correctIndex: 4,
-  		// options:[{option1: "hibernate.dialect"},{option2: "hibernate.connection.url"},{option3: "show_sql"},{option4: "All of the above"}],
-      option1: "hibernate.dialect",
-      option2: "hibernate.connection.url",
-      option3: "show_sql",
-      option4: "All of the above",
-  		difficultyLevel: 5,
-  		timesUsed: 9123,
-  		correctRatio: "720/7931",
-  		frequency: 912,
-  		createdOn: "12/3/1973",
-  		lastEdited: "12/3/1973",
-      topicId: "T1, T2, T4",
-      // topics: [
-      //   {
-      //   		_id: "T1",
-      //   		name: "cricket",
-      //   		category: "sport"
-      //   },
-      //   {
-      // 		_id: "T2",
-      // 		name: "baseball",
-      // 		category: "sport"
-      // 	}
-      // ]
 
+var Question = mongoose.model('Question', questionSchema,'Questions');
+
+Question.find({}).populate({
+  path: 'topicIds',
+  model: 'Topics',
+  populate: {
+    path: 'category',
+    model: 'Category'
+}}).exec(function(err, doc) {
+//  console.log(doc);
+  //console.log(doc[0].topicIds);
+  var topics = [],
+      categories = [],
+      topicId = [],
+      topicIds = doc[0].topicIds;
+  if(err) {
+    console.log(err);
+  }
+
+  for(var index=0, len= topicIds.length; index<len; index++) {
+    console.log(topicIds[index]);
+    topics.push(topicIds[index].name);
+    categories.push(topicIds[index].category.name);
+    topicId.push(topicIds[index]._id);
+  }
+  console.log(topics);
+  doc[0].topics = topics.join(', ');
+  doc[0].categories = categories.join(', ');
+  doc[0].topicId = topicId.join(', ');
+  console.log(doc[0]);
+  mongoose.connection.close();
 });
-q.collectTopicInfo().then( function() {
-  console.log(q.topics);
-});
+
+
+
+
+// var q = new Question({
+//       questionId: "web301_q11",
+//   		picture: "http://placehold.it/150x150",
+//   		question: "Which of the following is a valid property in a hibernate configuration?",
+//   		correctIndex: 4,
+//   		// options:[{option1: "hibernate.dialect"},{option2: "hibernate.connection.url"},{option3: "show_sql"},{option4: "All of the above"}],
+//       option1: "hibernate.dialect",
+//       option2: "hibernate.connection.url",
+//       option3: "show_sql",
+//       option4: "All of the above",
+//   		difficultyLevel: 5,
+//   		timesUsed: 9123,
+//   		correctRatio: "720/7931",
+//   		frequency: 912,
+//   		createdOn: "12/3/1973",
+//   		lastEdited: "12/3/1973",
+//       topicIds: ["T1", "T2", "T4"],
+//       topics: "",
+//       categories: "",
+//       topicId: ""
+//       // topics: [
+//       //   {
+//       //   		_id: "T1",
+//       //   		name: "cricket",
+//       //   		category: "sport"
+//       //   },
+//       //   {
+//       // 		_id: "T2",
+//       // 		name: "baseball",
+//       // 		category: "sport"
+//       // 	}
+//       // ]
+//
+// });
+// q.save(function(err) {
+//   if(err)
+//     console.log(err);
+//
+//   mongoose.connection.close();
+// });
+// // q.collectTopicInfo().then( function() {
+// //   console.log(q.topics);
+// // });
