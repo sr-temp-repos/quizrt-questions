@@ -4,9 +4,18 @@
 #resetPage,#loadQuestions{
   margin: 10px;
 }
+#mainDivForWholeBody{
+  background: rgba(245, 245,245, 0.9);
+}
+
+body{
+  background: url("../images/background1.jpg");
+
+}
 #questionInput{
   padding-bottom: 25px;
 }
+
 #spinner{
   display:none;
   opacity:.9;
@@ -38,4 +47,10 @@
   font-size: 60px;
   font-family: nunito;
   font-variant: small-caps;
+}
+
+#showGeneratedQuestions{
+  height: 500px;
+  overflow-x: scroll;
+
 }
