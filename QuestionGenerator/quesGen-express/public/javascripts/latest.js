@@ -10,13 +10,15 @@
   var qId;
   var qIdList=[];
   var optionData;
+  var numberOfQuestionsGenrated; // variable to store number of questions Generated
 
 $("#skipButton").on('click',function(){ // skip button in the help displaying div
   $('#introDiv').slideUp('slow'); // slideUp the intro div
 });
-$("#needHelp").on('click',function(){
-  $('#introDiv').slideDown('slow');
-  $("#introDivText").typed({
+
+$("#needHelp").on('click',function(){ // need help button... when clicked you get a screen with a series of instructions.
+  $('#introDiv').slideDown('slow'); // slideDownthe intro div
+  $("#introDivText").typed({ // a third party jquery which helps getting typing effect
     strings: ["Welcome To Project X . . ."," I Shall Help You Generate Questions",
               "You Shall Be Required To Key In One Sample Question",
               "E.G. Sample Question - Sachin Tendulkar is from which country ? ",
@@ -345,11 +347,11 @@ $("#needHelp").on('click',function(){
 
         // console.log("@346"+resultUrl);
         $.getJSON(resultUrl + "&callback=?", function(data) {
+            numberOfQuestionsGenrated=data["items"].length;
             $.each(data["items"], function(k, v) {
                 if (k<200) {
                     var link = tempURL + v + ".json";
                     $("#spinner").show();
-
                     $.getJSON(link, function(data) {
                         var name = data["entities"]["Q" + v]["labels"]["en"]["value"];
                         var temp=data["entities"]["Q" + v]["claims"][pidForOption];
@@ -383,19 +385,26 @@ $("#needHelp").on('click',function(){
         });
 
         $("#loadQuestions").show();
+        $("#selected").hide();
 
 
         $("#descriptionListDivInner").slideUp();
 
         $("#loadQuestions").on("click", function() {
+          $('#questionList').find("li").remove();
+            $('#questionListHeading').find("strong").remove();
+            $('#questionListOptions').find("li").remove();
+
           var distractors=generateDistractors(questionList);
-
+          
+          $("#questionListHeading").append($('<strong>',{
+            text:"Number of Questions Generated " + numberOfQuestionsGenrated
+          }));
           for(var i=0;i<questionList.length;i++){
-
             $("#showGeneratedQuestionsOuter").show();
             $("#questionList").append($('<li>', {
                 value: questionList[i].split("?")[0]+" ?",
-                text: questionList[i].split("?")[0]+" ?"+" "+'" '+distractors[i][0]+' "   '+distractors[i][1]+distractors[i][2]+distractors[i][3]
+                html: (i+1).toString().bold()+") "+" "+questionList[i].split("?")[0]+" ?"+ "<br>"+'" '+distractors[i][0].bold()+' "   '+distractors[i][1]+distractors[i][2]+distractors[i][3]
             }).addClass("list-group-item"));
           }
 
