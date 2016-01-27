@@ -201,20 +201,7 @@
           {{/each}}
         </div>
       </script>
-      <script type="text/x-handlebars-template" id="topicDataListTmp">
-        <datalist id="topicList">
-          {{#each this}}
-            <option data-topic-id="{{topicId}}">{{name}}</option>
-          {{/each}}
-        </datalist>
-      </script>
-      <script type="text/x-handlebars-template" id="categoryDataListTmp">
-        <datalist id="categoryList">
-          {{#each this}}
-            <option data-topic-id="{{topicId}}">{{category}}</option>
-          {{/each}}
-        </datalist>
-      </script>
+      
       <script type="text/x-handlebars-template" id="topicWellTmp">
         {{#each this}}
           <div class="well well-sm topics" data-topic-id="{{@index}}">

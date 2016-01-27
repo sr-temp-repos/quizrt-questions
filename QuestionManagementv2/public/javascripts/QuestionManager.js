@@ -94,20 +94,8 @@
         method: 'post'
       }).done(function(results) {
         self.results = results;
-        self.getTopicsJson();
         self.draw(self.results);
         self.registerHelpers();
-      });
-    },
-    getTopicsJson: function() {
-      var self=this;
-      $.ajax({
-        url: '/TopicsRequestHandler',
-        data: {requestType: 'list'},
-        dataType: 'json',
-        method: 'post'
-      }).done(function(topics) {
-        self.topics = topics;
       });
     },
     onTopicWellClose: function(self) {
@@ -138,8 +126,6 @@
 
       $modal = $(modalHandler(self.results[questionNumber])).insertAfter(self.$pageNo);
       $modal.modal('show');
-      $modal.append($(dataListHandler(self.topics))); //Adding Data List to help select topics
-      $modal.append($(categoryListHandler(self.topics)));
        $('[data-toggle="tooltip"]').tooltip();
 
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -311,9 +297,7 @@
     modalTemplateID: '#modalTmp',
     alertTemplateID: '#alertTmp',
     generateOptionsTemplate: '#generateOptionsTmp',
-    topicDataListTemplate: '#topicDataListTmp',
     topicWellTemplate: '#topicWellTmp',
-    categoryDataListTemplate: '#categoryDataListTmp',
 
     $questionContainer: $('#questionList'),
     optionListTag: '<div></div>',

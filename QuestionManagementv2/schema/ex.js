@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var promise = require('promise');
 var questionSchema = require('./question.js');
 
 var Question = mongoose.model('Question', questionSchema);
@@ -20,8 +21,8 @@ var q = new Question({
   		createdOn: "12/3/1973",
   		lastEdited: "12/3/1973",
       topicId: "T1, T2, T4",
-  		topics: "cricket, baseball, cat",
-  		categories: "sport, sport, animal",
+  		// topics: "cricket, baseball, cat",
+  		// categories: "sport, sport, animal",
       // topics: [
       //   {
       //   		_id: "T1",
@@ -36,5 +37,6 @@ var q = new Question({
       // ]
 
 });
-
- console.log(q);
+q.collectTopicInfo().then( function(self) {
+  console.log(q);
+});

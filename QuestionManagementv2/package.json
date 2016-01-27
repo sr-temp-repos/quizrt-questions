@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=9080 node ./bin/www"
+    "start": "PORT=8080 node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -11,9 +11,10 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "mongoose": "^4.2.10",
     "morgan": "~1.6.1",
+    "promise": "^7.1.1",
     "serve-favicon": "~2.3.0",
-    "stylus": "0.42.3",
-    "mongoose":"~4.2.7"
+    "stylus": "0.42.3"
   }
 }
