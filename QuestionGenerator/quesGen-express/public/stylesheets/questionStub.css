@@ -1,0 +1,41 @@
+#checkBoxDiv,#radioDiv,#descriptionListDiv,#entity,#propertySuggestionRow,#loadQuestions,#showGeneratedQuestionsOuter,#descriptionListDiv,#resetPage {
+    display: none;
+}
+#resetPage,#loadQuestions{
+  margin: 10px;
+}
+#questionInput{
+  padding-bottom: 25px;
+}
+#spinner{
+  display:none;
+  opacity:.9;
+  position:fixed;
+  top: 0%;
+  left: 0%;
+  bottom: 0%;
+  right: 0%;
+  background: url("../images/loading.gif") no-repeat center #fff;
+  text-align: center;
+  z-index: 2;
+}
+#loadingText{
+  opacity: 1;
+  font-size: 50px;
+}
+#introDiv{
+  display: none;
+  opacity:0.95;
+  position:fixed;
+  top: 0%;
+  left: 0%;
+  bottom: 0%;
+  right: 0%;
+  background-color: black;
+  z-index: 100;
+  color: white;
+  text-align: center;
+  font-size: 60px;
+  font-family: nunito;
+  font-variant: small-caps;
+}
