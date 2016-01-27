@@ -4,7 +4,6 @@
     /* Intializes the config data into the object */
     init: function(config) {
       $.extend(this,config);
-      //$(this.templateDiv).load(this.templateFile);
       this.getQuestionJson();
       this.eventHandlers();
     },
@@ -120,9 +119,7 @@
           pageNo = self.$pageNo.data('pageNo')-1,
           selectedRowCount = self.$dropDownId.data('selectedRowCount'),
           questionNumber = (rowId + pageNo * selectedRowCount),
-          modalHandler = Handlebars.compile($(self.modalTemplateID).html()),
-          dataListHandler = Handlebars.compile($(self.topicDataListTemplate).html()),
-          categoryListHandler = Handlebars.compile($(self.categoryDataListTemplate).html());
+          modalHandler = Handlebars.compile($(self.modalTemplateID).html());
 
       $modal = $(modalHandler(self.results[questionNumber])).insertAfter(self.$pageNo);
       $modal.modal('show');
@@ -285,30 +282,30 @@
   };
 
   QuestionManager.init({
-    /* Json URL */
-    questionURL: 'javascripts/QuestionsJson/QuestionSample_3.json',
-    // topicsURL: '/js/QuestionsJson/Topics_v1.json',
 
+    /* Template variable */
     /* Template to use for placing question and question container */
-    templateFile: 'templates.html',
-    templateDiv: '#loadTemplates',
     questionTemplateID: '#questionTbl',
     dropdownTemplateID: '#dropdownTmp',
-    modalTemplateID: '#modalTmp',
     alertTemplateID: '#alertTmp',
+    /* Templates for Modal window */
+    modalTemplateID: '#modalTmp',
     generateOptionsTemplate: '#generateOptionsTmp',
     topicWellTemplate: '#topicWellTmp',
+    /* end of Templates */
 
+    /* Question List Grid */
     $questionContainer: $('#questionList'),
-    optionListTag: '<div></div>',
 
     /* Search from object for submit event */
     $formSection: $('#searchForm'),
-    editQuestionForm: '#editQuestion',
+    editQuestionForm: '#editQuestion', /* Modal window form submission */
 
     /* Edit and Delete Button */
     editBtn: 'button.command-edit',
     deleteBtn: 'button.command-delete',
+
+    /* Modal window buttons */
     addTopicId: '#addTopicId',
     addCategoryId: '#addCategories',
     cancelCategoryId: '#cancelCategories',
@@ -322,22 +319,30 @@
                     'All'],
     $dropDownId: $('#noOfQuestions'),
     $pageNo: $('#pageNo'),
+
     /* Pagination Settings */
     noOfPaginations: 5, // no of paginations Visible
 
-    /* filter ID for redrawing filter options */
-    questionListHeader: '#questionList-header',
+    /* used for displaying alert below */
     $searchWell: $('div#search'),
 
-    /* topics */
+    /* topics wells */
     topicsClass: '.topics',
-    topicsWell: '#topicsWell',
+
+    /* Hidden Text box for storing topic ids */
     topicIds: '#topicIds',
+
+    /* Text box for Typing topics */
     topicName: '#topicName',
+    /* Label with categories */
     categories: '#categories',
+    /* if new topic found New Topic Form displayed */
     newTopicForm: '#newTopicForm',
+    /* if new category found new category form displayed */
     newCategoryForm: '#newCategoryForm',
+    /* messageArea for displaying messages in topic management */
     messageArea: '#messageArea',
+    /* lastEdited hidden text for changing lastEdited date after submit */
     lastEdited: '#lastEdited',
 
     /* Message Array for Topic management */
