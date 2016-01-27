@@ -21,8 +21,6 @@ var q = new Question({
   		createdOn: "12/3/1973",
   		lastEdited: "12/3/1973",
       topicId: "T1, T2, T4",
-  		// topics: "cricket, baseball, cat",
-  		// categories: "sport, sport, animal",
       // topics: [
       //   {
       //   		_id: "T1",
@@ -37,6 +35,6 @@ var q = new Question({
       // ]
 
 });
-q.collectTopicInfo().then( function(self) {
-  console.log(q);
+q.collectTopicInfo().then( function() {
+  console.log(q.topics);
 });

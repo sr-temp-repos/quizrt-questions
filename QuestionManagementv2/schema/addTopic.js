@@ -24,14 +24,11 @@ function readJSONFile(filename, callback) {
 var topics = [];
 readJSONFile('../public/javascripts/QuestionsJson/Topics_v1.json',function(err, json) {
   if(json) {
-    console.log(json);
     for(var prop in json) {
       prop = prop+'';
-      console.log(json[prop]);
       var topic = new Topic({ _id: json[prop].topicId, name: json[prop].name, category: json[prop].category});
       topic.save();
-      console.log(topic);
-      // topics.push(topic);
     }
+    mongoose.connection.close();
   }
 });

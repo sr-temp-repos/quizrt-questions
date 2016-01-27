@@ -117,6 +117,10 @@
                     <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
                     <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax this}}" value="{{correctIndex}}"  data-toggle="tooltip" title="Correct Index cannot be empty." />
                   </div>
+                  <div class="form-group">
+                    <label for="correctIndex">Image:</label>
+                    <input type="text" class="form-control" name="correctIndex" value="{{image}}" />
+                  </div>
                   <div class="wrap">
                     <div class="form-inline">
                       <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
@@ -155,7 +159,7 @@
                     <label  class='divider' name="correctRatio">{{correctRatio}}</label>
                     <label for="frequency">Frequency:</label>
                     <label name="frequency">{{frequency}}</label>
-                    <input type="hidden" id="lastEdited" name="requestType" value="edit" />
+                    <input type="hidden" name="requestType" value="edit" />
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -201,7 +205,7 @@
           {{/each}}
         </div>
       </script>
-      
+
       <script type="text/x-handlebars-template" id="topicWellTmp">
         {{#each this}}
           <div class="well well-sm topics" data-topic-id="{{@index}}">

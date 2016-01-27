@@ -133,7 +133,7 @@ var EditModalManager = {
   editQuestionFormSubmit: function(self,e) {
     var $self = $(this),
         $correctIndexinForm = $self.find('input[type="number"]')[0],
-        $hiddenTopicIds = $self.find('input[type="hidden"]')[1],
+        $hiddenTopicIds = $self.find('input[type="hidden"]')[2],
         $textArea = $self.find('textArea'),
         exit = false;
 
@@ -150,7 +150,7 @@ var EditModalManager = {
       var $this = $(this);
       if(isEmpty($this[0].value,$this,e)) {
 
-        if(index>1) {
+        if(index>0) {
           var $selectedTab = $($('.tab')[index-1]);
               $selectedDiv = $selectedTab.closest('div.form-group');
 

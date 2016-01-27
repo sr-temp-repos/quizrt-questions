@@ -51,7 +51,7 @@ q.methods.collectTopicInfo = function() {
       self.topics = topics.join(', ');
       self.categories = categories.join(', ');
       mongoose.connection.close();
-      resolve(this);
+      resolve();
     });
   });
   return promise;
