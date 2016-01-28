@@ -285,10 +285,16 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
           if(key.includes(data)||propertyValueList[key].includes(data)){
             var temp=propertyValueList[key].split(",");
             var newData;
+            if(key.includes(data))
+            {
+              newData=temp;
+            }
+            else{
             for(var i=0;i<temp.length;i++){
               if(temp[i].includes(data))
               newData=temp[i];
-            }
+            }}
+            // console.log(key,newData);
             searchedData[key]=newData;
           }
         }
@@ -302,6 +308,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
       option=$('input[type="radio"][name="descriptionList"]:checked').val();
 
       var claimForVariablePart=getData(propertyValueList,option);
+      // console.log(claimForVariablePart);
       var claimForOptionPart=getData(propertyValueList,optionData);
 
       generateQuestions(claimForVariablePart,claimForOptionPart,questionStub);
@@ -349,7 +356,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
         $.getJSON(resultUrl + "&callback=?", function(data) {
             numberOfQuestionsGenrated=data["items"].length;
             $.each(data["items"], function(k, v) {
-                if (k<200) {
+                if (k<1000) {
                     var link = tempURL + v + ".json";
                     $("#spinner").show();
                     $.getJSON(link, function(data) {
@@ -396,7 +403,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
             $('#questionListOptions').find("li").remove();
 
           var distractors=generateDistractors(questionList);
-          
+
           $("#questionListHeading").append($('<strong>',{
             text:"Number of Questions Generated " + numberOfQuestionsGenrated
           }));
@@ -404,7 +411,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
             $("#showGeneratedQuestionsOuter").show();
             $("#questionList").append($('<li>', {
                 value: questionList[i].split("?")[0]+" ?",
-                html: (i+1).toString().bold()+") "+" "+questionList[i].split("?")[0]+" ?"+ "<br>"+'" '+distractors[i][0].bold()+' "   '+distractors[i][1]+distractors[i][2]+distractors[i][3]
+                html: (i+1).toString().bold()+") "+" "+questionList[i].split("?")[0]+" ?"+ "<br>"+'a)'+distractors[i][0].bold()+'    '+" b) "+distractors[i][1]+" c) "+distractors[i][2]+" d) "+distractors[i][3]
             }).addClass("list-group-item"));
           }
 
