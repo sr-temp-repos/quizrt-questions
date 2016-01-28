@@ -11,6 +11,8 @@
   var qIdList=[];
   var optionData;
   var numberOfQuestionsGenrated; // variable to store number of questions Generated
+  var exclusionList=["","what","where","who","was","which","when","whom","who","whose","did","how","is","in","a","an","the","?","of","from"];
+  var tempArrayForWords=[]; // to have words which are not there in exclusionList
 
 $("#skipButton").on('click',function(){ // skip button in the help displaying div
   $('#introDiv').slideUp('slow'); // slideUp the intro div
@@ -81,18 +83,37 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
   }
 
   function getSampleQuestion(){
+    $("#sampleQuestion").on("keypress",function(e){
+      var code = (e.keyCode ? e.keyCode : e.which);
+     if(code == 13) { //Enter keycode
+       executeOnGoOrEnter();
+        //  alert("Enter key Pressed");
+     }
+
+});
     $("#sampleQuestionButton").on("click", function() {
-        $('#cbList').find("input").remove();
-        $('#cbList').find("label").remove();
-        var sampleQuestion = $("#sampleQuestion").val();
-        questionArray=getQuestionArray(sampleQuestion);
-        addCheckbox(questionArray);
-        $("#resetPage").show();
-        $("#resetPage").on("click", function() {
-          location.reload();
-        });
+      executeOnGoOrEnter();
+
     });
 
+  }
+  function executeOnGoOrEnter(){
+    $('#cbList').find("input").remove();
+    $('#cbList').find("label").remove();
+    var sampleQuestion = $("#sampleQuestion").val();
+    questionArray=getQuestionArray(sampleQuestion);
+    // console.log(questionArray);
+    for (var i = 0,j=0; i < questionArray.length;i++) {
+      if(exclusionList.indexOf(questionArray[i])==-1){
+       tempArrayForWords[j]=questionArray[i];
+        j++;
+      }
+    }
+    addCheckbox(tempArrayForWords);
+    $("#resetPage").show();
+    $("#resetPage").on("click", function() {
+      location.reload();
+    });
   }
   getSampleQuestion();
 
@@ -117,7 +138,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
 //       arrayForOption[count]=questionArray[j];
 //       count++;
 // }
-      addRadioButtons(questionArray);
+      addRadioButtons(tempArrayForWords);
       $("#radioDiv").slideDown();
     });
 
@@ -250,7 +271,8 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
       $("#radioDiv").slideUp();
       // $("#descriptionListDiv").slideDown();
       option=$('input[type="radio"]:checked').attr('id').split("")[2];
-      getProperties(questionArray[option]);
+      // console.log(option);
+      getProperties(tempArrayForWords[option]);
       aggregatedResult=aggregateVarAndConst(questionArray,checkedProperties); // aggregate the data and varOrConst Parameter
       questionStub=generateQuestionStub(aggregatedResult,option); // generate dummy question stub json..
       getEntityHints(questionStub["Var"]);
