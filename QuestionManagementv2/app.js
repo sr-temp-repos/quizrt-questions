@@ -4,10 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var wagner = require('wagner-core');
 
 var routes = require('./routes/index');
 var questionRequestHandler = require('./routes/QuestionRequestHandler');
 var topicsRequestHandler = require('./routes/TopicsRequestHandler');
+
+var db = require('./routes/DB.js');
+
+db.init(wagner, {
+  connectionURL: 'mongodb://localhost/test',
+  collection: [
+    'Questions',
+    'Topics',
+    'Categories'
+  ]
+});
 
 var app = express();
 
@@ -25,7 +37,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/QuestionRequestHandler', questionRequestHandler);
+app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
 app.use('/TopicsRequestHandler', topicsRequestHandler);
 
 // catch 404 and forward to error handler
@@ -34,7 +46,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
+console.log('connectionURL');
 // error handlers
 
 // development error handler
