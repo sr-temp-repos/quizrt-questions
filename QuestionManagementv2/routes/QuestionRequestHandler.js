@@ -37,7 +37,7 @@ module.exports = function(wagner) {
       case 'search':
         //readJSONFile(questionJSONFileURL, function(err, json) {
         wagner.invoke(db.QuestionDB.list, {
-          query: {},
+          query: { question : new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig') },
           var query = req.body.query,
               searchKeywords = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig'),
               json = json.filter(function(result) {
