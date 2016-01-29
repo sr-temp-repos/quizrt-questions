@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var promise = require('promise');
+var fs = require('fs');
 
 mongoose.connect('mongodb://localhost/test');
 
@@ -11,36 +11,36 @@ var questionSchema = require('./question.js');
 
 var Question = mongoose.model('Question', questionSchema,'Questions');
 
-Question.find({}).populate({
-  path: 'topicIds',
-  model: 'Topics',
-  populate: {
-    path: 'category',
-    model: 'Category'
-}}).exec(function(err, doc) {
-//  console.log(doc);
-  //console.log(doc[0].topicIds);
-  var topics = [],
-      categories = [],
-      topicId = [],
-      topicIds = doc[0].topicIds;
-  if(err) {
-    console.log(err);
-  }
-
-  for(var index=0, len= topicIds.length; index<len; index++) {
-    console.log(topicIds[index]);
-    topics.push(topicIds[index].name);
-    categories.push(topicIds[index].category.name);
-    topicId.push(topicIds[index]._id);
-  }
-  console.log(topics);
-  doc[0].topics = topics.join(', ');
-  doc[0].categories = categories.join(', ');
-  doc[0].topicId = topicId.join(', ');
-  console.log(doc[0]);
-  mongoose.connection.close();
-});
+// Question.find({}).populate({
+//   path: 'topicIds',
+//   model: 'Topics',
+//   populate: {
+//     path: 'category',
+//     model: 'Category'
+// }}).exec(function(err, doc) {
+// //  console.log(doc);
+//   //console.log(doc[0].topicIds);
+//   var topics = [],
+//       categories = [],
+//       topicId = [],
+//       topicIds = doc[0].topicIds;
+//   if(err) {
+//     console.log(err);
+//   }
+//
+//   for(var index=0, len= topicIds.length; index<len; index++) {
+//     console.log(topicIds[index]);
+//     topics.push(topicIds[index].name);
+//     categories.push(topicIds[index].category.name);
+//     topicId.push(topicIds[index]._id);
+//   }
+//   console.log(topics);
+//   doc[0].topics = topics.join(', ');
+//   doc[0].categories = categories.join(', ');
+//   doc[0].topicId = topicId.join(', ');
+//   console.log(doc[0]);
+//   mongoose.connection.close();
+// });
 
 
 
@@ -88,3 +88,34 @@ Question.find({}).populate({
 // // q.collectTopicInfo().then( function() {
 // //   console.log(q.topics);
 // // });
+
+function readJSONFile(filename, callback) {
+  fs.readFile(filename, function (err, data) {
+    if(err) {
+      callback(err);
+      return;
+    }
+    try {
+      callback(null, JSON.parse(data));
+    } catch(exception) {
+      callback(exception);
+    }
+  });
+}
+
+readJSONFile('../public/javascripts/QuestionsJson/QuestionSample_3.json',function(err, json) {
+  if(json) {
+    for(var i=0,len=json.length; i<len; i++) {
+      json[i].topicIds = json[i].topicId.split(', ');
+      json[i].topics = "";
+      json[i].topicId = "";
+      json[i].categories = "";
+      var q = new Question(json[i]);
+      q.save(function(err) {
+        if(err)
+        console.log(err);
+      });
+    }
+    // mongoose.con
+  }
+});
