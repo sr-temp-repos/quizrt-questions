@@ -40,7 +40,7 @@ module.exports.QuestionDB = {
       populate: {
         path: 'category',
         model: 'Category'
-    }}).limit(5).find(query, function(err, doc) {
+    }}).find(query, function(err, doc) {
       if(err) {
         console.log(err);
       }
