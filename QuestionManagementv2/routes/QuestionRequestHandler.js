@@ -41,8 +41,8 @@ module.exports = function(wagner) {
         wagner.invoke(db.QuestionDB.find, {
           query: { $or : [
               { question :  rgexQuery },
-              { 'topicIds.name' : rgexQuery },
-              { 'topicIds.category.name' : rgexQuery }
+              { topicIds: { $elemMatch: { name: rgexQuery } } },
+              { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
             ]
           },
           callback : function(err, json) {

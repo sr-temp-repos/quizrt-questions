@@ -33,23 +33,18 @@ module.exports.QuestionDB = {
     });
   },
   find: function(Question, query, callback) {
-
     Question.find({}).populate({
       path: 'topicIds',
       model: 'Topics',
       populate: {
         path: 'category',
         model: 'Category'
-    }}).find(query, function(err, doc) {
-      if(err) {
-        console.log(err);
-      }
-      console.log(doc[0].topicIds);
-    }).exec(function(err, doc) {
+    }}).find(query).exec(function(err, doc) {
       if(err) {
         console.log(err);
         callback(err,null);
       }
+      console.log(doc);
       for(var i = 0, doclen = doc.length; i<doclen; i++) {
         var topics = [],
             categories = [],
@@ -75,6 +70,24 @@ module.exports.TopicDB = {
     //   cfg = cfg + '';
     //   this[cfg] = config[cfg];
     // }
+  },
+  list: function(Topic, callback) {
+    Topic.find({}, function(err, doc) {
+      callback(err,doc);
+    })
+  },
+  findTopic: function(Category, query, callback) {
+    Category.find(query, function(err, doc) {
+      callback(err,doc);
+    });
+  }
+};
+
+module.exports.CategoryDB = {
+  list: function(Category, callback) {
+    Category.find({}, function(err, doc) {
+      callback(err,doc);
+    });
   }
 };
 

@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
-app.use('/TopicsRequestHandler', topicsRequestHandler);
+app.use('/TopicsRequestHandler', topicsRequestHandler(wagner));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -29,16 +29,16 @@ Question.find({}).populate({
   }
 
   for(var index=0, len= topicIds.length; index<len; index++) {
-    console.log(topicIds[index]);
+    //console.log(topicIds[index]);
     topics.push(topicIds[index].name);
     categories.push(topicIds[index].category.name);
     topicId.push(topicIds[index]._id);
   }
-  console.log(topics);
+  //console.log(topics);
   doc[0].topics = topics.join(', ');
   doc[0].categories = categories.join(', ');
   doc[0].topicId = topicId.join(', ');
-  console.log(doc[0].topicIds);
+  console.log(doc[0]);
   mongoose.connection.close();
 });
 
