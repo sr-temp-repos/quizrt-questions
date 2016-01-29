@@ -63,8 +63,8 @@
           <td>{{timesUsed}}</td>
           <td>{{correctRatio}}</td>
           <td>{{frequency}}</td>
-          <td>{{lastEdited}}</td>
-          <td>{{createdOn}}</td>
+          <td>{{dateFormater lastEdited}}</td>
+          <td>{{dateFormater createdOn}}</td>
           <td>
             <button type="button" class="btn btn-xs btn-default command-edit"  data-row-id="{{@index}}" data-question-id="{{questionId}}">
               <span class="glyphicon glyphicon-pencil"></span>
@@ -98,9 +98,9 @@
                   <h4 class="modal-title">Edit Question</h4>
                   <div class="form-inline pull-right wrapper">
                     <label for="createdOn">Created Dated:</label>
-                    <label class='divider' name="createdOn"><em>{{createdOn}}</em></label>
+                    <label class='divider' name="createdOn"><em>{{dateFormater createdOn}}</em></label>
                     <label for="lastEdited">Last Edited:</label>
-                    <label><em>{{lastEdited}}</em></label>
+                    <label><em>{{dateFormater lastEdited}}</em></label>
                     <input type="hidden" id="lastEdited" name="lastEdited" />
                   </div>
                 </div>

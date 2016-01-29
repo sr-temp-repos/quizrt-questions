@@ -24,7 +24,7 @@ module.exports = function(wagner) {
   router.post('/', function(req, res, next) {
     switch(req.body.requestType){
       case 'list':
-        wagner.invoke(db.QuestionDB.list, {
+        wagner.invoke(db.QuestionDB.find, {
           query: {},
           callback : function(err, json) {
             res.json(json);
@@ -36,14 +36,18 @@ module.exports = function(wagner) {
         break;
       case 'search':
         //readJSONFile(questionJSONFileURL, function(err, json) {
-        wagner.invoke(db.QuestionDB.list, {
-          query: { question : new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig') },
-          var query = req.body.query,
-              searchKeywords = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig'),
-              json = json.filter(function(result) {
-                return result.question.search(searchKeywords) > -1 || result.topics.search(searchKeywords) > -1 || result.categories.search(searchKeywords) > -1;
-              });
-          res.json(json);
+        var query = req.body.query,
+            rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
+        wagner.invoke(db.QuestionDB.find, {
+          query: { $or : [
+              { question :  rgexQuery },
+              { 'topicIds.name' : rgexQuery },
+              { 'topicIds.category.name' : rgexQuery }
+            ]
+          },
+          callback : function(err, json) {
+            res.json(json);
+          }
         });
         break;
       case 'edit':

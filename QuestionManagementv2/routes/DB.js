@@ -32,31 +32,40 @@ module.exports.QuestionDB = {
       });
     });
   },
-  list: function(Question, query, callback) {
+  find: function(Question, query, callback) {
+
     Question.find({}).populate({
       path: 'topicIds',
       model: 'Topics',
       populate: {
         path: 'category',
         model: 'Category'
-    }}).find(query).exec(function(err, doc) {
-      var topics = [],
-          categories = [],
-          topicId = [],
-          topicIds = doc[0].topicIds;
+    }},function(err,doc) {
+      
+    }).find(query, function(err, doc) {
+      if(err) {
+        console.log(err);
+      }
+      console.log(doc);
+    }).exec(function(err, doc) {
       if(err) {
         console.log(err);
         callback(err,null);
       }
-
-      for(var index=0, len= topicIds.length; index<len; index++) {
-        topics.push(topicIds[index].name);
-        categories.push(topicIds[index].category.name);
-        topicId.push(topicIds[index]._id);
+      for(var i = 0, doclen = doc.length; i<doclen; i++) {
+        var topics = [],
+            categories = [],
+            topicId = [],
+            topicIds = doc[i].topicIds;
+        for(var index=0, len= topicIds.length; index<len; index++) {
+          topics.push(topicIds[index].name);
+          categories.push(topicIds[index].category.name);
+          topicId.push(topicIds[index]._id);
+        }
+        doc[i].topics = topics.join(', ');
+        doc[i].categories = categories.join(', ');
+        doc[i].topicId = topicId.join(', ');
       }
-      doc[0].topics = topics.join(', ');
-      doc[0].categories = categories.join(', ');
-      doc[0].topicId = topicId.join(', ');
       callback(null,doc);
     });
   }

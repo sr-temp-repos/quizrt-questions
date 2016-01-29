@@ -23,7 +23,10 @@
         }
         return generateOptionsHandlebarFunction(optionArray);
       });
-
+      Handlebars.registerHelper('dateFormater', function(date) {
+        var tDate = new Date(date);
+        return (tDate.getMonth()+1) + self.dateSeparator + tDate.getDate() + self.dateSeparator + (1900 + tDate.getYear());
+      });
       Handlebars.registerHelper('generateTpcs', function(topicId) {
         var topics = topicId.split(',');
             topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html());
@@ -93,8 +96,8 @@
         method: 'post'
       }).done(function(results) {
         self.results = results;
-        self.draw(self.results);
         self.registerHelpers();
+        self.draw(self.results);
       });
     },
     onTopicWellClose: function(self) {
@@ -282,7 +285,8 @@
   };
 
   QuestionManager.init({
-
+    /* Date Separator */
+    dateSeparator : '/',
     /* Template variable */
     /* Template to use for placing question and question container */
     questionTemplateID: '#questionTbl',
