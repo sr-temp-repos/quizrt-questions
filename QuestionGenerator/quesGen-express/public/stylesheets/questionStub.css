@@ -50,7 +50,18 @@ body{
 }
 
 #showGeneratedQuestions{
-  height: 500px;
+  height: 1000px;
   overflow-x: scroll;
 
+}
+
+.imageForQuestion{
+  height: 200px;
+  width: 200px;
+}
+
+.innerImageDiv{
+  height: 100%;
+  width: 100%;
+  margin-left: 309px;
 }

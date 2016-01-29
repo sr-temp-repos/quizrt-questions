@@ -5,20 +5,20 @@ block content
     #introDiv.container-12
       span#introDivText
       button#skipButton.btn.btn-success.btn-block S T O P
-    
-    
+
+
     header
     .container-12
       h1.well.text-center
-        strong Question Generator    
+        strong Question Generator
         button#needHelp.btn.btn-default  Need Help ?
-        
+
     //end of header container-12
     main
     .container
       .row.text-center
         h3.text-info
-          strong Enter a sample question!  
+          strong Enter a sample question!
           small Eg. Sachin Tendulkar is from which country ?
       // end row
       .row#questionInput
@@ -29,13 +29,13 @@ block content
         // /input-group
       .row
         button#resetPage.btn.btn-danger.btn-block Reset
-        
+
       #analyzeQuestionDiv
         #checkBoxDiv
           .row.text-center
             .col-lg-12
-              h4.text-danger 
-                strong Select The Words Which Shall Act as Variable   
+              h4.text-danger
+                strong Select The Words Which Shall Act as Variable
                 small (E.g "Sachin Tendulkar" is a variable in question "Sachin Tendulkar is from which country ?")
             .col-lg-12
               .input-group.well
@@ -47,8 +47,8 @@ block content
         #radioDiv
           .row.text-center
             .col-lg-12
-              h4.text-danger 
-                strong Select the word which will be your option  
+              h4.text-danger
+                strong Select the word which will be your option
                 small (E.g "country" will be option in question "Sachin Tendulkar is from which country ?")
             .col-lg-12
               .input-group.well
@@ -57,7 +57,7 @@ block content
             // /.col-lg-12
             .text-center
               button#getOption.btn.btn-info Done
-        
+
         //- .row#displayAfterCheckAndRadio
         #propertySuggestion.col-lg-12
           #propertySuggestionRow.panel.panel-default
@@ -90,7 +90,7 @@ block content
         .text-center
           button#selected.btn.btn-info Done
           button#loadQuestions.btn.btn-success Load Questions
-            
+
       .well.text-center#showGeneratedQuestionsOuter
         #showGeneratedQuestionsheader.panel-heading
         .row#questionListHeading
@@ -98,10 +98,9 @@ block content
             h3 Questions List:
         // end row
         #showGeneratedQuestions.panel-body
-          
+
           hr
           ul#questionList.list-group
         // end panel body
     #spinner
-     strong#loadingText Surfing thru 15,887,129 Wikidata items.....  
-    
+     strong#loadingText Surfing thru 15,887,129 Wikidata items.....

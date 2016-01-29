@@ -50,6 +50,7 @@
         }
         return i-1;
       });
+
     },
 
     eventHandlers: function() {
@@ -132,7 +133,24 @@
         var $target = $($(e.target).attr("href")).find('textArea'); // activated tab
         $target.focus();
       });
-
+      $.ajax({
+        url: '/TopicsRequestHandler',
+        data: {requestType: 'listTopics'},
+        dataType: 'json',
+        method: 'post'
+      }).done(function(results) {
+        var handler=Handlebars.compile($(self.datalistTemplate).html());
+        $(handler(results)).appendTo($modal).attr('id','topicList');
+      });
+      $.ajax({
+        url: '/TopicsRequestHandler',
+        data: {requestType: 'listCategories'},
+        dataType: 'json',
+        method: 'post'
+      }).done(function(results) {
+        var handler=Handlebars.compile($(self.datalistTemplate).html());
+        $(handler(results)).appendTo($modal).attr('id','categoryList');
+      });
       //Click add button
       $(self.addTopicId).on('click', function(e) {
         EditModalManager.addTopic.call(this,self,e);
@@ -296,6 +314,7 @@
     modalTemplateID: '#modalTmp',
     generateOptionsTemplate: '#generateOptionsTmp',
     topicWellTemplate: '#topicWellTmp',
+    datalistTemplate: '#datalistTmp',
     /* end of Templates */
 
     /* Question List Grid */
@@ -335,6 +354,7 @@
 
     /* Hidden Text box for storing topic ids */
     topicIds: '#topicIds',
+    topicsWell: '#topicsWell',
 
     /* Text box for Typing topics */
     topicName: '#topicName',

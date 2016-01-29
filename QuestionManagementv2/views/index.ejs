@@ -213,6 +213,14 @@
           </div>
         {{/each}}
       </script>
+      <!--datalist template-->
+      <script type="text/x-handlebars-template" id="datalistTmp">
+        <datalist>
+          {{#each this}}
+            <option value="{{name}}">
+          {{/each}}
+        </datalist>
+      </script>
     </div>
     <!-- JQuery script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
