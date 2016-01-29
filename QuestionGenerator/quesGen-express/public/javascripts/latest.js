@@ -82,18 +82,16 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
     }
   }
 
-  function getSampleQuestion(){
-    $("#sampleQuestion").on("keypress",function(e){
+  function getSampleQuestion(){ // first function to be excuted
+    $("#sampleQuestion").on("keypress",function(e){ // enter key press event
       var code = (e.keyCode ? e.keyCode : e.which);
-     if(code == 13) { //Enter keycode
+     if(code == 13) { //Enter keycode.. when enter is pressed this becomes true
        executeOnGoOrEnter();
-        //  alert("Enter key Pressed");
      }
 
 });
-    $("#sampleQuestionButton").on("click", function() {
+    $("#sampleQuestionButton").on("click", function() { // or if the user clicks on go..
       executeOnGoOrEnter();
-
     });
 
   }
@@ -104,7 +102,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
     questionArray=getQuestionArray(sampleQuestion);
     // console.log(questionArray);
     for (var i = 0,j=0; i < questionArray.length;i++) {
-      if(exclusionList.indexOf(questionArray[i])==-1){
+      if(exclusionList.indexOf(questionArray[i].toLowerCase())==-1){ // exclude the words which are in exclusionList
        tempArrayForWords[j]=questionArray[i];
         j++;
       }
