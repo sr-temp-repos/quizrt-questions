@@ -11,6 +11,8 @@
   var qIdList=[];
   var optionData;
   var numberOfQuestionsGenrated; // variable to store number of questions Generated
+  var exclusionList=["","what","where","who","was","which","when","whom","who","whose","did","how","is","in","a","an","the","?","of","from"];
+  var tempArrayForWords=[]; // to have words which are not there in exclusionList
 
 $("#skipButton").on('click',function(){ // skip button in the help displaying div
   $('#introDiv').slideUp('slow'); // slideUp the intro div
@@ -81,18 +83,37 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
   }
 
   function getSampleQuestion(){
+    $("#sampleQuestion").on("keypress",function(e){
+      var code = (e.keyCode ? e.keyCode : e.which);
+     if(code == 13) { //Enter keycode
+       executeOnGoOrEnter();
+        //  alert("Enter key Pressed");
+     }
+
+});
     $("#sampleQuestionButton").on("click", function() {
-        $('#cbList').find("input").remove();
-        $('#cbList').find("label").remove();
-        var sampleQuestion = $("#sampleQuestion").val();
-        questionArray=getQuestionArray(sampleQuestion);
-        addCheckbox(questionArray);
-        $("#resetPage").show();
-        $("#resetPage").on("click", function() {
-          location.reload();
-        });
+      executeOnGoOrEnter();
+
     });
 
+  }
+  function executeOnGoOrEnter(){
+    $('#cbList').find("input").remove();
+    $('#cbList').find("label").remove();
+    var sampleQuestion = $("#sampleQuestion").val();
+    questionArray=getQuestionArray(sampleQuestion);
+    // console.log(questionArray);
+    for (var i = 0,j=0; i < questionArray.length;i++) {
+      if(exclusionList.indexOf(questionArray[i])==-1){
+       tempArrayForWords[j]=questionArray[i];
+        j++;
+      }
+    }
+    addCheckbox(tempArrayForWords);
+    $("#resetPage").show();
+    $("#resetPage").on("click", function() {
+      location.reload();
+    });
   }
   getSampleQuestion();
 
@@ -117,7 +138,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
 //       arrayForOption[count]=questionArray[j];
 //       count++;
 // }
-      addRadioButtons(questionArray);
+      addRadioButtons(tempArrayForWords);
       $("#radioDiv").slideDown();
     });
 
@@ -250,7 +271,8 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
       $("#radioDiv").slideUp();
       // $("#descriptionListDiv").slideDown();
       option=$('input[type="radio"]:checked').attr('id').split("")[2];
-      getProperties(questionArray[option]);
+      // console.log(option);
+      getProperties(tempArrayForWords[option]);
       aggregatedResult=aggregateVarAndConst(questionArray,checkedProperties); // aggregate the data and varOrConst Parameter
       questionStub=generateQuestionStub(aggregatedResult,option); // generate dummy question stub json..
       getEntityHints(questionStub["Var"]);
@@ -285,10 +307,16 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
           if(key.includes(data)||propertyValueList[key].includes(data)){
             var temp=propertyValueList[key].split(",");
             var newData;
+            if(key.includes(data))
+            {
+              newData=temp;
+            }
+            else{
             for(var i=0;i<temp.length;i++){
               if(temp[i].includes(data))
               newData=temp[i];
-            }
+            }}
+            // console.log(key,newData);
             searchedData[key]=newData;
           }
         }
@@ -302,6 +330,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
       option=$('input[type="radio"][name="descriptionList"]:checked').val();
 
       var claimForVariablePart=getData(propertyValueList,option);
+      // console.log(claimForVariablePart);
       var claimForOptionPart=getData(propertyValueList,optionData);
 
       generateQuestions(claimForVariablePart,claimForOptionPart,questionStub);
@@ -349,7 +378,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
         $.getJSON(resultUrl + "&callback=?", function(data) {
             numberOfQuestionsGenrated=data["items"].length;
             $.each(data["items"], function(k, v) {
-                if (k<200) {
+                if (k<1000) {
                     var link = tempURL + v + ".json";
                     $("#spinner").show();
                     $.getJSON(link, function(data) {
@@ -396,7 +425,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
             $('#questionListOptions').find("li").remove();
 
           var distractors=generateDistractors(questionList);
-          
+
           $("#questionListHeading").append($('<strong>',{
             text:"Number of Questions Generated " + numberOfQuestionsGenrated
           }));
@@ -404,7 +433,7 @@ $("#needHelp").on('click',function(){ // need help button... when clicked you ge
             $("#showGeneratedQuestionsOuter").show();
             $("#questionList").append($('<li>', {
                 value: questionList[i].split("?")[0]+" ?",
-                html: (i+1).toString().bold()+") "+" "+questionList[i].split("?")[0]+" ?"+ "<br>"+'" '+distractors[i][0].bold()+' "   '+distractors[i][1]+distractors[i][2]+distractors[i][3]
+                html: (i+1).toString().bold()+") "+" "+questionList[i].split("?")[0]+" ?"+ "<br>"+'a)'+distractors[i][0].bold()+'    '+" b) "+distractors[i][1]+" c) "+distractors[i][2]+" d) "+distractors[i][3]
             }).addClass("list-group-item"));
           }
 
