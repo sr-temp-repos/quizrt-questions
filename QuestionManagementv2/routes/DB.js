@@ -44,7 +44,6 @@ module.exports.QuestionDB = {
         console.log(err);
         callback(err,null);
       }
-      console.log(doc);
       for(var i = 0, doclen = doc.length; i<doclen; i++) {
         var topics = [],
             categories = [],
@@ -76,9 +75,17 @@ module.exports.TopicDB = {
       callback(err,doc);
     })
   },
-  findTopic: function(Category, query, callback) {
-    Category.find(query, function(err, doc) {
-      callback(err,doc);
+  findTopic: function(Topic, query, callback) {
+    Topic.find(query).populate({
+      path: 'category',
+      model: 'Category'
+    }).exec(function(err, doc) {
+      if(doc.length==1) {
+        doc[0].category = doc[0].category.name;
+        callback(err,doc);
+      } else {
+        callback(err,null);
+      }
     });
   }
 };

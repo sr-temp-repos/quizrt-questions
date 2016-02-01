@@ -23,6 +23,14 @@ module.exports = function(wagner) {
 
   router.post('/', function(req, res, next) {
     switch(req.body.requestType){
+      case 'add':
+        wagner.invoke(db.QuestionDB.add, {
+          json: req.body.questions,
+          callback: function(err, json) {
+            
+          }
+        });
+        break;
       case 'list':
         wagner.invoke(db.QuestionDB.find, {
           query: {},

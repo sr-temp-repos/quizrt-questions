@@ -14,8 +14,7 @@ var EditModalManager = {
       if(results.status==='success'){
         var $topicsWell = $(self.topicsWell),
             len = $topicsWell.find('.topics').length;
-
-        console.log($topicsWell);
+        
         $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
         $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
         var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {

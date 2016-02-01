@@ -39,14 +39,12 @@ module.exports = function(wagner) {
         break;
       case 'checkTopic':
         var textToSearch = req.body.checkExist;
-        wagner.invoke(db.TopicDB.find, {
+        wagner.invoke(db.TopicDB.findTopic, {
           query: { name : textToSearch },
           callback: function(err, doc) {
-            if(doc.length == 1) {
-              if(textToSearch === json[prop + ''].name) {
-                res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: json[prop+'']});
-                return;
-              }
+            if(doc) {
+              res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: doc[0]});
+              return;
             }
             else {
               res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic'});
