@@ -22,7 +22,7 @@ main {
 
 /* overiding default */
 #questionContainer {
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
 #questionList {
   width: inherit;
