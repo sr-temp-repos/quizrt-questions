@@ -44,7 +44,7 @@
               <td>{{dateFormater(x.lastEdited) | date:'MM/dd/yyyy'}}</td>
               <td>{{dateFormater(x.createdOn) | date:'MM/dd/yyyy'}}</td>
               <td>
-                <button type="button" class="btn btn-xs btn-default command-edit" >
+                <button type="button" class="btn btn-xs btn-default command-edit" ng-click="onEditClick($index)">
                    <!-- data-row-id="{{@index}}" data-question-id="{{questionId}}"> -->
                   <span class="glyphicon glyphicon-pencil"></span>
                 </button>

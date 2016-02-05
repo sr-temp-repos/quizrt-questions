@@ -1,4 +1,10 @@
 var EditModalManager = {
+  init: function() {
+    this.registerHelper();
+  },
+  registerHelper: function() {
+    
+  },
   addTopic: function(self,e) {
     var textEntered = $(this).closest('div').find('input')[0].value,
         $addBtn = $(this),
@@ -14,7 +20,7 @@ var EditModalManager = {
       if(results.status==='success'){
         var $topicsWell = $(self.topicsWell),
             len = $topicsWell.find('.topics').length;
-        
+
         $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
         $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
         var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {

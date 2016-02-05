@@ -1,4 +1,4 @@
-QuestionManagerApp.controller('index', ['$scope','$http', function($scope, $http) {
+QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function($scope, $uibModal, $http) {
   // $http.({
   //   method: 'POST',
   //   url: '/QuestionRequestHandler',
@@ -26,7 +26,8 @@ QuestionManagerApp.controller('index', ['$scope','$http', function($scope, $http
 
   QuestionManager.init({
     $scope: $scope,
-    $http: $http
+    $http: $http,
+    $uibModal: $uibModal
   });
 
 }]);

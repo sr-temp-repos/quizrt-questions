@@ -13,9 +13,9 @@
     <h4 class="modal-title">Edit Question</h4>
     <div class="form-inline pull-right wrapper">
       <label for="createdOn">Created Dated:</label>
-      <label class='divider' name="createdOn"><em>{{dateFormater(selectedQuestion.createdOn) | date:'MM/dd/yyyy')}}</em></label>
+      <label class='divider' name="createdOn"><em>{{dateFormater(selectedQuestion.createdOn) | date:'MM/dd/yyyy'}}</em></label>
       <label for="lastEdited">Last Edited:</label>
-      <label><em>{{dateFormater(selectedQuestion.lastEdited) | date:'MM/dd/yyyy')}}</em></label>
+      <label><em>{{dateFormater(selectedQuestion.lastEdited) | date:'MM/dd/yyyy'}}</em></label>
       <input type="hidden" id="lastEdited" name="lastEdited" value="{{selectedQuestion.lastEdited}}"/>
     </div>
   </div>
@@ -23,12 +23,14 @@
     <div class="form-group">
       <input type="hidden" name="questionId" value="{{questionId}}" />
       <label for="question">Question: </label><strong class="required text-danger">*</strong>
-      <textarea type="text" class="form-control" name="question" rows="4" data-toggle="tooltip" title="Question cannot be empty."> {{question}} </textarea>
+      <textarea type="text" class="form-control" name="question" rows="4" data-toggle="tooltip" title="Question cannot be empty.">
+        {{selectedQuestion.question}}
+      </textarea>
     </div>
     <div class="form-group">
       <label for='options'>Options:</label><strong class="required text-danger">*</strong>
       <uib-tabset>
-        <uib-tab ng-repeat="tab in getTabs(selectedQuestion)" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+        <uib-tab ng-repeat="tab in getTabs(selectedQuestion)" heading="$index+1" active="tab.active">
           {{tab.content}}
         </uib-tab>
       </uib-tabset>

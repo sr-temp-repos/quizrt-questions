@@ -86,6 +86,21 @@
         $scp.firstQuestion = (page-1) * $scp.selectedRowCount;
         self.getQuestionJson();
       };
+      self.$scope.onEditClick = function(index) {
+        var modalInstance = self.$uibModal.open({
+          animation: self.$scope.animationsEnabled,
+          templateUrl: 'modal.html',
+          controller: 'EditQuestionControl',
+          resolve: {
+            $mainControllerScope: function () {
+              return {
+                selectedQuestion: self.$scope.questions[index],
+                dateFormater:self.$scope.dateFormater
+              }
+            }
+          }
+        });
+      }
     },
     getCurrentDate: function() {
       var todayDate = new Date();
