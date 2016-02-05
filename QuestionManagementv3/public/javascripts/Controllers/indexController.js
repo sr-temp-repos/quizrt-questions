@@ -21,7 +21,9 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function
 
     /* Pagination Setup */
     firstQuestion: 0,
-    currentPage: 1
+    currentPage: 1,
+    /* searchText */
+    searchText:""
   });
 
   QuestionManager.init({

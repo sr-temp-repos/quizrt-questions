@@ -31,11 +31,22 @@ module.exports = function(wagner) {
           }
         });
         break;
-      case 'list':
+      case 'search':
+        var query = req.body.query,
+          rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
+
+        query=  (query=="")? {} : { $or : [
+              { question :  rgexQuery },
+              { topicIds: { $elemMatch: { name: rgexQuery } } },
+              { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
+            ]
+          };
+
         wagner.invoke(db.QuestionDB.getCount, {
+          query: query,
           callback : function(err, count) {
             wagner.invoke(db.QuestionDB.find, {
-              query: {},
+              query: query,
               firstQuestion: req.body.firstQuestion,
               count: req.body.count,
               callback : function(err, json) {
@@ -53,22 +64,22 @@ module.exports = function(wagner) {
         //   res.json(json);
         // });
         break;
-      case 'search':
-        //readJSONFile(questionJSONFileURL, function(err, json) {
-        var query = req.body.query,
-            rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
-        wagner.invoke(db.QuestionDB.find, {
-          query: { $or : [
-              { question :  rgexQuery },
-              { topicIds: { $elemMatch: { name: rgexQuery } } },
-              { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
-            ]
-          },
-          callback : function(err, json) {
-            res.json(json);
-          }
-        });
-        break;
+      // case 'search':
+      //   //readJSONFile(questionJSONFileURL, function(err, json) {
+      //   var query = req.body.query,
+      //       rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
+      //   wagner.invoke(db.QuestionDB.find, {
+      //     query: { $or : [
+      //         { question :  rgexQuery },
+      //         { topicIds: { $elemMatch: { name: rgexQuery } } },
+      //         { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
+      //       ]
+      //     },
+      //     callback : function(err, json) {
+      //       res.json(json);
+      //     }
+      //   });
+      //   break;
       case 'edit':
         /* Data base area for edit operations */
         res.json({status: 'success', message: 'Success : Successfully saved the question'});

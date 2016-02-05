@@ -72,6 +72,15 @@
       //   self.$formSection.children('input')[0].value = "";
       //   self.$formSection.submit();
       // });
+      self.$scope.onSearch= function(){
+        self.getQuestionJson();
+      };
+
+      self.$scope.onReset= function(){
+        self.$scope.searchText="";
+        self.getQuestionJson();
+      };
+
       self.$scope.noOfRowChange = function(item, indexSelected) {
         var $scp = self.$scope;
         $scp.firstQuestion = 0;
@@ -124,11 +133,12 @@
 
       self.$http({
         url: '/QuestionRequestHandler',
-        data: {requestType: 'list', firstQuestion: $scp.firstQuestion, count: $scp.selectedRowCount},
+        data: {requestType: 'search', firstQuestion: $scp.firstQuestion, count: $scp.selectedRowCount,query: $scp.searchText},
         // dataType: 'json',
         method: 'post'
       }).then(function(results) {
         var dt = results.data;
+        console.log(results);
         $scp.questions = dt.rows;
         $scp.totalQuestions = dt.count;
         $scp.lastQuestion = $scp.firstQuestion + $scp.selectedRowCount;

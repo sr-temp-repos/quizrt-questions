@@ -32,8 +32,14 @@ module.exports.QuestionDB = {
       });
     });
   },
-  getCount: function(Question, callback) {
-    Question.find({}).count({},function(err,doc) {
+  getCount: function(Question,query, callback) {
+    Question.find({}).populate({
+      path: 'topicIds',
+      model: 'Topics',
+      populate: {
+        path: 'category',
+        model: 'Category'
+    }}).count(query,function(err,doc) {
       callback(err, doc);
     });
   },
