@@ -36,7 +36,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-  app.use(express.static(path.join(__dirname, 'views')));
 
 
 app.use('/', routes);
@@ -49,7 +48,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-console.log('connectionURL');
+// console.log('connectionURL');
 // error handlers
 
 // development error handler

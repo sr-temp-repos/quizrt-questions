@@ -6,7 +6,7 @@ var QuestionManagerApp = angular.module("QuestionManagerApp", [
 .config(function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'index.ejs',
+      templateUrl: 'QuestionManager.html',
       controller: 'index',
       controllerAs: 'indexController'
     })
