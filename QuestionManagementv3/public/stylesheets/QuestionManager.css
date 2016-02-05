@@ -1,0 +1,74 @@
+main {
+  margin-top: 30px;
+}
+
+#search {
+  width: inherit;
+}
+
+#searchForm > * {
+  margin-left: 10px;
+  padding: 3px;
+}
+
+#pageNo > .pagination {
+  margin: 0px;
+}
+
+#pageNo > .pageTracker {
+  text-align: right;
+  margin: 25px 0px;
+}
+
+/* overiding default */
+#questionContainer {
+  overflow: scroll;
+}
+#questionList {
+  width: inherit;
+  margin-bottom: 0px;
+}
+#alertArea {
+  display: none;
+}
+
+.divider:after {
+  content: ' | ';
+}
+.modal-header * {
+  display: inline-block;
+}
+.topics {
+  display: inline-block;
+  margin : 2px;
+  padding: 2px;
+}
+#topicsWell {
+  display: inline-block;
+}
+.form-inline > * {
+  margin-top: 10px;
+}
+.wrapper {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 0px;
+  color: grey;
+}
+.wrapper::before {
+  content: '(';
+}
+.wrapper:after {
+  content: ')';
+}
+
+.alert {
+  display: none;
+}
+
+.form-hidden {
+  display: none;
+}
+.required {
+  font-size: 18px;
+}
