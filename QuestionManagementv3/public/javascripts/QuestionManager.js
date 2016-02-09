@@ -138,7 +138,6 @@
         method: 'post'
       }).then(function(results) {
         var dt = results.data;
-        console.log(results);
         $scp.questions = dt.rows;
         $scp.totalQuestions = dt.count;
         $scp.lastQuestion = $scp.firstQuestion + $scp.selectedRowCount;

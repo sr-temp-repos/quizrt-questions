@@ -3,70 +3,110 @@ var EditModalManager = {
   init: function(config) {
     angular.extend(this,config);
     this.registerHelper();
+    this.eventHandler();
   },
   registerHelper: function() {
-      var self=this;
-      //console.log(this);
-
-        var tabs=[];
-        for( var i=1;i<=12;i++ ) {
-          if( self.$scope.selectedQuestion['option' + i] ) {
-            tabs.push({
-              content: self.$scope.selectedQuestion['option' + i],
-              title: 'option' + i
-            });
-          } else {
-            break;
-          }
+    var self=this;
+    self.$scope.getTabs = function() {
+      var tabs=[];
+      for( var i=1;i<=12;i++ ) {
+        if( self.$scope.selectedQuestion['option' + i] ) {
+          tabs.push({
+            content: self.$scope.selectedQuestion['option' + i],
+            title: 'Option ' + i
+          });
+        } else {
+          break;
         }
-        self.$scope.tabs=tabs;
-
-        self.$scope.getMax = function(question){
-          for( var i=1;i<=12;i++ ) {
-            if( question['option' + i] ) {
-            } else {
-              break;
-            }
-          }
-          return i-1;
-        }
-
-        // self.$scope.editQuestionClose = function(){
-        //   self.$uibModalInstance.dismiss('cancel');
-        // };
-  },
-  addTopic: function(self,e) {
-    var textEntered = $(this).closest('div').find('input')[0].value,
-        $addBtn = $(this),
-        topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html()),
-        $topicIdsHidden = $(self.topicIds)[0],
-        $categories = $(self.categories);
-    $.ajax({
-      url: '/TopicsRequestHandler',
-      data: {requestType: 'checkTopic', checkExist: textEntered  },
-      dataType: 'json',
-      method: 'post'
-    }).done(function(results) {
-      if(results.status==='success'){
-        var $topicsWell = $(self.topicsWell),
-            len = $topicsWell.find('.topics').length;
-
-        $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-        $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-        var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-          self.onTopicWellClose.call(this,self);
-        }).end();
-        $topicsWell.append(newWell);
-        $($topicsWell.find('.topics')[len]).data('topicId',len);
       }
-      else {
-        $(self.messageArea).html(self.messages['newTopic']).slideDown();
-        $(self.newTopicForm).slideDown();
-        $addBtn.fadeOut();
-        $(self.topicName).attr('disabled',true);
+      return tabs;
+    };
+    self.$scope.tabs=self.$scope.getTabs();
+
+    self.$scope.getMax = function(question){
+      for( var i=1;i<=12;i++ ) {
+        if( question['option' + i] ) {
+        } else {
+          break;
+        }
+      }
+      return i-1;
+    }
+  },
+  eventHandler: function() {
+    var self = this;
+    self.$scope.editQuestionClose = function() {
+       self.$uibModalInstance.dismiss('cancel');
+    };
+
+    self.$scope.addNewTopic = function() {
+      self.addTopic(self);
+    };
+    self.$scope.deleteTopic = function(index) {
+      self.deleteTopic(self,index);
+    };
+  },
+  addTopic: function(self) {
+    var scp = self.$scope;
+    self.$http({
+      url: '/TopicsRequestHandler',
+      data: {requestType: 'checkTopic', checkExist: scp.topicName },
+      method: 'post'
+    }).then(function(results) {
+      console.log(results);
+      var dt = results.data;
+      if(dt.status==='success') {
+        scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
+        scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+      } else {
+        scp.newTopicForm = true;
       }
     });
   },
+  deleteTopic: function(self, index) {
+    var scp = self.$scope,
+        sq = scp.selectedQuestion,
+        topics = sq.topics.replace(/\s/g,'').split(','),
+        categories = sq.categories.replace(/\s/g,'').split(',');
+    console.log(topics + ' \n' + categories);
+    topics.splice(index,1);
+    categories.splice(index,1);
+    sq.topics = topics.join(', ');
+    sq.categories = categories.join(', ');
+    console.log(topics + ' \n' + categories);
+  },
+  // addTopic: function(self,e) {
+  //   var textEntered = $(this).closest('div').find('input')[0].value,
+  //       $addBtn = $(this),
+  //       topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html()),
+  //       $topicIdsHidden = $(self.topicIds)[0],
+  //       $categories = $(self.categories);
+  //   $.ajax({
+  //     url: '/TopicsRequestHandler',
+  //     data: {requestType: 'checkTopic', checkExist: textEntered  },
+  //     dataType: 'json',
+  //     method: 'post'
+  //   }).done(function(results) {
+  //     if(results.status==='success'){
+  //       var $topicsWell = $(self.topicsWell),
+  //           len = $topicsWell.find('.topics').length;
+  //
+  //       $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
+  //       $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
+  //       var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
+  //         self.onTopicWellClose.call(this,self);
+  //       }).end();
+  //       $topicsWell.append(newWell);
+  //       $($topicsWell.find('.topics')[len]).data('topicId',len);
+  //     }
+  //     else {
+  //       $(self.messageArea).html(self.messages['newTopic']).slideDown();
+  //       $(self.newTopicForm).slideDown();
+  //       $addBtn.fadeOut();
+  //       $(self.topicName).attr('disabled',true);
+  //     }
+  //   });
+  // },
   addCategoryId: function(self) {
     var $addCategoryTxt = $(this).closest('div').find('input')[0],
         textEntered = $addCategoryTxt.value,

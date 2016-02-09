@@ -23,7 +23,7 @@
     <div class="form-group">
       <input type="hidden" name="questionId" value="{{questionId}}" />
       <label for="question">Question: </label><strong class="required text-danger">*</strong>
-      <textarea type="text" class="form-control" name="question" rows="4" data-toggle="tooltip" title="Question cannot be empty.">
+      <textarea type="text" class="form-control" name="question" rows="4" data-toggle="tooltip" title="Question cannot be empty." ng-model="selectedQuestion.question">
         {{selectedQuestion.question}}
       </textarea>
     </div>
@@ -59,22 +59,23 @@
     <div class="wrap">
       <div class="form-inline">
         <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
-        <div id="topicsWell">
-          {{selectedQuestion.topics}}
+        <div ng-repeat="topic in selectedQuestion.topics.replace('/\s/g','').split(',') track by $index" class="well well-sm topics">
+          {{topic}}
+          <button type="button" class="close" ng-click="deleteTopic($index)">&times;</button>
         </div>
       </div>
       <div class="form-inline" data-toggle="tooltip">
-        <strong id="messageArea" class="text-warning form-hidden"></strong>
-        <input type="text" class="form-control" id="topicName" list="topicList" placeholder="Enter Topics to add"  data-toggle="tooltip" title="Topics cannot be empty. Please add one." />
-        <input type="button" class="form-control btn btn-warning" id="addTopicId" value="Add" />
+        <strong id="messageArea" class="text-warning">{{messages[messageSelect]}}</strong>
+        <input type="text" class="form-control" id="topicName" list="topicList" placeholder="Enter Topics to add" ng-model="topicName" ng-disabled="newTopicForm" data-toggle="tooltip" title="Topics cannot be empty. Please add one." />
+        <input type="button" class="form-control btn btn-warning" ng-show="!newTopicForm" ng-hide="newTopicForm" id="addTopicId" value="Add" ng-click="addNewTopic()" />
         <input type="hidden" id="topicIds" name="topicsIds" value="{{topicId}}" />
-        <div class="form-hidden" id="newTopicForm">
+        <div ng-show="newTopicForm" ng-hide="!newTopicForm">
           <input type="text" class="form-control" list="categoryList" placeholder="Enter category to add" />
-          <input type="button" class="form-control btn btn-warning" id="addCategories" value="Add" />
-          <input type="button" class="form-control btn btn-default" id="cancelCategories" value="Cancel" />
+          <input type="button" class="form-control btn btn-warning" ng-show="!newCategoryForm" ng-hide="newCategoryForm" ng-click="addCategories()" value="Add" />
+          <input type="button" class="form-control btn btn-default" ng-show="!newCategoryForm" ng-hide="newCategoryForm" ng-click="cancelCategories()" value="Cancel" />
           <p></p>
         </div>
-        <div class="form-hidden" id="newCategoryForm">
+        <div ng-show="newCategoryForm" ng-hide="!newCategoryForm">
           <strong class="text-warning" >Are you sure you want to add new Category?</strong>
             <input type="button" class="form-control btn btn-warning" id="yesBtn" value="Yes" />
             <input type="button" class="form-control btn btn-default" id="noBtn" value="No" />
