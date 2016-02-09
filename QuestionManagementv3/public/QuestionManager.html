@@ -1,6 +1,6 @@
   <main class="container">
     <div id="search" class="well row">
-      <form id="searchForm" class="col-sm-9 col-xs-9" action="">
+      <form id="searchForm" class="col-sm-9 col-xs-9" ng-submit="onSearch()">
         <input name="searchText" id="searchText" ng-model="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />
         <button type="button" class="btn btn-success col-sm-2 col-xs-2" ng-click="onSearch()" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
         <button type="reset" class="btn btn-default col-sm-2 col-xs-2" ng-click="onReset()"><span class="glyphicon glyphicon-remove"></span> Clear </button>
@@ -50,7 +50,7 @@
                 </button>
                 <button type="button" class="btn btn-xs btn-default command-delete">
                   <!-- data-row-id="{{@index}}" data-question-id="{{questionId}}"> -->
-                  <span class="glyphicon glyphicon-remove"></span>
+                  <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </td>
             </tr>

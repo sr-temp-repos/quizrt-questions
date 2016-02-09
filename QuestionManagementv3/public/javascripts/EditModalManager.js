@@ -65,7 +65,6 @@ var EditModalManager = {
       data: {requestType: 'checkTopic', checkExist: scp.topicName },
       method: 'post'
     }).then(function(results) {
-      console.log(results);
       var dt = results.data;
       if(dt.status==='success') {
         scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
@@ -81,12 +80,10 @@ var EditModalManager = {
         sq = scp.selectedQuestion,
         topics = sq.topics.replace(/\s/g,'').split(','),
         categories = sq.categories.replace(/\s/g,'').split(',');
-    console.log(topics + ' \n' + categories);
     topics.splice(index,1);
     categories.splice(index,1);
     sq.topics = topics.join(', ');
     sq.categories = categories.join(', ');
-    console.log(topics + ' \n' + categories);
   },
   // addTopic: function(self,e) {
   //   var textEntered = $(this).closest('div').find('input')[0].value,

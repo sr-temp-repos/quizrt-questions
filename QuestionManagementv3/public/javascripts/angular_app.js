@@ -1,7 +1,8 @@
 var QuestionManagerApp = angular.module("QuestionManagerApp", [
   'ngRoute',
   'bw.paging',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnimate'
 ])
 .config(function ($routeProvider, $locationProvider) {
   $routeProvider

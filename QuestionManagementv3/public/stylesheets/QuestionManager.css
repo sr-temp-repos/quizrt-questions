@@ -32,6 +32,22 @@ main {
   display: none;
 }
 
+/*Animate hide and show area */
+.animate-show {
+  opacity: 1;
+  line-height: normal;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  opacity: 0;
+  line-height: 0;
+}
+/* End of angular animations*/
+
 .divider:after {
   content: ' | ';
 }
