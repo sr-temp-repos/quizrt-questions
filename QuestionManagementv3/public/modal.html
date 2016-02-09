@@ -1,6 +1,6 @@
 <!-- Modal Window --> 
 <!-- <div class="modal fade" id="myModal" role="dialog"> -->
-  <!-- <div class="modal-dialog">
+  <!-- <div class="modal-dialog">-->
     <!-- Modal content-->
     <!-- <div class="modal-content">
     </div>
@@ -30,8 +30,8 @@
     <div class="form-group">
       <label for='options'>Options:</label><strong class="required text-danger">*</strong>
       <uib-tabset>
-        <uib-tab ng-repeat="tab in getTabs(selectedQuestion)" heading="$index+1" active="tab.active">
-          {{tab.content}}
+        <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+          <textarea class="form-control" rows="4" name="option(@index)" data-toggle="tooltip" title="Option (@index) cannot be empty.">{{tab.content}}</textarea>
         </uib-tab>
       </uib-tabset>
       <!-- <div class="tab-content">
@@ -50,17 +50,17 @@
     </div>
     <div class="form-group">
       <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
-      <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax(this)}}" value="{{correctIndex}}"  data-toggle="tooltip" title="Correct Index cannot be empty." />
+      <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax(selectedQuestion)}}" value="{{selectedQuestion.correctIndex}}"  data-toggle="tooltip" title="Correct Index cannot be empty." />
     </div>
     <div class="form-group">
       <label for="correctIndex">Image:</label>
-      <input type="text" class="form-control" name="correctIndex" value="{{image}}" />
+      <input type="text" class="form-control" name="correctIndex" value="{{selectedQuestion.image}}" />
     </div>
     <div class="wrap">
       <div class="form-inline">
         <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
         <div id="topicsWell">
-          {{{generateTpcs this.topics}}}
+          {{selectedQuestion.topics}}
         </div>
       </div>
       <div class="form-inline" data-toggle="tooltip">
@@ -83,22 +83,22 @@
     </div>
     <div class="form-inline">
       <label for="categories">Categories:</label>
-      <em><label id="categories" name="categories" >{{categories}}</label></em>
+      <em><label id="categories" name="categories" >{{selectedQuestion.categories}}</label></em>
     </div>
     <div class="form-group">
       <label for="difficultyLevel">Difficulty Level:</label>
-      <label  class='divider' name="difficultyLevel">{{difficultyLevel}}</label>
+      <label  class='divider' name="difficultyLevel">{{selectedQuestion.difficultyLevel}}</label>
       <label for="timesUsed">Times Used: </label>
-      <label  class='divider' name="timesUsed">{{timesUsed}}</label>
+      <label  class='divider' name="timesUsed">{{selectedQuestion.timesUsed}}</label>
       <label for="correctRatio">Correct Ratio:</label>
-      <label  class='divider' name="correctRatio">{{correctRatio}}</label>
+      <label  class='divider' name="correctRatio">{{selectedQuestion.correctRatio}}</label>
       <label for="frequency">Frequency:</label>
-      <label name="frequency">{{frequency}}</label>
+      <label name="frequency">{{selectedQuestion.frequency}}</label>
       <input type="hidden" name="requestType" value="edit" />
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="editQuestionClose()">Close</button>
-    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="submit" class="btn btn-primary" ng-click="onQuestionSave()">Save changes</button>
   </div>
 </form>

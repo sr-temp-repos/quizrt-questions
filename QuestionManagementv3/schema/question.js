@@ -8,7 +8,7 @@ var questionSchema = {
   questionId: {type: String, required: true},
   question: { type: String, required: true },
   // Pictures must start with "http://"
-  picture: { type: String, match: /^http:\/\//i },
+  image: { type: String, match: /^http:\/\//i },
   option1: { type: String, required: true },
   option2: { type: String, required: true },
   option3: { type: String },

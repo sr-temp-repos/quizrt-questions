@@ -1,9 +1,39 @@
+(function() {
 var EditModalManager = {
-  init: function() {
+  init: function(config) {
+    angular.extend(this,config);
     this.registerHelper();
   },
   registerHelper: function() {
-    
+      var self=this;
+      //console.log(this);
+
+        var tabs=[];
+        for( var i=1;i<=12;i++ ) {
+          if( self.$scope.selectedQuestion['option' + i] ) {
+            tabs.push({
+              content: self.$scope.selectedQuestion['option' + i],
+              title: 'option' + i
+            });
+          } else {
+            break;
+          }
+        }
+        self.$scope.tabs=tabs;
+
+        self.$scope.getMax = function(question){
+          for( var i=1;i<=12;i++ ) {
+            if( question['option' + i] ) {
+            } else {
+              break;
+            }
+          }
+          return i-1;
+        }
+
+        // self.$scope.editQuestionClose = function(){
+        //   self.$uibModalInstance.dismiss('cancel');
+        // };
   },
   addTopic: function(self,e) {
     var textEntered = $(this).closest('div').find('input')[0].value,
@@ -204,3 +234,5 @@ var EditModalManager = {
   }
 
 };
+window.EditModalManager = EditModalManager;
+})();
