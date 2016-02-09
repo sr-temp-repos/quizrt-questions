@@ -45,6 +45,18 @@ var EditModalManager = {
     self.$scope.deleteTopic = function(index) {
       self.deleteTopic(self,index);
     };
+    self.$scope.addCategories = function() {
+      self.addCategoryId(self);
+    };
+    self.$scope.cancelCategories = function() {
+      self.cancelCategoryIdClicked(self);
+    };
+    self.$scope.onYesBtnClick = function() {
+      self.yesBtnClicked(self);
+    };
+    self.$scope.onNoBtnClick = function() {
+      self.noBtnClicked(self);
+    };
   },
   addTopic: function(self) {
     var scp = self.$scope;
@@ -59,6 +71,7 @@ var EditModalManager = {
         scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
         scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
       } else {
+        scp.messageSelect = 1;
         scp.newTopicForm = true;
       }
     });
@@ -108,104 +121,133 @@ var EditModalManager = {
   //   });
   // },
   addCategoryId: function(self) {
-    var $addCategoryTxt = $(this).closest('div').find('input')[0],
-        textEntered = $addCategoryTxt.value,
-        $newTopicForm = $(self.newTopicForm),
-        $newCategoryForm = $(self.newCategoryForm),
-        $topicIdsHidden = $(self.topicIds)[0],
-        $categories = $(self.categories),
-        topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html());
-    $.ajax({
+    var scp = self.$scope;
+    self.$http({
       url: '/TopicsRequestHandler',
-      data: {requestType: 'checkCategory', checkExist: textEntered, newTopicName: $(self.topicName)[0].value },
-      dataType: 'json',
+      data: {requestType: 'checkCategory', checkExist: scp.categoryName },
       method: 'post'
-    }).done(function(results) {
-      if(results.status==='success') {
-        var $topicsWell = $(self.topicsWell),
-            len = $topicsWell.find('.topics').length;
-
-        $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-        $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-        var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-          self.onTopicWellClose.call(this,self);
-        }).end();
-        $topicsWell.append(newWell);
-        $(self.messageArea).slideUp().removeClass('text-danger');
-        $($topicsWell.find('.topics')[len]).data('topicId',len);
-        $newTopicForm.slideUp();
-        $(self.addTopicId).fadeIn();
-        $(self.topicName).attr('disabled',false);
+    }).then(function(results) {
+      console.log(results);
+      var dt = results.data;
+      if(dt.status==='success') {
+        scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + scp.topicName;
+        scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+        scp.messageSelect = 0;
+        scp.newTopicForm = false;
       } else {
-      //  console.log($(self.messageArea).removeClass('text-danger'));
-        $(self.messageArea).html(self.messages['newCategory']).removeClass('text-danger');
-        $($addCategoryTxt).attr('disabled',true);
-        $newTopicForm.find(':button').fadeOut();
-        $newCategoryForm.slideDown();
-        $newCategoryForm.data('topicObj', results.topicObj);
+        scp.messageSelect = 2;
+        scp.newCategoryForm = true;
       }
     });
+    // var $addCategoryTxt = $(this).closest('div').find('input')[0],
+    //     textEntered = $addCategoryTxt.value,
+    //     $newTopicForm = $(self.newTopicForm),
+    //     $newCategoryForm = $(self.newCategoryForm),
+    //     $topicIdsHidden = $(self.topicIds)[0],
+    //     $categories = $(self.categories),
+    //     topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html());
+    // $.ajax({
+    //   url: '/TopicsRequestHandler',
+    //   data: {requestType: 'checkCategory', checkExist: textEntered, newTopicName: $(self.topicName)[0].value },
+    //   dataType: 'json',
+    //   method: 'post'
+    // }).done(function(results) {
+    //   if(results.status==='success') {
+    //     var $topicsWell = $(self.topicsWell),
+    //         len = $topicsWell.find('.topics').length;
+    //
+    //     $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
+    //     $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
+    //     var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
+    //       self.onTopicWellClose.call(this,self);
+    //     }).end();
+    //     $topicsWell.append(newWell);
+    //     $(self.messageArea).slideUp().removeClass('text-danger');
+    //     $($topicsWell.find('.topics')[len]).data('topicId',len);
+    //     $newTopicForm.slideUp();
+    //     $(self.addTopicId).fadeIn();
+    //     $(self.topicName).attr('disabled',false);
+    //   } else {
+    //   //  console.log($(self.messageArea).removeClass('text-danger'));
+    //     $(self.messageArea).html(self.messages['newCategory']).removeClass('text-danger');
+    //     $($addCategoryTxt).attr('disabled',true);
+    //     $newTopicForm.find(':button').fadeOut();
+    //     $newCategoryForm.slideDown();
+    //     $newCategoryForm.data('topicObj', results.topicObj);
+    //   }
+    // });
   },
-  cancelCategoryIdClicked: function(self,e) {
-    $(self.addTopicId).fadeIn();
-    $(self.newTopicForm).slideUp();
-    $(self.topicName).attr('disabled',false);
-    $(self.messageArea).slideUp();
+  cancelCategoryIdClicked: function(self) {
+    var scp = self.$scope;
+    scp.newTopicForm = false;
+    scp.messageSelect = 0;
+    // $(self.addTopicId).fadeIn();
+    // $(self.newTopicForm).slideUp();
+    // $(self.topicName).attr('disabled',false);
+    // $(self.messageArea).slideUp();
   },
-  yesBtnClicked: function(self,e) {
-
-      var $newCategoryForm = $(self.newCategoryForm),
-          $newTopicForm = $(self.newTopicForm),
-          $topicIdsHidden = $(self.topicIds)[0],
-          $categories = $(self.categories),
-          $addCategoryTxt = $newTopicForm.find('input')[0],
-          topicObj = $newCategoryForm.data('topicObj');
-
-      $.ajax({
-        url: '/TopicsRequestHandler',
-        data: {requestType: 'addTopicCategory', newTopicObj: topicObj },
-        dataType: 'json',
-        method: 'post'
-      }).done(function(results) {
-
-        if(results.status === 'success') {
-          var $topicsWell = $(self.topicsWell),
-              len = $topicsWell.find('.topics').length;
-
-          $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-          $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-          var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-            self.onTopicWellClose.call(this,self);
-          }).end();
-          $topicsWell.append(newWell);
-          $($topicsWell.find('.topics')[len]).data('topicId',len);
-          $newCategoryForm.slideUp();
-          $newTopicForm.slideUp();
-          $(self.messageArea).slideUp();
-          $($addCategoryTxt).attr('disabled',false);
-          $(self.addTopicId).fadeIn();
-          $(self.topicName).attr('disabled',false);
-          $newTopicForm.find(':button').fadeIn();
-        }
-        else {
-          $(self.messageArea).html(self.messages['error']).addClass('text-danger');
-          $newCategoryForm.slideUp();
-          $($addCategoryTxt).attr('disabled',false);
-          $newTopicForm.find(':button').fadeIn();
-        }
-      });
+  yesBtnClicked: function(self) {
+      var scp = self.$scope;
+      scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + scp.topicName;
+      scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + scp.categoryName;
+      scp.messageSelect = 0;
+      scp.newCategoryForm = false;
+      scp.newTopicForm = false;
+      // var $newCategoryForm = $(self.newCategoryForm),
+      //     $newTopicForm = $(self.newTopicForm),
+      //     $topicIdsHidden = $(self.topicIds)[0],
+      //     $categories = $(self.categories),
+      //     $addCategoryTxt = $newTopicForm.find('input')[0],
+      //     topicObj = $newCategoryForm.data('topicObj');
+      //
+      // $.ajax({
+      //   url: '/TopicsRequestHandler',
+      //   data: {requestType: 'addTopicCategory', newTopicObj: topicObj },
+      //   dataType: 'json',
+      //   method: 'post'
+      // }).done(function(results) {
+      //
+      //   if(results.status === 'success') {
+      //     var $topicsWell = $(self.topicsWell),
+      //         len = $topicsWell.find('.topics').length;
+      //
+      //     $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
+      //     $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
+      //     var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
+      //       self.onTopicWellClose.call(this,self);
+      //     }).end();
+      //     $topicsWell.append(newWell);
+      //     $($topicsWell.find('.topics')[len]).data('topicId',len);
+      //     $newCategoryForm.slideUp();
+      //     $newTopicForm.slideUp();
+      //     $(self.messageArea).slideUp();
+      //     $($addCategoryTxt).attr('disabled',false);
+      //     $(self.addTopicId).fadeIn();
+      //     $(self.topicName).attr('disabled',false);
+      //     $newTopicForm.find(':button').fadeIn();
+      //   }
+      //   else {
+      //     $(self.messageArea).html(self.messages['error']).addClass('text-danger');
+      //     $newCategoryForm.slideUp();
+      //     $($addCategoryTxt).attr('disabled',false);
+      //     $newTopicForm.find(':button').fadeIn();
+      //   }
+      // });
   },
-  noBtnClicked: function(self,e) {
-      var $newCategoryForm = $(self.newCategoryForm),
-          $newTopicForm = $(self.newTopicForm),
-          $topicIdsHidden = $(self.topicIds)[0],
-          $categories = $(self.categories),
-          $addCategoryTxt = $newTopicForm.find('input')[0];
-
-      $newCategoryForm.slideUp();
-      $($addCategoryTxt).attr('disabled',false);
-      $newTopicForm.find(':button').fadeIn();
-      $(self.messageArea).html(self.messages['newTopic']).removeClass('text-danger');
+  noBtnClicked: function(self) {
+      var scp = self.$scope;
+      scp.newCategoryForm = false;
+      scp.messageSelect = 1;
+      // var $newCategoryForm = $(self.newCategoryForm),
+      //     $newTopicForm = $(self.newTopicForm),
+      //     $topicIdsHidden = $(self.topicIds)[0],
+      //     $categories = $(self.categories),
+      //     $addCategoryTxt = $newTopicForm.find('input')[0];
+      //
+      // $newCategoryForm.slideUp();
+      // $($addCategoryTxt).attr('disabled',false);
+      // $newTopicForm.find(':button').fadeIn();
+      // $(self.messageArea).html(self.messages['newTopic']).removeClass('text-danger');
   },
   editQuestionFormSubmit: function(self,e) {
     var $self = $(this),

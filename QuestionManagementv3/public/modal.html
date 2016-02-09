@@ -70,15 +70,15 @@
         <input type="button" class="form-control btn btn-warning" ng-show="!newTopicForm" ng-hide="newTopicForm" id="addTopicId" value="Add" ng-click="addNewTopic()" />
         <input type="hidden" id="topicIds" name="topicsIds" value="{{topicId}}" />
         <div ng-show="newTopicForm" ng-hide="!newTopicForm">
-          <input type="text" class="form-control" list="categoryList" placeholder="Enter category to add" />
+          <input type="text" class="form-control" list="categoryList" placeholder="Enter category to add" ng-model="categoryName"/>
           <input type="button" class="form-control btn btn-warning" ng-show="!newCategoryForm" ng-hide="newCategoryForm" ng-click="addCategories()" value="Add" />
           <input type="button" class="form-control btn btn-default" ng-show="!newCategoryForm" ng-hide="newCategoryForm" ng-click="cancelCategories()" value="Cancel" />
           <p></p>
         </div>
         <div ng-show="newCategoryForm" ng-hide="!newCategoryForm">
           <strong class="text-warning" >Are you sure you want to add new Category?</strong>
-            <input type="button" class="form-control btn btn-warning" id="yesBtn" value="Yes" />
-            <input type="button" class="form-control btn btn-default" id="noBtn" value="No" />
+            <input type="button" class="form-control btn btn-warning" id="yesBtn" value="Yes" ng-click="onYesBtnClick()"/>
+            <input type="button" class="form-control btn btn-default" id="noBtn" value="No" ng-click="onNoBtnClick()"/>
         </div>
       </div>
     </div>
