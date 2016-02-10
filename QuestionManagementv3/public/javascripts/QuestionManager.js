@@ -104,6 +104,7 @@
             $mainControllerScope: function () {
               return {
                 selectedQuestion: angular.copy(self.$scope.questions[index]),
+                QuestionManager: self,
                 dateFormater:self.$scope.dateFormater
               }
             }

@@ -288,10 +288,10 @@ var EditModalManager = {
       // dataType: 'json',
       method: 'post'
     }).then(function(results) {
-      console.log(results);
-      // self.getQuestionJson();
+      //console.log(results);
+      scp.QuestionManager.getQuestionJson();
     }, function errorCall(data) {
-      console.log(data);
+      //console.log(data);
     });
   },
   editQuestionFormSubmit: function(self,e) {
