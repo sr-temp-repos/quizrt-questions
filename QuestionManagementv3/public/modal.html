@@ -23,7 +23,7 @@
     <div class="form-group" ng-class="{'has-error' : !selectedQuestion.question}">
       <input type="hidden" name="questionId" value="{{questionId}}" />
       <label for="question">Question: </label><strong class="required text-danger">*</strong>
-      <textarea type="text" class="form-control" name="question" rows="4" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="selectedQuestion.question.length<1" title="Question cannot be empty." ng-model="selectedQuestion.question">
+      <textarea type="text" class="form-control" name="question" rows="4" ng-model="selectedQuestion.question" title="Question cannot be empty." required>
         {{selectedQuestion.question}}
       </textarea>
     </div>
@@ -32,7 +32,7 @@
       <uib-tabset>
         <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
           <div class="form-group" ng-class="{'has-error' : !tab.content}">
-            <textarea class="form-control" rows="4" name="option{{$index}}" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="tab.content.length<1" title="Option ({{$index+1}}) cannot be empty.">
+            <textarea class="form-control" rows="4" name="option{{$index+1}}" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="!tab.content" title="Option ({{$index+1}}) cannot be empty." required>
               {{tab.content}}
             </textarea>
           </div>
@@ -54,11 +54,11 @@
     </div>
     <div class="form-group">
       <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
-      <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax(selectedQuestion)}}" value="{{selectedQuestion.correctIndex}}"  data-toggle="tooltip" title="Correct Index cannot be empty." />
+      <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax(selectedQuestion)}}" value="{{selectedQuestion.correctIndex}}" title="Correct Index cannot be empty." required />
     </div>
     <div class="form-group">
       <label for="correctIndex">Image:</label>
-      <input type="text" class="form-control" name="correctIndex" value="{{selectedQuestion.image}}" />
+      <input type="text" class="form-control" name="image" value="{{selectedQuestion.image}}" />
     </div>
     <div class="wrap">
       <div class="form-inline">
