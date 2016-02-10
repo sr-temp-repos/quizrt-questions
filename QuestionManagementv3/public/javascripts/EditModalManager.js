@@ -59,7 +59,12 @@ var EditModalManager = {
     };
     self.$scope.newTopic = function(topic,category) {
       self.newTopic(self,topic,category);
-    }
+    };
+    self.$scope.onQuestionSave = function(question) {
+      // console.log(question);
+      self.QuestionSave(self,question);
+      self.$uibModalInstance.dismiss('cancel');
+    };
   },
   addTopic: function(self) {
     var scp = self.$scope;
@@ -267,6 +272,21 @@ var EditModalManager = {
       });
 
 
+  },
+  QuestionSave: function(self,question) {
+    var scp = self.$scope;
+    //console.log(scp);
+    self.$http({
+      url: '/QuestionRequestHandler',
+      data: {requestType: 'save', question: question},
+      // dataType: 'json',
+      method: 'post'
+    }).then(function(results) {
+      console.log(results);
+      // self.getQuestionJson();
+    }, function errorCall(data) {
+      console.log(data);
+    });
   },
   editQuestionFormSubmit: function(self,e) {
     var $self = $(this),

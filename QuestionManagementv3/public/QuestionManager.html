@@ -23,17 +23,55 @@
               <th data-column-id='question'>Question</th>
               <th data-column-id='topicId'>Topics</th>
               <th data-column-id='categories'>Categories</th>
-              <th data-column-id='difficultyLevel'>Difficulty Level</th>
-              <th data-column-id='timesUsed'>Times Used</th>
-              <th data-column-id='correctRatio'>Correct Ratio</th>
-              <th data-column-id='frequency'>Frequecy per Day</th>
-              <th data-column-id='lastEdited'>Last Edited</th>
-              <th data-column-id='createdOn'>Created On</th>
+              <th data-column-id='difficultyLevel' ng-click="sortType = 'difficultyLevel'; sortReverse = !sortReverse">
+                <a href="#">
+                  Difficulty Level
+                  <span ng-show="sortType == 'difficultyLevel' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'difficultyLevel' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th data-column-id='timesUsed' ng-click="sortType = 'timesUsed'; sortReverse = !sortReverse">
+                <a href="#">
+                  Times Used
+                  <span ng-show="sortType == 'timesUsed' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'timesUsed' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th data-column-id='correctRatio' ng-click="sortType = 'correctRatio'; sortReverse = !sortReverse">
+                <a href="#">
+                  Correct Ratio
+                  <span ng-show="sortType == 'correctRatio' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'correctRatio' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th data-column-id='frequency' ng-click="sortType = 'frequency'; sortReverse = !sortReverse">
+                <a href="#">
+                  Frequecy per Day
+                  <span ng-show="sortType == 'frequency' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'frequency' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th data-column-id='lastEdited' ng-click="sortType = 'lastEdited'; sortReverse = !sortReverse">
+                <a href="#">
+                  Last Edited
+                  (mm/dd/yyyy)
+                  <span ng-show="sortType == 'lastEdited' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'lastEdited' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th data-column-id='createdOn' ng-click="sortType = 'createdOn'; sortReverse = !sortReverse">
+                <a href="#">
+                  Created On
+                  (mm/dd/yyyy)
+                  <span ng-show="sortType == 'createdOn' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'createdOn' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
               <th data-column-id='commands'>Edit/Delete</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="question-row" ng-repeat="x in questions">
+            <tr class="question-row" ng-repeat="x in questions | orderBy:sortType:sortReverse">
               <td class="question">{{x.question}}</td>
               <td>{{x.topics}}</td>
               <td>{{x.categories}}</td>
@@ -48,7 +86,7 @@
                    <!-- data-row-id="{{@index}}" data-question-id="{{questionId}}"> -->
                   <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button type="button" class="btn btn-xs btn-default command-delete">
+                <button type="button" class="btn btn-xs btn-default command-delete" ng-click="onDeleteClick($index)">
                   <!-- data-row-id="{{@index}}" data-question-id="{{questionId}}"> -->
                   <span class="glyphicon glyphicon-trash"></span>
                 </button>

@@ -71,6 +71,31 @@ module.exports.QuestionDB = {
       }
       callback(null,doc);
     });
+  },
+  delete: function(Question,id,callback) {
+    Question.remove({ _id : id }).exec(function(err,doc){
+    if(err){
+      console.log(err);
+      callback(err,null);
+    }
+    callback(null,doc);
+    });
+  },
+  save: function(Question,question,callback) {
+    // console.log(question.lastEdited);
+    question.lastEdited = new Date();
+    // console.log(question.lastEdited);
+    var q = new Question(question);
+    var upsertData = q.toObject();
+    delete upsertData._id;
+    Question.update({ _id : question._id },upsertData,{upsert: true},function(err,doc){
+      if(err){
+        console.log(err);
+        callback(err,null);
+      }
+      // console.log();
+      callback(null,doc);
+    });
   }
 };
 

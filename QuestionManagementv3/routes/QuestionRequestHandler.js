@@ -80,19 +80,43 @@ module.exports = function(wagner) {
       //     }
       //   });
       //   break;
-      case 'edit':
+      case 'save':
         /* Data base area for edit operations */
-        res.json({status: 'success', message: 'Success : Successfully saved the question'});
-        break;
-      case 'delete':
-        readJSONFile(questionJSONFileURL, function(err, json) {
-          var questionIdToDelete = parseInt(req.body.questionId);
-          if( json.length > questionIdToDelete && questionIdToDelete > -1 ) {
-            res.json({status: 'success', message: 'Success : Deleted ' + questionIdToDelete + ' from the question data store.'});
-          } else {
-            res.json({status: 'failure', message: 'Failure : Cannot able to find ' + questionIdToDelete + ' in the question data store.'});
+        // res.json({status: 'success', message: 'Success : Successfully saved the question'});
+        var question = req.body.question;
+        // console.log(id);
+        wagner.invoke(db.QuestionDB.save,{
+          question: question,
+          callback: function(err, doc) {
+            if (doc) {
+              res.json({status: 'success', message: 'Success : Saved in the question data store.'});
+            } else {
+              res.json({status: 'failure', message: 'Failure : Cannot able to save  in the question data store.'});
+            }
           }
         });
+        break;
+      case 'delete':
+        var id = req.body.questionId;
+        // console.log(id);
+        wagner.invoke(db.QuestionDB.delete,{
+          id: id,
+          callback: function(err, doc) {
+            if (doc) {
+              res.json({status: 'success', message: 'Success : Deleted ' + id + ' from the question data store.'});
+            } else {
+              res.json({status: 'failure', message: 'Failure : Cannot able to delete ' + id + ' in the question data store.'});
+            }
+          }
+        });
+        // readJSONFile(questionJSONFileURL, function(err, json) {
+        //   var questionIdToDelete = parseInt(req.body.questionId);
+        //   if( json.length > questionIdToDelete && questionIdToDelete > -1 ) {
+        //     res.json({status: 'success', message: 'Success : Deleted ' + questionIdToDelete + ' from the question data store.'});
+        //   } else {
+        //     res.json({status: 'failure', message: 'Failure : Cannot able to find ' + questionIdToDelete + ' in the question data store.'});
+        //   }
+        // });
     }
 
   });

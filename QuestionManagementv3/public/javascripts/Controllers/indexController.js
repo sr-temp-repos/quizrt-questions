@@ -23,7 +23,10 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function
     firstQuestion: 0,
     currentPage: 1,
     /* searchText */
-    searchText:""
+    searchText:"",
+    /* default sort*/
+    //sortType     = 'frequency', // set the default sort type
+    sortReverse: false  // set the default sort order
   });
 
   QuestionManager.init({

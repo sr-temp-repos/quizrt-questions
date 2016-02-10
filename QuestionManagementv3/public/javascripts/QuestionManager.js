@@ -109,7 +109,15 @@
             }
           }
         });
-      }
+      };
+      self.$scope.onDeleteClick = function(index) {
+        var selectedQuestion = self.$scope.questions[index];
+        // console.log(selectedQuestion._id);
+        self.onQuestionDelete(self,selectedQuestion._id);
+      };
+      self.$scope.orderByMe = function(x) {
+        self.$scope.myOrderBy = x;
+      };
     },
     getCurrentDate: function() {
       var todayDate = new Date();
@@ -233,36 +241,49 @@
         self.onTopicWellClose.call(this,self)
       });
     },
-    onQuestionDelete: function(self) {
-      var questionNumber = $(this).data('rowId'),
-          pageNo = self.$pageNo.data('pageNo')-1,
-          selectedRowCount = self.$dropDownId.data('selectedRowCount');
-
-      //sending request to server for delete operation
-      $.ajax({
+    onQuestionDelete: function(self,id) {
+      var scp = self.$scope;
+      //console.log(scp);
+      self.$http({
         url: '/QuestionRequestHandler',
-        data: {requestType: 'delete', questionId: (questionNumber + pageNo * selectedRowCount)},
-        dataType: 'json',
+        data: {requestType: 'delete', questionId: id},
+        // dataType: 'json',
         method: 'post'
-      }).done(function(result) {
-        var alertHandleFunction = Handlebars.compile($(self.alertTemplateID).html()),
-            $alertArea = $('.alert');
-
-        // Check Alert Area exits
-        if($alertArea.length > 0 ) {
-          $alertArea.slideUp(500,function(){
-            $alertArea.remove();
-            $(alertHandleFunction(result)).insertAfter(self.$searchWell).slideDown(500);
-          });
-        } else {
-          $(alertHandleFunction(result)).insertAfter(self.$searchWell).slideDown(500);
-        }
-
-        if(result.status == 'success') {
-          self.results.splice(questionNumber,1);
-          self.redraw(self.results);
-        }
+      }).then(function(results) {
+        //console.log(results);
+        self.getQuestionJson();
+      }, function errorCall(data) {
+        // console.log(data);
       });
+      // var questionNumber = $(this).data('rowId'),
+      //     pageNo = self.$pageNo.data('pageNo')-1,
+      //     selectedRowCount = self.$dropDownId.data('selectedRowCount');
+      //
+      // //sending request to server for delete operation
+      // $.ajax({
+      //   url: '/QuestionRequestHandler',
+      //   data: {requestType: 'delete', questionId: (questionNumber + pageNo * selectedRowCount)},
+      //   dataType: 'json',
+      //   method: 'post'
+      // }).done(function(result) {
+      //   var alertHandleFunction = Handlebars.compile($(self.alertTemplateID).html()),
+      //       $alertArea = $('.alert');
+      //
+      //   // Check Alert Area exits
+      //   if($alertArea.length > 0 ) {
+      //     $alertArea.slideUp(500,function(){
+      //       $alertArea.remove();
+      //       $(alertHandleFunction(result)).insertAfter(self.$searchWell).slideDown(500);
+      //     });
+      //   } else {
+      //     $(alertHandleFunction(result)).insertAfter(self.$searchWell).slideDown(500);
+      //   }
+      //
+      //   if(result.status == 'success') {
+      //     self.results.splice(questionNumber,1);
+      //     self.redraw(self.results);
+      //   }
+      // });
     },
     listQuestions: function(results) {
       var $questionContainer = this.$questionContainer,
