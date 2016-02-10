@@ -120,6 +120,5 @@ module.exports = function(wagner) {
     }
 
   });
-
   return router;
 }

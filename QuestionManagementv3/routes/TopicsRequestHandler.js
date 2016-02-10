@@ -77,7 +77,6 @@ module.exports = function(wagner) {
           topicObj['_id'] = newTopicId;
         });
         break;
-
       case 'addTopicCategory':
         var newTopicObj = {
           topicId: req.body['newTopicObj[topicId]'],

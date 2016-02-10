@@ -68,6 +68,12 @@ var EditModalManager = {
   },
   addTopic: function(self) {
     var scp = self.$scope;
+    if(scp.topicName.length == 0)
+    {
+      scp.messageSelect = 4;
+      return;
+    }
+    scp.messageSelect = 0;
     self.$http({
       url: '/TopicsRequestHandler',
       data: {requestType: 'checkTopic', checkExist: scp.topicName },
