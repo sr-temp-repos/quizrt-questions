@@ -70,6 +70,13 @@ module.exports = function(wagner) {
           res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
         });
         break;
+      case 'addNewTopic':
+        var topicObj = req.body.topicObj;
+        readJSONFile(topicsJSONFileURL, function(err, json) {
+          var newTopicId = 'T' + (Object.keys(json).length+1);
+          topicObj['_id'] = newTopicId;
+        }
+
       case 'addTopicCategory':
         var newTopicObj = {
           topicId: req.body['newTopicObj[topicId]'],

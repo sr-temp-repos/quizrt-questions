@@ -57,6 +57,9 @@ var EditModalManager = {
     self.$scope.onNoBtnClick = function() {
       self.noBtnClicked(self);
     };
+    self.$scope.newTopic = function(topic,category) {
+      self.newTopic(self,topic,category);
+    }
   },
   addTopic: function(self) {
     var scp = self.$scope;
@@ -69,6 +72,7 @@ var EditModalManager = {
       if(dt.status==='success') {
         scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
         scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+        console.log(scp.selectedQuestion);
       } else {
         scp.messageSelect = 1;
         scp.newTopicForm = true;
@@ -131,6 +135,8 @@ var EditModalManager = {
         scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
         scp.messageSelect = 0;
         scp.newTopicForm = false;
+        //var len = scp.selectedQuestion.topicIds.length;
+        scp.newTopic(scp.topicName,dt.topicObj.category);
       } else {
         scp.messageSelect = 2;
         scp.newCategoryForm = true;
@@ -245,6 +251,22 @@ var EditModalManager = {
       // $($addCategoryTxt).attr('disabled',false);
       // $newTopicForm.find(':button').fadeIn();
       // $(self.messageArea).html(self.messages['newTopic']).removeClass('text-danger');
+  },
+  newTopic : function(self,topic,category)  {
+      var scp = self.$scope,
+          obj = {
+                  name : topic,
+                  category : category
+                };
+      self.$http({
+        url: '/TopicsRequestHandler',
+        data: {requestType: 'addNewTopic', topicObj: obj },
+        method: 'post'
+      }).then(function(results) {
+          console.log(results);
+      });
+
+
   },
   editQuestionFormSubmit: function(self,e) {
     var $self = $(this),
