@@ -39,7 +39,8 @@ module.exports.QuestionDB = {
       populate: {
         path: 'category',
         model: 'Category'
-    }}).count(query,function(err,doc) {
+      }
+    }).count(query,function(err,doc) {
       callback(err, doc);
     });
   },
@@ -50,7 +51,8 @@ module.exports.QuestionDB = {
       populate: {
         path: 'category',
         model: 'Category'
-    }}).find(query).exec(function(err, doc) {
+      }
+    }).find(query).exec(function(err, doc) {
       if(err) {
         console.log(err);
         callback(err,null);

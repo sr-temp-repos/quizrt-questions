@@ -103,7 +103,7 @@
           resolve: {
             $mainControllerScope: function () {
               return {
-                selectedQuestion: self.$scope.questions[index],
+                selectedQuestion: angular.copy(self.$scope.questions[index]),
                 dateFormater:self.$scope.dateFormater
               }
             }

@@ -75,8 +75,8 @@ module.exports = function(wagner) {
         readJSONFile(topicsJSONFileURL, function(err, json) {
           var newTopicId = 'T' + (Object.keys(json).length+1);
           topicObj['_id'] = newTopicId;
-        }
-
+        });
+        break;
       case 'addTopicCategory':
         var newTopicObj = {
           topicId: req.body['newTopicObj[topicId]'],

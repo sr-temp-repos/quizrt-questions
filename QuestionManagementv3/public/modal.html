@@ -20,10 +20,10 @@
     </div>
   </div>
   <div class="modal-body">
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error' : !selectedQuestion.question}">
       <input type="hidden" name="questionId" value="{{questionId}}" />
       <label for="question">Question: </label><strong class="required text-danger">*</strong>
-      <textarea type="text" class="form-control" name="question" rows="4" data-toggle="tooltip" title="Question cannot be empty." ng-model="selectedQuestion.question">
+      <textarea type="text" class="form-control" name="question" rows="4" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="selectedQuestion.question.length<1" title="Question cannot be empty." ng-model="selectedQuestion.question">
         {{selectedQuestion.question}}
       </textarea>
     </div>
@@ -31,7 +31,11 @@
       <label for='options'>Options:</label><strong class="required text-danger">*</strong>
       <uib-tabset>
         <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
-          <textarea class="form-control" rows="4" name="option(@index)" data-toggle="tooltip" title="Option (@index) cannot be empty.">{{tab.content}}</textarea>
+          <div class="form-group" ng-class="{'has-error' : !tab.content}">
+            <textarea class="form-control" rows="4" name="option{{$index}}" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="tab.content.length<1" title="Option ({{$index+1}}) cannot be empty.">
+              {{tab.content}}
+            </textarea>
+          </div>
         </uib-tab>
       </uib-tabset>
       <!-- <div class="tab-content">
@@ -66,9 +70,9 @@
       </div>
       <div class="form-inline" data-toggle="tooltip">
         <strong id="messageArea" class="text-warning">{{messages[messageSelect]}}</strong>
-        <input type="text" class="form-control" id="topicName" list="topicList" placeholder="Enter Topics to add" ng-model="topicName" ng-disabled="newTopicForm" data-toggle="tooltip" title="Topics cannot be empty. Please add one." />
-        <input type="button" class="form-control btn btn-warning" ng-show="!newTopicForm" ng-hide="newTopicForm" id="addTopicId" value="Add" ng-click="addNewTopic()" />
-        <input type="hidden" id="topicIds" name="topicsIds" value="{{topicId}}" />
+        <input type="text" class="form-control" list="topicList" placeholder="Enter Topics to add" ng-model="topicName" ng-disabled="newTopicForm" tooltip-trigger="focus" uib-tooltip="Topic cannot be empty." tooltip-enable="!topicName" />
+        <input type="button" class="form-control btn btn-warning" ng-hide="newTopicForm" value="Add" ng-click="addNewTopic()" />
+        <input type="hidden" name="topicsIds" value="{{topicId}}" />
         <div class="animate-show" ng-hide="!newTopicForm">
           <input type="text" class="form-control" list="categoryList" placeholder="Enter category to add" ng-model="categoryName" ng-disabled="newCategoryForm" />
           <input type="button" class="form-control btn btn-warning" ng-hide="newCategoryForm" ng-click="addCategories()" value="Add" />
