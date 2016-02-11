@@ -176,6 +176,7 @@ var EditModalManager = {
       } else {
         scp.messageSelect = 2;
         scp.newCategoryForm = true;
+        scp.newTopicObj = dt.topicObj;
       }
     });
     // var $addCategoryTxt = $(this).closest('div').find('input')[0],
@@ -226,12 +227,37 @@ var EditModalManager = {
     // $(self.messageArea).slideUp();
   },
   yesBtnClicked: function(self) {
-      var scp = self.$scope;
-      scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + scp.topicName;
-      scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + scp.categoryName;
-      scp.messageSelect = 0;
-      scp.newCategoryForm = false;
-      scp.newTopicForm = false;
+    var scp = self.$scope;
+    console.log(scp.newTopicObj);
+    self.$http({
+      url: '/TopicsRequestHandler',
+      data: {requestType: 'addTopicCategory',  topicObj : scp.newTopicObj },
+      method: 'post'
+    }).then(function(results) {
+      console.log(results);
+      var dt = results.data;
+      console.log(dt);
+      if(dt.status==='success') {
+        if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
+          scp.selectedQuestion.topics = dt.topicObj.name;
+          scp.selectedQuestion.categories = dt.topicObj.category;
+          scp.selectedQuestion.topicId = dt.topicObj._id;
+        } else {
+          scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
+          scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+          scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+        }
+          scp.messageSelect = 0;
+          scp.newCategoryForm = false;
+          scp.newTopicForm = false;
+    } else {
+          scp.messageSelect = 2;
+          scp.newCategoryForm = true;
+          scp.newTopicObj = dt.topicObj;
+    }
+    });
+      // var scp = self.$scope;
+
       // var $newCategoryForm = $(self.newCategoryForm),
       //     $newTopicForm = $(self.newTopicForm),
       //     $topicIdsHidden = $(self.topicIds)[0],
