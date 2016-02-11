@@ -62,64 +62,81 @@ module.exports = function(wagner) {
               topicObj = { name: topicObj, category: textToSearch };
               res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
             } else { // Category found - create a topic with existing category
-              // Get topics count
               wagner.invoke(db.TopicDB.getCount,{
                 callback: function(err, doc) {
-                    var newTopicId = 'T' + (doc+1),
-                        obj = {
-                          _id: newTopicId,
-                          name: topicObj,
-                          imageUrl: "",
-                          category: categoryObj[0]._id
-                        };
-                    wagner.invoke(db.TopicDB.addTopic,{
-                      topicObj: obj,
-                      callback: function(err){
-                        if(err) {
-                          topicObj = { name: topicObj, category: textToSearch };
-                          res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
-                        }
-                        obj.category = categoryObj[0].name;
-                        res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
+                  var newTopicId = 'T' + (doc+1),
+                      obj = {
+                        _id: newTopicId,
+                        name: topicObj,
+                        imageUrl: "",
+                        category: categoryObj[0]._id
+                      };
+                  console.log(obj);
+                  wagner.invoke(db.TopicDB.addTopic,{
+                    topicObj: obj,
+                    callback: function(err){
+                      if(err){
+                        topicObj = { name: topicObj, category: textToSearch };
+                        res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
                       }
-                    });
+                      obj.category = categoryObj[0].name;
+                      res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
+                    }
+                  });
                 }
               });
-              // create a topic id with category id
-              // send res.json
             }
           }
         });
-        // readJSONFile(topicsJSONFileURL, function(err, json) {
-        //   var newTopicId = 'T' + (Object.keys(json).length+1);
-        //   json[newTopicId] = {topicId: newTopicId, name: req.body.newTopicName};
-        //   for(var prop in json) {
-        //     if(textToSearch === json[prop + ''].category) {
-        //       //updating values
-        //       json[newTopicId]['category'] = json[prop+''].category;
-        //       res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
-        //       return;
-        //     }
-        //   }
-        //   //New Category to be added
-        //   json[newTopicId]['category'] = textToSearch;
-        //   res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
-        // });
         break;
-      case 'addNewTopic':
-        var topicObj = req.body.topicObj;
-        readJSONFile(topicsJSONFileURL, function(err, json) {
-          var newTopicId = 'T' + (Object.keys(json).length+1);
-          topicObj['_id'] = newTopicId;
-        });
-        break;
+
       case 'addTopicCategory':
-        var newTopicObj = {
-          topicId: req.body['newTopicObj[topicId]'],
-          name: req.body['newTopicObj[name]'],
-          category: req.body['newTopicObj[category]']
-        };
-        res.json({status: 'success', message: 'Success : Added New Topic ' + newTopicObj.topicId + ' topic', topicObj: newTopicObj });
+      // get the count of category and generate new category id
+      // add the new category
+      // get the topic count and add it with category id
+        var topicObj = req.body.topicObj;
+        console.log(topicObj);
+        wagner.invoke(db.CategoryDB.getCount,{
+          callback: function(err, doc) {
+            var newCategoryId = 'C' + (doc+1),
+                obj = {
+                  _id: newCategoryId,
+                  name: topicObj.category,
+                  imageUrl: "",
+                };
+            var categoryObj = obj;
+            wagner.invoke(db.CategoryDB.addCategory, {
+              categoryObj: categoryObj,
+              callback: function(err) {
+                if(err){
+                  res.json({status: 'failure', message: 'Failure : Not added ' + topicObj.category + ' category', topicObj: topicObj });
+                }
+                // res.json({status: 'success', message: 'Success : Added ' + topicObj.category + ' category', topicObj: obj});
+                wagner.invoke(db.TopicDB.getCount, {
+                  callback: function(err, doc) {
+                    var newTopicId = 'T' + (doc+1),
+                        obj = {
+                          _id: newTopicId,
+                          name: topicObj.name,
+                          imageUrl: "",
+                          category: categoryObj._id
+                        };
+                    wagner.invoke(db.TopicDB.addTopic, {
+                      topicObj: obj,
+                      callback: function(err) {
+                        if(err){
+                          res.json({status: 'failure', message: 'Failure : Not added ' + topicObj.name + ' topic', topicObj: topicObj });
+                        }
+                        obj.category = categoryObj.name;
+                        res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
         break;
     }
   });

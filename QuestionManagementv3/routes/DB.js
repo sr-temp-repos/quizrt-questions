@@ -128,7 +128,7 @@ module.exports.TopicDB = {
   list: function(Topic, callback) {
     Topic.find({}, function(err, doc) {
       callback(err,doc);
-    })
+    });
   },
   findTopic: function(Topic, query, callback) {
     Topic.find(query).populate({
@@ -165,6 +165,17 @@ module.exports.CategoryDB = {
       query = {};
       Category.find(query, function(err, doc) {
       callback(err,doc);
+    });
+  },
+  getCount: function(Category, callback) {
+    Category.find({}).count(function(err,doc) {
+      callback(err, doc);
+    });
+  },
+  addCategory: function(Category,categoryObj,callback) {
+    var c = new Category(categoryObj);
+    c.save(function(err){
+      callback(err);
     });
   }
 };
