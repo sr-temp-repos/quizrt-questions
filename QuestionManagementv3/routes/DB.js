@@ -133,8 +133,10 @@ module.exports.TopicDB = {
 };
 
 module.exports.CategoryDB = {
-  list: function(Category, callback) {
-    Category.find({}, function(err, doc) {
+  find: function(Category, query, callback) {
+    if(query)
+      query = {};
+    Category.find({query}, function(err, doc) {
       callback(err,doc);
     });
   }

@@ -79,6 +79,7 @@ var EditModalManager = {
       return;
     }
     scp.messageSelect = 0;
+    scp.newtopicObj = "";
     self.$http({
       url: '/TopicsRequestHandler',
       data: {requestType: 'checkTopic', checkExist: scp.topicName },
@@ -95,10 +96,10 @@ var EditModalManager = {
           scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
           scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
         }
-        console.log(scp.selectedQuestion.topics);
       } else {
         scp.messageSelect = 1;
         scp.newTopicForm = true;
+        scp.newtopicObj = scp.topicName;
       }
     });
   },
@@ -151,7 +152,7 @@ var EditModalManager = {
     var scp = self.$scope;
     self.$http({
       url: '/TopicsRequestHandler',
-      data: {requestType: 'checkCategory', checkExist: scp.categoryName },
+      data: {requestType: 'checkCategory', checkExist: scp.categoryName, topicObj : scp.newTopicObj },
       method: 'post'
     }).then(function(results) {
       console.log(results);

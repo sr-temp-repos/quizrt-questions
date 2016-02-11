@@ -31,7 +31,7 @@ module.exports = function(wagner) {
         });
         break;
       case 'listCategories':
-        wagner.invoke(db.CategoryDB.list, {
+        wagner.invoke(db.CategoryDB.find, {
           callback: function(err, doc) {
             res.json(doc);
           }
@@ -53,7 +53,21 @@ module.exports = function(wagner) {
         })
         break;
       case 'checkCategory':
-        var textToSearch = req.body.checkExist;
+        var textToSearch = req.body.checkExist,
+            topicObj = req.body.topicObj;
+        wagner.invoke(db.CategoryDB.find, {
+          query: { name : textToSearch },
+          callback: function(err, doc) {
+            if(doc.length < 1) { // Category not found - return a object with new category name filled for conformation.
+              topicObj = { name: topicObj, category: textToSearch };
+              res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: topicObj });
+            } else { // Category found - create a topic with existing category
+              // Get topics count
+              // create a topic id with category id
+              // send res.json
+            }
+          }
+        });
         readJSONFile(topicsJSONFileURL, function(err, json) {
           var newTopicId = 'T' + (Object.keys(json).length+1);
           json[newTopicId] = {topicId: newTopicId, name: req.body.newTopicName};
