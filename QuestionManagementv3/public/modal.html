@@ -7,7 +7,7 @@
   </div> -->
 <!-- </div> -->
 
-<form id="editQuestion" method="post">
+<form id="editQuestion" method="post" ng-submit="onQuestionSave(selectedQuestion)">
   <div class="modal-header">
     <button type="button" class="close" ng-click="editQuestionClose()">&times;</button>
     <h4 class="modal-title">Edit Question</h4>
@@ -24,15 +24,14 @@
       <input type="hidden" name="questionId" value="{{questionId}}" />
       <label for="question">Question: </label><strong class="required text-danger">*</strong>
       <textarea type="text" class="form-control" name="question" rows="4" ng-model="selectedQuestion.question" title="Question cannot be empty." required>
-        {{selectedQuestion.question}}
       </textarea>
     </div>
     <div class="form-group">
       <label for='options'>Options:</label><strong class="required text-danger">*</strong>
       <uib-tabset>
-        <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
+        <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
           <div class="form-group" ng-class="{'has-error' : !tab.content}">
-            <textarea class="form-control" rows="4" name="option{{$index+1}}" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="!tab.content" title="Option ({{$index+1}}) cannot be empty." required>
+            <textarea class="form-control" rows="4" name="option{{$index+1}}" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="!tab.content" title="Option ({{$index+1}}) cannot be empty.">
               {{tab.content}}
             </textarea>
           </div>
@@ -52,18 +51,18 @@
         {{/each}}
       </div> -->
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
       <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
-      <input type="number" class="form-control" name="correctIndex" min="1" max="{{getMax(selectedQuestion)}}" value="{{selectedQuestion.correctIndex}}" title="Correct Index cannot be empty." required />
+      <input type="number" class="form-control" ng-model="selectedQuestion.correctIndex" name="correctIndex" min="1" max="{{getMax(selectedQuestion)}}" title="Correct Index cannot be empty." required />
     </div>
     <div class="form-group">
-      <label for="correctIndex">Image:</label>
+      <label for="image">Image:</label>
       <input type="text" class="form-control" name="image" value="{{selectedQuestion.image}}" />
     </div>
     <div class="wrap">
-      <div class="form-inline">
+      <div class="form-inline" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
         <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
-        <div ng-if="selectedQuestion.topics.length > 0" ng-repeat="topic in selectedQuestion.topics.replace('/\s/g','').split(',') track by $index" class="well well-sm topics">
+        <div ng-if="selectedQuestion.topics.length > 0" ng-repeat="topic in selectedQuestion.topics.replace('/\s/g','').split(',')" class="well well-sm topics">
           {{topic}}
           <button type="button" class="close" ng-click="deleteTopic($index)">&times;</button>
         </div>
@@ -72,7 +71,7 @@
         <strong id="messageArea" class="text-warning">{{messages[messageSelect]}}</strong>
         <input type="text" class="form-control" list="topicList" placeholder="Enter Topics to add" ng-model="topicName" ng-disabled="newTopicForm" tooltip-trigger="focus" uib-tooltip="Topic cannot be empty." tooltip-enable="!topicName" />
         <input type="button" class="form-control btn btn-warning" ng-hide="newTopicForm" value="Add" ng-click="addNewTopic()" />
-        <input type="hidden" name="topicsIds" value="{{topicId}}" />
+        <input type="hidden" name="topicsIds" ng-model="selectedQuestion.topicId"/>
         <div class="animate-show" ng-hide="!newTopicForm">
           <input type="text" class="form-control" list="categoryList" placeholder="Enter category to add" ng-model="categoryName" ng-disabled="newCategoryForm" />
           <input type="button" class="form-control btn btn-warning" ng-hide="newCategoryForm" ng-click="addCategories()" value="Add" />
@@ -104,6 +103,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="editQuestionClose()">Close</button>
-    <button type="button" class="btn btn-primary" ng-click="onQuestionSave(selectedQuestion)">Save changes</button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
   </div>
 </form>

@@ -7,7 +7,8 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         'Topic that was entered is new, please tag it with some category', // newTopic message
         'Category that was entered is new, please comfirm as requested below', // newCategory message
         'Failed to insert new Topic and Category, please try again', //error message
-        'Topic cannot be Empty'
+        'Topic cannot be Empty. Please add a topic using below form.', // If topic empty
+        'Duplicate Topic Not Allowed. Try some other Topic name.' // Duplicate topic addition
       ],
       messageSelect: 0,
       newTopicForm: false,

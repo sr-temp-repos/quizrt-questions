@@ -13,6 +13,7 @@ var EditModalManager = {
         if( self.$scope.selectedQuestion['option' + i] ) {
           tabs.push({
             content: self.$scope.selectedQuestion['option' + i],
+            active: (i==1),
             title: 'Option ' + i
           });
         } else {
@@ -63,14 +64,18 @@ var EditModalManager = {
     self.$scope.onQuestionSave = function(question) {
       // console.log(question);
       self.QuestionSave(self,question);
-      self.$uibModalInstance.dismiss('cancel');
     };
   },
   addTopic: function(self) {
     var scp = self.$scope;
+
     if(scp.topicName.length == 0)
     {
       scp.messageSelect = 4;
+      return;
+    }
+    if( scp.selectedQuestion.topics.split(', ').indexOf(scp.topicName) > -1 ) {
+      scp.messageSelect = 5;
       return;
     }
     scp.messageSelect = 0;
@@ -81,9 +86,16 @@ var EditModalManager = {
     }).then(function(results) {
       var dt = results.data;
       if(dt.status==='success') {
-        scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
-        scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
-        console.log(scp.selectedQuestion);
+        if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
+          scp.selectedQuestion.topics = dt.topicObj.name;
+          scp.selectedQuestion.categories = dt.topicObj.category;
+          scp.selectedQuestion.topicId = dt.topicObj._id;
+        } else {
+          scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
+          scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+          scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+        }
+        console.log(scp.selectedQuestion.topics);
       } else {
         scp.messageSelect = 1;
         scp.newTopicForm = true;
@@ -95,10 +107,13 @@ var EditModalManager = {
         sq = scp.selectedQuestion,
         topics = sq.topics.replace(/\s/g,'').split(','),
         categories = sq.categories.replace(/\s/g,'').split(',');
+        topicIds = sq.topicId.replace(/\s/g,'').split(',');
     topics.splice(index,1);
     categories.splice(index,1);
+    topicIds.splice(index,1);
     sq.topics = topics.join(', ');
     sq.categories = categories.join(', ');
+    sq.topicId = topicIds.join(', ');
   },
   // addTopic: function(self,e) {
   //   var textEntered = $(this).closest('div').find('input')[0].value,
@@ -281,14 +296,33 @@ var EditModalManager = {
   },
   QuestionSave: function(self,question) {
     var scp = self.$scope;
-    //console.log(scp);
+
+    for(var index in scp.tabs) {
+      if(!scp.tabs[index].content)
+      {
+        for(var i in scp.tabs)
+        {
+          if(scp.tabs[i].active) {
+            scp.tabs[i].active=false;
+            scp.tabs[index].active=true;
+            break;
+          }
+        }
+        return;
+      }
+    }
+    if(!question.topicId || question.topicId.length < 1 )
+    {
+      scp.messageSelect = 4;
+      return;
+    }
     self.$http({
       url: '/QuestionRequestHandler',
       data: {requestType: 'save', question: question},
       // dataType: 'json',
       method: 'post'
     }).then(function(results) {
-      //console.log(results);
+      self.$uibModalInstance.dismiss('cancel');
       scp.QuestionManager.getQuestionJson();
     }, function errorCall(data) {
       //console.log(data);
