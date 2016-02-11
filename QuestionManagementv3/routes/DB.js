@@ -129,14 +129,28 @@ module.exports.TopicDB = {
         callback(err,null);
       }
     });
+  },
+  getCount: function(Topic, callback) {
+    Topic.find({}).populate({
+      path: 'category',
+      model: 'Category'
+    }).count(function(err,doc) {
+      callback(err, doc);
+    });
+  },
+  addTopic: function(Topic,topicObj,callback) {
+    var t = new Topic(topicObj);
+    t.save(function(err){
+      callback(err);
+    });
   }
 };
 
 module.exports.CategoryDB = {
   find: function(Category, query, callback) {
-    if(query)
+    if(!query)
       query = {};
-    Category.find({query}, function(err, doc) {
+      Category.find(query, function(err, doc) {
       callback(err,doc);
     });
   }

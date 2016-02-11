@@ -57,32 +57,55 @@ module.exports = function(wagner) {
             topicObj = req.body.topicObj;
         wagner.invoke(db.CategoryDB.find, {
           query: { name : textToSearch },
-          callback: function(err, doc) {
-            if(doc.length < 1) { // Category not found - return a object with new category name filled for conformation.
+          callback: function(err, categoryObj) {
+            if(categoryObj.length < 1) { // Category not found - return a object with new category name filled for conformation.
               topicObj = { name: topicObj, category: textToSearch };
-              res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: topicObj });
+              res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
             } else { // Category found - create a topic with existing category
               // Get topics count
+              wagner.invoke(db.TopicDB.getCount,{
+                callback: function(err, doc) {
+                    var newTopicId = 'T' + (doc+1),
+                        obj = {
+                          _id: newTopicId,
+                          name: topicObj,
+                          imageUrl: "",
+                          category: categoryObj[0]._id
+                        };
+                    console.log(obj);
+                    wagner.invoke(db.TopicDB.addTopic,{
+                      topicObj: obj,
+                      callback: function(err){
+                        if(err){
+                          topicObj = { name: topicObj, category: textToSearch };
+                          res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: topicObj });
+                        }
+                        obj.category = categoryObj[0].name;
+                        res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: obj});
+                      }
+                    });
+                }
+              });
               // create a topic id with category id
               // send res.json
             }
           }
         });
-        readJSONFile(topicsJSONFileURL, function(err, json) {
-          var newTopicId = 'T' + (Object.keys(json).length+1);
-          json[newTopicId] = {topicId: newTopicId, name: req.body.newTopicName};
-          for(var prop in json) {
-            if(textToSearch === json[prop + ''].category) {
-              //updating values
-              json[newTopicId]['category'] = json[prop+''].category;
-              res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
-              return;
-            }
-          }
-          //New Category to be added
-          json[newTopicId]['category'] = textToSearch;
-          res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
-        });
+        // readJSONFile(topicsJSONFileURL, function(err, json) {
+        //   var newTopicId = 'T' + (Object.keys(json).length+1);
+        //   json[newTopicId] = {topicId: newTopicId, name: req.body.newTopicName};
+        //   for(var prop in json) {
+        //     if(textToSearch === json[prop + ''].category) {
+        //       //updating values
+        //       json[newTopicId]['category'] = json[prop+''].category;
+        //       res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
+        //       return;
+        //     }
+        //   }
+        //   //New Category to be added
+        //   json[newTopicId]['category'] = textToSearch;
+        //   res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: json[newTopicId]});
+        // });
         break;
       case 'addNewTopic':
         var topicObj = req.body.topicObj;

@@ -79,7 +79,7 @@ var EditModalManager = {
       return;
     }
     scp.messageSelect = 0;
-    scp.newtopicObj = "";
+    scp.newTopicObj = "";
     self.$http({
       url: '/TopicsRequestHandler',
       data: {requestType: 'checkTopic', checkExist: scp.topicName },
@@ -99,7 +99,7 @@ var EditModalManager = {
       } else {
         scp.messageSelect = 1;
         scp.newTopicForm = true;
-        scp.newtopicObj = scp.topicName;
+        scp.newTopicObj = scp.topicName;
       }
     });
   },
@@ -150,6 +150,7 @@ var EditModalManager = {
   // },
   addCategoryId: function(self) {
     var scp = self.$scope;
+    console.log(scp.newTopicObj);
     self.$http({
       url: '/TopicsRequestHandler',
       data: {requestType: 'checkCategory', checkExist: scp.categoryName, topicObj : scp.newTopicObj },
@@ -157,13 +158,21 @@ var EditModalManager = {
     }).then(function(results) {
       console.log(results);
       var dt = results.data;
+      console.log(dt);
       if(dt.status==='success') {
-        scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + scp.topicName;
-        scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+        if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
+          scp.selectedQuestion.topics = dt.topicObj.name;
+          scp.selectedQuestion.categories = dt.topicObj.category;
+          scp.selectedQuestion.topicId = dt.topicObj._id;
+        } else {
+          scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
+          scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+          scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+        }
         scp.messageSelect = 0;
         scp.newTopicForm = false;
         //var len = scp.selectedQuestion.topicIds.length;
-        scp.newTopic(scp.topicName,dt.topicObj.category);
+        // scp.newTopic(scp.topicName,dt.topicObj.category);
       } else {
         scp.messageSelect = 2;
         scp.newCategoryForm = true;
