@@ -78,10 +78,10 @@ module.exports = function(wagner) {
                       callback: function(err){
                         if(err){
                           topicObj = { name: topicObj, category: textToSearch };
-                          res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' topic', topicObj: topicObj });
+                          res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
                         }
                         obj.category = categoryObj[0].name;
-                        res.json({status: 'success', message: 'Success : Found ' + textToSearch + ' topic', topicObj: obj});
+                        res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
                       }
                     });
                 }
