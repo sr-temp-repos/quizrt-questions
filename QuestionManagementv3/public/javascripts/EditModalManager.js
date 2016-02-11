@@ -116,38 +116,6 @@ var EditModalManager = {
     sq.categories = categories.join(', ');
     sq.topicId = topicIds.join(', ');
   },
-  // addTopic: function(self,e) {
-  //   var textEntered = $(this).closest('div').find('input')[0].value,
-  //       $addBtn = $(this),
-  //       topicWellfunction = Handlebars.compile($(self.topicWellTemplate).html()),
-  //       $topicIdsHidden = $(self.topicIds)[0],
-  //       $categories = $(self.categories);
-  //   $.ajax({
-  //     url: '/TopicsRequestHandler',
-  //     data: {requestType: 'checkTopic', checkExist: textEntered  },
-  //     dataType: 'json',
-  //     method: 'post'
-  //   }).done(function(results) {
-  //     if(results.status==='success'){
-  //       var $topicsWell = $(self.topicsWell),
-  //           len = $topicsWell.find('.topics').length;
-  //
-  //       $topicIdsHidden.value += (($topicIdsHidden.value.length > 0)? ', ':'') + results.topicObj.topicId;
-  //       $categories.html((($categories.html().trim().length > 0)? $categories.html() + ', ' : '') + results.topicObj.category);
-  //       var newWell = $(topicWellfunction([results.topicObj.name])).find('.close').on('click',function(e) {
-  //         self.onTopicWellClose.call(this,self);
-  //       }).end();
-  //       $topicsWell.append(newWell);
-  //       $($topicsWell.find('.topics')[len]).data('topicId',len);
-  //     }
-  //     else {
-  //       $(self.messageArea).html(self.messages['newTopic']).slideDown();
-  //       $(self.newTopicForm).slideDown();
-  //       $addBtn.fadeOut();
-  //       $(self.topicName).attr('disabled',true);
-  //     }
-  //   });
-  // },
   addCategoryId: function(self) {
     var scp = self.$scope;
     console.log(scp.newTopicObj);

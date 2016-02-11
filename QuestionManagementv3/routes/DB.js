@@ -32,6 +32,19 @@ module.exports.QuestionDB = {
       });
     });
   },
+  add: function(Question, questions, callback) {
+    for(var index in questions) { // Looping each question in questions array
+      questions[index].topicIds = questions[index].topicId.split(', '); // Generating ids from questions.topicid
+      questions[index].topicId = ''; //clearing all other temp variables
+      questions[index].topics = '';
+      questions[index].categories = '';
+
+      var q = new Question(questions[index]); // validating with schema
+      q.save(function(err) { // saving the data
+        callback(err);
+      });
+    }
+  },
   getCount: function(Question,query, callback) {
     Question.find({}).populate({
       path: 'topicIds',

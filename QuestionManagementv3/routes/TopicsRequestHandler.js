@@ -72,11 +72,10 @@ module.exports = function(wagner) {
                           imageUrl: "",
                           category: categoryObj[0]._id
                         };
-                    console.log(obj);
                     wagner.invoke(db.TopicDB.addTopic,{
                       topicObj: obj,
                       callback: function(err){
-                        if(err){
+                        if(err) {
                           topicObj = { name: topicObj, category: textToSearch };
                           res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
                         }
