@@ -397,7 +397,6 @@ var EditModalManager = {
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
   }
-
 };
 window.EditModalManager = EditModalManager;
 })();
