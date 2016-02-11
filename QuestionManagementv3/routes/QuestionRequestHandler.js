@@ -33,20 +33,33 @@ module.exports = function(wagner) {
         break;
       case 'search':
         var query = req.body.query,
-          rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
-
+            sortType = req.body.sortType,
+            sortReverse = req.body.sortReverse,
+            obj = {};
+            rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
+        // console.log(sortType);
+        if(sortReverse){
+          sortReverse = 1;
+        }
+        else {
+          sortReverse = -1;
+        }
+        if(sortType!=""){
+          obj[sortType] = sortReverse;
+        }
         query=  (query=="")? {} : { $or : [
               { question :  rgexQuery },
               { topicIds: { $elemMatch: { name: rgexQuery } } },
               { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
             ]
           };
-
+        // console.log(obj);
         wagner.invoke(db.QuestionDB.getCount, {
           query: query,
           callback : function(err, count) {
             wagner.invoke(db.QuestionDB.find, {
               query: query,
+              sortObj: obj,
               firstQuestion: req.body.firstQuestion,
               count: req.body.count,
               callback : function(err, json) {

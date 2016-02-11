@@ -25,7 +25,7 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function
     /* searchText */
     searchText:"",
     /* default sort*/
-    //sortType     = 'frequency', // set the default sort type
+    sortType: '', // set the default sort type
     sortReverse: false  // set the default sort order
   });
 

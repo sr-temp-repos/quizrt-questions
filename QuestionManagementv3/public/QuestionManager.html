@@ -23,35 +23,35 @@
               <th data-column-id='question'>Question</th>
               <th data-column-id='topicId'>Topics</th>
               <th data-column-id='categories'>Categories</th>
-              <th data-column-id='difficultyLevel' ng-click="sortType = 'difficultyLevel'; sortReverse = !sortReverse">
+              <th data-column-id='difficultyLevel' ng-click="onSortClick('difficultyLevel')">
                 <a href="#">
                   Difficulty Level
                   <span ng-show="sortType == 'difficultyLevel' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                   <span ng-show="sortType == 'difficultyLevel' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                 </a>
               </th>
-              <th data-column-id='timesUsed' ng-click="sortType = 'timesUsed'; sortReverse = !sortReverse">
+              <th data-column-id='timesUsed' ng-click="onSortClick('timesUsed')">
                 <a href="#">
                   Times Used
                   <span ng-show="sortType == 'timesUsed' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                   <span ng-show="sortType == 'timesUsed' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                 </a>
               </th>
-              <th data-column-id='correctRatio' ng-click="sortType = 'correctRatio'; sortReverse = !sortReverse">
+              <th data-column-id='correctRatio' ng-click="onSortClick('correctRatio')">
                 <a href="#">
                   Correct Ratio
                   <span ng-show="sortType == 'correctRatio' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                   <span ng-show="sortType == 'correctRatio' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                 </a>
               </th>
-              <th data-column-id='frequency' ng-click="sortType = 'frequency'; sortReverse = !sortReverse">
+              <th data-column-id='frequency' ng-click="onSortClick('frequency')">
                 <a href="#">
                   Frequecy per Day
                   <span ng-show="sortType == 'frequency' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                   <span ng-show="sortType == 'frequency' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                 </a>
               </th>
-              <th data-column-id='lastEdited' ng-click="sortType = 'lastEdited'; sortReverse = !sortReverse">
+              <th data-column-id='lastEdited' ng-click="onSortClick('lastEdited')">
                 <a href="#">
                   Last Edited
                   (mm/dd/yyyy)
@@ -59,7 +59,7 @@
                   <span ng-show="sortType == 'lastEdited' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                 </a>
               </th>
-              <th data-column-id='createdOn' ng-click="sortType = 'createdOn'; sortReverse = !sortReverse">
+              <th data-column-id='createdOn' ng-click="onSortClick('createdOn')">
                 <a href="#">
                   Created On
                   (mm/dd/yyyy)
@@ -71,7 +71,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="question-row" ng-repeat="x in questions | orderBy:sortType:sortReverse">
+            <tr class="question-row" ng-repeat="x in questions">
               <td class="question">{{x.question}}</td>
               <td>{{x.topics}}</td>
               <td>{{x.categories}}</td>
