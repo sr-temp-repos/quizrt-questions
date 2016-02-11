@@ -116,8 +116,12 @@
         // console.log(selectedQuestion._id);
         self.onQuestionDelete(self,selectedQuestion._id);
       };
-      self.$scope.orderByMe = function(x) {
-        self.$scope.myOrderBy = x;
+      self.$scope.onSortClick = function(x) {
+        //console.log(x);
+        self.$scope.sortType = x;
+        self.$scope.sortReverse = !(self.$scope.sortReverse);
+        // console.log(self.$scope.sortType);
+        self.getQuestionJson();
       };
     },
     getCurrentDate: function() {
@@ -142,7 +146,7 @@
 
       self.$http({
         url: '/QuestionRequestHandler',
-        data: {requestType: 'search', firstQuestion: $scp.firstQuestion, count: $scp.selectedRowCount,query: $scp.searchText},
+        data: {requestType: 'search', firstQuestion: $scp.firstQuestion, count: $scp.selectedRowCount,query: $scp.searchText,sortType: $scp.sortType, sortReverse: $scp.sortReverse},
         // dataType: 'json',
         method: 'post'
       }).then(function(results) {

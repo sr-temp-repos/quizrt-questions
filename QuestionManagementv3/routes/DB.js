@@ -44,8 +44,9 @@ module.exports.QuestionDB = {
       callback(err, doc);
     });
   },
-  find: function(Question, query, firstQuestion, count, callback) {
-    Question.find({}).skip(firstQuestion).limit(count).populate({
+  find: function(Question, query, firstQuestion, count, sortObj, callback) {
+
+    Question.find({}).sort(sortObj).skip(firstQuestion).limit(count).populate({
       path: 'topicIds',
       model: 'Topics',
       populate: {
@@ -86,6 +87,9 @@ module.exports.QuestionDB = {
   save: function(Question,question,callback) {
     // console.log(question.lastEdited);
     question.lastEdited = new Date();
+    question.topicIds = question.topicId.split(', ');
+    question.topics = "";
+    question.categories = "";
     // console.log(question.lastEdited);
     var q = new Question(question);
     var upsertData = q.toObject();
