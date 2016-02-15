@@ -1,0 +1,159 @@
+<html>
+   <head>
+      <title>Question Generator</title>
+      <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+      <link href="stylesheets/animations.css" rel="stylesheet" type="text/css">
+      <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-animate.min.js"></script>
+
+      <script src="./javascripts/app.js"></script>
+      <script src="./javascripts/ui-bootstrap-1.1.2.min.js"></script>
+   </head>
+   <body ng-app="questionGenerator" ng-controller="MainCtrl">
+      <div class="row">
+         <div class="col-md-12 text-center ">
+            <div class="panel panel-success">
+              <div class="panel-heading">
+               <h1>Question Generator</h1>
+             </div>
+            </div>
+            <form ng-submit="sampleQuestionEntered()">
+              <div class="col-md-12 text-center panel panel-default" >
+
+              <div class="panel-heading">
+               <h3 >Enter A Sample Question <small>( E.g. Sachin Tendulkar is from which country ? )</small></h3>
+             </div>
+             <div class="col-md-12 text-center panel-body" >
+
+               <div class="form-group col-md-11">
+                  <input type="text"
+                     class="form-control"
+                     placeholder="Key In The Sample Question Here"
+                     ng-model="question"></input>
+               </div>
+               <button type="submit" class="btn btn-success col-md-1">Done</button>
+             </div>
+             </div>
+            </form>
+         </div>
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showVariableSelectionDiv">
+            <div class="panel-heading">
+               <h3 class="panel-title">Select The Word(s) Which Shall Act as Variable</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-4" ng-repeat="questionWord in filteredQuestion">
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <input
+                        type="checkbox"
+                        name="questionParts[]"
+                        value="{{questionWord}}"
+                        ng-checked="selection.indexOf(questionWord) > -1"
+                        ng-click="toggleSelection(questionWord)"
+                        > {{questionWord}}
+                     </span>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="variablesSelected()">Proceed</button></div>
+         </div>
+
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showOptionSelectionDiv">
+            <div class="panel-heading">
+               <h3 class="panel-title">Select The Word(s) Which Shall Act as Option</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-4" ng-repeat="questionWord in filteredQuestion">
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <input
+                        type="checkbox"
+                        name="questionParts[]ForOption"
+                        value="{{questionWord}}"
+                        ng-checked="selection.indexOf(questionWord) > -1"
+                        ng-click="toggleSelection(questionWord)"
+                        > {{questionWord}}
+                     </span>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="optionsSelected()">Proceed</button></div>
+         </div>
+
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showVariableResultSelectionDiv">
+            <div class="panel-heading">
+               <h3 class="panel-title">Hey! Lemme Know What Did You Mean By " {{variable}}  "</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-12" ng-repeat="results in searchResultForVariable">
+                  <div class="list-group">
+                     <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-click="selectedOption(results)"> <b>{{results.label}}</b> - {{results.description}}</button>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
+
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="optionsSelectedFromVariableSearchResult()">Proceed</button></div>
+         </div>
+
+
+
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showOptionResultSelectionDiv">
+            <div class="panel-heading">
+               <h3 class="panel-title">Ok! I got that.... Now Which of following best match " {{option}}  " in Context of " {{variable}}  "</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-12" ng-repeat="results in searchResultForOption">
+                  <div class="list-group">
+                     <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-click="selectedOption(results)"> <b>{{results.label}}</b> - {{results.description}}</button>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="optionsSelectedFromOptionSearchResult()">Proceed</button></div>
+         </div>
+
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showVariablePropertiesDiv">
+            <div class="panel-heading">
+               <h3 class="panel-title">Trying To Figure Out What Kind Of Entity " {{variable}} " is... Select The Description Which Matches Best</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-12" ng-repeat="object in listOfObjectsVariableCouldMean">
+                  <div class="list-group">
+                     <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-click="selectedOption(object)"><b> {{object["pString"]}} - {{object["qString"]}} </b></button>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
+         </div>
+
+
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showGeneratedQuestions">
+            <div class="panel-heading">
+               <h3 class="panel-title">{{generateQuestionsList[generateQuestionsList.length-1]}} Questions Generated </h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-12" ng-repeat="object in generateQuestionsList | limitTo:200">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info btn-block text-center">{{object.question}}</li>
+                        <li class="list-group-item list-group-item-success btn-block text-center">{{object.answer}}</li>
+                        <li class="list-group-item list-group-item-danger btn-block text-center">{{object.distractor}}</li>
+                        <li><img src="{{object.imageUri}}" height="200" width="auto" alt="{{object.imageUri}}" /></li>
+                    </ul>
+                  <!-- /input-group -->
+               </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
+         </div>
+
+      </div>
+      <!--  -->
+      <div id="spinner" ng-show="showLoadingScreen">
+        <strong id="loadingText">Surfing Thru 16,286,803 WIKIDATA Items</strong>
+      </div>
+   </body>
+</html>
