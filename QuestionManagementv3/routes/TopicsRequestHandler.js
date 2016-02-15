@@ -31,7 +31,7 @@ module.exports = function(wagner) {
         });
         break;
       case 'listCategories':
-        wagner.invoke(db.CategoryDB.find, {
+        wagner.invoke(db.CategoryDB.list, {
           callback: function(err, doc) {
             res.json(doc);
           }

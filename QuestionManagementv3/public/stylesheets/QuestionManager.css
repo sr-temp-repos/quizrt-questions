@@ -88,3 +88,12 @@ main {
 .required {
   font-size: 18px;
 }
+.listButtons {
+  display: inline-block;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 0px;
+}
+.listButtons li:first-child {
+  margin-bottom: 7px;
+}

@@ -7,7 +7,7 @@ var TopicsModel = mongoose.model('Topics', topic, 'Topics');
 var questionSchema = {
   questionId: {type: String, required: true},
   question: { type: String, required: true },
-  // Pictures must start with "http://"
+  // Images must start with "http://"
   image: { type: String, match: /^http:\/\//i },
   option1: { type: String, required: true },
   option2: { type: String, required: true },

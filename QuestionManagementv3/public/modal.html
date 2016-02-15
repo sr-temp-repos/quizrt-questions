@@ -1,12 +1,3 @@
-<!-- Modal Window --> 
-<!-- <div class="modal fade" id="myModal" role="dialog"> -->
-  <!-- <div class="modal-dialog">-->
-    <!-- Modal content-->
-    <!-- <div class="modal-content">
-    </div>
-  </div> -->
-<!-- </div> -->
-
 <form id="editQuestion" method="post" ng-submit="onQuestionSave(selectedQuestion)">
   <div class="modal-header">
     <button type="button" class="close" ng-click="editQuestionClose()">&times;</button>
@@ -37,19 +28,6 @@
           </div>
         </uib-tab>
       </uib-tabset>
-      <!-- <div class="tab-content">
-        {{#each this}}
-          {{#if (equal @index 1)}}
-            <div id="option{{@index}}" class="tab-pane form-group fade in active">
-              <textarea class="form-control" rows="4" name="option{{@index}}" data-toggle="tooltip" title="Option {{@index}} cannot be empty.">{{this}}</textarea>
-            </div>
-          {{else}}
-            <div id="option{{@index}}" class="tab-pane form-group fade in">
-              <textarea class="form-control" rows="4" name="option{{@index}}" data-toggle="tooltip" title="Option {{@index}} cannot be empty.">{{this}}</textarea>
-            </div>
-          {{/if}}
-        {{/each}}
-      </div> -->
     </div>
     <div class="form-group" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
       <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
@@ -105,4 +83,10 @@
     <button type="button" class="btn btn-default" ng-click="editQuestionClose()">Close</button>
     <button type="submit" class="btn btn-primary">Save changes</button>
   </div>
+  <datalist id="topicList">
+    <option value="{{x}}" ng-repeat="x in topics">
+  </datalist>
+  <datalist id="categoryList">
+    <option value="{{x}}" ng-repeat="x in categories">
+  </datalist>
 </form>

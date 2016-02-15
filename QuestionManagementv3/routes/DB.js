@@ -167,6 +167,11 @@ module.exports.CategoryDB = {
       callback(err,doc);
     });
   },
+  list: function(Category, callback) {
+    Category.find({}, function(err, doc) {
+      callback(err,doc);
+    });
+  },
   getCount: function(Category, callback) {
     Category.find({}).count(function(err,doc) {
       callback(err, doc);
