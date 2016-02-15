@@ -1,4 +1,4 @@
-QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function($scope, $uibModal, $http) {
+QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxService', function($scope, $uibModal, $http, $ajaxService) {
 
   $scope = angular.extend($scope, {
     /* Dropdown options */
@@ -94,19 +94,23 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function
       var self=this,
           $scp = self.$scope;
 
-      self.$http({
-        url: '/QuestionRequestHandler',
-        data: {requestType: 'search', firstQuestion: $scp.firstQuestion, count: $scp.selectedRowCount,query: $scp.searchText,sortType: $scp.sortType, sortReverse: $scp.sortReverse},
-        // dataType: 'json',
-        method: 'post'
-      }).then(function(results) {
+      self.$ajaxService.getQuestionJson({
+        requestType: 'search',
+        firstQuestion: $scp.firstQuestion,
+        count: $scp.selectedRowCount,
+        query: $scp.searchText,
+        sortType: $scp.sortType,
+        sortReverse: $scp.sortReverse
+      }, function(err, results) {
+        if(err)
+        {
+          console.log(err);
+        }
         var dt = results.data;
         $scp.questions = dt.rows;
         $scp.totalQuestions = dt.count;
         $scp.lastQuestion = $scp.firstQuestion + $scp.selectedRowCount;
         $scp.lastQuestion = ($scp.lastQuestion > $scp.totalQuestions)? $scp.totalQuestions : $scp.lastQuestion;
-      }, function errorCall(data) {
-        // console.log(data);
       });
     },
     onQuestionDelete: function(self,id) {
@@ -129,7 +133,8 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', function
   QuestionManager.init({
     $scope: $scope,
     $http: $http,
-    $uibModal: $uibModal
+    $uibModal: $uibModal,
+    $ajaxService: $ajaxService
   });
 
 }]);
