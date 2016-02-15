@@ -20,18 +20,24 @@
     <div class="form-group">
       <label for='options'>Options:</label><strong class="required text-danger">*</strong>
       <uib-tabset>
-        <uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active">
+        <uib-tab ng-repeat="tab in tabs" active="tab.active">
+          <uib-tab-heading>
+            Option {{$index + 1}} <button ng-click="deleteOption($index)" class="close">&times;</button>
+          </uib-tab-heading>
+
           <div class="form-group" ng-class="{'has-error' : !tab.content}">
             <textarea class="form-control" rows="4" name="option{{$index+1}}" tooltip-trigger="focus" ng-model="tab.content" uib-tooltip="Option ({{$index + 1}}) cannot be empty." tooltip-enable="!tab.content" title="Option ({{$index+1}}) cannot be empty.">
               {{tab.content}}
             </textarea>
           </div>
         </uib-tab>
+        <uib-tab heading="+" select="addOption()">
+        </uib-tab>
       </uib-tabset>
     </div>
     <div class="form-group" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
       <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
-      <input type="number" class="form-control" ng-model="selectedQuestion.correctIndex" name="correctIndex" min="1" max="{{getMax(selectedQuestion)}}" title="Correct Index cannot be empty." required />
+      <input type="number" class="form-control" ng-model="selectedQuestion.correctIndex" name="correctIndex" min="1" max="{{tabs.length}}" title="Correct Index cannot be empty." required />
     </div>
     <div class="form-group">
       <label for="image">Image:</label>
@@ -40,7 +46,7 @@
     <div class="wrap">
       <div class="form-inline" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
         <label for="topicId">Topics:</label><strong class="required text-danger">*</strong>
-        <div ng-if="selectedQuestion.topics.length > 0" ng-repeat="topic in selectedQuestion.topics.replace('/\s/g','').split(',')" class="well well-sm topics">
+        <div ng-if="selectedQuestion.topics.length > 0" ng-repeat="topic in selectedQuestion.topics.replace('/\s/g','').split(',') track by $index" class="well well-sm topics">
           {{topic}}
           <button type="button" class="close" ng-click="deleteTopic($index)">&times;</button>
         </div>

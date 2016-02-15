@@ -29,8 +29,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             if( self.$scope.selectedQuestion['option' + i] ) {
               tabs.push({
                 content: self.$scope.selectedQuestion['option' + i],
-                active: (i==1),
-                title: 'Option ' + i
+                active: (i==1)
               });
             } else {
               break;
@@ -40,15 +39,6 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         };
         self.$scope.tabs=self.$scope.getTabs();
 
-        self.$scope.getMax = function(question){
-          for( var i=1;i<=12;i++ ) {
-            if( question['option' + i] ) {
-            } else {
-              break;
-            }
-          }
-          return i-1;
-        },
         self.$scope.getTopicDatalist = function() {
           var topicObjArray = [];
           self.$http({
@@ -89,7 +79,24 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         self.$scope.editQuestionClose = function() {
            self.$uibModalInstance.dismiss('cancel');
         };
+        self.$scope.addOption = function() {
+          var scp = self.$scope;
+          for(var i in scp.tabs)
+          {
+            if(scp.tabs[i].active) {
+              scp.tabs[i].active=false;
+              scp.tabs.push({
+                active: 'true',
+                content: ''
+              });
+              break;
+            }
+          }
 
+        }
+        self.$scope.deleteOption = function(index) {
+          self.deleteOption(self,index);
+        };
         self.$scope.addNewTopic = function() {
           self.addTopic(self);
         };
@@ -115,6 +122,10 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
           // console.log(question);
           self.QuestionSave(self,question);
         };
+      },
+      deleteOption: function(self, index) {
+        var scp = self.$scope;
+        scp.tabs.splice(index, 1);
       },
       addTopic: function(self) {
         var scp = self.$scope;
@@ -239,7 +250,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
       },
       QuestionSave: function(self,question) {
         var scp = self.$scope;
-
+        // checking Option tab is empty, if so focus
         for(var index in scp.tabs) {
           if(!scp.tabs[index].content)
           {
@@ -258,6 +269,9 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         {
           scp.messageSelect = 4;
           return;
+        }
+        for(var i=1; i<=12; i++) {
+          question['option' + i] = scp.tabs[i-1]? scp.tabs[i-1].content: null;
         }
         self.$http({
           url: '/QuestionRequestHandler',

@@ -51,15 +51,13 @@
                   <span ng-show="sortType == 'frequency' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
                 </a>
               </th>
-              <th ng-click="onSortClick('lastEdited')">
-                <a href="#">
+              <th width='9%'>
+                <a ng-click="onSortClick('lastEdited')" href="#">
                   Last Edited
                   <span ng-show="sortType == 'lastEdited' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                   <span ng-show="sortType == 'lastEdited' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-                </a>
-              </th>
-              <th ng-click="onSortClick('createdOn')">
-                <a href="#">
+                </a> <br/> --------------- <br/>
+                <a ng-click="onSortClick('createdOn')" href="#">
                   Created On
                   <span ng-show="sortType == 'createdOn' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
                   <span ng-show="sortType == 'createdOn' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
@@ -80,21 +78,16 @@
               <td>{{x.timesUsed}}</td>
               <td>{{x.correctRatio}}</td>
               <td>{{x.frequency}}</td>
-              <td>{{dateFormater(x.lastEdited) | date:'MM/dd/yyyy'}}</td>
-              <td>{{dateFormater(x.createdOn) | date:'MM/dd/yyyy'}}</td>
-              <td>
-                <ul class="listButtons">
-                  <li>
-                    <button type="button" class="btn btn-xs btn-default command-edit" ng-click="onEditClick($index)">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="btn btn-xs btn-default command-delete" ng-click="onDeleteClick($index)">
-                      <span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                  </li>
-                </ul>
+              <td>{{dateFormater(x.lastEdited) | date:'MM/dd/yyyy'}}
+                <br/> -------------- <br/>
+                {{dateFormater(x.createdOn) | date:'MM/dd/yyyy'}}</td>
+              <td width='7%'>
+                <button type="button" class="btn btn-xs btn-default command-edit" ng-click="onEditClick($index)">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="button" class="btn btn-xs btn-default command-delete" ng-click="onDeleteClick($index)">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
               </td>
             </tr>
           </tbody>
