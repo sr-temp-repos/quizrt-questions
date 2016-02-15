@@ -6,6 +6,7 @@ app.controller('MainCtrl', [
 '$http',
 function($scope,$http){
   $scope.exclusionList=[];
+  $scope.topicsList={};
 
   $http({
   method: 'GET',
@@ -20,11 +21,27 @@ function($scope,$http){
     // or server returns response with an error status.
   });
 
+  $http({
+  method: 'GET',
+  url: '/getTopicsList'
+}).then(function successCallback(response) {
+  for (var i = 0; i < response.data.length; i++) {
+    console.log(response.data[i]["_id"]);
+    console.log(response.data[i]["name"]);
+    $scope.topicsList[response.data[i]["_id"]]=response.data[i]["name"];
+  }
+  }, function errorCallback(response) {
+    console.log(response);
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+  });
+
   $scope.sampleQuestionEntered = function(){
     if(!$scope.question || $scope.question === '') { return; }
     // $scope.sampleQuestionAfterExlusion=$scope.question
     $scope.filteredQuestion=filterQuestion($scope.question,$scope.exclusionList);
-    $scope.showVariableSelectionDiv=true;
+    $scope.showTopicSelectionDiv=true;
+    $scope.showVariableSelectionDiv=false;
     $scope.showOptionSelectionDiv=false;
     $scope.showVariableResultSelectionDiv=false;
     $scope.showOptionResultSelectionDiv=false;
@@ -32,6 +49,12 @@ function($scope,$http){
     $scope.showGeneratedQuestions=false;
   };
 
+  $scope.topicsSelected = function(){
+    $scope.topicIds=$scope.selection;
+    $scope.selection=[];
+    $scope.showTopicSelectionDiv=false;
+    $scope.showVariableSelectionDiv=true;
+  };
 
   $scope.variablesSelected = function(){
 
@@ -102,7 +125,7 @@ $scope.sendPAndQForVariableAndOption=function(){
     else {
       $scope.selection.push(questionWord);
     }
-
+    console.log($scope.selection);
   };
 
   $scope.selectedOption=function(selectedRadioButton){
@@ -195,6 +218,7 @@ function figureOutPandQCombinationForVarAndPidOfOption($http,$scope){
   dataToBeSentToServer.push($scope.finalQidForVariable);
   dataToBeSentToServer.push($scope.finalPidForOption);
   dataToBeSentToServer.push($scope.questionStub);
+  dataToBeSentToServer.push($scope.topicIds);
   // console.log(dataToBeSentToServer);
   $http({method: 'Post', url: '/generateQuestions', data: {data:dataToBeSentToServer }}).
     success(function(data, status, headers, config) {

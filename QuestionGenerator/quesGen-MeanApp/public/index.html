@@ -37,6 +37,28 @@
              </div>
             </form>
          </div>
+         <div class="col-md-12 text-center panel panel-primary" ng-show="showTopicSelectionDiv">
+            <div class="panel-heading">
+               <h3 class="panel-title">This Question Belongs To Which of The Following Topics ?</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-4" ng-repeat="(topicId,topicName) in topicsList">
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <input
+                        type="checkbox"
+                        name="topics[]"
+                        value="{{topics}}"
+                        ng-checked="selection.indexOf(topicId) > -1"
+                        ng-click="toggleSelection(topicId)"
+                        > {{topicName}}
+                     </span>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="topicsSelected()">Proceed</button></div>
+         </div>
          <div class="col-md-12 text-center panel panel-primary" ng-show="showVariableSelectionDiv">
             <div class="panel-heading">
                <h3 class="panel-title">Select The Word(s) Which Shall Act as Variable</h3>

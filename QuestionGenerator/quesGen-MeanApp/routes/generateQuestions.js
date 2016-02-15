@@ -13,6 +13,7 @@ router.post('/', function(req, res, next) {
   var qIdForVar=req.body.data[1].split('Q');
   var pIdForOpt=req.body.data[2].split('P');
   var questionStub=req.body.data[3];
+  var topicIds=req.body.data[4];
 
   var searchUri="http://wdq.wmflabs.org/api?q=claim["+pIdForVar[1]+":"+qIdForVar[1]+"] and claim["+pIdForOpt[1]+"]";
   // console.log(searchUri);
@@ -28,7 +29,7 @@ router.post('/', function(req, res, next) {
       }
 
       // console.log("Number of questions generated " + numberOfQuestionsCreated);
-      getDescriptionForEachEntity(arrayOfUri,pIdForOpt[1],res,questionStub);
+      getDescriptionForEachEntity(arrayOfUri,pIdForOpt[1],res,questionStub,topicIds);
     }
     // console.log(arrayOfRequestsToBePromised);
 
@@ -38,7 +39,7 @@ router.post('/', function(req, res, next) {
 
 });
 
-function getDescriptionForEachEntity(arrayOfUri,pIdForOpt,res,questionStub){
+function getDescriptionForEachEntity(arrayOfUri,pIdForOpt,res,questionStub,topicIds){
   // console.log("arrayOfUri");
   // console.log(arrayOfUri);
 var arrayOfRequestsToBePromised=[];
@@ -138,11 +139,11 @@ for (var i = 0; i < arrayOfUri.length; i++) {
     }
 
     if(dataType==="wikibase-item"){
-      getNameForOptionPid(objectToContainVariableAndAnswer,imageArray,questionStub,res);
+      getNameForOptionPid(objectToContainVariableAndAnswer,imageArray,questionStub,res,topicIds);
 
     }
     else {
-      generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,imageArray,questionStub,res);
+      generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,imageArray,questionStub,res,topicIds);
     }
     // console.log(objectToContainVariableAndAnswer);
 
@@ -152,7 +153,7 @@ for (var i = 0; i < arrayOfUri.length; i++) {
 
 }
 
-function getNameForOptionPid(objectToContainVariableAndAnswer,imageArray,questionStub,res){
+function getNameForOptionPid(objectToContainVariableAndAnswer,imageArray,questionStub,res,topicIds){
   var searchUri;
   var arrayOfObjectsForEachEntity=[];
   var arrayOfRequestsToBePromised=[];
@@ -207,13 +208,13 @@ function getNameForOptionPid(objectToContainVariableAndAnswer,imageArray,questio
         }
       }
       // console.log(objectToContainVariableAndAnswer);
-      generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,imageArray,questionStub,res)
+      generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,imageArray,questionStub,res,topicIds)
 
     });
 
 }
 
-function generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,imageArray,questionStub,res){
+function generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,imageArray,questionStub,res,topicIds){
   console.log("in generate questions function");
   var counterForImageArray=0;
   var counterForQuesArray=0;
@@ -236,13 +237,13 @@ function generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAns
 
   }
   // console.log(arrayForQuestionData);
-  generateDistractors(arrayForQuestionData,res);
+  generateDistractors(arrayForQuestionData,res,topicIds);
   // res.send(arrayForQuestionData);
   // console.log(allCorrectAnswers);
 }
 
 
-function generateDistractors(arrayForQuestionData,res){
+function generateDistractors(arrayForQuestionData,res,topicIds){
   var poolOfAllUniqueAnswers=[];
   var arrayOfObjsQuesAndDistractor=[];
   var counterForQuesArray=0;
@@ -273,6 +274,7 @@ function generateDistractors(arrayForQuestionData,res){
         tempObjToStoreQueAnsDis["answer"]=arrayForQuestionData[i]["answer"][j];
         tempObjToStoreQueAnsDis["imageUri"]=arrayForQuestionData[i]["imageUri"];
         tempObjToStoreQueAnsDis["distractor"]=distractor;
+        tempObjToStoreQueAnsDis["topicIds"]=topicIds;
 
         arrayOfObjsQuesAndDistractor[counterForQuesArray++]=tempObjToStoreQueAnsDis;
       }

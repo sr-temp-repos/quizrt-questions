@@ -4,11 +4,13 @@ var mongoose=require('mongoose');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log("in exclusion");
-  var ExclusionList=require('../schema/exclusionListSchema.js')
-  ExclusionList.find(function(err, exclusionList) {
+  console.log("in get topics");
+
+  var topicsList=require('../schema/topicsListSchema.js');
+  topicsList.find({},function(err, topicsList) {
   if (err) return console.error(err);
-  res.send(exclusionList);
+  console.log(topicsList);
+  res.send(topicsList);
 });
 });
 
