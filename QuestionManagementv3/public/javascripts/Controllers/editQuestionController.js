@@ -1,5 +1,5 @@
-QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainControllerScope','$window', '$uibModalInstance',
-  function($scope, $http, $mainControllerScope, $window, $uibModalInstance) {
+QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainControllerScope','$window', '$uibModalInstance', '$ajaxService',
+  function($scope, $http, $mainControllerScope, $window, $uibModalInstance, $ajaxService) {
     angular.extend($scope,$mainControllerScope, {
       /* Message Array for Topic management */
       messages: [
@@ -41,29 +41,33 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
 
         self.$scope.getTopicDatalist = function() {
           var topicObjArray = [];
-          self.$http({
-            url: '/TopicsRequestHandler',
-            data: {requestType: 'listTopics'},
-            method: 'post'
-          }).then(function(results) {
-              // console.log(results.data);
+          self.$ajaxService.getTopicDatalist(
+            {
+              requestType: 'listTopics'
+            }, function(err, results) {
+              if(err)
+              {
+                console.log(err);
+              }
               for( var i=0;i< results.data.length;i++)
               {
                   topicObjArray.push(results.data[i].name);
               }
-          });
+            });
           return topicObjArray;
         };
         self.$scope.topics = self.$scope.getTopicDatalist();
         // console.log(self.$scope.topics);
         self.$scope.getCategoriesDatalist = function() {
           var categoryObjArray = [];
-          self.$http({
-            url: '/TopicsRequestHandler',
-            data: {requestType: 'listCategories'},
-            method: 'post'
-          }).then(function(results) {
-              // console.log(results.data);
+          self.$ajaxService.getCategoriesDatalist(
+            {
+              requestType: 'listCategories'
+            }, function(err, results) {
+              if(err)
+              {
+                console.log(err);
+              }
               for( var i=0;i< results.data.length;i++)
               {
                   categoryObjArray.push(results.data[i].name);
@@ -141,28 +145,31 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         }
         scp.messageSelect = 0;
         scp.newTopicObj = "";
-        self.$http({
-          url: '/TopicsRequestHandler',
-          data: {requestType: 'checkTopic', checkExist: scp.topicName },
-          method: 'post'
-        }).then(function(results) {
-          var dt = results.data;
-          if(dt.status==='success') {
-            if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
-              scp.selectedQuestion.topics = dt.topicObj.name;
-              scp.selectedQuestion.categories = dt.topicObj.category;
-              scp.selectedQuestion.topicId = dt.topicObj._id;
-            } else {
-              scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
-              scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
-              scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
-            }
-          } else {
-            scp.messageSelect = 1;
-            scp.newTopicForm = true;
-            scp.newTopicObj = scp.topicName;
-          }
-        });
+        self.$ajaxService.addTopic({
+          requestType: 'checkTopic',
+          checkExist: scp.topicName
+         }, function(err, results) {
+           if(err)
+           {
+             console.log(err);
+           }
+           var dt = results.data;
+           if(dt.status==='success') {
+             if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
+               scp.selectedQuestion.topics = dt.topicObj.name;
+               scp.selectedQuestion.categories = dt.topicObj.category;
+               scp.selectedQuestion.topicId = dt.topicObj._id;
+             } else {
+               scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
+               scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+               scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+             }
+           } else {
+             scp.messageSelect = 1;
+             scp.newTopicForm = true;
+             scp.newTopicObj = scp.topicName;
+           }
+         });
       },
       deleteTopic: function(self, index) {
         var scp = self.$scope,
@@ -180,14 +187,16 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
       addCategoryId: function(self) {
         var scp = self.$scope;
         console.log(scp.newTopicObj);
-        self.$http({
-          url: '/TopicsRequestHandler',
-          data: {requestType: 'checkCategory', checkExist: scp.categoryName, topicObj : scp.newTopicObj },
-          method: 'post'
-        }).then(function(results) {
-          console.log(results);
+        self.$ajaxService.addCategoryId({
+          requestType: 'checkCategory',
+          checkExist: scp.categoryName,
+          topicObj : scp.newTopicObj
+        }, function(err, results) {
+          if(err)
+          {
+            console.log(err);
+          }
           var dt = results.data;
-          console.log(dt);
           if(dt.status==='success') {
             if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
               scp.selectedQuestion.topics = dt.topicObj.name;
@@ -215,32 +224,34 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
       yesBtnClicked: function(self) {
         var scp = self.$scope;
         console.log(scp.newTopicObj);
-        self.$http({
-          url: '/TopicsRequestHandler',
-          data: {requestType: 'addTopicCategory',  topicObj : scp.newTopicObj },
-          method: 'post'
-        }).then(function(results) {
-          console.log(results);
-          var dt = results.data;
-          console.log(dt);
-          if(dt.status==='success') {
-            if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
-              scp.selectedQuestion.topics = dt.topicObj.name;
-              scp.selectedQuestion.categories = dt.topicObj.category;
-              scp.selectedQuestion.topicId = dt.topicObj._id;
-            } else {
-              scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
-              scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
-              scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+        self.$ajaxService.yesBtnClicked(
+          {
+            requestType: 'addTopicCategory',
+            topicObj : scp.newTopicObj
+          }, function(err, results) {
+            if(err)
+            {
+              console.log(err);
             }
-              scp.messageSelect = 0;
-              scp.newCategoryForm = false;
-              scp.newTopicForm = false;
-        } else {
-              scp.messageSelect = 2;
-              scp.newCategoryForm = true;
-              scp.newTopicObj = dt.topicObj;
-        }
+            var dt = results.data;
+            if(dt.status==='success') {
+              if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
+                scp.selectedQuestion.topics = dt.topicObj.name;
+                scp.selectedQuestion.categories = dt.topicObj.category;
+                scp.selectedQuestion.topicId = dt.topicObj._id;
+              } else {
+                scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
+                scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+                scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+              }
+                scp.messageSelect = 0;
+                scp.newCategoryForm = false;
+                scp.newTopicForm = false;
+          } else {
+                scp.messageSelect = 2;
+                scp.newCategoryForm = true;
+                scp.newTopicObj = dt.topicObj;
+          }
         });
       },
       noBtnClicked: function(self) {
@@ -273,25 +284,27 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         for(var i=1; i<=12; i++) {
           question['option' + i] = scp.tabs[i-1]? scp.tabs[i-1].content: null;
         }
-        self.$http({
-          url: '/QuestionRequestHandler',
-          data: {requestType: 'save', question: question},
-          // dataType: 'json',
-          method: 'post'
-        }).then(function(results) {
-          self.$uibModalInstance.dismiss('cancel');
-          scp.QuestionManager.getQuestionJson();
-        }, function errorCall(data) {
-          //console.log(data);
-        });
-      }
+        self.$ajaxService.QuestionSave(
+          {
+            requestType: 'save',
+            question: question
+          }, function(err, results) {
+            if(err)
+            {
+              console.log(err);
+            }
+            self.$uibModalInstance.dismiss('cancel');
+            scp.QuestionManager.getQuestionJson();
+          });
+        }
     };
 
     EditModalManager.init({
       $scope: $scope,
       $uibModalInstance: $uibModalInstance,
       $http: $http,
-      $window: $window
+      $window: $window,
+      $ajaxService: $ajaxService
     });
   }
 ]);

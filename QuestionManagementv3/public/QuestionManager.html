@@ -15,6 +15,20 @@
             </li>
           </ul>
         </div>
+        <form class="col-sm-7 col-xs-7 checkbox">
+          <label>
+            <input type="checkbox" ng-model="all" ng-init="all=true" ng-checked="!(ques||top||cat)" ng-true-value="true" ng-false-value="false">All
+          </label>
+          <label>
+            <input type="checkbox" ng-model="ques" ng-init="ques=false" ng-checked="!all" ng-true-value="true" ng-false-value="false">Questions
+          </label>
+          <label>
+            <input type="checkbox" ng-model="top" ng-init="top=false" ng-checked="!all" ng-true-value="true" ng-false-value="false">Topics
+          </label>
+          <label>
+            <input type="checkbox" ng-model="cat" ng-init="cat=false" ng-checked="!all" ng-true-value="true" ng-false-value="false">Categories
+          </label>
+        </form>
       </div>
       <div id="questionContainer" class="row">
         <table id="questionList" class="table table-bordered table-responsive table-hover">

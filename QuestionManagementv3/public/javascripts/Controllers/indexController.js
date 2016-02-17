@@ -116,16 +116,15 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
     onQuestionDelete: function(self,id) {
       var scp = self.$scope;
       //console.log(scp);
-      self.$http({
-        url: '/QuestionRequestHandler',
-        data: {requestType: 'delete', questionId: id},
-        // dataType: 'json',
-        method: 'post'
-      }).then(function(results) {
-        //console.log(results);
+      self.$ajaxService.onQuestionDelete({
+        requestType: 'delete',
+        questionId: id
+      }, function(err, results) {
+        if(err)
+        {
+          console.log(err);
+        }
         self.getQuestionJson();
-      }, function errorCall(data) {
-        // console.log(data);
       });
     }
   };
