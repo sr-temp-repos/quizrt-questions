@@ -38,7 +38,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', routes);
+// app.use('/', routes);
 app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
 app.use('/TopicsRequestHandler', topicsRequestHandler(wagner));
 

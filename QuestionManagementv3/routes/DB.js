@@ -50,24 +50,74 @@ module.exports.QuestionDB = {
       callback(err, doc);
     });
   },
+  /*
+    This function used for following purpose
+    - Listing: listing indicated by empty query string
+    - Searching
+  */
   find: function(Question, searchSettings, callback) {
-    var query = searchSettings.query===""? {}: {name : searchSettings.query};
+    var query='',
+        retEmpty=false;
+    /* checks whether request is for searching */
+    if (searchSettings.query !='' && (searchSettings.searchIn.cat || searchSettings.searchIn.all)){
+      query = {name : searchSettings.query}; // Query search when search settings allows
+    } else {
+      retEmpty = true; // Don't search any thing in Category DB
+    }
     searchSettings.wagner.invoke(searchSettings.db.CategoryDB.find, {
       query: query,
+      retEmpty: retEmpty,
       callback: function(err, docs) {
-        query: searchSettings.query===""? {}: {name : searchSettings.query};
-        if(docs.length > 0) {
-          categoryIds = docs.map(function(doc) { return doc._id });
-          query= rgexQuery !== ""? { $or : [ {name : searchSettings.query}, {category: {$in: categoryIds}} ] }: {};
+        query = '';
+        retEmpty = false;
+        /* Checks whether request is for searching */
+        if(searchSettings.query !='' && (searchSettings.searchIn.top || searchSettings.searchIn.all)) {
+          /* Searching topics is required */
+          if(docs.length > 0 ) {
+            /* query for searching topics and categories */
+            var categoryIds = docs.map(function(doc) { return doc._id });
+            query = { $or : [ {name : searchSettings.query}, {category: {$in: categoryIds}} ] };
+          }
+          else /* Searching only for topics */
+            query = {name : searchSettings.query};
+
+        } else if (docs.length > 0 ){ // topics not selected but categories is selected
+            var categoryIds = docs.map(function(doc) { return doc._id });
+            query = {category: {$in: categoryIds}};
+        } else {
+          retEmpty = true;
         }
 
         searchSettings.wagner.invoke(searchSettings.db.TopicDB.findTopics, {
           query: query,
+          retEmpty: retEmpty,
           callback: function(err, docs) {
-            query= searchSettings.query===""? {}: {question : searchSettings.query};
-            if(docs.length > 0) {
-              topicIds = docs.map(function(doc) { return doc._id });
-              query= rgexQuery !== ""? { $or : [ {question : searchSettings.query}, {topicIds: {$in: topicIds}} ] }: {};
+            query = '';
+            retEmpty = false;
+            /* Checks whether request is for searching */
+            if(searchSettings.query !='' && (searchSettings.searchIn.ques || searchSettings.searchIn.all)) {
+              /* Searching topics is required */
+              if(docs.length > 0 ) {
+                /* query for searching topics and question */
+                var topicIds = docs.map(function(doc) { return doc._id });
+                query = { $or : [ {question : searchSettings.query}, {topicIds: {$in: topicIds}} ] };
+              }
+              else /* Searching only for question */
+                query = {question : searchSettings.query};
+
+            } else if (docs.length > 0 ) { // question not selected but topics exists is selected
+                categoryIds = docs.map(function(doc) { return doc._id });
+                query = {topicIds: {$in: categoryIds}};
+            } else if (searchSettings.query !=''){
+              var jsonData = {
+                rows: [],
+                firstQuestion: searchSettings.firstQuestion,
+                count: 0
+              };
+              callback(null,jsonData);
+              return;
+            } else {
+              query = {};
             }
             Question.find(query)
               .sort(searchSettings.sortObj)
@@ -83,7 +133,9 @@ module.exports.QuestionDB = {
                   callback(err,null);
                   return;
                 }
+                var count = doc.length;
 
+                doc = doc.slice(searchSettings.firstQuestion, searchSettings.firstQuestion + searchSettings.count);
                 for(var i = 0, doclen = doc.length; i<doclen; i++) {
                   var topics = [],
                       categories = [],
@@ -100,9 +152,9 @@ module.exports.QuestionDB = {
                 }
 
                 var jsonData = {
-                  rows: doc.slice(searchSettings.firstQuestion, searchSettings.firstQuestion + searchSettings.count ),
+                  rows: doc,
                   firstQuestion: searchSettings.firstQuestion,
-                  count: doc.length
+                  count: count
                 };
                 callback(null,jsonData);
               });
@@ -147,7 +199,12 @@ module.exports.TopicDB = {
       callback(err,doc);
     });
   },
-  findTopic: function(Topic, query, callback) {
+  findTopic: function(Topic, retEmpty, query, callback) {
+    if(retEmpty) { // no search required only callback
+      callback(null,[]);
+      return;
+    }
+
     Topic.find(query).populate({
       path: 'category',
       model: 'Category'
@@ -160,7 +217,11 @@ module.exports.TopicDB = {
       }
     });
   },
-  findTopics: function(Topic, query, callback) {
+  findTopics: function(Topic, retEmpty, query, callback) {
+    if(retEmpty) {
+      callback(null,[]);
+      return;
+    }
     Topic.find(query, function(err, doc) {
       callback(err,doc);
     });
@@ -182,9 +243,12 @@ module.exports.TopicDB = {
 };
 
 module.exports.CategoryDB = {
-  find: function(Category, query, callback) {
-    if(!query)
-      query = {};
+  find: function(Category, retEmpty, query, callback) {
+    if(retEmpty) { // no search required only callback
+      callback(null,[]);
+      return;
+    }
+
     Category.find(query, function(err, doc) {
       callback(err,doc);
     });

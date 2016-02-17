@@ -22,7 +22,7 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
 
     // default search settings
     searchText:"",
-    checkbox: {
+    searchIn : {
       all: true,
       ques: false,
       top: false,
@@ -100,12 +100,17 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
       };
       self.$scope.changeSelection = function(control) {
         var $scp = self.$scope;
-        if(control && ($scp.checkbox.ques || $scp.checkbox.top || $scp.checkbox.cat)) {
-          $scp.checkbox.all = false;
-        } else if($scp.checkbox.all) {
-          $scp.checkbox.ques = false;
-          $scp.checkbox.top = false;
-          $scp.checkbox.cat = false;
+        if($scp.searchIn.ques && $scp.searchIn.top && $scp.searchIn.cat)
+        {
+          control=0;
+          $scp.searchIn.all = true;
+        }
+        if(control && ($scp.searchIn.ques || $scp.searchIn.top || $scp.searchIn.cat)) {
+          $scp.searchIn.all = false;
+        } else if($scp.searchIn.all) {
+          $scp.searchIn.ques = false;
+          $scp.searchIn.top = false;
+          $scp.searchIn.cat = false;
         }
       };
     },
@@ -119,7 +124,8 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
         count: $scp.selectedRowCount,
         query: $scp.searchText,
         sortType: $scp.sortType,
-        sortReverse: $scp.sortReverse
+        sortReverse: $scp.sortReverse,
+        searchIn: $scp.searchIn
       }, function(err, results) {
         if(err)
         {
