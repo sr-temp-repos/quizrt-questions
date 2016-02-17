@@ -45,47 +45,70 @@ module.exports.QuestionDB = {
       });
     }
   },
-  getCount: function(Question,query, callback) {
-    Question.find({}).populate({
-      path: 'topicIds',
-      model: 'Topics',
-      populate: {
-        path: 'category',
-        model: 'Category'
-      }
-    }).count(query,function(err,doc) {
+  getCount: function(Question, query, callback) {
+    Question.count(query,function(err,doc) {
       callback(err, doc);
     });
   },
-  find: function(Question, query, firstQuestion, count, sortObj, callback) {
-
-    Question.find({}).sort(sortObj).skip(firstQuestion).limit(count).populate({
-      path: 'topicIds',
-      model: 'Topics',
-      populate: {
-        path: 'category',
-        model: 'Category'
-      }
-    }).find(query).exec(function(err, doc) {
-      if(err) {
-        console.log(err);
-        callback(err,null);
-      }
-      for(var i = 0, doclen = doc.length; i<doclen; i++) {
-        var topics = [],
-            categories = [],
-            topicId = [],
-            topicIds = doc[i].topicIds;
-        for(var index=0, len= topicIds.length; index<len; index++) {
-          topics.push(topicIds[index].name);
-          categories.push(topicIds[index].category.name);
-          topicId.push(topicIds[index]._id);
+  find: function(Question, searchSettings, callback) {
+    var query = searchSettings.query===""? {}: {name : searchSettings.query};
+    searchSettings.wagner.invoke(searchSettings.db.CategoryDB.find, {
+      query: query,
+      callback: function(err, docs) {
+        query: searchSettings.query===""? {}: {name : searchSettings.query};
+        if(docs.length > 0) {
+          categoryIds = docs.map(function(doc) { return doc._id });
+          query= rgexQuery !== ""? { $or : [ {name : searchSettings.query}, {category: {$in: categoryIds}} ] }: {};
         }
-        doc[i].topics = topics.join(', ');
-        doc[i].categories = categories.join(', ');
-        doc[i].topicId = topicId.join(', ');
+
+        searchSettings.wagner.invoke(searchSettings.db.TopicDB.findTopics, {
+          query: query,
+          callback: function(err, docs) {
+            query= searchSettings.query===""? {}: {question : searchSettings.query};
+            if(docs.length > 0) {
+              topicIds = docs.map(function(doc) { return doc._id });
+              query= rgexQuery !== ""? { $or : [ {question : searchSettings.query}, {topicIds: {$in: topicIds}} ] }: {};
+            }
+            Question.find(query)
+              .sort(searchSettings.sortObj)
+              .populate({
+                path: 'topicIds',
+                model: 'Topics',
+                populate: {
+                  path: 'category',
+                  model: 'Category'
+                }
+              }).exec(function(err, doc) {
+                if(err) {
+                  callback(err,null);
+                  return;
+                }
+
+                for(var i = 0, doclen = doc.length; i<doclen; i++) {
+                  var topics = [],
+                      categories = [],
+                      topicId = [],
+                      topicIds = doc[i].topicIds;
+                  for(var index=0, len = topicIds.length; index<len; index++) {
+                    topics.push(topicIds[index].name);
+                    categories.push(topicIds[index].category.name);
+                    topicId.push(topicIds[index]._id);
+                  }
+                  doc[i].topics = topics.join(', ');
+                  doc[i].categories = categories.join(', ');
+                  doc[i].topicId = topicId.join(', ');
+                }
+
+                var jsonData = {
+                  rows: doc.slice(searchSettings.firstQuestion, searchSettings.firstQuestion + searchSettings.count ),
+                  firstQuestion: searchSettings.firstQuestion,
+                  count: doc.length
+                };
+                callback(null,jsonData);
+              });
+          }
+        });
       }
-      callback(null,doc);
     });
   },
   delete: function(Question,id,callback) {
@@ -119,12 +142,6 @@ module.exports.QuestionDB = {
 };
 
 module.exports.TopicDB = {
-  init: function(config) {
-    // for(var cfg in config) {
-    //   cfg = cfg + '';
-    //   this[cfg] = config[cfg];
-    // }
-  },
   list: function(Topic, callback) {
     Topic.find({}, function(err, doc) {
       callback(err,doc);
@@ -141,6 +158,11 @@ module.exports.TopicDB = {
       } else {
         callback(err,null);
       }
+    });
+  },
+  findTopics: function(Topic, query, callback) {
+    Topic.find(query, function(err, doc) {
+      callback(err,doc);
     });
   },
   getCount: function(Topic, callback) {
@@ -163,7 +185,7 @@ module.exports.CategoryDB = {
   find: function(Category, query, callback) {
     if(!query)
       query = {};
-      Category.find(query, function(err, doc) {
+    Category.find(query, function(err, doc) {
       callback(err,doc);
     });
   },

@@ -22,7 +22,7 @@
       <uib-tabset>
         <uib-tab ng-repeat="tab in tabs" active="tab.active">
           <uib-tab-heading>
-            Option {{$index + 1}} <button ng-click="deleteOption($index)" class="close">&times;</button>
+            Option {{$index + 1}} <button ng-if='$index >= 2' ng-click="deleteOption($index)" class="close"><span class="glyphicon glyphicon-remove"></span></button>
           </uib-tab-heading>
 
           <div class="form-group" ng-class="{'has-error' : !tab.content}">
@@ -31,7 +31,10 @@
             </textarea>
           </div>
         </uib-tab>
-        <uib-tab heading="+" select="addOption()">
+        <uib-tab select="addOption()" ng-if='tabs.length < 12' active='false'>
+          <uib-tab-heading>
+            <span class="glyphicon glyphicon-plus"></span>
+          </uib-tab-heading>
         </uib-tab>
       </uib-tabset>
     </div>
