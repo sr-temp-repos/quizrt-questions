@@ -17,16 +17,16 @@
         </div>
         <form class="col-sm-7 col-xs-7 checkbox">
           <label>
-            <input type="checkbox" ng-model="all" ng-init="all=true" ng-checked="!(ques||top||cat)" ng-true-value="true" ng-false-value="false">All
+            <input type="checkbox" ng-model="checkbox.all" ng-click="changeSelection(0)">All
           </label>
           <label>
-            <input type="checkbox" ng-model="ques" ng-init="ques=false" ng-checked="!all" ng-true-value="true" ng-false-value="false">Questions
+            <input type="checkbox" ng-model="checkbox.ques" ng-click="changeSelection(1)">Questions
           </label>
           <label>
-            <input type="checkbox" ng-model="top" ng-init="top=false" ng-checked="!all" ng-true-value="true" ng-false-value="false">Topics
+            <input type="checkbox" ng-model="checkbox.top" ng-click="changeSelection(1)">Topics
           </label>
           <label>
-            <input type="checkbox" ng-model="cat" ng-init="cat=false" ng-checked="!all" ng-true-value="true" ng-false-value="false">Categories
+            <input type="checkbox" ng-model="checkbox.cat" ng-click="changeSelection(1)">Categories
           </label>
         </form>
       </div>

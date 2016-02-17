@@ -2,23 +2,32 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
 
   $scope = angular.extend($scope, {
     /* Dropdown options */
-    noOfQuestions: [10, //first one default
-                    25,
-                    50,
+    noOfQuestions: [50, //first one default
+                    100,
+                    150,
                     'All'],
     selectedRowCountIndex: 2,
     selectedRowCount: 50,
 
+    /* Intializing question table with empty obj Array */
     questions: [{}],
 
     /* Pagination Setup */
     firstQuestion: 0,
     currentPage: 1,
-    /* default searchText */
-    searchText:"",
+
     /* default sort setup*/
     sortType: '', // set the default sort type
-    sortReverse: false  // set the default sort order
+    sortReverse: false,  // set the default sort order
+
+    // default search settings
+    searchText:"",
+    checkbox: {
+      all: true,
+      ques: false,
+      top: false,
+      cat: false
+    }
   });
 
   var QuestionManager = {
@@ -88,6 +97,16 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
         self.$scope.sortType = x;
         self.$scope.sortReverse = !(self.$scope.sortReverse);
         self.getQuestionJson();
+      };
+      self.$scope.changeSelection = function(control) {
+        var $scp = self.$scope;
+        if(control && ($scp.checkbox.ques || $scp.checkbox.top || $scp.checkbox.cat)) {
+          $scp.checkbox.all = false;
+        } else if($scp.checkbox.all) {
+          $scp.checkbox.ques = false;
+          $scp.checkbox.top = false;
+          $scp.checkbox.cat = false;
+        }
       };
     },
     getQuestionJson: function() {
