@@ -14,6 +14,7 @@ var getHintsForVariable = require('./routes/getHintsForVariable');
 var getJsonDataForVariable= require('./routes/getJsonDataForVariable')
 var generateQuestions= require('./routes/generateQuestions');
 var getTopicsList= require('./routes/getTopicsList');
+var saveQuestionPattern= require('./routes/saveQuestionPattern');
 
 
 var app = express();
@@ -38,6 +39,7 @@ app.use('/getHintsForOption', getHintsForOption);
 app.use('/getHintsForVariable', getHintsForVariable);
 app.use('/getJsonDataForVariable', getJsonDataForVariable);
 app.use('/generateQuestions', generateQuestions);
+app.use('/saveQuestionPattern', saveQuestionPattern);
 
 
 // catch 404 and forward to error handler

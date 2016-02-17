@@ -5,6 +5,7 @@ var request = require('request');
 var Promise = require("bluebird");
 var rp = require('request-promise');
 var MD5 = require('./MD5');
+var slug = require('slug');
 
 
 var numberOfQuestionsCreated;
@@ -28,7 +29,7 @@ router.post('/', function(req, res, next) {
       var arrayOfUri=[];
       // console.log(numberOfQuestionsCreated);
       // console.log(searchUri);
-      for (var i = 0; i < 200; i++) { //set 200 as limit here...
+      for (var i = 0; i < 50; i++) { //set 200 as limit here...
         arrayOfUri.push('https://www.wikidata.org/wiki/Special:EntityData/Q'+wholePageAsObject["items"][i]+'.json');
       }
 
@@ -316,7 +317,11 @@ function generateDistractors(arrayForQuestionData,res,topicIds){
             k--;
           }
         }
-
+        console.log(arrayForQuestionData[i]["question"]);
+        console.log(slug(arrayForQuestionData[i]["question"]));
+        console.log(MD5(slug(arrayForQuestionData[i]["question"])));
+        
+        tempObjToStoreQueAnsDis["questionId"]=MD5(slug(arrayForQuestionData[i]["question"]));
         tempObjToStoreQueAnsDis["question"]=arrayForQuestionData[i]["question"];
         tempObjToStoreQueAnsDis["answer"]=arrayForQuestionData[i]["answer"][j];
         tempObjToStoreQueAnsDis["imageUri"]=arrayForQuestionData[i]["imageUri"];

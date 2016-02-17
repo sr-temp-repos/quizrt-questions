@@ -16,6 +16,7 @@
     "morgan": "~1.6.1",
     "request": "^2.69.0",
     "request-promise": "^2.0.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "slug": "^0.9.1"
   }
 }
