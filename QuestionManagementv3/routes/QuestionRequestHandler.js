@@ -39,72 +39,35 @@ module.exports = function(wagner) {
             sortType = req.body.sortType,
             sortReverse = req.body.sortReverse,
             obj = {};
-            rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
-        // console.log(sortType);
-        if(sortReverse){
-          sortReverse = 1;
-        }
-        else {
-          sortReverse = -1;
-        }
-        if(sortType!=""){
+            rgexQuery = query !=""? new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig'): "";
+        sortReverse = (sortReverse)? 1: -1;
+        if(sortType!="") {
           obj[sortType] = sortReverse;
         }
-        query=  (query=="")? {} : { $or : [
-              { question :  rgexQuery },
-              { topicIds: { $elemMatch: { name: rgexQuery } } },
-              { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
-            ]
-          };
-        // console.log(obj);
-        wagner.invoke(db.QuestionDB.getCount, {
-          query: query,
-          callback : function(err, count) {
-            wagner.invoke(db.QuestionDB.find, {
-              query: query,
-              sortObj: obj,
-              firstQuestion: req.body.firstQuestion,
-              count: req.body.count,
-              callback : function(err, json) {
-                var jsonData = {
-                  rows: json,
-                  firstQuestion: req.body.firstQuestion,
-                  count: count
-                };
-                res.json(jsonData);
-              }
-            });
+        wagner.invoke(db.QuestionDB.find, {
+          searchSettings : {
+            query: rgexQuery,
+            sortObj: obj,
+            firstQuestion: req.body.firstQuestion,
+            count: req.body.count,
+            wagner: wagner,
+            db: db
+          },
+          callback: function(err, json) {
+            res.json(json);
           }
         });
         break;
-      // case 'search':
-      //   //readJSONFile(questionJSONFileURL, function(err, json) {
-      //   var query = req.body.query,
-      //       rgexQuery = new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig');
-      //   wagner.invoke(db.QuestionDB.find, {
-      //     query: { $or : [
-      //         { question :  rgexQuery },
-      //         { topicIds: { $elemMatch: { name: rgexQuery } } },
-      //         { topicIds : { $elemMatch : { 'category.name' : rgexQuery } } }
-      //       ]
-      //     },
-      //     callback : function(err, json) {
-      //       res.json(json);
-      //     }
-      //   });
-      //   break;
       case 'save':
         /* Data base area for edit operations */
-        // res.json({status: 'success', message: 'Success : Successfully saved the question'});
         var question = req.body.question;
-        // console.log(id);
-        wagner.invoke(db.QuestionDB.save,{
+        wagner.invoke(db.QuestionDB.save, {
           question: question,
           callback: function(err, doc) {
             if (doc) {
               res.json({status: 'success', message: 'Success : Saved in the question data store.'});
             } else {
-              res.json({status: 'failure', message: 'Failure : Cannot able to save  in the question data store.'});
+              res.json({status: 'failure', message: 'Failure : Cannot able to save in the question data store.'});
             }
           }
         });

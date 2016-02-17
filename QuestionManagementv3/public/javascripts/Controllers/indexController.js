@@ -6,8 +6,8 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
                     25,
                     50,
                     'All'],
-    selectedRowCountIndex: 0,
-    selectedRowCount: 10,
+    selectedRowCountIndex: 2,
+    selectedRowCount: 50,
 
     questions: [{}],
 
@@ -45,7 +45,7 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
         self.getQuestionJson();
       };
 
-      self.$scope.onReset= function(){
+      self.$scope.onReset= function() {
         self.$scope.searchText="";
         self.getQuestionJson();
       };
