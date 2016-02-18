@@ -40,24 +40,45 @@ function($scope,$http){
     if(!$scope.question || $scope.question === '') { return; }
     // $scope.sampleQuestionAfterExlusion=$scope.question
     $scope.filteredQuestion=filterQuestion($scope.question,$scope.exclusionList);
-    $scope.showTopicSelectionDiv=true;
-    $scope.showVariableSelectionDiv=false;
+    $scope.boolValueForButtons=true;
+
+    $scope.showVariableSelectionDiv=true;
     $scope.showOptionSelectionDiv=false;
     $scope.showVariableResultSelectionDiv=false;
     $scope.showOptionResultSelectionDiv=false;
     $scope.showVariablePropertiesDiv=false;
     $scope.showGeneratedQuestions=false;
+    $scope.showSaveQuesStub=false;
+    $scope.showSuccessMessage=false;
   };
 
   $scope.topicsSelected = function(){
     $scope.topicIds=$scope.selection;
-    $scope.selection=[];
+  //   $scope.selection=[];
     $scope.showTopicSelectionDiv=false;
-    $scope.showVariableSelectionDiv=true;
+  //   $scope.showVariableSelectionDiv=true;
+  var questionStubJsonDoc={};
+  questionStubJsonDoc["pIdForVar"]=$scope.finalPidForVariable;
+  questionStubJsonDoc["qIdForVar"]=$scope.finalQidForVariable;
+  questionStubJsonDoc["pIdForOpt"]=$scope.finalPidForOption;
+  questionStubJsonDoc["questionStub"]=$scope.questionStub;
+  questionStubJsonDoc["topicIds"]=$scope.topicIds;
+
+  $scope.showLoadingScreen=true;
+  $http({method: 'Post', url: '/saveQuestionPattern', data: {data: questionStubJsonDoc}}).
+    success(function(data, status, headers, config) {
+      console.log(data);
+      $scope.showLoadingScreen=false;
+      $scope.showSaveQuesStub=false;
+      $scope.successMessage=data;
+      $scope.showSuccessMessage=true;
+    });
+
+  console.log(questionStubJsonDoc);
   };
 
   $scope.variablesSelected = function(){
-
+    $scope.boolValueForButtons=true;
     $scope.variable=$scope.filteredQuestion.filter(function (eachWord) {
       return $scope.selection.indexOf(eachWord) !== -1;
       });
@@ -72,7 +93,7 @@ function($scope,$http){
   };
 
   $scope.optionsSelected = function(){
-
+    $scope.boolValueForButtons=true;
     $scope.option=$scope.filteredQuestion.filter(function (eachWord) {
       return $scope.selection.indexOf(eachWord) !== -1;
       });
@@ -89,12 +110,16 @@ function($scope,$http){
   };
 
 $scope.optionsSelectedFromVariableSearchResult=function(){
+  $scope.boolValueForButtons=true;
+
   $scope.variableContextFromUser=$scope.textOfSelectedRadioButton;
   $scope.showVariableResultSelectionDiv=false;
   $scope.showOptionResultSelectionDiv=true;
 };
 
 $scope.optionsSelectedFromOptionSearchResult=function(){
+  $scope.boolValueForButtons=true;
+
   $scope.optionContextFromUser=$scope.textOfSelectedRadioButton;
   $scope.showOptionResultSelectionDiv=false;
 
@@ -119,18 +144,42 @@ $scope.sendPAndQForVariableAndOption=function(){
     // is currently selected
     if (idx > -1) {
       $scope.selection.splice(idx, 1);
+
     }
 
     // is newly selected
     else {
       $scope.selection.push(questionWord);
+
     }
     console.log($scope.selection);
+    if ($scope.selection.length>0) {
+      $scope.boolValueForButtons=false;
+    }
+    else {
+      $scope.boolValueForButtons=true;
+
+    }
   };
 
   $scope.selectedOption=function(selectedRadioButton){
+    $scope.boolValueForButtons=false;
+
     $scope.textOfSelectedRadioButton=selectedRadioButton;
     // console.log($scope.textOfSelectedRadioButton);
+  };
+
+  $scope.saveQuestionStub=function(){
+    $scope.showTopicSelectionDiv=true;
+
+
+  };
+
+  $scope.resetPage=function(){
+    $scope.showSuccessMessage=false;
+    $scope.showGeneratedQuestions=false
+    $scope.question="";
+    sampleQuestionEntered();
   };
 }]);
 
@@ -227,6 +276,7 @@ function figureOutPandQCombinationForVarAndPidOfOption($http,$scope){
       $scope.generateQuestionsList=data;
       $scope.showLoadingScreen=false;
       $scope.showGeneratedQuestions=true;
+      $scope.showSaveQuesStub=true;
 
     });
 }

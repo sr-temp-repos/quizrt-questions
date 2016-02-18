@@ -38,6 +38,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
@@ -56,6 +57,7 @@ initPassport(passport);
 
 var routes = require('./routes/index')(passport);
 app.use('/', routes);
+
 app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
 app.use('/TopicsRequestHandler', topicsRequestHandler(wagner));
 

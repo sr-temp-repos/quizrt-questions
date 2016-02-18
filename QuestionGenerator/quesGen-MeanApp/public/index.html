@@ -2,6 +2,8 @@
    <head>
       <title>Question Generator</title>
       <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+      <!-- <link href="./stylesheets/bootstrap.min.css" rel="stylesheet"> -->
+
       <link href="stylesheets/animations.css" rel="stylesheet" type="text/css">
       <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
       <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
@@ -9,6 +11,7 @@
 
       <script src="./javascripts/app.js"></script>
       <script src="./javascripts/ui-bootstrap-1.1.2.min.js"></script>
+
    </head>
    <body ng-app="questionGenerator" ng-controller="MainCtrl">
       <div class="row">
@@ -37,28 +40,7 @@
              </div>
             </form>
          </div>
-         <div class="col-md-12 text-center panel panel-primary" ng-show="showTopicSelectionDiv">
-            <div class="panel-heading">
-               <h3 class="panel-title">This Question Belongs To Which of The Following Topics ?</h3>
-            </div>
-            <div class="panel-body">
-               <div class="col-md-4" ng-repeat="(topicId,topicName) in topicsList">
-                  <div class="input-group">
-                     <span class="input-group-addon">
-                     <input
-                        type="checkbox"
-                        name="topics[]"
-                        value="{{topics}}"
-                        ng-checked="selection.indexOf(topicId) > -1"
-                        ng-click="toggleSelection(topicId)"
-                        > {{topicName}}
-                     </span>
-                  </div>
-                  <!-- /input-group -->
-               </div>
-            </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="topicsSelected()">Proceed</button></div>
-         </div>
+
          <div class="col-md-12 text-center panel panel-primary" ng-show="showVariableSelectionDiv">
             <div class="panel-heading">
                <h3 class="panel-title">Select The Word(s) Which Shall Act as Variable</h3>
@@ -79,7 +61,7 @@
                   <!-- /input-group -->
                </div>
             </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="variablesSelected()">Proceed</button></div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="variablesSelected()">Proceed</button></div>
          </div>
 
          <div class="col-md-12 text-center panel panel-primary" ng-show="showOptionSelectionDiv">
@@ -102,7 +84,7 @@
                   <!-- /input-group -->
                </div>
             </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="optionsSelected()">Proceed</button></div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelected()">Proceed</button></div>
          </div>
 
          <div class="col-md-12 text-center panel panel-primary" ng-show="showVariableResultSelectionDiv">
@@ -118,7 +100,7 @@
                </div>
             </div>
 
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="optionsSelectedFromVariableSearchResult()">Proceed</button></div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelectedFromVariableSearchResult()">Proceed</button></div>
          </div>
 
 
@@ -135,7 +117,7 @@
                   <!-- /input-group -->
                </div>
             </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="optionsSelectedFromOptionSearchResult()">Proceed</button></div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelectedFromOptionSearchResult()">Proceed</button></div>
          </div>
 
          <div class="col-md-12 text-center panel panel-primary" ng-show="showVariablePropertiesDiv">
@@ -150,7 +132,7 @@
                   <!-- /input-group -->
                </div>
             </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
          </div>
 
 
@@ -158,7 +140,37 @@
             <div class="panel-heading">
                <h3 class="panel-title">{{generateQuestionsList[generateQuestionsList.length-1]}} Questions Generated </h3>
             </div>
+            <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-danger btn-block " ng-click="saveQuestionStub()">Save Question Stub</button></div>
+            <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}<button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
+
+            <div class="col-md-12 text-center panel panel-success" ng-show="showTopicSelectionDiv">
+               <div class="panel-heading">
+                  <h3 class="panel-title">This Question Belongs To Which of The Following Topics ?</h3>
+               </div>
+               <div class="panel-body">
+                  <div class="col-md-4" ng-repeat="(topicId,topicName) in topicsList">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        <input
+                           type="checkbox"
+                           name="topics[]"
+                           value="{{topics}}"
+                           ng-checked="selection.indexOf(topicId) > -1"
+                           ng-click="toggleSelection(topicId)"
+                           > {{topicName}}
+                        </span>
+                     </div>
+                     <!-- /input-group -->
+                  </div>
+               </div>
+               <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-info " ng-click="topicsSelected()">Proceed</button></div>
+               <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}  <button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
+
+            </div>
+
+
             <div class="panel-body">
+
                <div class="col-md-12" ng-repeat="object in generateQuestionsList | limitTo:200">
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-info btn-block text-center">{{object.question}}</li>
@@ -169,8 +181,18 @@
                   <!-- /input-group -->
                </div>
             </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
+            <div class="panel-footer"><button type="submit" class="btn btn-danger btn-block " ng-click="saveQuestionStub()">Save Question Stub</button></div>
+            <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-info " ng-click="topicsSelected()">Proceed</button></div>
+            <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}  <button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
+
+
          </div>
+
+
+
+
+
+
 
       </div>
       <!--  -->

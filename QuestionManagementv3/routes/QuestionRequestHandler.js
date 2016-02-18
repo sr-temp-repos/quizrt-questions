@@ -38,8 +38,10 @@ module.exports = function(wagner) {
         var query = req.body.query,
             sortType = req.body.sortType,
             sortReverse = req.body.sortReverse,
-            obj = {};
+            searchIn = req.body.searchIn,
+            obj = {},
             rgexQuery = query !=""? new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig'): "";
+
         sortReverse = (sortReverse)? 1: -1;
         if(sortType!="") {
           obj[sortType] = sortReverse;
@@ -50,6 +52,7 @@ module.exports = function(wagner) {
             sortObj: obj,
             firstQuestion: req.body.firstQuestion,
             count: req.body.count,
+            searchIn: searchIn,
             wagner: wagner,
             db: db
           },
