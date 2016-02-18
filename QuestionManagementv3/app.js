@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/FilesNoAuth')));
 
 
 
@@ -55,11 +55,25 @@ app.use(flash());
 var initPassport = require('./passport/init');
 initPassport(passport);
 
-var routes = require('./routes/index')(passport);
-app.use('/', routes);
+var authenticationHandler = require('./routes/Auth')(passport);
+
+app.get('/login', authenticationHandler.getLoginPage);
+app.post('/login', authenticationHandler.login(passport));
+app.post('/signup', authenticationHandler.signup(passport));
+
+// authenticate request
+app.use(authenticationHandler.AuthenticateRequest);
+
+// Request authenticated now allowing to normal routes
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
 app.use('/TopicsRequestHandler', topicsRequestHandler(wagner));
+app.use('/', function(req, res, next) {
+  console.log('you came to home page');
+  res.redirect('home.html');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
