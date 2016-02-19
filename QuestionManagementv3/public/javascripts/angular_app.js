@@ -43,7 +43,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.onQuestionDelete = function(data, callback) {
      $http({
        url: '/QuestionRequestHandler',
@@ -55,7 +55,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.addTopic = function(data, callback) {
      $http({
        url: '/TopicsRequestHandler',
@@ -67,7 +67,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.addCategoryId = function(data, callback) {
      $http({
        url: '/TopicsRequestHandler',
@@ -79,7 +79,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.yesBtnClicked = function(data, callback) {
      $http({
        url: '/TopicsRequestHandler',
@@ -91,7 +91,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.QuestionSave = function(data, callback) {
      $http({
        url: '/QuestionRequestHandler',
@@ -103,7 +103,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.getCategoriesDatalist = function(data, callback) {
      $http({
        url: '/TopicsRequestHandler',
@@ -115,7 +115,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   },
+   };
    this.getTopicDatalist = function(data, callback) {
      $http({
        url: '/TopicsRequestHandler',
@@ -127,7 +127,7 @@ QuestionManagerApp.service('$ajaxService', function($http){
      }, function errorCall(data) {
        callback(data,null);
      });
-   }
+   };
 });
 QuestionManagerApp.factory('AuthService',
   ['$q', '$timeout', '$http',

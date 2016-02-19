@@ -7,6 +7,13 @@ app.controller('MainCtrl', [
 function($scope,$http){
   $scope.exclusionList=[];
   $scope.topicsList={};
+  $scope.optionsArray=[];
+  $scope.maxNumberOfOptions=12;
+  $scope.minNumberOfOptions=2;
+
+  for (var i = $scope.minNumberOfOptions; i <= $scope.maxNumberOfOptions; i++) {
+    $scope.optionsArray.push(i);
+  }
 
   $http({
   method: 'GET',
@@ -50,6 +57,8 @@ function($scope,$http){
     $scope.showGeneratedQuestions=false;
     $scope.showSaveQuesStub=false;
     $scope.showSuccessMessage=false;
+    $scope.divForSelectionOfNumberOfOptions=false;
+
   };
 
   $scope.topicsSelected = function(){
@@ -57,24 +66,56 @@ function($scope,$http){
   //   $scope.selection=[];
     $scope.showTopicSelectionDiv=false;
   //   $scope.showVariableSelectionDiv=true;
-  var questionStubJsonDoc={};
-  questionStubJsonDoc["pIdForVar"]=$scope.finalPidForVariable;
-  questionStubJsonDoc["qIdForVar"]=$scope.finalQidForVariable;
-  questionStubJsonDoc["pIdForOpt"]=$scope.finalPidForOption;
-  questionStubJsonDoc["questionStub"]=$scope.questionStub;
-  questionStubJsonDoc["topicIds"]=$scope.topicIds;
+   $scope.questionStubJsonDoc={};
+  $scope.questionStubJsonDoc["pIdForVar"]=$scope.finalPidForVariable;
+  $scope.questionStubJsonDoc["qIdForVar"]=$scope.finalQidForVariable;
+  $scope.questionStubJsonDoc["pIdForOpt"]=$scope.finalPidForOption;
+  $scope.questionStubJsonDoc["questionStub"]=$scope.questionStub;
+  $scope.questionStubJsonDoc["topicIds"]=$scope.topicIds;
+  $scope.questionStubJsonDoc["numberOfOptionsToBeGenerated"]=$scope.numberOfOptionsToBeGenerated;
 
   $scope.showLoadingScreen=true;
-  $http({method: 'Post', url: '/saveQuestionPattern', data: {data: questionStubJsonDoc}}).
+  $http({method: 'Post', url: '/saveQuestionPattern', data: {data: $scope.questionStubJsonDoc}}).
     success(function(data, status, headers, config) {
-      console.log(data);
+      // if (status==500) {
+      //   console.log("duplicate found");
+      //   console.log(data);
+      //
+      // }
       $scope.showLoadingScreen=false;
-      $scope.showSaveQuesStub=false;
-      $scope.successMessage=data;
-      $scope.showSuccessMessage=true;
+
+      if (data.patternId !== undefined) {
+        console.log("#############");
+        $scope.showSaveQuesStub=false;
+        $scope.resetPageButton=false;
+        $scope.successMessage="Duplicate Stub Pattern Found... Shall I Go Ahead and Update It ?";
+        $scope.showSuccessMessage=true;
+        $scope.showDivForUpdateQueStub=true;
+        $scope.duplicateQuestionStub=data;
+      }
+      else {
+        $scope.showSaveQuesStub=false;
+        $scope.successMessage=data;
+        $scope.showSuccessMessage=true;
+        $scope.resetPageButton=true;
+
+      }
+
+      console.log(data);
     });
 
-  console.log(questionStubJsonDoc);
+  // console.log(questionStubJsonDoc);
+  };
+
+  $scope.overWriteDupQuesStub=function(){
+    $http({method: 'Post', url: '/overWriteDupQuesStub', data: {data: $scope.questionStubJsonDoc}}).
+      success(function(data, status, headers, config) {
+        $scope.successMessage=data;
+        $scope.showSuccessMessage=true;
+        $scope.showDivForUpdateQueStub=false;
+        $scope.resetPageButton=true;
+      });
+
   };
 
   $scope.variablesSelected = function(){
@@ -128,11 +169,16 @@ $scope.optionsSelectedFromOptionSearchResult=function(){
 
   sendVariableAndOptionContextToServer($scope,$http);
 };
-
-$scope.sendPAndQForVariableAndOption=function(){
+$scope.showDivForNumberOfOption=function(){
   $scope.variableEntityTypeFromUser=$scope.textOfSelectedRadioButton;
   $scope.showVariablePropertiesDiv=false;
-  figureOutPandQCombinationForVarAndPidOfOption($http,$scope)
+  $scope.divForSelectionOfNumberOfOptions=true;
+}
+$scope.sendPAndQForVariableAndOption=function(){
+  console.log($scope.textOfSelectedRadioButton);
+  $scope.divForSelectionOfNumberOfOptions=false;
+  $scope.numberOfOptionsToBeGenerated=$scope.textOfSelectedRadioButton;
+  figureOutPandQCombinationForVarAndPidOfOption($http,$scope);
 }
   // selected part from check box group
   $scope.selection = [];
@@ -179,7 +225,7 @@ $scope.sendPAndQForVariableAndOption=function(){
     $scope.showSuccessMessage=false;
     $scope.showGeneratedQuestions=false
     $scope.question="";
-    sampleQuestionEntered();
+    $scope.sampleQuestionEntered();
   };
 }]);
 
@@ -262,18 +308,35 @@ function figureOutPandQCombinationForVarAndPidOfOption($http,$scope){
   // console.log($scope.questionStub);
 
   $scope.showLoadingScreen=true;
-  var dataToBeSentToServer=[];
-  dataToBeSentToServer.push($scope.finalPidForVariable);
-  dataToBeSentToServer.push($scope.finalQidForVariable);
-  dataToBeSentToServer.push($scope.finalPidForOption);
-  dataToBeSentToServer.push($scope.questionStub);
-  dataToBeSentToServer.push($scope.topicIds);
+  var dataToBeSentToServer={};
+  // dataToBeSentToServer.push($scope.finalPidForVariable);
+  // dataToBeSentToServer.push($scope.finalQidForVariable);
+  // dataToBeSentToServer.push($scope.finalPidForOption);
+  // dataToBeSentToServer.push($scope.questionStub);
+  // dataToBeSentToServer.push($scope.topicIds);
   // console.log(dataToBeSentToServer);
+  dataToBeSentToServer["pIdForVar"]=$scope.finalPidForVariable;
+  dataToBeSentToServer["qIdForVar"]=$scope.finalQidForVariable;
+  dataToBeSentToServer["pIdForOpt"]=$scope.finalPidForOption;
+  dataToBeSentToServer["questionStub"]=$scope.questionStub;
+  dataToBeSentToServer["topicIds"]=$scope.topicIds;
+  dataToBeSentToServer["numberOfQuestions"]=100; // hardcoded as of now
+  dataToBeSentToServer["numberOfOptionsToBeGenerated"]=$scope.numberOfOptionsToBeGenerated;
+  console.log(dataToBeSentToServer);
   $http({method: 'Post', url: '/generateQuestions', data: {data:dataToBeSentToServer }}).
     success(function(data, status, headers, config) {
       console.log(data);
       console.log(data.length);
       $scope.generateQuestionsList=data;
+      for (var i = 0; i < $scope.generateQuestionsList.length; i++) {
+        var tempArrayForOptions=[];
+        $scope.generateQuestionsList[i]["options"]=[];
+        for (var j = 1; j <= $scope.numberOfOptionsToBeGenerated; j++) {
+          tempArrayForOptions.push($scope.generateQuestionsList[i]["option"+j]);
+        }
+        $scope.generateQuestionsList[i]["options"]=tempArrayForOptions;
+
+      }
       $scope.showLoadingScreen=false;
       $scope.showGeneratedQuestions=true;
       $scope.showSaveQuesStub=true;
