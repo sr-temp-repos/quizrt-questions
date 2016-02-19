@@ -25,12 +25,11 @@ module.exports = function(wagner) {
     switch(req.body.requestType){
       case 'add':
         wagner.invoke(db.QuestionDB.add, {
-          questions: req.body.questions,
-          callback: function(err) {
+          callback: function(err, count, ins, notIns) {
             if(err)
               res.json({status: 'failure', message: 'Failure : Cannot able to save  in the question data store.'});
             else
-              res.json({status: 'success', message: 'Success : Saved in the question data store.'});
+              res.json({status: 'success', message: 'Success : Saved in the question data store.', count: count, inserted: ins, notInserted: notIns});
           }
         });
         break;
