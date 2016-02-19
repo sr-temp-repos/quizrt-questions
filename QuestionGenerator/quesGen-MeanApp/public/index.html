@@ -132,16 +132,42 @@
                   <!-- /input-group -->
                </div>
             </div>
+            <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="showDivForNumberOfOption()">Proceed</button></div>
+         </div>
+
+         <div class="col-md-12 text-center panel panel-primary" ng-show="divForSelectionOfNumberOfOptions">
+            <div class="panel-heading">
+               <h3 class="panel-title">Cool !! I Am All Set.. Just A Last Query... How Many Options Shall I Generate ?</h3>
+            </div>
+            <div class="panel-body">
+               <div class="col-md-2" ng-repeat="optionsNumber in optionsArray">
+                  <div class="list-group">
+                     <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-disabled="boolValueForButtons" ng-click="selectedOption(optionsNumber)"><b> {{optionsNumber}} </b></button>
+                  </div>
+                  <!-- /input-group -->
+               </div>
+            </div>
             <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
          </div>
 
 
          <div class="col-md-12 text-center panel panel-primary" ng-show="showGeneratedQuestions">
             <div class="panel-heading">
-               <h3 class="panel-title">{{generateQuestionsList[generateQuestionsList.length-1]}} Questions Generated </h3>
+               <h3 class="panel-title">More Than {{generateQuestionsList[generateQuestionsList.length-1]}} Questions Generated </h3>
             </div>
             <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-danger btn-block " ng-click="saveQuestionStub()">Save Question Stub</button></div>
-            <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}<button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
+            <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}
+              <div class="panel-body" ng-show="showDivForUpdateQueStub">
+                <h4>Question = {{duplicateQuestionStub.questionStub.pre}}+
+                      {{duplicateQuestionStub.questionStub.var}}+
+                      {{duplicateQuestionStub.questionStub.post}}</h2>
+                <h4>Number Of Options = {{duplicateQuestionStub.numberOfOptionsToBeGenerated}} </h2>
+                <h4>Topics = {{duplicateQuestionStub.topicIds}} </h2>
+                <button type="submit" class="btn btn-success" ng-click="overWriteDupQuesStub()">Yes </button>
+                <button type="submit" class="btn btn-danger" ng-click="resetPage()">No </button>
+              </div>
+              <button type="submit" class="btn btn-success" ng-click="resetPage()" ng-show="resetPageButton">Another Search ? :-) </button>
+            </div>
 
             <div class="col-md-12 text-center panel panel-success" ng-show="showTopicSelectionDiv">
                <div class="panel-heading">
@@ -164,28 +190,25 @@
                   </div>
                </div>
                <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-info " ng-click="topicsSelected()">Proceed</button></div>
-               <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}  <button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
+               <div class="panel-footer" ng-show="showSuccessMessage"><h3>{{successMessage}} </h3> <button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
 
             </div>
 
 
             <div class="panel-body">
 
-               <div class="col-md-12" ng-repeat="object in generateQuestionsList | limitTo:200">
+               <div class="col-md-12" ng-repeat="object in generateQuestionsList | limitTo:100">
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-info btn-block text-center">{{object.question}}</li>
-                        <li class="list-group-item list-group-item-success btn-block text-center">{{object.answer}}</li>
-                        <li class="list-group-item list-group-item-danger btn-block text-center">{{object.distractor}}</li>
-                        <li><img src="{{object.imageUri}}" height="200" width="auto" alt="{{object.imageUri}}" /></li>
+                        <li class="list-group-item list-group-item-warning btn-block text-center" >
+                          <span ng-repeat="options in object.options"> || {{options}}</span>
+                        </li>
+                        <li class="list-group-item list-group-item-success btn-block text-center">{{object.options[object.correctIndex -1]}}</li>
+                        <li><img src="{{object.image}}" height="200" width="auto" alt="{{object.image}}" /></li>
                     </ul>
                   <!-- /input-group -->
                </div>
             </div>
-            <div class="panel-footer"><button type="submit" class="btn btn-danger btn-block " ng-click="saveQuestionStub()">Save Question Stub</button></div>
-            <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-info " ng-click="topicsSelected()">Proceed</button></div>
-            <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}  <button type="submit" class="btn btn-success" ng-click="resetPage()">Another Search ? :-) </button></div>
-
-
          </div>
 
 

@@ -1,4 +1,7 @@
   <main class="container">
+    <div ng-controller="logoutController">
+      <a ng-click='logout()' class="btn btn-default">Logout</a>
+    </div>
     <div id="search" class="well row">
       <form id="searchForm" class="col-sm-9 col-xs-9" ng-submit="onSearch()">
         <input name="searchText" id="searchText" ng-model="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />

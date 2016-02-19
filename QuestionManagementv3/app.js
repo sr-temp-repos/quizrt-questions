@@ -69,6 +69,7 @@ app.use(authenticationHandler.AuthenticateRequest);
 
 // Request authenticated now allowing to normal routes
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
 app.use('/TopicsRequestHandler', topicsRequestHandler(wagner));
 

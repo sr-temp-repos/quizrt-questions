@@ -2,7 +2,8 @@ var mongoose = require('mongoose'),
     questionSchema = require('../schema/question'),
     topicSchema = require('../schema/topic'),
     categorySchema = require('../schema/category'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    fs = require('fs');
 
 module.exports.QuestionDB = {
   init: function(wagner, config) {
@@ -32,18 +33,61 @@ module.exports.QuestionDB = {
       });
     });
   },
-  add: function(Question, questions, callback) {
-    for(var index in questions) { // Looping each question in questions array
-      questions[index].topicIds = questions[index].topicId.split(', '); // Generating ids from questions.topicid
-      questions[index].topicId = ''; //clearing all other temp variables
-      questions[index].topics = '';
-      questions[index].categories = '';
+  add: function(Question, callback) {
+      var stream = fs.createReadStream("../tempFileToStoreQues.json", {flags: 'r', encoding: 'utf-8'});
+      var buf = '';
+      var inserted = 0;
+      var notInserted = 0;
 
-      var q = new Question(questions[index]); // validating with schema
-      q.save(function(err) { // saving the data
-        callback(err);
+      stream.on('data', function(d) {
+        buf += d.toString(); // when data is read, stash it in a string buffer
+        pump(); // then process the buffer
       });
-    }
+
+      function pump() {
+        var pos;
+
+        while ((pos = buf.indexOf('\n')) >= 0) { // keep going while there's a newline somewhere in the buffer
+            if (pos == 0) { // if there's more than one newline in a row, the buffer will now start with a newline
+                buf = buf.slice(1); // discard it
+                continue; // so that the next iteration will start with data
+            }
+            processLine(buf.slice(0,pos)); // hand off the line
+            buf = buf.slice(pos+1); // and slice the processed data off the buffer
+        }
+      }
+
+      function processLine(line) { // here's where we do something with a line
+
+        if (line[line.length-1] == '\r') line=line.substr(0,line.length-1); // discard CR (0x0D)
+
+        if (line.length > 0) { // ignore empty lines
+            var obj = JSON.parse(line); // parse the JSON
+            Question.find({questionId: obj.questionId}, function(err, docs) {
+              if(docs.length == 0) {
+                obj["difficultyLevel"] = 0;
+                obj["timesUsed"] = 0;
+                obj["correctRatio"] = "";
+                obj["frequency"] = 0;
+                obj["lastEdited"] = new Date();
+                obj["createdOn"] = new Date();
+                var q = new Question(obj); // validating with schema
+                q.save(function(err) { // saving the data
+                  if (err) {
+                    notInserted++;
+                  } else {
+                    inserted++;
+                  }
+                  // callback(err);
+                });
+              }
+              else {
+                notInserted++;
+              }
+            });
+        }
+      }
+      callback(null, inserted+notInserted, inserted, notInserted);
   },
   getCount: function(Question, query, callback) {
     Question.count(query,function(err,doc) {
