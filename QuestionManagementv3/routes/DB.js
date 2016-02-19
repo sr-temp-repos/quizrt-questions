@@ -91,6 +91,7 @@ module.exports.QuestionDB = {
                 });
               }
               else {
+                savedCount++;
                 notInserted++;
               }
             });
