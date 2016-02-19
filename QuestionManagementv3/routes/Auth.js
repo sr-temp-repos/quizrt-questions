@@ -38,6 +38,11 @@ var Auth = {
       })(req, res, next);
     };
   },
+  /* Handle Logout */
+	signout: function(req, res) {
+		req.logout();
+		res.redirect('/');
+	},
 
   /* Handle All other routes */
   AuthenticateRequest: function(req,res,next) {

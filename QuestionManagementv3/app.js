@@ -38,7 +38,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/FilesNoAuth')));
 
 
-
+/* Authentication block start here */
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
@@ -60,20 +60,17 @@ var authenticationHandler = require('./routes/Auth')(passport);
 app.get('/login', authenticationHandler.getLoginPage);
 app.post('/login', authenticationHandler.login(passport));
 app.post('/signup', authenticationHandler.signup(passport));
+app.get('/signout', authenticationHandler.signout);
 
 // authenticate request
 app.use(authenticationHandler.AuthenticateRequest);
 
+/* End of Authentication Block */
+
 // Request authenticated now allowing to normal routes
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 app.use('/QuestionRequestHandler', questionRequestHandler(wagner));
 app.use('/TopicsRequestHandler', topicsRequestHandler(wagner));
-app.use('/', function(req, res, next) {
-  console.log('you came to home page');
-  res.redirect('home.html');
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

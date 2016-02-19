@@ -1,4 +1,5 @@
-QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxService', function($scope, $uibModal, $http, $ajaxService) {
+QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxService','$window',
+function($scope, $uibModal, $http, $ajaxService, $window) {
 
   $scope = angular.extend($scope, {
     /* Dropdown options */
@@ -6,7 +7,7 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
                     100,
                     150,
                     'All'],
-    selectedRowCountIndex: 2,
+    selectedRowCountIndex: 0,
     selectedRowCount: 50,
 
     /* Intializing question table with empty obj Array */
@@ -29,7 +30,9 @@ QuestionManagerApp.controller('index', ['$scope', '$uibModal', '$http', '$ajaxSe
       cat: false
     }
   });
-
+  $scope.signout= function() {
+    $window.location.href='/signout';
+  };
   var QuestionManager = {
 
     /* Intializes the config data into the object */
