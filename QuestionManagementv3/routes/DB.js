@@ -36,12 +36,18 @@ module.exports.QuestionDB = {
   add: function(Question, callback) {
       var stream = fs.createReadStream("../tempFileToStoreQues.json", {flags: 'r', encoding: 'utf-8'});
       var buf = '';
+      var readCount = 0,
+          savedCount = 0,
+          readingComplete = false;
       var inserted = 0;
       var notInserted = 0;
 
       stream.on('data', function(d) {
         buf += d.toString(); // when data is read, stash it in a string buffer
         pump(); // then process the buffer
+      });
+      stream.on('end', function() {
+        readingComplete=true;
       });
 
       function pump() {
@@ -58,7 +64,7 @@ module.exports.QuestionDB = {
       }
 
       function processLine(line) { // here's where we do something with a line
-
+        readCount++;
         if (line[line.length-1] == '\r') line=line.substr(0,line.length-1); // discard CR (0x0D)
 
         if (line.length > 0) { // ignore empty lines
@@ -73,11 +79,14 @@ module.exports.QuestionDB = {
                 obj["createdOn"] = new Date();
                 var q = new Question(obj); // validating with schema
                 q.save(function(err) { // saving the data
+                  savedCount++;
                   if (err) {
                     notInserted++;
                   } else {
                     inserted++;
                   }
+                  if(readingComplete && (readCount == savedCount))
+                    callback(null, count, inserted, notInserted);
                   // callback(err);
                 });
               }
@@ -87,7 +96,6 @@ module.exports.QuestionDB = {
             });
         }
       }
-      callback(null, inserted+notInserted, inserted, notInserted);
   },
   getCount: function(Question, query, callback) {
     Question.count(query,function(err,doc) {
