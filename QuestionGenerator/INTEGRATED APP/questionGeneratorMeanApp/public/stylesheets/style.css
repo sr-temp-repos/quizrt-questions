@@ -12,6 +12,7 @@
 
 body{
   background: url("../images/background1.jpg");
+  font-family: 'Arvo', serif;
 }
 
 #loadingText{

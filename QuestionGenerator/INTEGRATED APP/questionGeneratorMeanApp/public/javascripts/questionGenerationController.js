@@ -4,7 +4,8 @@ var app = angular.module('questionGenerator');
 app.controller('questionGenerationController', [
   '$scope',
   '$http',
-  function($scope,$http){
+  '$parse',
+  function($scope,$http,$parse){
     $scope.stubList=[];
     $scope.totalStubs="";
     $http({
@@ -21,9 +22,10 @@ app.controller('questionGenerationController', [
     });
 
     $scope.selectedStub = "";
-
     $scope.setSelectedStub=function setSelectedStub(stub){
       $scope.selectedStub=stub;
+      $scope.firstRefresh=false;
+      $scope.notFirstRefresh=false;
       if($scope.selectedStub["lastExecutedOn"]===null){
         $scope.firstRefresh=true;
       }
@@ -36,13 +38,17 @@ app.controller('questionGenerationController', [
       $scope.notFirstRefresh=false;
       $scope.firstRefresh=false;
     }
+
+
     $scope.refreshSlectedStubList=function refreshSlectedStubList(){
-        $scope.showLoadingScreen=true;
+      $scope.isDisabled=true;
+      $scope.selectedStub["executionStatus"]=null;
+      $scope.selectedStub["running"]=true;
+      $scope.selectedStub["executed"]=false;
       $scope.selectedStub["numberOfQuestions"]="ALL";
       var d = new Date();
       $scope.selectedStub["lastExecutedOn"]=new Date().getTime();
-
-
+      var curTime=new Date().getTime();
       console.log($scope.selectedStub);
       $http({method: 'Post', url: '/generateQuestions', data: {data: $scope.selectedStub}}).
         success(function(data, status, headers, config) {
@@ -55,15 +61,14 @@ app.controller('questionGenerationController', [
               $scope.selectedStub["successfullyInserted"]=data["inserted"];
               $http({method: 'Post', url: '/overWriteDupQuesStub', data: {data: $scope.selectedStub}}).
                 success(function(data, status, headers, config) {
-                  console.log(data);
-                    $scope.showLoadingScreen=false;
                     $scope.notFirstRefresh=false;
                     $scope.firstRefresh=false;
+                    $scope.selectedStub["running"]=false;
+                    $scope.selectedStub["executed"]=true;
+                    $scope.isDisabled=false;
                 });
             });
         });
     }
-
-
 
   }]);

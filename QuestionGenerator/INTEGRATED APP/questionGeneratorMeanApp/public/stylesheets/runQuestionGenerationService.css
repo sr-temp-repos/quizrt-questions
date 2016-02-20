@@ -1,15 +1,17 @@
-#spinner{
-  opacity:.9;
-  position:fixed;
-  top: 0%;
-  left: 0%;
-  bottom: 0%;
-  right: 0%;
-  background: url("../images/loading.gif") no-repeat center #fff;
-  text-align: center;
-  z-index: 2;
+body{
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.glyphicon.glyphicon-send.glyphicon-exclamation-sign {
+  font-size: 70px;
 }
 
-.glyphicon.glyphicon-send.glyphicon-exclamation-sign {
+.badge{
   font-size: 30px;
+}
+.runningJobGif{
+  background: url("../images/runningJob.gif") no-repeat center #fff;
+}
+
+img{
+    width: 35px;
 }
