@@ -7,12 +7,12 @@
   <div class="row">
     <div class="col-md-12 text-center ">
       <form ng-submit="sampleQuestionEntered()">
-        <div class="col-md-12 text-center panel panel-default" >
+        <div class="col-md-12 text-center " >
 
-          <div class="panel-heading">
+          <div class="well">
             <h3 >Enter A Sample Question <small>( E.g. Sachin Tendulkar is from which country ? )</small></h3>
           </div>
-          <div class="col-md-12 text-center panel-body" >
+          <div class="col-md-12 text-center" >
 
             <div class="form-group col-md-11">
               <input type="text"
@@ -26,9 +26,9 @@
       </form>
     </div>
 
-    <div class="col-md-12 text-center panel panel-primary slide-left" ng-show="showVariableSelectionDiv">
+    <div class="col-md-12 text-center  slide-left" ng-show="showVariableSelectionDiv">
       <div class="panel-heading">
-        <h3 class="panel-title">Select The Word(s) Which Shall Act as Variable</h3>
+        <h3 class="panel-title well">Select The Word(s) Which Shall Act as Variable</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-4" ng-repeat="questionWord in filteredQuestion">
@@ -46,12 +46,12 @@
           <!-- /input-group -->
         </div>
       </div>
-      <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="variablesSelected()">Proceed</button></div>
+      <div><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="variablesSelected()">Proceed</button></div>
     </div>
 
-    <div class="col-md-12 text-center panel panel-primary slide-right" ng-show="showOptionSelectionDiv">
+    <div class="col-md-12 text-center slide-right" ng-show="showOptionSelectionDiv">
       <div class="panel-heading">
-        <h3 class="panel-title">Select The Word(s) Which Shall Act as Option</h3>
+        <h3 class="panel-title well">Select The Word(s) Which Shall Act as Option</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-4" ng-repeat="questionWord in filteredQuestion">
@@ -69,79 +69,79 @@
           <!-- /input-group -->
         </div>
       </div>
-      <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelected()">Proceed</button></div>
+      <div><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelected()">Proceed</button></div>
     </div>
 
-    <div class="col-md-12 text-center panel panel-primary spin-toggle" ng-show="showVariableResultSelectionDiv">
+    <div class="col-md-12 text-center spin-toggle" ng-show="showVariableResultSelectionDiv">
       <div class="panel-heading">
-        <h3 class="panel-title">Hey! Lemme Know What Did You Mean By " {{variable}}  "</h3>
+        <h3 class="panel-title well">Hey! Lemme Know What Did You Mean By " {{variable}}  "</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-12" ng-repeat="results in searchResultForVariable">
           <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-click="selectedOption(results)"> <b>{{results.label}}</b> - {{results.description}}</button>
+            <button type="button" class="list-group-item list-group-item-info btn-block text-center" ng-click="selectedOption(results)"> <b>{{results.label}}</b> - {{results.description}}</button>
           </div>
           <!-- /input-group -->
         </div>
       </div>
 
-      <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelectedFromVariableSearchResult()">Proceed</button></div>
+      <div><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelectedFromVariableSearchResult()">Proceed</button></div>
     </div>
 
 
 
-    <div class="col-md-12 text-center panel panel-primary flip-in" ng-show="showOptionResultSelectionDiv">
+    <div class="col-md-12 text-center flip-in" ng-show="showOptionResultSelectionDiv">
       <div class="panel-heading">
-        <h3 class="panel-title">Ok! I got that.... Now Which of following best match " {{option}}  " in Context of " {{variable}}  "</h3>
+        <h3 class="panel-title well">Ok! I got that.... Now Which of following best match " {{option}}  " in Context of " {{variable}}  "</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-12" ng-repeat="results in searchResultForOption">
           <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-click="selectedOption(results)"> <b>{{results.label}}</b> - {{results.description}}</button>
+            <button type="button" class="list-group-item list-group-item-info btn-block text-center" ng-click="selectedOption(results)"> <b>{{results.label}}</b> - {{results.description}}</button>
           </div>
           <!-- /input-group -->
         </div>
       </div>
-      <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelectedFromOptionSearchResult()">Proceed</button></div>
+      <div ><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="optionsSelectedFromOptionSearchResult()">Proceed</button></div>
     </div>
 
-    <div class="col-md-12 text-center panel panel-primary bouncy-slide-right" ng-show="showVariablePropertiesDiv">
+    <div class="col-md-12 text-center bouncy-slide-right" ng-show="showVariablePropertiesDiv">
       <div class="panel-heading">
-        <h3 class="panel-title">Trying To Figure Out What Kind Of Entity " {{variable}} " is... Select The Description Which Matches Best</h3>
+        <h3 class="panel-title well">Trying To Figure Out What Kind Of Entity " {{variable}} " is... Select The Description Which Matches Best</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-12" ng-repeat="object in listOfObjectsVariableCouldMean">
           <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-click="selectedOption(object)"><b> {{object["pString"]}} - {{object["qString"]}} </b></button>
+            <button type="button" class="list-group-item list-group-item-info btn-block text-center" ng-click="selectedOption(object)"><b> {{object["pString"]}} - {{object["qString"]}} </b></button>
           </div>
           <!-- /input-group -->
         </div>
       </div>
-      <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="showDivForNumberOfOption()">Proceed</button></div>
+      <div ><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="showDivForNumberOfOption()">Proceed</button></div>
     </div>
 
-    <div class="col-md-12 text-center panel panel-primary rotate-in" ng-show="divForSelectionOfNumberOfOptions">
+    <div class="col-md-12 text-center rotate-in" ng-show="divForSelectionOfNumberOfOptions">
       <div class="panel-heading">
-        <h3 class="panel-title">Cool !! I Am All Set.. Just A Last Query... How Many Options Shall I Generate ?</h3>
+        <h3 class="panel-title well">Cool !! I Am All Set.. Just A Last Query... How Many Options Shall I Generate ?</h3>
       </div>
       <div class="panel-body">
         <div class="col-md-2" ng-repeat="optionsNumber in optionsArray">
           <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-success btn-block text-center" ng-disabled="boolValueForButtons" ng-click="selectedOption(optionsNumber)"><b> {{optionsNumber}} </b></button>
+            <button type="button" class="list-group-item list-group-item-info btn-block text-center" ng-disabled="boolValueForButtons" ng-click="selectedOption(optionsNumber)"><b> {{optionsNumber}} </b></button>
           </div>
           <!-- /input-group -->
         </div>
       </div>
-      <div class="panel-footer"><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
+      <div><button type="submit" class="btn btn-info " ng-disabled="boolValueForButtons" ng-click="sendPAndQForVariableAndOption()">Proceed</button></div>
     </div>
 
 
-    <div class="col-md-12 text-center panel panel-primary bouncy-slide-top" ng-show="showGeneratedQuestions">
+    <div class="col-md-12 text-center bouncy-slide-top" ng-show="showGeneratedQuestions">
       <div class="panel-heading">
         <h3 class="panel-title">More Than {{generateQuestionsList[generateQuestionsList.length-1]}} Questions Generated </h3>
       </div>
-      <div class="panel-footer" ng-show="showSaveQuesStub"><button type="submit" class="btn btn-danger btn-block " ng-click="saveQuestionStub()">Save Question Stub</button></div>
-      <div class="panel-footer" ng-show="showSuccessMessage">{{successMessage}}
+      <div ng-show="showSaveQuesStub"><button type="submit" class="btn btn-danger btn-block " ng-click="saveQuestionStub()">Save Question Stub</button></div>
+      <div  ng-show="showSuccessMessage">{{successMessage}}
         <div class="panel-body" ng-show="showDivForUpdateQueStub">
           <h4>Question = {{duplicateQuestionStub.questionStub.pre}}+
             {{duplicateQuestionStub.questionStub.var}}+

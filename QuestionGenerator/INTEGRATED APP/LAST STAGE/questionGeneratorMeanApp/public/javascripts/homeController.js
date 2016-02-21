@@ -14,4 +14,5 @@ function($scope,$http,$location){
   $scope.redirectToRunJobs=function(){
     $location.path('/runJobs');
   }
+
 }]);
