@@ -93,6 +93,8 @@ module.exports.QuestionDB = {
               else {
                 savedCount++;
                 notInserted++;
+                if(readingComplete && (readCount == savedCount))
+                  callback(null, count, inserted, notInserted);
               }
             });
         }
@@ -252,11 +254,7 @@ module.exports.TopicDB = {
       callback(err,doc);
     });
   },
-  findTopic: function(Topic, retEmpty, query, callback) {
-    if(retEmpty) { // no search required only callback
-      callback(null,[]);
-      return;
-    }
+  findTopic: function(Topic, query, callback) {
 
     Topic.find(query).populate({
       path: 'category',

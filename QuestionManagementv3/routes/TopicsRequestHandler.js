@@ -21,7 +21,7 @@ module.exports = function(wagner) {
   }
 
   router.post('/', function(req, res, next) {
-
+    console.log(req.body.requestType);
     switch(req.body.requestType) {
       case 'listTopics':
         wagner.invoke(db.TopicDB.list, {
@@ -57,6 +57,7 @@ module.exports = function(wagner) {
             topicObj = req.body.topicObj;
         wagner.invoke(db.CategoryDB.find, {
           query: { name : textToSearch },
+          retEmpty: false,
           callback: function(err, categoryObj) {
             if(categoryObj.length < 1) { // Category not found - return a object with new category name filled for conformation.
               topicObj = { name: topicObj, category: textToSearch };
