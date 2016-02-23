@@ -23,5 +23,8 @@
     "express-session": "~1.0.4",
     "bcrypt-nodejs" : "*",
     "connect-flash" : "*"
+  },
+  "dev-dependencies": {
+    
   }
 }

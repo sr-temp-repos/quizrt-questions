@@ -41,7 +41,7 @@ var Auth = {
   /* Handle Logout */
 	signout: function(req, res) {
 		req.logout();
-		res.redirect('/');
+		res.redirect('/login');
 	},
 
   /* Handle All other routes */
