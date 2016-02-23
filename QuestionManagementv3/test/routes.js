@@ -11,7 +11,7 @@ describe('Express Routes Testing', function() {
     it('1.1 Should be able to authenticate user with credentials', function(done) {
       request(app)
         .post('/login')
-        .send({username: 'Penchalaiah', password: 'Pencha'})
+        .send({username: 'prithvi', password: 'prithvi'})
         .expect(200)
         .end(function(err, res) {
           if(err) return done(err);
@@ -25,7 +25,7 @@ describe('Express Routes Testing', function() {
       request(app)
         .post('/signup')
         .send({
-          username: 'test6',
+          username: 'test5',
           password: 'tests',
           email: 'test@test.com',
           firstName: 'test',
@@ -168,7 +168,7 @@ describe('Express Routes Testing', function() {
           if(err) return done(err);
           expect(res.body.rows).to.be.an('array');
           expect(res.body.firstQuestion).to.equal(0);
-          expect(res.body.rows[0].question).to.contain('database');
+          expect(res.body.rows[0].question).to.match(/database/i);
           done();
         });
     });

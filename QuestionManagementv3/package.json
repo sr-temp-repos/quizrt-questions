@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "PORT=8000 node ./bin/www"
+    "start": "PORT=8000 node ./bin/www",
+    "test": "mocha"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -21,10 +22,11 @@
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
     "express-session": "~1.0.4",
-    "bcrypt-nodejs" : "*",
-    "connect-flash" : "*"
+    "bcrypt-nodejs": "*",
+    "connect-flash": "*"
   },
-  "dev-dependencies": {
-    
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
   }
 }

@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('https://www.wpfaster.org/wp-content/uploads/2013/06/Questionmark-Background-1.jpg');
+  /*background-position: top center;*/
 }
 
 a {
