@@ -25,15 +25,11 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         var self=this;
         self.$scope.getTabs = function() {
           var tabs=[];
-          for( var i=1;i<=12;i++ ) {
-            if( self.$scope.selectedQuestion['option' + i] ) {
-              tabs.push({
-                content: self.$scope.selectedQuestion['option' + i],
-                active: (i==1)
-              });
-            } else {
-              break;
-            }
+          for( var i=0;i<self.$scope.selectedQuestion.options.length;i++ ) {
+            tabs.push({
+              content: self.$scope.selectedQuestion.options[i],
+              active: (i==1)
+            });
           }
           return tabs;
         };
@@ -281,9 +277,9 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
           scp.messageSelect = 4;
           return;
         }
-        for(var i=1; i<=12; i++) {
-          question['option' + i] = scp.tabs[i-1]? scp.tabs[i-1].content: null;
-        }
+
+        question.options = scp.tabs.map(function (tab) { return tab.content; })
+
         self.$ajaxService.QuestionSave(
           {
             requestType: 'save',

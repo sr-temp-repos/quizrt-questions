@@ -3,7 +3,7 @@ var topic = require('./topic');
 var category = require('./category')
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/questionGenerator');
+mongoose.connect('mongodb://localhost/test');
 
 
 // Parameters are: model name, schema, collection name
