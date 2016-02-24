@@ -1,0 +1,127 @@
+  <main class="container">
+    <div id="search" class="well row">
+      <form id="searchForm" class="col-sm-9 col-xs-9" ng-submit="onSearch()">
+        <input name="searchText" id="searchText" ng-model="searchText" class="col-sm-7 col-xs-7" placeholder="Search using Keywords, Topics, Category" type="text" />
+        <button type="button" class="btn btn-success col-sm-2 col-xs-2" ng-click="onSearch()" name="button"><span class="glyphicon glyphicon-search"></span> Search</button>
+        <button type="reset" class="btn btn-default col-sm-2 col-xs-2" ng-click="onReset()"><span class="glyphicon glyphicon-remove"></span> Clear </button>
+      </form>
+      <div id='noOfQuestions' uib-dropdown class='col-sm-3 col-xs-3 actionBar'>
+        <button uib-dropdown-toggle class="btn btn-default" type="button">
+          {{noOfQuestions[selectedRowCountIndex]}}
+          <span class="caret"></span></button>
+          <ul uib-dropdown-menu >
+            <li class="noofRows" ng-repeat="x in noOfQuestions" ng-click="noOfRowChange(x, $index)">
+              <a href>{{x}}</a>
+            </li>
+          </ul>
+          <a ng-click="signout()" role="button" class="pull-right"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
+        </div>
+        <form class="col-sm-7 col-xs-7 checkbox">
+          <label>
+            <input type="checkbox" ng-model="searchIn.all" ng-click="changeSelection(0)">All
+          </label>
+          <label>
+            <input type="checkbox" ng-model="searchIn.ques" ng-click="changeSelection(1)">Questions
+          </label>
+          <label>
+            <input type="checkbox" ng-model="searchIn.top" ng-click="changeSelection(1)">Topics
+          </label>
+          <label>
+            <input type="checkbox" ng-model="searchIn.cat" ng-click="changeSelection(1)">Categories
+          </label>
+        </form>
+      </div>
+      <div id="questionContainer" class="row">
+        <table id="questionList" class="table table-bordered table-responsive table-hover">
+          <div ng-if="!questions.length">
+            <h1>Search results not found</h1>
+          </div>
+          <thead ng-hide="!questions.length">
+            <tr>
+              <th>Question</th>
+              <th>Topics</th>
+              <th>Categories</th>
+              <th ng-click="onSortClick('difficultyLevel')">
+                <a href="#">
+                  Difficulty Level
+                  <span ng-show="sortType == 'difficultyLevel' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'difficultyLevel' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th ng-click="onSortClick('timesUsed')">
+                <a href="#">
+                  Times Used
+                  <span ng-show="sortType == 'timesUsed' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'timesUsed' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th ng-click="onSortClick('correctRatio')">
+                <a href="#">
+                  Correct Ratio
+                  <span ng-show="sortType == 'correctRatio' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'correctRatio' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th ng-click="onSortClick('frequency')">
+                <a href="#">
+                  Frequecy per Day
+                  <span ng-show="sortType == 'frequency' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'frequency' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th width='9%'>
+                <a ng-click="onSortClick('lastEdited')" href="#">
+                  Last Edited
+                  <span ng-show="sortType == 'lastEdited' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'lastEdited' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a> <br/> --------------- <br/>
+                <a ng-click="onSortClick('createdOn')" href="#">
+                  Created On
+                  <span ng-show="sortType == 'createdOn' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                  <span ng-show="sortType == 'createdOn' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                </a>
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="question-row" ng-repeat="x in questions">
+              <td class="question">{{x.question}}</td>
+              <td>{{x.topics}}</td>
+              <td>{{x.categories}}</td>
+              <td>{{x.difficultyLevel}}</td>
+              <td>{{x.timesUsed}}</td>
+              <td>{{x.correctRatio}}</td>
+              <td>{{x.frequency}}</td>
+              <td>{{dateFormater(x.lastEdited) | date:'MM/dd/yyyy'}}
+                <br/> -------------- <br/>
+                {{dateFormater(x.createdOn) | date:'MM/dd/yyyy'}}</td>
+              <td width='7%'>
+                <button type="button" class="btn btn-xs btn-default command-edit" ng-click="onEditClick($index)">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="button" class="btn btn-xs btn-default command-delete" ng-click="onDeleteClick($index)">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="pageNo" class="row" ng-hide="!questions.length">
+        <!-- Pagination and Page Tracker are generated by Paging plugin in client side. -->
+        <div paging page="currentPage" page-size="selectedRowCount" total="totalQuestions"
+        text-first="<<"
+        text-last=">>"
+        text-next=">"
+        text-prev="<"
+        show-prev-next="true"
+        show-first-last="true"
+        ul-class="pagination col-sm-8 col-xs-6"
+        paging-action="onPageclick(page)">
+        </div>
+        <p class="pageTracker col-sm-4 col-xs-6">
+          Showing {{firstQuestion + 1}} to {{lastQuestion}} of {{totalQuestions}} Questions
+        </p>
+      </div>
+    </main>

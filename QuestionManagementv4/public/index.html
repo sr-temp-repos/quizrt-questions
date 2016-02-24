@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="QuestionManagerApp">
+<head>
+  <meta charset="utf-8">
+  <title>Question Manager</title>
+  <!-- Boot Strap Style Sheet -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+  <!-- Custom Style sheet -->
+  <link rel="stylesheet" href="stylesheets/QuestionManager.css" />
+
+  <!-- Angular JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular.min.js" charset="utf-8"></script>
+  <!-- Angular Route JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.2/angular-route.js" charset="utf-8"></script>
+  <!-- Angular Animate for Bootstrap animation-->
+  <script src="https://code.angularjs.org/1.5.0-rc.2/angular-animate.min.js" charset="utf-8"></script>
+
+  <script src="libraries/ui-bootstrap-tpls-1.1.2.min.js" charset="utf-8"></script>
+  <base href="/">
+</head>
+<body>
+  <div ng-view=""> </div>
+
+  <script src="libraries/paging.js" charset="utf-8"></script>
+  <script src="javascripts/angular_app.js"></script>
+  <script src="javascripts/Controllers/indexController.js"> </script>
+  <script src="javascripts/Controllers/editQuestionController.js"> </script>
+
+</body>
+</html>
