@@ -172,5 +172,23 @@ describe('Express Routes Testing', function() {
           done();
         });
     });
+    it("2.4 Should able to delete a question", function(done) {
+
+      request(app)
+        .post('/QuestionRequestHandler')
+        .send({
+          requestType: 'delete',
+          questionId: '56bb28c608b130c1065b794f'
+        })
+        .set('cookie', cookie)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if(err) return done(err);
+          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.equal('success');
+          done();
+        });
+    });
   });
 });
