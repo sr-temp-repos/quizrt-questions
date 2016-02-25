@@ -21,6 +21,6 @@ var mongoose = require('mongoose'),
       imageUrl: { type: String },
       categoryTopics: [{ type: String, ref: 'Topic' }]
     }),
-    Category = mongoose.model('category', categorySchema, "category_collection");
+    Category = mongoose.model('Category', categorySchema, "category_collection");
 
 module.exports = Category;

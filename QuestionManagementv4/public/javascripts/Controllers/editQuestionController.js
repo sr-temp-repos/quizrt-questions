@@ -195,12 +195,12 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
           var dt = results.data;
           if(dt.status==='success') {
             if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
-              scp.selectedQuestion.topics = dt.topicObj.name;
-              scp.selectedQuestion.categories = dt.topicObj.category;
+              scp.selectedQuestion.topics = dt.topicObj.topicName;
+              scp.selectedQuestion.categories = dt.topicObj.topicCategory;
               scp.selectedQuestion.topicId = dt.topicObj._id;
             } else {
-              scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
-              scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+              scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.topicName;
+              scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.topicCategory;
               scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
             }
             scp.messageSelect = 0;
@@ -232,12 +232,12 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             var dt = results.data;
             if(dt.status==='success') {
               if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
-                scp.selectedQuestion.topics = dt.topicObj.name;
-                scp.selectedQuestion.categories = dt.topicObj.category;
+                scp.selectedQuestion.topics = dt.topicObj.topicName;
+                scp.selectedQuestion.categories = dt.topicObj.topicCategory;
                 scp.selectedQuestion.topicId = dt.topicObj._id;
               } else {
-                scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.name;
-                scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.category;
+                scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.topicName;
+                scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.topicCategory;
                 scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
               }
                 scp.messageSelect = 0;

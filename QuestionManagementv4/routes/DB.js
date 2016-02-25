@@ -168,10 +168,10 @@ module.exports.QuestionDB = {
             Question.find(query)
               .sort(searchSettings.sortObj)
               .populate({
-                path: 'topicIds',
-                model: 'Topics',
+                path: 'topicId',
+                model: 'Topic',
                 populate: {
-                  path: 'category',
+                  path: 'topicCategory',
                   model: 'Category'
                 }
               }).exec(function(err, doc) {
@@ -188,8 +188,8 @@ module.exports.QuestionDB = {
                       topicIds = [],
                       topicId = doc[i].topicId;
                   for(var index=0, len = topicId.length; index<len; index++) {
-                    topics.push(topicId[index].name);
-                    categories.push(topicId[index].category.name);
+                    topics.push(topicId[index].topicName);
+                    categories.push(topicId[index].topicCategory.categoryName);
                     topicIds.push(topicId[index]._id);
                   }
                   doc[i].topics = topics.join(', ');
@@ -224,6 +224,7 @@ module.exports.QuestionDB = {
     question.topicId = question.topicIds.split(', ');
     question.topics = "";
     question.categories = "";
+    question.correctIndex = question.correctIndex-1;
     // console.log(question.lastEdited);
     var q = new Question(question);
     var upsertData = q.toObject();
@@ -248,11 +249,11 @@ module.exports.TopicDB = {
   findTopic: function(Topic, query, callback) {
 
     Topic.find(query).populate({
-      path: 'category',
+      path: 'topicCategory',
       model: 'Category'
     }).exec(function(err, doc) {
       if(doc.length==1) {
-        doc[0].category = doc[0].topicCategory.categoryName;
+        doc[0].topicCategory = doc[0].topicCategory.categoryName;
         callback(err,doc);
       } else {
         callback(err,null);
@@ -270,7 +271,7 @@ module.exports.TopicDB = {
   },
   getCount: function(Topic, callback) {
     Topic.find({}).populate({
-      path: 'category',
+      path: 'topicCategory',
       model: 'Category'
     }).count(function(err,doc) {
       callback(err, doc);

@@ -8,10 +8,10 @@ var app = require('../app');
 
 
 describe('Express Routes Testing', function() {
-  beforeEach(function() {
-    var modelStub = sinon.stub(userModel, 'save');
-    modelStub.yields(null,[{status: 'success'}]);
-  });
+  // beforeEach(function() {
+  //   var modelStub = sinon.stub(userModel, 'save');
+  //   modelStub.yields(null,[{status: 'success'}]);
+  // });
   var cookie;
   describe('1. Checking Authentication layer', function() {
     it('1.1 Should be able to authenticate user with credentials', function(done) {

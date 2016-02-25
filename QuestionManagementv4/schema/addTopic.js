@@ -31,10 +31,10 @@ readJSONFile('../public/javascripts/QuestionsJson/Topics_v1.json',function(err, 
     var c1 = new Category({_id: 'C1',categoryName: 'sport', imageUrl: ''});
     var c2 = new Category({_id: 'C2',categoryName: 'animal', imageUrl: ''});
 
-    // c1.save(function(err) {
-    //   console.log(err);
-    // });
-    // c2.save();
+    c1.save(function(err) {
+      console.log(err);
+    });
+    c2.save();
     var sportArr = [], animalArr = [], i=0,j=0;
     for(var prop in json) {
       prop = prop+'';
