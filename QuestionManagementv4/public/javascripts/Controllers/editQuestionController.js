@@ -33,8 +33,10 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
           }
           return tabs;
         };
+        self.$scope.selectedQuestion.correctIndex++;
         self.$scope.tabs=self.$scope.getTabs();
-
+        self.$scope.topics = [];
+        self.$scope.categories = [];
         self.$scope.getTopicDatalist = function() {
           var topicObjArray = [];
           self.$ajaxService.getTopicDatalist(
@@ -45,15 +47,11 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
               {
                 console.log(err);
               }
-              for( var i=0;i< results.data.length;i++)
-              {
-                  topicObjArray.push(results.data[i].topicName);
-              }
+              self.$scope.topics = results.data.map(function(dt) { return dt.topicName; });
             });
-          return topicObjArray;
         };
-        self.$scope.topics = self.$scope.getTopicDatalist();
-        // console.log(self.$scope.topics);
+        self.$scope.getTopicDatalist();
+
         self.$scope.getCategoriesDatalist = function() {
           var categoryObjArray = [];
           self.$ajaxService.getCategoriesDatalist(
@@ -64,15 +62,11 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
               {
                 console.log(err);
               }
-              for( var i=0;i< results.data.length;i++)
-              {
-                  categoryObjArray.push(results.data[i].categoryName);
-              }
+              self.$scope.categories = results.data.map(function(dt) { return dt.categoryName; });
           });
-          return categoryObjArray;
         };
-        self.$scope.categories = self.$scope.getCategoriesDatalist();
-        // console.log(self.$scope.categories);
+        self.$scope.getCategoriesDatalist();
+
       },
       eventHandler: function() {
         var self = this;
@@ -154,11 +148,11 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
              if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
                scp.selectedQuestion.topics = dt.topicObj.topicName;
                scp.selectedQuestion.categories = dt.topicObj.topicCategory;
-               scp.selectedQuestion.topicId = dt.topicObj._id;
+               scp.selectedQuestion.topicIds = dt.topicObj._id;
              } else {
                scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.topicName;
                scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.topicCategory;
-               scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+               scp.selectedQuestion.topicIds = scp.selectedQuestion.topicIds + ', '+ dt.topicObj._id;
              }
            } else {
              scp.messageSelect = 1;
@@ -197,11 +191,11 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
               scp.selectedQuestion.topics = dt.topicObj.topicName;
               scp.selectedQuestion.categories = dt.topicObj.topicCategory;
-              scp.selectedQuestion.topicId = dt.topicObj._id;
+              scp.selectedQuestion.topicIds = dt.topicObj._id;
             } else {
               scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.topicName;
               scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.topicCategory;
-              scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+              scp.selectedQuestion.topicIds = scp.selectedQuestion.topicIds + ', '+ dt.topicObj._id;
             }
             scp.messageSelect = 0;
             scp.newTopicForm = false;
@@ -231,14 +225,15 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             }
             var dt = results.data;
             if(dt.status==='success') {
+              console.log(dt.topicObj);
               if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
                 scp.selectedQuestion.topics = dt.topicObj.topicName;
                 scp.selectedQuestion.categories = dt.topicObj.topicCategory;
-                scp.selectedQuestion.topicId = dt.topicObj._id;
+                scp.selectedQuestion.topicIds = dt.topicObj._id;
               } else {
                 scp.selectedQuestion.topics = scp.selectedQuestion.topics + ', ' + dt.topicObj.topicName;
                 scp.selectedQuestion.categories = scp.selectedQuestion.categories + ', ' + dt.topicObj.topicCategory;
-                scp.selectedQuestion.topicId = scp.selectedQuestion.topicId + ', '+ dt.topicObj._id;
+                scp.selectedQuestion.topicIds = scp.selectedQuestion.topicIds + ', '+ dt.topicObj._id;
               }
                 scp.messageSelect = 0;
                 scp.newCategoryForm = false;
@@ -279,7 +274,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         }
 
         question.options = scp.tabs.map(function (tab) { return tab.content; })
-
+        console.log(question);
         self.$ajaxService.QuestionSave(
           {
             requestType: 'save',
