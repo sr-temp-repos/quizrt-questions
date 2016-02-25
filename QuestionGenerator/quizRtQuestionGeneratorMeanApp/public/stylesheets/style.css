@@ -1,0 +1,21 @@
+#spinner{
+  opacity:.85;
+  position:fixed;
+  top: 0%;
+  left: 0%;
+  bottom: 0%;
+  right: 0%;
+  background: url("../images/loading.gif") no-repeat center #fff;
+  text-align: center;
+  z-index: 2;
+}
+
+body{
+  background: url("../images/background1.jpg");
+  font-family: 'Arvo', serif;
+}
+
+#loadingText{
+  opacity: 1;
+  font-size: 50px;
+}
