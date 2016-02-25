@@ -7,7 +7,6 @@ var router = express.Router();
 module.exports = function(wagner) {
 
   router.post('/', function(req, res, next) {
-    console.log(req.body.requestType);
     switch(req.body.requestType) {
       case 'listTopics':
         wagner.invoke(db.TopicDB.list, {
@@ -61,12 +60,17 @@ module.exports = function(wagner) {
                   wagner.invoke(db.TopicDB.addTopic,{
                     topicObj: obj,
                     callback: function(err){
-                      if(err){
-                        topicObj = { topicName: topicObj, topicCategory: textToSearch };
-                        res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
-                      }
-                      obj.topicCategory = categoryObj[0].categoryName;
-                      res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
+                      wagner.invoke(db.CategoryDB.updateTopic, {
+                        topicObj: obj,
+                        callback: function(err) {
+                          if(err){
+                            topicObj = { topicName: topicObj, topicCategory: textToSearch };
+                            res.json({status: 'failure', message: 'Failure : Not Found ' + textToSearch + ' category', topicObj: topicObj });
+                          }
+                          obj.topicCategory = categoryObj[0].categoryName;
+                          res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
+                        }
+                      });
                     }
                   });
                 }
@@ -81,13 +85,12 @@ module.exports = function(wagner) {
       // add the new category
       // get the topic count and add it with category id
         var topicObj = req.body.topicObj;
-        console.log(topicObj);
         wagner.invoke(db.CategoryDB.getCount,{
           callback: function(err, doc) {
             var newCategoryId = 'C' + (doc+1),
                 obj = {
                   _id: newCategoryId,
-                  categoryName: topicObj.category,
+                  categoryName: topicObj.topicCategory,
                   imageUrl: "",
                 };
             var categoryObj = obj;
@@ -110,11 +113,16 @@ module.exports = function(wagner) {
                     wagner.invoke(db.TopicDB.addTopic, {
                       topicObj: obj,
                       callback: function(err) {
-                        if(err){
-                          res.json({status: 'failure', message: 'Failure : Not added ' + topicObj.name + ' topic', topicObj: topicObj });
-                        }
-                        obj.topicCategory = categoryObj.categoryName;
-                        res.json({status: 'success', message: 'Success : Added ' + obj.name + ' topic', topicObj: obj});
+                        wagner.invoke(db.CategoryDB.updateTopic, {
+                          topicObj: obj,
+                          callback: function(err) {
+                            if(err){
+                              res.json({status: 'failure', message: 'Failure : Not added ' + topicObj.topicName + ' topic', topicObj: topicObj });
+                            }
+                            obj.topicCategory = categoryObj.categoryName;
+                            res.json({status: 'success', message: 'Success : Added ' + obj.topicName + ' topic', topicObj: obj});
+                          }
+                        });
                       }
                     });
                   }

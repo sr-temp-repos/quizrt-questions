@@ -234,6 +234,7 @@ module.exports.QuestionDB = {
     question.topics = "";
     question.categories = "";
     question.correctIndex = question.correctIndex-1;
+    console.log(question);
     // console.log(question.lastEdited);
     var q = new Question(question);
     var upsertData = q.toObject();
@@ -319,6 +320,15 @@ module.exports.CategoryDB = {
     var c = new Category(categoryObj);
     c.save(function(err){
       callback(err);
+    });
+  },
+  updateTopic: function(Category, topicObj, callback) {
+   Category.update({_id: topicObj.topicCategory}, {$push: {categoryTopics: topicObj._id}}, function(err, doc) {
+      if(err){
+        callback(err);
+        return;
+      }
+      callback(null)
     });
   }
 };

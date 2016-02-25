@@ -40,11 +40,11 @@
     </div>
     <div class="form-group" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
       <label for="correctIndex">Correct index:</label><strong class="required text-danger">*</strong>
-      <input type="number" class="form-control" ng-model="selectedQuestion.correctIndex" name="correctIndex" min="1" max="{{tabs.length}}" title="Correct Index cannot be empty." required />
+      <input type="number" class="form-control" ng-model="selectedQuestion.correctIndex" name="correctIndex" min="1" max="{{tabs.length}}" title="Correct Index cannot be empty."  required />
     </div>
     <div class="form-group">
       <label for="image">Image:</label>
-      <input type="text" class="form-control" name="image" value="{{selectedQuestion.image}}" />
+      <input type="text" class="form-control" name="image" ng-model="selectedQuestion.image" />
     </div>
     <div class="wrap">
       <div class="form-inline" ng-class="{'has-error' : !selectedQuestion.correctIndex}">
