@@ -1,11 +1,17 @@
 var expect = require('chai').expect;
 var request = require('supertest');
-
+var mongoose = require('mongoose');
+var sinon = require('sinon');
+var userModel = mongoose.model('User',require('../schema/user.js'), 'user');
 
 var app = require('../app');
 
 
 describe('Express Routes Testing', function() {
+  beforeEach(function() {
+    var modelStub = sinon.stub(userModel, 'save');
+    modelStub.yields(null,[{status: 'success'}]);
+  });
   var cookie;
   describe('1. Checking Authentication layer', function() {
     it('1.1 Should be able to authenticate user with credentials', function(done) {
@@ -25,7 +31,7 @@ describe('Express Routes Testing', function() {
       request(app)
         .post('/signup')
         .send({
-          username: 'test5',
+          username: 'test6',
           password: 'tests',
           email: 'test@test.com',
           firstName: 'test',
@@ -35,6 +41,7 @@ describe('Express Routes Testing', function() {
         .expect('Location','/')
         .end(function(err, res) {
           if(err) return done(err);
+          console.log(res.body);
           done();
         });
     });

@@ -36,6 +36,9 @@ module.exports.QuestionDB = {
       var inserted = 0;
       var notInserted = 0;
 
+      var generateRandomNumber = function(range) {
+        return Math.round(Math.random()*range)%range + 1;
+      }
       stream.on('data', function(d) {
         buf += d.toString(); // when data is read, stash it in a string buffer
         pump(); // then process the buffer
@@ -68,6 +71,12 @@ module.exports.QuestionDB = {
               if(docs.length == 0) {
                 obj["lastEdited"] = new Date();
                 obj["createdOn"] = new Date();
+                obj.difficultyLevel = generateRandomNumber(10);
+                var noOfAttemps = generateRandomNumber(10000);
+                obj.timesUsed = noOfAttemps;
+                obj.correctRatio = generateRandomNumber(noOfAttemps) + '/' + noOfAttemps;
+                obj.frequency = Math.round(obj.timesUsed/10);
+
                 var q = new Question(obj); // validating with schema
                 q.save(function(err) { // saving the data
                   savedCount++;
