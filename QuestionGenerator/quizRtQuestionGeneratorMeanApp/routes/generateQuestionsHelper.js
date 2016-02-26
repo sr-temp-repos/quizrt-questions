@@ -10,7 +10,15 @@ var redis = require('redis');
 
 
 module.exports = function makeClaimAndPrepareArrayOfUris(req, res, next,tempFileDescForStore,tempFileDescForStore) {
-  // var client = redis.createClient(); //creates a new client
+  var port='6379';
+  var host='172.23.238.253'
+  var client = redis.createClient(port,host); //creates a new client
+  client.on("error", function (err) {
+    console.log("Error " + err);
+  });
+  client.on('connect', function() {
+    console.log('Connected to Redis');
+  });
 
   // var numberOfQuestions;
   // var numberOfQuestionsPrepared;
@@ -43,8 +51,8 @@ module.exports = function makeClaimAndPrepareArrayOfUris(req, res, next,tempFile
             if (numberOfQuestions === "ALL") {
                 ifAllHasBeenRequested = true;
                 console.log("@@@@@@@@@@@@@@@@@@@@@@@" + "ALL questions has been recieved");
-                // numberOfQuestions = numberOfQuestionsCreated;
-                numberOfQuestions = 750;
+                numberOfQuestions = numberOfQuestionsCreated;
+                // numberOfQuestions = 750;
             }
             if (endIndex>numberOfQuestions) {
               endIndex=numberOfQuestions;
@@ -74,7 +82,7 @@ module.exports = function makeClaimAndPrepareArrayOfUris(req, res, next,tempFile
                         var objectToContainIfPopularOrNot=resultsArray[3];
                         console.log(" data type = " +  dataType);
                         if (dataType === "wikibase-item") {
-                            getNameForOptionPid(objectToContainVariableAndAnswer)
+                            getNameForOptionPid(objectToContainVariableAndAnswer,client)
                                 .then(function(resultsArray) {
                                     console.log("request done from getNameForOptionPid");
                                     console.log(resultsArray);
@@ -299,74 +307,107 @@ function getDescriptionForEachEntity(arrayOfUri, pIdForOpt) {
 
 
 
-function getNameForOptionPid(objectToContainVariableAndAnswer, imageArray) {
+function getNameForOptionPid(objectToContainVariableAndAnswer, client) {
     console.log(" request recieved in getNameForOptionPid");
     // console.log(objectToContainVariableAndAnswer);
-
     var deferred = Promise.defer();
-    var searchUri;
-    var arrayOfObjectsForEachEntity = [];
-    var arrayOfRequestsToBePromised = [];
-    var eachEntityName = {};
 
-    for (var firstTempVarForKeyRunover in objectToContainVariableAndAnswer) {
-        if (objectToContainVariableAndAnswer.hasOwnProperty(firstTempVarForKeyRunover)) {
-            for (var i = 0; i < objectToContainVariableAndAnswer[firstTempVarForKeyRunover].length; i++) {
-                searchUri = 'https://www.wikidata.org/wiki/Special:EntityData/Q' + objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i] + '.json'
+    checkLocalClientForNameOfPid(objectToContainVariableAndAnswer,client)
+    .then(function(result){
+      console.log("$$$$$$$$$$$$$$$$");
+      console.log(result);
+      console.log("$$$$$$$$$$$$$$$$");
+      var searchUri;
+      var arrayOfObjectsForEachEntity = [];
+      var arrayOfRequestsToBePromised = [];
+      var eachEntityName = {};
 
-                // get data from redis here...
-                // client.get(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i], function(err, reply) {
-                //   console.log(reply);
-                //  if (reply!=="") {
-                //    objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]=reply;
-                //  }
-                    // else {
-                      arrayOfRequestsToBePromised.push(rp(searchUri)
-                          .then(function(body) {
-                              var obj = JSON.parse(body);
-                              arrayOfObjectsForEachEntity.push(obj);
-                          })
-                          .catch(function(err) {
-                              // Crawling failed...
-                          }));
-                    // }
-                // });
+      for (var firstTempVarForKeyRunover in objectToContainVariableAndAnswer) {
+          if (objectToContainVariableAndAnswer.hasOwnProperty(firstTempVarForKeyRunover)) {
+              for (var i = 0; i < objectToContainVariableAndAnswer[firstTempVarForKeyRunover].length; i++) {
+                  searchUri = 'https://www.wikidata.org/wiki/Special:EntityData/Q' + objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i] + '.json'
 
-                // console.log('Q'+objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]);
+                  // get data from redis here...
+                  if (result[objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]] !== undefined) {
+                    objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i] = result[objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]];
 
-            }
-        }
-    }
-    Promise.all(arrayOfRequestsToBePromised).then(function() {
-        console.log("Promises Done");
-        for (var i = 0; i < arrayOfObjectsForEachEntity.length; i++) {
-            var key = Object.keys(arrayOfObjectsForEachEntity[i]["entities"]);
-            if (arrayOfObjectsForEachEntity[i]["entities"][key]["labels"] !== undefined) {
-                if (arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["en"] !== undefined) {
-                    eachEntityName[key] = arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["en"]["value"];
-                } else if (arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["es"] !== undefined) {
-                    eachEntityName[key] = arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["es"]["value"];
-                } else {
-                    var labelsAvailable = Object.keys(arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]);
-                    eachEntityName[key] = arrayOfObjectsForEachEntity[i]["entities"][key]["labels"][labelsAvailable[0]]["value"];
+                  }
+                  else {
+                    arrayOfRequestsToBePromised.push(rp(searchUri)
+                        .then(function(body) {
+                            var obj = JSON.parse(body);
+                            arrayOfObjectsForEachEntity.push(obj);
+                        })
+                        .catch(function(err) {
+                            // Crawling failed...
+                        }));
+                  }
+
+
+
+                  // console.log('Q'+objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]);
+
+              }
+          }
+      }
+      console.log('arrayOfRequestsToBePromised');
+      console.log(arrayOfRequestsToBePromised);
+      console.log(arrayOfRequestsToBePromised.length);
+
+      Promise.all(arrayOfRequestsToBePromised).then(function() {
+          console.log("Promises Done");
+          for (var i = 0; i < arrayOfObjectsForEachEntity.length; i++) {
+              var key = Object.keys(arrayOfObjectsForEachEntity[i]["entities"]);
+              if (arrayOfObjectsForEachEntity[i]["entities"][key]["labels"] !== undefined) {
+                  if (arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["en"] !== undefined) {
+                      eachEntityName[key] = arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["en"]["value"];
+                  } else if (arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["es"] !== undefined) {
+                      eachEntityName[key] = arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]["es"]["value"];
+                  } else {
+                      var labelsAvailable = Object.keys(arrayOfObjectsForEachEntity[i]["entities"][key]["labels"]);
+                      eachEntityName[key] = arrayOfObjectsForEachEntity[i]["entities"][key]["labels"][labelsAvailable[0]]["value"];
+                  }
+              }
+
+          }
+          console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+          console.log(eachEntityName);
+          console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+          console.log(objectToContainVariableAndAnswer);
+          console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+          console.log("here @375");
+          console.log(arrayOfRequestsToBePromised.length);
+          if (arrayOfRequestsToBePromised.length>0) {
+            console.log(result);
+
+            for (var firstTempVarForKeyRunover in objectToContainVariableAndAnswer) {
+                if (objectToContainVariableAndAnswer.hasOwnProperty(firstTempVarForKeyRunover)) {
+                    for (var i = 0; i < objectToContainVariableAndAnswer[firstTempVarForKeyRunover].length; i++) {
+                      console.log(firstTempVarForKeyRunover);
+                      console.log(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]);
+                      console.log(typeof(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]));
+                      if (typeof(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i])!=='string') {
+                        console.log("not found in redis");
+                        client.set(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i],eachEntityName['Q' + objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]], function(err, reply) {
+                            console.log(reply);
+                            console.log("Was not found in local");
+                            console.log("set to local client");
+                          });
+                      objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i] = eachEntityName['Q' + objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]];
+                      }
+                      console.log("here");
+
+                    }
                 }
             }
-        }
 
-        for (var firstTempVarForKeyRunover in objectToContainVariableAndAnswer) {
-            if (objectToContainVariableAndAnswer.hasOwnProperty(firstTempVarForKeyRunover)) {
-                for (var i = 0; i < objectToContainVariableAndAnswer[firstTempVarForKeyRunover].length; i++) {
-                    // client.set(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i],eachEntityName['Q' + objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]], function(err, reply) {
-                    //     console.log(reply);
-                    //   });
-                    objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i] = eachEntityName['Q' + objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]];
-                }
-            }
         }
         deferred.resolve(objectToContainVariableAndAnswer);
+
+      });
     });
     return deferred.promise;
-}
+  }
 
 
 function generateQuestionsJsonToBeSentBackToClient(objectToContainVariableAndAnswer,objectToContainIfPopularOrNot, imageArray, questionStub,tempFileDescForInter) {
@@ -592,4 +633,39 @@ function generateArrayofImageUrl(arrayOfImageUrlFromWiki) { // function to gener
      function getARandonAnsweFromPoolOfAns(poolOfAllUniqueAnswers){
        var randomIndex = Math.floor(Math.random() * poolOfAllUniqueAnswers.length);
        return(poolOfAllUniqueAnswers[randomIndex]);
+     }
+
+
+     function checkLocalClientForNameOfPid(objectToContainVariableAndAnswer,client){
+       var deferred = Promise.defer();
+       console.log('redis access begin');
+       console.log(objectToContainVariableAndAnswer);
+       var length=Object.keys(objectToContainVariableAndAnswer).length;
+       var counter=0;
+       var objectToContainVariableAndAnswerAfterLocalLookUp={};
+       var arrayToBeFiredToRedis=[];
+       for (var firstTempVarForKeyRunover in objectToContainVariableAndAnswer) {
+           if (objectToContainVariableAndAnswer.hasOwnProperty(firstTempVarForKeyRunover)) {
+               for (var i = 0; i < objectToContainVariableAndAnswer[firstTempVarForKeyRunover].length; i++) {
+                 console.log(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]);
+                 arrayToBeFiredToRedis.push(objectToContainVariableAndAnswer[firstTempVarForKeyRunover][i]);
+               }
+             }
+           }
+
+           client.mget(arrayToBeFiredToRedis, function(err, reply) {
+             console.log("$$$$$$$$$$$$$$$$$$$$$$$$$");
+             console.log(arrayToBeFiredToRedis);
+             console.log(reply);
+             for (var i = 0; i < arrayToBeFiredToRedis.length; i++) {
+               if (reply[i]) {
+                 objectToContainVariableAndAnswerAfterLocalLookUp[arrayToBeFiredToRedis[i]]=reply[i];
+               }
+             }
+                 deferred.resolve(objectToContainVariableAndAnswerAfterLocalLookUp);
+           });
+
+       return deferred.promise;
+
+
      }

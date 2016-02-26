@@ -321,7 +321,7 @@ function figureOutPandQCombinationForVarAndPidOfOption($http,$scope){
   dataToBeSentToServer["pIdForOpt"]=$scope.finalPidForOption;
   dataToBeSentToServer["questionStub"]=$scope.questionStub;
   dataToBeSentToServer["topicIds"]=$scope.topicIds;
-  dataToBeSentToServer["numberOfQuestions"]=60; // hardcoded as of now
+  dataToBeSentToServer["numberOfQuestions"]=100; // hardcoded as of now
   dataToBeSentToServer["numberOfOptionsToBeGenerated"]=$scope.numberOfOptionsToBeGenerated;
   console.log(dataToBeSentToServer);
   $http({method: 'Post', url: '/generateQuestions', timeout : 100000000,  data: {data:dataToBeSentToServer }}).

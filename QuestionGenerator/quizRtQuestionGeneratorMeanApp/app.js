@@ -23,7 +23,7 @@ var wagner = require('wagner-core');
 var db = require('./routes/DB.js');
 
 db.init(wagner, {
-  connectionURL: 'mongodb://localhost/questionGenerator'
+  connectionURL: 'mongodb://172.23.238.253/quizRT3'
 });
 
 
