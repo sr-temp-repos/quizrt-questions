@@ -1,8 +1,7 @@
 var login = require('./login');
 var signup = require('./signup');
 var mongoose = require('mongoose');
-var userSchema = require('../schema/user');
-var User = mongoose.model('User',userSchema,'users');
+var User = require('../models/user');
 
 module.exports = function(passport){
 

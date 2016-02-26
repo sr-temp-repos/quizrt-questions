@@ -7,6 +7,7 @@ var router = express.Router();
 module.exports = function(wagner) {
 
   router.post('/', function(req, res, next) {
+    console.log(req.body);
     switch(req.body.requestType){
       case 'add':
         wagner.invoke(db.QuestionDB.add, {
@@ -72,6 +73,47 @@ module.exports = function(wagner) {
             }
           }
         });
+        break;
+      case 'deleteSelected':
+        /*
+          1. Convert post data to local variable
+          2. delete based on ids
+          3. delete based on query
+        */
+        var deleteIds = req.body.deleteIds,
+            query = req.body.query? req.body.query: "",
+            searchIn = req.body.searchIn,
+            rgexQuery = query !=""? new RegExp('\\b(' + query.replace(/\s/g,'|') + ')','ig'): "";
+        console.log(deleteIds);
+        if(deleteIds.length > 0) {
+          wagner.invoke(db.QuestionDB.deleteByIds, {
+            deleteIds: deleteIds,
+            callback: function(err, doc) {
+              if (doc) {
+                res.json({status: 'success', message: 'Success : Deleted all selected ids from the question data store.'});
+              } else {
+                res.json({status: 'failure', message: 'Failure : Cannot able to delete in the question data store.'});
+              }
+            }
+          });
+        } else {
+          wagner.invoke(db.QuestionDB.deleteByQuery, {
+            searchSettings: {
+              query: rgexQuery,
+              searchIn: searchIn,
+              wagner: wagner,
+              db: db
+            },
+            callback: function(err, doc) {
+              if (doc) {
+                res.json({status: 'success', message: 'Success : Deleted all selected ids from the question data store.'});
+              } else {
+                res.json({status: 'failure', message: 'Failure : Cannot able to delete in the question data store.'});
+              }
+            }
+          });
+        }
+        break;
     }
 
   });

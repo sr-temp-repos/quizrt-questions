@@ -9,4 +9,4 @@ var userSchema = {
 	firstName: String,
 	lastName: String
 };
-module.exports = new mongoose.Schema(userSchema);
+module.exports = mongoose.model('User',new mongoose.Schema(userSchema),'users');

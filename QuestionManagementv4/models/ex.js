@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/newDB');
+var conn = mongoose.connect('mongodb://localhost/newDB');
 
 //var categorySchema = require('./category');
 //var topic = require('./topic');
@@ -111,6 +111,9 @@ readJSONFile('../public/javascripts/QuestionsJson/QuestionSample_5.json',functio
       q.save(function(err) {
         if(err)
         console.log(err);
+        if(i==len-1){
+            mongoose.connection.close();
+        }
       });
     }
     // mongoose.con

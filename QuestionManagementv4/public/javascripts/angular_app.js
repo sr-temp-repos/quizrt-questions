@@ -114,4 +114,17 @@ QuestionManagerApp.service('$ajaxService', function($http){
        callback(data,null);
      });
    };
+   this.deleteSelectedQuestion = function(data, callback) {
+     //console.log('call received');
+     $http({
+       url: '/QuestionRequestHandler',
+       data: data,
+       method: 'post'
+     }).then(function(results) {
+       //console.log(results);
+       callback(null, results);
+     }, function errorCall(data) {
+       callback(data,null);
+     });
+   };
 });

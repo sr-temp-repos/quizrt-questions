@@ -219,12 +219,115 @@ module.exports.QuestionDB = {
     });
   },
   delete: function(Question,id,callback) {
-    Question.remove({ _id : id }).exec(function(err,doc){
-    if(err){
-      console.log(err);
-      callback(err,null);
+    Question.remove({ questionId : id }).exec(function(err,doc){
+      if(err){
+        //console.log(err);
+        callback(err,null);
+      }
+      callback(null,doc);
+    });
+  },
+  deleteByIds: function(Question, deleteIds, callback ) {
+    Question.remove({questionId : {$in : deleteIds}}).exec(function(err,doc){
+      if(err){
+        console.log(err);
+        callback(err,null);
+      }
+      callback(null,doc);
+    });
+  },
+  generateQuery: function(Question, searchSettings, callback) {
+    var query='',
+        retEmpty=false;
+
+    /* checks whether request is for searching */
+    if (searchSettings.query !='' && (searchSettings.searchIn.cat || searchSettings.searchIn.all)) {
+      query = {categoryName : searchSettings.query}; // Query search when search settings allows
+    } else {
+      retEmpty = true; // Don't search any thing in Category DB
     }
-    callback(null,doc);
+    searchSettings.wagner.invoke(searchSettings.db.CategoryDB.find, {
+      query: query,
+      retEmpty: retEmpty,
+      callback: function(err, docs) {
+        query = '';
+        retEmpty = false;
+        /* Checks whether request is for searching */
+        if(searchSettings.query !='' && (searchSettings.searchIn.top || searchSettings.searchIn.all)) {
+          /* Searching topics is required */
+          if(docs.length > 0 ) {
+            /* query for searching topics and categories */
+            var categoryIds = docs.map(function(doc) { return doc._id });
+            query = { $or : [ {topicName : searchSettings.query}, {topicCategory: {$in: categoryIds}} ] };
+          }
+          else /* Searching only for topics */
+            query = {topicName : searchSettings.query};
+
+        } else if (docs.length > 0 ){ // topics not selected but categories is selected
+            var categoryIds = docs.map(function(doc) { return doc._id });
+            query = {topicCategory: {$in: categoryIds}};
+        } else {
+          retEmpty = true;
+        }
+        searchSettings.wagner.invoke(searchSettings.db.TopicDB.findTopics, {
+          query: query,
+          retEmpty: retEmpty,
+          callback: function(err, docs) {
+            query = '';
+            retEmpty = false;
+            /* Checks whether request is for searching */
+            if(searchSettings.query !='' && (searchSettings.searchIn.ques || searchSettings.searchIn.all)) {
+              /* Searching topics is required */
+              if(docs.length > 0 ) {
+                /* query for searching topics and question */
+                var topicIds = docs.map(function(doc) { return doc._id });
+                query = { $or : [ {question : searchSettings.query}, {topicId: {$in: topicIds}} ] };
+              }
+              else /* Searching only for question */
+                query = {question : searchSettings.query};
+
+            } else if (docs.length > 0 ) { // question not selected but topics exists is selected
+                categoryIds = docs.map(function(doc) { return doc._id });
+                query = {topicId: {$in: categoryIds}};
+            } else if (searchSettings.query !=''){
+              var queryObj = {
+                query: '',
+                result: false
+              };
+              callback(null,jsonData);
+              return -1;
+            } else {
+              query = {};
+            }
+            callback(null, {
+              query: query,
+              result: true
+            });
+          }
+        });
+      }
+    });
+  },
+  deleteByQuery: function(Question, searchSettings, callback) {
+    /*
+      1. get the Query by wagner
+      2. execute the remove command
+    */
+    searchSettings.wagner.invoke(searchSettings.db.QuestionDB.generateQuery, {
+      searchSettings: searchSettings,
+      callback: function(err, json) {
+        if(json.result) {
+          Question.remove(json.query).exec(function(err,doc){
+            if(err){
+              console.log(err);
+              callback(err,null);
+            }
+            callback(null,doc);
+          });
+        } else {
+          callback(json, null);
+        }
+      }
     });
   },
   save: function(Question,question,callback) {
@@ -234,7 +337,7 @@ module.exports.QuestionDB = {
     question.topics = "";
     question.categories = "";
     question.correctIndex = question.correctIndex-1;
-    console.log(question);
+    //console.log(question);
     // console.log(question.lastEdited);
     var q = new Question(question);
     var upsertData = q.toObject();
