@@ -45,7 +45,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             }, function(err, results) {
               if(err)
               {
-                console.log(err);
+                //console.log(err);
               }
               self.$scope.topics = results.data.map(function(dt) { return dt.topicName; });
             });
@@ -176,7 +176,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
       },
       addCategoryId: function(self) {
         var scp = self.$scope;
-        console.log(scp.newTopicObj);
+        //console.log(scp.newTopicObj);
         self.$ajaxService.addCategoryId({
           requestType: 'checkCategory',
           checkExist: scp.categoryName,
@@ -213,7 +213,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
       },
       yesBtnClicked: function(self) {
         var scp = self.$scope;
-        console.log(scp.newTopicObj);
+        //console.log(scp.newTopicObj);
         self.$ajaxService.yesBtnClicked(
           {
             requestType: 'addTopicCategory',
@@ -225,7 +225,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             }
             var dt = results.data;
             if(dt.status==='success') {
-              console.log(dt.topicObj);
+              //console.log(dt.topicObj);
               if(!scp.selectedQuestion.topicId || scp.selectedQuestion.topicId.length < 1) {
                 scp.selectedQuestion.topics = dt.topicObj.topicName;
                 scp.selectedQuestion.categories = dt.topicObj.topicCategory;
@@ -274,7 +274,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
         }
 
         question.options = scp.tabs.map(function (tab) { return tab.content; })
-        console.log(question);
+        //console.log(question);
         self.$ajaxService.QuestionSave(
           {
             requestType: 'save',

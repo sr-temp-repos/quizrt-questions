@@ -12,6 +12,11 @@ function($scope, $uibModal, $http, $ajaxService, $window) {
     selectedRowCountIndex: 0,
     selectedRowCount: 50,
 
+    /* checkbox intialization for selection */
+    quesSelected : [],
+    deleteIds: [],
+    querydelete: false,
+
     /* Intializing question table with empty obj Array */
     questions: [{}],
 
@@ -50,7 +55,17 @@ function($scope, $uibModal, $http, $ajaxService, $window) {
       self.$scope.dateFormater = function(date) {
         var tDate = new Date(date);
         return tDate;
-      }
+      };
+      self.$scope.intializeQuesSelect= function() {
+        //intialize quesSelected variable to false;
+        var $scp = self.$scope;
+        for(var i=0,len = self.$scope.questions.length; i<len; i++) {
+          $scp.quesSelected[i] = false;
+        }
+        $scp.deleteIds= [];
+        $scp.querydelete= false;
+      };
+
     },
 
     eventHandlers: function() {
@@ -96,7 +111,7 @@ function($scope, $uibModal, $http, $ajaxService, $window) {
       };
       self.$scope.onDeleteClick = function(index) {
         var selectedQuestion = self.$scope.questions[index];
-        self.onQuestionDelete(self,selectedQuestion._id);
+        self.onQuestionDelete(self,selectedQuestion.questionId);
       };
       self.$scope.onSortClick = function(x) {
         self.$scope.sortType = x;
@@ -117,6 +132,65 @@ function($scope, $uibModal, $http, $ajaxService, $window) {
           $scp.searchIn.top = false;
           $scp.searchIn.cat = false;
         }
+      };
+      self.$scope.selectQuestion = function(isEnabled, index, questionId) {
+        var scp = self.$scope;
+
+        /*  If all question is selected enable querydelete, check all the checkboxes and empty the deleteIds
+          if all is unselected make querydelete to false and uncheck all the checkboxes
+          If single question select push it questionSelected Array
+          If single question unselect push
+          */
+
+        switch (isEnabled) {
+          case true:
+            if(index==0) {
+              scp.querydelete = true;
+              for(var i=1;i<scp.quesSelected.length;i++) {
+                scp.quesSelected[i] = true;
+              }
+              scp.deleteIds = [];
+            } else {
+              scp.querydelete = false;
+              scp.quesSelected[0] = false;
+              scp.deleteIds.push(questionId);
+            }
+            break;
+          case false:
+            if(index==0) {
+              scp.querydelete = false;
+              for(var i=1;i<scp.quesSelected.length;i++) {
+                scp.quesSelected[i] = false;
+              }
+            } else {
+              scp.querydelete = false;
+              scp.quesSelected[0] = false;
+              scp.deleteIds.splice(scp.deleteIds.indexOf(questionId),1);
+            }
+            break;
+        }
+        // //console.log({
+        //   querydelete: scp.querydelete,
+        //   quesSelected: scp.quesSelected,
+        //   deleteIds: scp.deleteIds
+        // });
+      };
+      self.$scope.deleteSelected =  function() {
+        // create a post in service
+        var query,
+            $scp = self.$scope;
+        if($scp.querydelete) {
+          query= $scp.searchText;
+        }
+        //console.log("deleted selected called");
+        self.$ajaxService.deleteSelectedQuestion({
+          requestType: 'deleteSelected',
+          query: query,
+          deleteIds: $scp.deleteIds,
+          searchIn: $scp.searchIn
+        }, function(err, results) {
+          self.getQuestionJson();
+        });
       };
     },
     getQuestionJson: function() {
@@ -141,6 +215,8 @@ function($scope, $uibModal, $http, $ajaxService, $window) {
         $scp.totalQuestions = dt.count;
         $scp.lastQuestion = $scp.firstQuestion + $scp.selectedRowCount;
         $scp.lastQuestion = ($scp.lastQuestion > $scp.totalQuestions)? $scp.totalQuestions : $scp.lastQuestion;
+
+        self.$scope.intializeQuesSelect();
       });
     },
     onQuestionDelete: function(self,id) {

@@ -14,6 +14,7 @@
               <a href>{{x}}</a>
             </li>
           </ul>
+          <button type="button" ng-show="deleteIds.length > 0 || querydelete" ng-click="deleteSelected()" name="button" class="btn btn-warning"><span class="glyphicon glyphicon-trash"></span> Delete</button>
           <a ng-click="signout()" role="button" class="pull-right"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
         </div>
         <form class="col-sm-7 col-xs-7 checkbox">
@@ -38,6 +39,7 @@
           </div>
           <thead ng-hide="!questions.length">
             <tr>
+              <th><input type="checkbox" ng-model="quesSelected[0]" ng-click="selectQuestion(quesSelected[0], 0)"></th>
               <th>Question</th>
               <th>Topics</th>
               <th>Categories</th>
@@ -86,6 +88,7 @@
           </thead>
           <tbody>
             <tr class="question-row" ng-repeat="x in questions">
+              <td><input type="checkbox" ng-click="selectQuestion(quesSelected[$index+1], $index+1, x.questionId)" ng-model="quesSelected[$index+1]"></td>
               <td class="question">{{x.question}}</td>
               <td>{{x.topics}}</td>
               <td>{{x.categories}}</td>
