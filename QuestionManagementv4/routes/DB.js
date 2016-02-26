@@ -174,45 +174,47 @@ module.exports.QuestionDB = {
             } else {
               query = {};
             }
-            Question.find(query)
-              .sort(searchSettings.sortObj)
-              .populate({
-                path: 'topicId',
-                model: 'Topic',
-                populate: {
-                  path: 'topicCategory',
-                  model: 'Category'
-                }
-              }).exec(function(err, doc) {
-                if(err) {
-                  callback(err,null);
-                  return;
-                }
-                var count = doc.length;
-
-                doc = doc.slice(searchSettings.firstQuestion, searchSettings.firstQuestion + searchSettings.count);
-                for(var i = 0, doclen = doc.length; i<doclen; i++) {
-                  var topics = [],
-                      categories = [],
-                      topicIds = [],
-                      topicId = doc[i].topicId;
-                  for(var index=0, len = topicId.length; index<len; index++) {
-                    topics.push(topicId[index].topicName);
-                    categories.push(topicId[index].topicCategory.categoryName);
-                    topicIds.push(topicId[index]._id);
+            Question.count(query).exec(function(err, doc) {
+              var outputCount = doc;
+              Question.find(query)
+                .skip(searchSettings.firstQuestion)
+                .limit(searchSettings.count)
+                .sort(searchSettings.sortObj)
+                .populate({
+                  path: 'topicId',
+                  model: 'Topic',
+                  populate: {
+                    path: 'topicCategory',
+                    model: 'Category'
                   }
-                  doc[i].topics = topics.join(', ');
-                  doc[i].categories = categories.join(', ');
-                  doc[i].topicIds = topicIds.join(', ');
-                }
+                }).exec(function(err, doc) {
+                  if(err) {
+                    callback(err,null);
+                    return;
+                  }
+                  for(var i = 0, doclen = doc.length; i<doclen; i++) {
+                    var topics = [],
+                        categories = [],
+                        topicIds = [],
+                        topicId = doc[i].topicId;
+                    for(var index=0, len = topicId.length; index<len; index++) {
+                      topics.push(topicId[index].topicName);
+                      categories.push(topicId[index].topicCategory.categoryName);
+                      topicIds.push(topicId[index]._id);
+                    }
+                    doc[i].topics = topics.join(', ');
+                    doc[i].categories = categories.join(', ');
+                    doc[i].topicIds = topicIds.join(', ');
+                  }
 
-                var jsonData = {
-                  rows: doc,
-                  firstQuestion: searchSettings.firstQuestion,
-                  count: count
-                };
-                callback(null,jsonData);
-              });
+                  var jsonData = {
+                    rows: doc,
+                    firstQuestion: searchSettings.firstQuestion,
+                    count: outputCount
+                  };
+                  callback(null,jsonData);
+                });
+            });
           }
         });
       }

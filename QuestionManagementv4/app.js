@@ -13,7 +13,7 @@ var topicsRequestHandler = require('./routes/TopicsRequestHandler');
 var db = require('./routes/DB.js');
 
 db.init(wagner, {
-  connectionURL: 'mongodb://localhost/newDB'
+  connectionURL: 'mongodb://172.23.238.253/quizRT3'
 });
 
 var app = express();

@@ -6,7 +6,9 @@ function($scope, $uibModal, $http, $ajaxService, $window) {
     noOfQuestions: [50, //first one default
                     100,
                     150,
-                    'All'],
+                    250,
+                    500,
+                    1000],
     selectedRowCountIndex: 0,
     selectedRowCount: 50,
 

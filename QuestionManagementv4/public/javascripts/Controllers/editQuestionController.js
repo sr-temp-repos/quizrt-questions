@@ -28,7 +28,7 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
           for( var i=0;i<self.$scope.selectedQuestion.options.length;i++ ) {
             tabs.push({
               content: self.$scope.selectedQuestion.options[i],
-              active: (i==1)
+              active: (i==0)
             });
           }
           return tabs;
@@ -166,13 +166,13 @@ QuestionManagerApp.controller('EditQuestionControl', ['$scope','$http','$mainCon
             sq = scp.selectedQuestion,
             topics = sq.topics.replace(/\s/g,'').split(','),
             categories = sq.categories.replace(/\s/g,'').split(',');
-            topicIds = sq.topicId.replace(/\s/g,'').split(',');
+            topicIds = sq.topicIds.replace(/\s/g,'').split(',');
         topics.splice(index,1);
         categories.splice(index,1);
         topicIds.splice(index,1);
         sq.topics = topics.join(', ');
         sq.categories = categories.join(', ');
-        sq.topicId = topicIds.join(', ');
+        sq.topicIds = topicIds.join(', ');
       },
       addCategoryId: function(self) {
         var scp = self.$scope;
