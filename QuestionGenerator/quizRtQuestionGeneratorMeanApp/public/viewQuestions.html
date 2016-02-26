@@ -189,7 +189,8 @@
                     <span ng-repeat="options in object.options"> || {{options}}</span>
                   </li>
                   <li class="list-group-item list-group-item-success btn-block text-center">{{object.options[object.correctIndex]}} ## {{object.popularityDesc}}  </li>
-                  <li><img src="{{object.image}}" height="200" width="auto" alt="{{object.image}}" /></li>
+
+                  <li ng-show="object.image"><img src="{{object.image}}" height="200" width="auto" alt="{{object.image}}" /></li>
                 </ul>
                 <!-- /input-group -->
               </div>
